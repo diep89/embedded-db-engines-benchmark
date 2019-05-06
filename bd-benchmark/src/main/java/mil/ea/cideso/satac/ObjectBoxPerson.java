@@ -34,11 +34,11 @@ public class ObjectBoxPerson {
         sexo = newSexo;
     }
 
-    private String getTel() {
+    private int getTel() {
         return tel;
     }
 
-    private void setTel(String newTel) {
+    private void setTel(int newTel) {
         tel = newTel;
     }
 }
