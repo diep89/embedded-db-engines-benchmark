@@ -1,0 +1,26 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Debug (Launch) - External Terminal",
+      "request": "launch",
+      "console": "externalTerminal",
+      "mainClass": "mil.ea.cideso.satac.Main",
+      "projectName": "bd-benchmark"
+    },
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - Main",
+      "request": "launch",
+      "mainClass": "mil.ea.cideso.satac.Main",
+      "projectName": "bd-benchmark"
+    },
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - App",
+      "request": "launch",
+      "mainClass": "mil.ea.cideso.satac.App",
+      "projectName": "bd-benchmark"
+    }
+  ]
+}
