@@ -44,6 +44,12 @@
       <artifactId>objectbox-java</artifactId>
       <version>2.3.4</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
+    <dependency>
+      <groupId>org.mongodb</groupId>
+      <artifactId>mongo-java-driver</artifactId>
+      <version>3.11.0-beta2</version>
+    </dependency>
     <!-- Guava: Herramienta para implementar un timer -->
     <dependency>
       <groupId>com.google.guava</groupId>
@@ -93,6 +99,28 @@
         <plugin>
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
+        </plugin>
+        <!-- Plugin para compilar un proyecto Gradle en Maven -->
+        <plugin>
+          <groupId>org.fortasoft</groupId>
+          <artifactId>gradle-maven-plugin</artifactId>
+          <version>1.0.8</version>
+          <configuration>
+            <tasks>
+              <!-- this would effectively call "gradle doSomething" -->
+              <task>doSomething</task>
+            </tasks>
+          </configuration>
+          <executions>
+            <execution>
+              <!-- You can bind this to any phase you like -->
+              <phase>compile</phase>
+              <goals>
+                <!-- goal must be "invoke" -->
+                <goal>invoke</goal>
+              </goals>
+            </execution>
+          </executions>
         </plugin>
       </plugins>
     </pluginManagement>

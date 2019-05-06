@@ -6,10 +6,8 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         int menuOption;
-        String motores[] = { "SQLite v3.27.2.1", "ObjectBox v2.3.4" };
-
-        String dbName = "test-sqlite-db.db";
-        File file = new File(dbName);
+        String motores[] = { "SQLite v3.27.2.1", "MongoDB v3.11.0-beta2" };
+        String stats[];
         String tableName = "TestTable";
 
         // Atributos definidos para el test automatizado.
@@ -21,15 +19,13 @@ public class Main {
         String timer = "";
         String eliminar;
 
-        int attributeQty;
-        String attributeName;
-        String attributeType;
-        Integer attributeSize = null;
+        // int attributeQty;
+        // String attributeName;
+        // String attributeType;
+        // Integer attributeSize = null;
         // Integer attributeValue = null;
         // String attributeText = null;
         Scanner input = new Scanner(System.in);
-
-        SqliteCreator creator = new SqliteCreator();
 
         System.out.println("Practica Profesional Supervisada");
         System.out.println("Benchmark de motores de BD embebidos");
@@ -63,10 +59,12 @@ public class Main {
             switch (menuOption) {
             case 1:
                 // Test automatizado
-                // Creación de la BD.
-                creator.createNewDatabase(dbName);
+                SqliteCreator sqliteCreator = new SqliteCreator();
+                String dbName = "testDb";
+                // Creación de la BD Sqlite.
+                sqliteCreator.createNewDatabase(dbName);
 
-                // Mensaje informativo:
+                // Mensaje informativo sobre atributos.
                 System.out.println("Se procede a realizar la creación de la tabla de prueba en la BD.");
                 System.out.println("Los atributos que se crearán son: ");
                 for (int i = 0; i < attributesList.length; i++) {
@@ -87,7 +85,7 @@ public class Main {
                 // Creación de la tabla 'TestTable'
                 // En la creación de una nueva tabla se crea automáticamente el atributo "id"
                 // como PK. Input de nombre de tabla deshabilitado.
-                creator.createNewTable(dbName, tableName, attributesList, attributesType, attributesLength);
+                sqliteCreator.createNewTable(dbName, tableName, attributesList, attributesType, attributesLength);
 
                 // Mensaje informativo.
                 // Pedido de ingreso de cantidad de registros a generar.
@@ -106,7 +104,11 @@ public class Main {
                 System.out.println("Se ingresarán " + cantidadAInsertar + " registros.\n");
 
                 // Alta de registros
-                creator.insertData(dbName, tableName, cantidadAInsertar);
+                // SQLite
+                sqliteCreator.insertData(dbName, tableName, cantidadAInsertar);
+
+                // MongoDB
+                // mongoDbCreator.
 
                 // Prueba
                 timer = SqliteCreator.getTimer();
@@ -127,7 +129,8 @@ public class Main {
                 System.out.println("");
 
                 if (eliminar.equalsIgnoreCase("y")) {
-                    creator.dropDatabase(dbName);
+                    File file = new File(dbName);
+                    sqliteCreator.dropDatabase(dbName);
                     if (file.delete()) {
                         System.out.println("El archivo '" + dbName + "' ha sido eliminado.");
                     }
@@ -148,83 +151,73 @@ public class Main {
                 // NOT NULL.
                 // El atributo 'pk' indica (con 1 o 0, 1 para afirmativo) si el campo es PRIMARY
                 // KEY.
-                System.out.println("INGRESO DE ATRIBUTOS");
+                /*
+                 * System.out.println("INGRESO DE ATRIBUTOS");
+                 * 
+                 * do {
+                 * System.out.print("Indique la cantidad de atributos que desea ingresar: ");
+                 * attributeQty = input.nextInt(); System.out.println(""); if (attributeQty < 1)
+                 * { System.out.print("Cantidad inválida."); } } while (attributeQty < 1);
+                 * 
+                 * for (int i = 0; i < attributeQty; i++) {
+                 * 
+                 * System.out.println("Atributo " + (i + 1));
+                 * System.out.print("Ingrese el nombre del atributo nuevo: "); attributeName =
+                 * input.next();
+                 * 
+                 * do { System.out.
+                 * print("Ingrese el tipo de dato que almacenará el atributo (VARCHAR, INT, DOUBLE): "
+                 * ); attributeType = input.next(); System.out.println("");
+                 * 
+                 * if (!(attributeType.equalsIgnoreCase("int") ||
+                 * attributeType.equalsIgnoreCase("double") ||
+                 * attributeType.equalsIgnoreCase("varchar"))) {
+                 * System.out.println("Ingreso incorrecto."); } } while
+                 * (!(attributeType.equalsIgnoreCase("int") ||
+                 * attributeType.equalsIgnoreCase("double") ||
+                 * attributeType.equalsIgnoreCase("varchar")));
+                 * 
+                 * if (attributeType.equalsIgnoreCase("varchar")) { do {
+                 * System.out.print("Ingrese el tamaño de la variable (1-255): "); attributeSize
+                 * = input.nextInt(); System.out.println("");
+                 * 
+                 * if (attributeSize < 1 || attributeSize > 255) {
+                 * System.out.println("Tamaño incorrecto."); } } while (attributeSize < 1 ||
+                 * attributeSize > 255); }
+                 * 
+                 * sqliteCreator.createNewAttribute(dbName, tableName, attributeName,
+                 * attributeType, attributeSize);
+                 * 
+                 * // Presione ENTER para continuar
+                 * System.out.print("Presione ENTER para continuar..."); try { System.in.read();
+                 * } catch (Exception e) { e.printStackTrace(); } System.out.println("");
+                 */
 
-                do {
-                    System.out.print("Indique la cantidad de atributos que desea ingresar: ");
-                    attributeQty = input.nextInt();
-                    System.out.println("");
-                    if (attributeQty < 1) {
-                        System.out.print("Cantidad inválida.");
-                    }
-                } while (attributeQty < 1);
+                // FALTA VALIDAR EL TAMAÑO DEL TEXTO INGRESADO.
+                // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!.
+                // if (attributeType.equalsIgnoreCase("varchar")) {
+                // System.out.print("Ingrese el texto para el atributo: ");
+                // attributeText = input.next();
+                // System.out.println("");
+                // creator.insertText(dbName, tableName, attributeName, attributeText);
+                // } else {
+                // FALTA VALIDAR EL VALOR INGRESADO.
+                // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!.
+                // System.out.print("Ingrese un valor para el atributo: ");
+                // attributeValue = input.nextInt();
+                // System.out.println("");
+                // creator.insertNumber(dbName, tableName, attributeName, attributeValue);
+                // }
 
-                for (int i = 0; i < attributeQty; i++) {
-
-                    System.out.println("Atributo " + (i + 1));
-                    System.out.print("Ingrese el nombre del atributo nuevo: ");
-                    attributeName = input.next();
-
-                    do {
-                        System.out.print("Ingrese el tipo de dato que almacenará el atributo (VARCHAR, INT, DOUBLE): ");
-                        attributeType = input.next();
-                        System.out.println("");
-
-                        if (!(attributeType.equalsIgnoreCase("int") || attributeType.equalsIgnoreCase("double")
-                                || attributeType.equalsIgnoreCase("varchar"))) {
-                            System.out.println("Ingreso incorrecto.");
-                        }
-                    } while (!(attributeType.equalsIgnoreCase("int") || attributeType.equalsIgnoreCase("double")
-                            || attributeType.equalsIgnoreCase("varchar")));
-
-                    if (attributeType.equalsIgnoreCase("varchar")) {
-                        do {
-                            System.out.print("Ingrese el tamaño de la variable (1-255): ");
-                            attributeSize = input.nextInt();
-                            System.out.println("");
-
-                            if (attributeSize < 1 || attributeSize > 255) {
-                                System.out.println("Tamaño incorrecto.");
-                            }
-                        } while (attributeSize < 1 || attributeSize > 255);
-                    }
-
-                    creator.createNewAttribute(dbName, tableName, attributeName, attributeType, attributeSize);
-
-                    // Presione ENTER para continuar
-                    System.out.print("Presione ENTER para continuar...");
-                    try {
-                        System.in.read();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    System.out.println("");
-
-                    // FALTA VALIDAR EL TAMAÑO DEL TEXTO INGRESADO.
-                    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!.
-                    // if (attributeType.equalsIgnoreCase("varchar")) {
-                    // System.out.print("Ingrese el texto para el atributo: ");
-                    // attributeText = input.next();
-                    // System.out.println("");
-                    // creator.insertText(dbName, tableName, attributeName, attributeText);
-                    // } else {
-                    // FALTA VALIDAR EL VALOR INGRESADO.
-                    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!.
-                    // System.out.print("Ingrese un valor para el atributo: ");
-                    // attributeValue = input.nextInt();
-                    // System.out.println("");
-                    // creator.insertNumber(dbName, tableName, attributeName, attributeValue);
-                    // }
-
-                    // Presione ENTER para continuar
-                    // System.out.print("Presione ENTER para continuar...");
-                    // try {
-                    // System.in.read();
-                    // } catch (Exception e) {
-                    // e.printStackTrace();
-                    // }
-                    // System.out.println("");
-                }
+                // Presione ENTER para continuar
+                // System.out.print("Presione ENTER para continuar...");
+                // try {
+                // System.in.read();
+                // } catch (Exception e) {
+                // e.printStackTrace();
+                // }
+                // System.out.println("");
+                // }
                 break;
 
             } // Cierro switch
@@ -246,7 +239,9 @@ public class Main {
         System.out.printf("%-25s %-20s", "Motor", "Create");
         System.out.println("");
         System.out.println("");
-        for (int i = 0; i < motores.length; i++) {
+        for (
+
+                int i = 0; i < motores.length; i++) {
             System.out.printf("%-25s %-20s", motores[i], timer);
         }
 

@@ -2,6 +2,20 @@
   "configurations": [
     {
       "type": "java",
+      "name": "CodeLens (Launch) - MongoDbCreator",
+      "request": "launch",
+      "mainClass": "mil.ea.cideso.satac.MongoDbCreator",
+      "projectName": "bd-benchmark"
+    },
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - ObjectBoxCreator",
+      "request": "launch",
+      "mainClass": "mil.ea.cideso.satac.ObjectBoxCreator",
+      "projectName": "bd-benchmark"
+    },
+    {
+      "type": "java",
       "name": "Debug (Launch) - External Terminal",
       "request": "launch",
       "console": "externalTerminal",
