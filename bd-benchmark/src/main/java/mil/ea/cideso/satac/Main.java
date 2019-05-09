@@ -6,7 +6,8 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         int menuOption;
-        String motores[] = { "SQLite v3.27.2.1", "MongoDB v3.11.0-beta2" };
+        String motoresNombres[] = { "SQLite v3.27.2.1", "MongoDB v3.11.0-beta2" };
+        ArrayList<String> motores = new ArrayList<String>();
         String stats[];
         String tableName = "TestTable";
 
@@ -15,7 +16,7 @@ public class Main {
         String attributesType[] = { "int", "varchar", "int" };
         String attributesLength[] = { "2", "1", "8" };
 
-        int cantidadAInsertar = 100;
+        int cantidadAInsertar;
         String timer = "";
         String eliminar;
 
@@ -31,8 +32,8 @@ public class Main {
         System.out.println("Benchmark de motores de BD embebidos");
         System.out.println("");
         System.out.println("Lista de motores de BD en el test:");
-        for (int i = 0; i < motores.length; i++) {
-            System.out.println("- " + motores[i]);
+        for (int i = 0; i < motoresNombres.length; i++) {
+            System.out.println("- " + motoresNombres[i]);
         }
         System.out.println("");
 
@@ -57,11 +58,14 @@ public class Main {
             System.out.println("");
 
             switch (menuOption) {
+
+            // Test automatizado
             case 1:
-                // Test automatizado
-                SqliteCreator sqliteCreator = new SqliteCreator();
                 String dbName = "testDb";
                 // Creación de la BD Sqlite.
+
+                sqliteCreator.createNewDatabase(dbName);
+
                 sqliteCreator.createNewDatabase(dbName);
 
                 // Mensaje informativo sobre atributos.
@@ -129,10 +133,10 @@ public class Main {
                 System.out.println("");
 
                 if (eliminar.equalsIgnoreCase("y")) {
-                    File file = new File(dbName);
-                    sqliteCreator.dropDatabase(dbName);
+                    File file = new File(dbName + ".db");
+                    sqliteCreator.dropDatabase(dbName + ".db");
                     if (file.delete()) {
-                        System.out.println("El archivo '" + dbName + "' ha sido eliminado.");
+                        System.out.println("El archivo '" + dbName + ".db' ha sido eliminado.");
                     }
                 }
 
@@ -236,13 +240,13 @@ public class Main {
         // CRUD: Create, Read, Update, Delete !!!!!!!!!!!!!!!!
         System.out.println("Resultados del benchmark");
         System.out.println("");
+        System.out.println("Operaciones CRUD (Create, Read, Update, Delete)");
+        System.out.println("");
         System.out.printf("%-25s %-20s", "Motor", "Create");
         System.out.println("");
         System.out.println("");
-        for (
-
-                int i = 0; i < motores.length; i++) {
-            System.out.printf("%-25s %-20s", motores[i], timer);
+        for (int i = 0; i < motores.length; i++) {
+            System.out.printf("%-25s %-20s\n", motores[i], timer);
         }
 
         System.out.println("");

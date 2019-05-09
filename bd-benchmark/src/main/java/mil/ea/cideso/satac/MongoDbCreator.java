@@ -9,15 +9,32 @@ import com.mongodb.MongoCredential;
 import org.bson.Document;
 
 public class MongoDbCreator {
+
+    public void createNewDatabase(String dbName) {
+        MongoDatabase database = getDatabase(dbName);
+    }
+
+    public void createNewTable(String dbName, String tableName, String[] attributesList, String[] attributesType,
+            String[] attributesLength) {
+
+    }
+
+    // Collection = Table.
+
+    // FUNCIONES AUXILIARES
     // Creating a Mongo client
-    MongoClient mongo = new MongoClient("localhost", 27017);
+    private MongoDatabase getDatabase(String dbName) {
+        MongoClient mongo = new MongoClient("localhost", 27017);
 
-    // Creating Credentials
-    MongoCredential credential;credential=MongoCredential.createCredential("sampleUser","myDb","password".toCharArray());System.out.println("Connected to the database successfully");
+        // Creating Credentials
+        MongoCredential credential;
+        credential = MongoCredential.createCredential("sampleUser", dbName, "password".toCharArray());
+        // System.out.println("Connected to the database successfully");
 
-    // Accessing the database
-    MongoDatabase database = mongo.getDatabase("myDb");
-    // System.out.println("Credentials ::" + credential);
+        // Accessing the database
+        MongoDatabase database = mongo.getDatabase("myDb");
+        return database;
+    }
 
     // Creating a collection
     database.createCollection("sampleCollection");
