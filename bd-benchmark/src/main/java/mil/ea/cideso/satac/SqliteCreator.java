@@ -4,15 +4,23 @@ import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
 
 public class SqliteCreator extends MotorBD {
-    setNombreMotor("SQLite v3.27.2.1");
 
-    // Funcion para crear una nueva BD.
+    public SqliteCreator() {
+        setNombreMotor("SQLite v3.27.2.1");
+    }
+
+    // Función para crear una nueva BD.
     @Override
     public void createNewDatabase(String dbName) {
         // String url = "jdbc:sqlite:C:/sqlite/db/" + dbName;
         setUrl("jdbc:sqlite:" + dbName + ".db");
 
         try {
+            // Descomentar para eliminar la BD.
+            // setSql("DROP DATABASE IF EXISTS " + dbName + ";");
+            // setStmt(getConn().createStatement());
+            // getStmt().execute(getSql());
+
             getConnection(getUrl());
             if (getConn() != null) {
                 DatabaseMetaData meta = getConn().getMetaData();
@@ -38,8 +46,10 @@ public class SqliteCreator extends MotorBD {
     }
 
     // Función para crear una nueva tabla en la BD.
+    @Override
     public void createNewTable(String dbName, String tableName, String[] attributesList, String[] attributesType,
             String[] attributesLength) {
+
         setSql("CREATE TABLE IF NOT EXISTS " + tableName + " (" + "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ");
         setAttributesList(attributesList);
         setAttributesType(attributesType);
@@ -47,16 +57,17 @@ public class SqliteCreator extends MotorBD {
         setAttributesQty(getAttributesList().length);
 
         for (int i = 0; i < getAttributesQty() - 1; i++) {
-            getSql().concat(
-                    getAttributesList()[i] + " " + getAttributesType()[i] + "(" + getAttributesLength()[i] + "), ");
+            setSql(getSql().concat(
+                    getAttributesList()[i] + " " + getAttributesType()[i] + "(" + getAttributesLength()[i] + "), "));
         }
         // En la siguiente línea, se debe concatenar al string 'sql' la última
         // ocurrencia de la lista de atributos.
         // Para ello utilizo 'attributesList.length', pero hay que restarle 1.
         // (El método length la cantidad de elementos contando a partir de '1',
         // pero el string 'sql' inicia en '0')
-        getSql().concat(getAttributesList()[getAttributesQty() - 1] + " " + getAttributesType()[getAttributesQty() - 1]
-                + "(" + getAttributesLength()[getAttributesQty() - 1] + "));");
+        setSql(getSql()
+                .concat(getAttributesList()[getAttributesQty() - 1] + " " + getAttributesType()[getAttributesQty() - 1]
+                        + "(" + getAttributesLength()[getAttributesQty() - 1] + "));"));
 
         try {
             getConnection(getUrl());
@@ -88,20 +99,20 @@ public class SqliteCreator extends MotorBD {
 
     }
 
-    // Funciones para configurar test automatizado
-
+    // Función para operaciones CREATE
+    @Override
     public void insertData(String dbName, String tableName, int cantidadAInsertar) {
 
         // Lógica para la generación de la sentencia SQL de inserción de datos.
         setSql("INSERT INTO " + tableName + " (");
         for (int k = 0; k < getAttributesQty() - 1; k++) {
-            getSql().concat(getAttributesList()[k] + ", ");
+            setSql(getSql().concat(getAttributesList()[k] + ", "));
         }
-        getSql().concat(getAttributesList()[getAttributesQty() - 1] + ") VALUES (");
+        setSql(getSql().concat(getAttributesList()[getAttributesQty() - 1] + ") VALUES ("));
         for (int k = 0; k < getAttributesQty() - 1; k++) {
-            getSql().concat("?, ");
+            setSql(getSql().concat("?, "));
         }
-        getSql().concat("?);");
+        setSql(getSql().concat("?);"));
 
         // tiempoInicio = System.currentTimeMillis();
         for (int j = 0; j < cantidadAInsertar; j++) {
@@ -154,12 +165,17 @@ public class SqliteCreator extends MotorBD {
         // System.out.printf("El tiempo de ejecución fue de " + timer + ".\n");
         // System.out.println("");
 
-        setTimerReturned(getTimer().toString());
+        // Guardo el valor del timer en la variable 'timerReturned'.
+        // Esta variable debe ser recuperada desde el main.
+        setStatsCreateOp(getTimer().toString());
 
+        // Reseteo el timer.
         setTimer(getTimer().reset());
 
     }
 
+    // Función (opcional) para eliminar la BD generada
+    @Override
     public void dropDatabase(String dbName) {
         setSql("DROP DATABASE " + dbName + ".db");
 

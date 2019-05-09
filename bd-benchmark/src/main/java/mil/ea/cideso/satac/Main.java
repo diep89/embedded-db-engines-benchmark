@@ -1,14 +1,18 @@
 package mil.ea.cideso.satac;
 
 import java.io.File;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         int menuOption;
-        String motoresNombres[] = { "SQLite v3.27.2.1", "MongoDB v3.11.0-beta2" };
-        ArrayList<String> motores = new ArrayList<String>();
-        String stats[];
+
+        // Nombre de la BD a generar.
+        String dbName = "testDb";
+
+        // Nombre de la tabla a generar.
         String tableName = "TestTable";
 
         // Atributos definidos para el test automatizado.
@@ -16,8 +20,9 @@ public class Main {
         String attributesType[] = { "int", "varchar", "int" };
         String attributesLength[] = { "2", "1", "8" };
 
+        // Variables auxiliares.
+        Scanner input = new Scanner(System.in);
         int cantidadAInsertar;
-        String timer = "";
         String eliminar;
 
         // int attributeQty;
@@ -26,16 +31,24 @@ public class Main {
         // Integer attributeSize = null;
         // Integer attributeValue = null;
         // String attributeText = null;
-        Scanner input = new Scanner(System.in);
+
+        // Instanciación de las clases creadoras de BD.
+        SqliteCreator sqlite = new SqliteCreator();
+        // MongoDbCreator mongo = new MongoDbCreator();
+
+        // Creación de lista que contiene las instancias creadas anteriormente.
+        LinkedList<MotorBD> ll = new LinkedList<MotorBD>();
+        ll.add(sqlite);
+        // ll.add(mongo);
 
         System.out.println("Practica Profesional Supervisada");
         System.out.println("Benchmark de motores de BD embebidos");
         System.out.println("");
-        System.out.println("Lista de motores de BD en el test:");
-        for (int i = 0; i < motoresNombres.length; i++) {
-            System.out.println("- " + motoresNombres[i]);
-        }
-        System.out.println("");
+        // System.out.println("Lista de motores de BD en el test:");
+        // for (int i = 0; i < motoresNombres.length; i++) {
+        // System.out.println("- " + motoresNombres[i]);
+        // }
+        // System.out.println("");
 
         do {
             System.out.println("Opciones:");
@@ -55,94 +68,105 @@ public class Main {
                 }
             } while (menuOption < 0 || menuOption > 2);
 
-            System.out.println("");
+            // System.out.println("");
 
             switch (menuOption) {
-
             // Test automatizado
             case 1:
-                String dbName = "testDb";
-                // Creación de la BD Sqlite.
+                // Creación de objeto iterador para recorrer todas las instancias contenidas en
+                // la lista.
+                Iterator<MotorBD> itr = ll.iterator();
+                while (itr.hasNext()) {
+                    Object element = itr.next();
+                    ((MotorBD) element).createNewDatabase(dbName);
 
-                sqliteCreator.createNewDatabase(dbName);
-
-                sqliteCreator.createNewDatabase(dbName);
-
-                // Mensaje informativo sobre atributos.
-                System.out.println("Se procede a realizar la creación de la tabla de prueba en la BD.");
-                System.out.println("Los atributos que se crearán son: ");
-                for (int i = 0; i < attributesList.length; i++) {
-                    System.out.printf("%-10s " + attributesType[i] + "(" + attributesLength[i] + ")\n",
-                            attributesList[i]);
-                }
-                System.out.println("");
-
-                // Presione ENTER para continuar
-                System.out.print("Presione ENTER para continuar...");
-                try {
-                    System.in.read();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                System.out.println("");
-
-                // Creación de la tabla 'TestTable'
-                // En la creación de una nueva tabla se crea automáticamente el atributo "id"
-                // como PK. Input de nombre de tabla deshabilitado.
-                sqliteCreator.createNewTable(dbName, tableName, attributesList, attributesType, attributesLength);
-
-                // Mensaje informativo.
-                // Pedido de ingreso de cantidad de registros a generar.
-                System.out.println("Generación y alta de registros en la BD.");
-                System.out.print("Indique la cantidad de registros a ingresar (1-100k): ");
-                cantidadAInsertar = input.nextInt();
-                System.out.println("");
-                do {
-                    if (cantidadAInsertar < 1 || cantidadAInsertar > 100000) {
-                        System.out.print("Error: cantidad inválida. Por favor, elija una cantidad válida: ");
-                        cantidadAInsertar = input.nextInt();
-                        System.out.println("");
+                    // Mensaje informativo sobre atributos.
+                    System.out.println("Se procede a realizar la creación de la tabla de prueba en la BD.");
+                    System.out.println("Los atributos que se crearán son: ");
+                    for (int j = 0; j < attributesList.length; j++) {
+                        System.out.printf("%-10s " + attributesType[j] + "(" + attributesLength[j] + ")\n",
+                                attributesList[j]);
                     }
-                } while (cantidadAInsertar < 1 || cantidadAInsertar > 100000);
+                    System.out.println("");
 
-                System.out.println("Se ingresarán " + cantidadAInsertar + " registros.\n");
-
-                // Alta de registros
-                // SQLite
-                sqliteCreator.insertData(dbName, tableName, cantidadAInsertar);
-
-                // MongoDB
-                // mongoDbCreator.
-
-                // Prueba
-                timer = SqliteCreator.getTimer();
-                System.out.println("La operación tardó " + timer);
-                System.out.println("");
-
-                // Eliminación de la BD.
-                System.out.println("Operación finalizada.");
-
-                do {
-                    System.out.print("¿Desea eliminar la BD (Y/N)? ");
-                    eliminar = input.next();
-                    if (!(eliminar.equalsIgnoreCase("y") || eliminar.equalsIgnoreCase("n"))) {
-                        System.out.println("Respuesta inválida. Intente nuevamente.");
+                    // Presione ENTER para continuar
+                    System.out.print("Presione ENTER para continuar...");
+                    try {
+                        System.in.read();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                } while (!(eliminar.equalsIgnoreCase("y") || eliminar.equalsIgnoreCase("n")));
+                    System.out.println("");
 
-                System.out.println("");
+                    // Creación de la tabla 'TestTable'
+                    // En la creación de una nueva tabla se crea automáticamente el atributo "id"
+                    // como PK. Input de nombre de tabla deshabilitado.
+                    ((MotorBD) element).createNewTable(dbName, tableName, attributesList, attributesType,
+                            attributesLength);
 
-                if (eliminar.equalsIgnoreCase("y")) {
-                    File file = new File(dbName + ".db");
-                    sqliteCreator.dropDatabase(dbName + ".db");
-                    if (file.delete()) {
-                        System.out.println("El archivo '" + dbName + ".db' ha sido eliminado.");
+                    // Mensaje informativo.
+                    // Pedido de ingreso de cantidad de registros a generar.
+                    System.out.println("Generación y alta de registros en la BD.");
+                    System.out.print("Indique la cantidad de registros a ingresar (1-100k): ");
+                    cantidadAInsertar = input.nextInt();
+                    System.out.println("");
+                    do {
+                        if (cantidadAInsertar < 1 || cantidadAInsertar > 100000) {
+                            System.out.print("Error: cantidad inválida. Por favor, elija una cantidad válida: ");
+                            cantidadAInsertar = input.nextInt();
+                            System.out.println("");
+                        }
+                    } while (cantidadAInsertar < 1 || cantidadAInsertar > 100000);
+
+                    System.out.println(
+                            "Se ingresarán " + cantidadAInsertar + " registros en la tabla " + tableName + ".\n");
+
+                    // Operación CREATE (Alta de registros)
+                    ((MotorBD) element).insertData(dbName, tableName, cantidadAInsertar);
+
+                    // System.out.println("La operación tardó " + timer);
+                    // System.out.println("");
+
+                    // Eliminación de la BD.
+                    System.out.println(
+                            "Motor: " + ((MotorBD) element).getNombreMotor() + "\nOperación 'Create' finalizada.\n");
+
+                    // Presione ENTER para continuar
+                    System.out.print("Presione ENTER para continuar...");
+                    try {
+                        System.in.read();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
+                    System.out.println("");
+
+                    // OPERACIÓN READ
+                    // OPERACIÓN UPDATE
+                    // OPERACIÓN DELETE
+
+                    // Opcional: Descomentar para eliminar la BD generada.
+                    // do {
+                    // System.out.print("¿Desea eliminar la BD (Y/N)? ");
+                    // eliminar = input.next();
+                    // if (!(eliminar.equalsIgnoreCase("y") || eliminar.equalsIgnoreCase("n"))) {
+                    // System.out.println("Respuesta inválida. Intente nuevamente.");
+                    // }
+                    // } while (!(eliminar.equalsIgnoreCase("y") ||
+                    // eliminar.equalsIgnoreCase("n")));
+
+                    // System.out.println("");
+
+                    // if (eliminar.equalsIgnoreCase("y")) {
+                    // File file = new File(dbName + ".db");
+                    // sqlite.dropDatabase(dbName + ".db");
+                    // if (file.delete()) {
+                    // System.out.println("El archivo '" + dbName + ".db' ha sido eliminado.");
+                    // }
+                    // }
+
+                    System.out.println("");
                 }
-
-                System.out.println("");
                 menuOption = 0;
-
                 break;
             case 2:
                 // Test con carga de atributos manual
@@ -238,6 +262,9 @@ public class Main {
 
         // Tabla para mostrar resultados
         // CRUD: Create, Read, Update, Delete !!!!!!!!!!!!!!!!
+        System.out.println("");
+        System.out.println("***");
+        System.out.println("");
         System.out.println("Resultados del benchmark");
         System.out.println("");
         System.out.println("Operaciones CRUD (Create, Read, Update, Delete)");
@@ -245,8 +272,12 @@ public class Main {
         System.out.printf("%-25s %-20s", "Motor", "Create");
         System.out.println("");
         System.out.println("");
-        for (int i = 0; i < motores.length; i++) {
-            System.out.printf("%-25s %-20s\n", motores[i], timer);
+
+        Iterator<MotorBD> itr = ll.iterator();
+        while (itr.hasNext()) {
+            Object element = itr.next();
+            System.out.printf("%-25s %-20s\n", ((MotorBD) element).getNombreMotor(),
+                    ((MotorBD) element).getStatsCreateOp());
         }
 
         System.out.println("");

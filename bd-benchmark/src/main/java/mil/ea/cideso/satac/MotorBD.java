@@ -30,8 +30,8 @@ public abstract class MotorBD {
     private Stopwatch timer;
     // Stopwatch timer = Stopwatch.createUnstarted();
 
-    // Atributo y función para devolver el timer
-    static private String timerReturned;
+    // Atributos para guardar resultados de pruebas
+    String statsCreateOp;
 
     /**
      * @return the nombreMotor
@@ -199,20 +199,6 @@ public abstract class MotorBD {
         this.timer = timer;
     }
 
-    /**
-     * @return the timerReturned
-     */
-    public static String getTimerReturned() {
-        return timerReturned;
-    }
-
-    /**
-     * @param timerReturned the timerReturned to set
-     */
-    public static void setTimerReturned(String timerReturned) {
-        MotorBD.timerReturned = timerReturned;
-    }
-
     // Función para generar la conexión a la BD
     public Connection getConnection(String url) {
         try {
@@ -223,16 +209,30 @@ public abstract class MotorBD {
         return conn;
     }
 
+    /**
+     * @return the statsCreateOp
+     */
+    public String getStatsCreateOp() {
+        return statsCreateOp;
+    }
+
+    /**
+     * @param statsCreateOp the statsCreateOp to set
+     */
+    public void setStatsCreateOp(String statsCreateOp) {
+        this.statsCreateOp = statsCreateOp;
+    }
+
     public abstract void createNewDatabase(String dbName);
 
     public abstract void createNewTable(String dbName, String tableName, String[] attributesList,
             String[] attributesType, String[] attributesLength);
 
+    public abstract void insertData(String dbName, String tableName, int cantidadAInsertar);
+
     public abstract void dropDatabase(String dbName);
 
     // Funciones para configurar test automatizado
-    // public abstract void insertData(String dbName, String tableName, int
-    // cantidadAInsertar);
 
     // public abstract void createNewAttribute(String dbName, String tableName,
     // String AttributeName, String attributeType,
