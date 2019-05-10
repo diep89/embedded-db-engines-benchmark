@@ -33,13 +33,15 @@ public class Main {
         // String attributeText = null;
 
         // Instanciación de las clases creadoras de BD.
-        SqliteCreator sqlite = new SqliteCreator();
+        // SqliteCreator sqlite = new SqliteCreator();
         // MongoDbCreator mongo = new MongoDbCreator();
+        // RocksDbCreator rocks = new RocksDbCreator();
 
         // Creación de lista que contiene las instancias creadas anteriormente.
         LinkedList<MotorBD> ll = new LinkedList<MotorBD>();
-        ll.add(sqlite);
+        // ll.add(sqlite);
         // ll.add(mongo);
+        // ll.add(rocks);
 
         System.out.println("Practica Profesional Supervisada");
         System.out.println("Benchmark de motores de BD embebidos");
@@ -54,8 +56,6 @@ public class Main {
             System.out.println("Opciones:");
             System.out.println("1 - Test automatizado");
             System.out.println("2 - Test con ingreso manual de atributos");
-            // System.out.println("");
-            // System.out.println("");
             System.out.println("");
             System.out.print("Por favor, elija una opción (0 para finalizar): ");
             menuOption = input.nextInt();
@@ -68,17 +68,30 @@ public class Main {
                 }
             } while (menuOption < 0 || menuOption > 2);
 
-            // System.out.println("");
-
             switch (menuOption) {
             // Test automatizado
             case 1:
-                // Creación de objeto iterador para recorrer todas las instancias contenidas en
-                // la lista.
+                System.out.println("\n***");
+                System.out.println("Inicio de test automatizado");
+                System.out.println("");
+                System.out.println("Se realizarán operaciones CRUD.\n");
+                // Presione ENTER para continuar
+                System.out.print("Presione ENTER para continuar...");
+                try {
+                    System.in.read();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                System.out.println("");
+                // Creación de objeto 'iterator' para recorrer todas las instancias contenidas
+                // en la lista.
                 Iterator<MotorBD> itr = ll.iterator();
                 while (itr.hasNext()) {
-                    Object element = itr.next();
-                    ((MotorBD) element).createNewDatabase(dbName);
+                    MotorBD element = itr.next();
+                    System.out.printf("Motor: %s v%s\n\n", element.getEngineName(), element.getEngineVersion());
+                    System.out.println("1. Operación CREATE:\n");
+                    dbName = dbName + "-" + element.getEngineName();
+                    element.createNewDatabase(dbName);
 
                     // Mensaje informativo sobre atributos.
                     System.out.println("Se procede a realizar la creación de la tabla de prueba en la BD.");
@@ -101,8 +114,7 @@ public class Main {
                     // Creación de la tabla 'TestTable'
                     // En la creación de una nueva tabla se crea automáticamente el atributo "id"
                     // como PK. Input de nombre de tabla deshabilitado.
-                    ((MotorBD) element).createNewTable(dbName, tableName, attributesList, attributesType,
-                            attributesLength);
+                    element.createNewTable(dbName, tableName, attributesList, attributesType, attributesLength);
 
                     // Mensaje informativo.
                     // Pedido de ingreso de cantidad de registros a generar.
@@ -122,14 +134,10 @@ public class Main {
                             "Se ingresarán " + cantidadAInsertar + " registros en la tabla " + tableName + ".\n");
 
                     // Operación CREATE (Alta de registros)
-                    ((MotorBD) element).insertData(dbName, tableName, cantidadAInsertar);
-
-                    // System.out.println("La operación tardó " + timer);
-                    // System.out.println("");
+                    element.insertData(dbName, tableName, cantidadAInsertar);
 
                     // Eliminación de la BD.
-                    System.out.println(
-                            "Motor: " + ((MotorBD) element).getNombreMotor() + "\nOperación 'Create' finalizada.\n");
+                    System.out.println("Motor: " + element.getEngineName() + "\nOperación 'CREATE' finalizada.\n");
 
                     // Presione ENTER para continuar
                     System.out.print("Presione ENTER para continuar...");
@@ -275,9 +283,8 @@ public class Main {
 
         Iterator<MotorBD> itr = ll.iterator();
         while (itr.hasNext()) {
-            Object element = itr.next();
-            System.out.printf("%-25s %-20s\n", ((MotorBD) element).getNombreMotor(),
-                    ((MotorBD) element).getStatsCreateOp());
+            MotorBD element = itr.next();
+            System.out.printf("%-25s %-20s\n", element.getEngineName(), element.getStatsCreateOp());
         }
 
         System.out.println("");

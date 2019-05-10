@@ -11,7 +11,8 @@ import java.sql.Statement;
 import com.google.common.base.Stopwatch;
 
 public abstract class MotorBD {
-    private String nombreMotor;
+    private String engineName;
+    private String engineVersion;
     private String url;
     private String sql;
 
@@ -36,18 +37,32 @@ public abstract class MotorBD {
     /**
      * @return the nombreMotor
      */
-    public String getNombreMotor() {
-        if (nombreMotor == null) {
-            nombreMotor = new String();
+    public String getEngineName() {
+        if (engineName == null) {
+            engineName = new String();
         }
-        return nombreMotor;
+        return engineName;
+    }
+
+    /**
+     * @return the engineVersion
+     */
+    public String getEngineVersion() {
+        return engineVersion;
+    }
+
+    /**
+     * @param engineVersion the engineVersion to set
+     */
+    public void setEngineVersion(String engineVersion) {
+        this.engineVersion = engineVersion;
     }
 
     /**
      * @param nombreMotor the nombreMotor to set
      */
-    public void setNombreMotor(String nombreMotor) {
-        this.nombreMotor = nombreMotor;
+    public void setEngineName(String EngineName) {
+        this.engineName = EngineName;
     }
 
     /**

@@ -6,7 +6,8 @@ import java.sql.SQLException;
 public class SqliteCreator extends MotorBD {
 
     public SqliteCreator() {
-        setNombreMotor("SQLite v3.27.2.1");
+        setEngineName("SQLite");
+        setEngineVersion("3.27.2.1");
     }
 
     // Función para crear una nueva BD.
