@@ -28,14 +28,14 @@ public abstract class MotorBD {
     private PreparedStatement pstmt;
 
     // Timer
-    private Stopwatch timer;
+    private Stopwatch timer = null;
     // Stopwatch timer = Stopwatch.createUnstarted();
 
     // Atributos para guardar resultados de pruebas
-    String statsCreateOp;
+    String statsCreateOperation;
 
     /**
-     * @return the nombreMotor
+     * @return the engineName
      */
     public String getEngineName() {
         if (engineName == null) {
@@ -225,17 +225,17 @@ public abstract class MotorBD {
     }
 
     /**
-     * @return the statsCreateOp
+     * @return the statsCreateOperation
      */
-    public String getStatsCreateOp() {
-        return statsCreateOp;
+    public String getStatsCreateOperation() {
+        return statsCreateOperation;
     }
 
     /**
-     * @param statsCreateOp the statsCreateOp to set
+     * @param statsCreateOperation the statsCreateOperation to set
      */
-    public void setStatsCreateOp(String statsCreateOp) {
-        this.statsCreateOp = statsCreateOp;
+    public void setStatsCreateOperation(String statsCreateOperation) {
+        this.statsCreateOperation = statsCreateOperation;
     }
 
     public abstract void createNewDatabase(String dbName);

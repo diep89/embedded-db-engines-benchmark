@@ -35,13 +35,13 @@ public class Main {
         // Instanciación de las clases creadoras de BD.
         // SqliteCreator sqlite = new SqliteCreator();
         // MongoDbCreator mongo = new MongoDbCreator();
-        // RocksDbCreator rocks = new RocksDbCreator();
+        RocksDbCreator rocks = new RocksDbCreator();
 
         // Creación de lista que contiene las instancias creadas anteriormente.
         LinkedList<MotorBD> ll = new LinkedList<MotorBD>();
         // ll.add(sqlite);
         // ll.add(mongo);
-        // ll.add(rocks);
+        ll.add(rocks);
 
         System.out.println("Practica Profesional Supervisada");
         System.out.println("Benchmark de motores de BD embebidos");
@@ -71,7 +71,7 @@ public class Main {
             switch (menuOption) {
             // Test automatizado
             case 1:
-                System.out.println("\n***");
+                System.out.println("\n***\n");
                 System.out.println("Inicio de test automatizado");
                 System.out.println("");
                 System.out.println("Se realizarán operaciones CRUD.\n");
@@ -119,24 +119,39 @@ public class Main {
                     // Mensaje informativo.
                     // Pedido de ingreso de cantidad de registros a generar.
                     System.out.println("Generación y alta de registros en la BD.");
-                    System.out.print("Indique la cantidad de registros a ingresar (1-100k): ");
-                    cantidadAInsertar = input.nextInt();
-                    System.out.println("");
-                    do {
-                        if (cantidadAInsertar < 1 || cantidadAInsertar > 100000) {
-                            System.out.print("Error: cantidad inválida. Por favor, elija una cantidad válida: ");
-                            cantidadAInsertar = input.nextInt();
-                            System.out.println("");
-                        }
-                    } while (cantidadAInsertar < 1 || cantidadAInsertar > 100000);
 
+                    switch (element.getEngineName().toLowerCase()) {
+                    case "rocksdb":
+                        System.out.print("Indique la cantidad de registros a ingresar (1-100): ");
+                        cantidadAInsertar = input.nextInt();
+                        System.out.println("");
+                        do {
+                            if (cantidadAInsertar < 1 || cantidadAInsertar > 100) {
+                                System.out.print("Error: cantidad inválida. Por favor, elija una cantidad válida: ");
+                                cantidadAInsertar = input.nextInt();
+                                System.out.println("");
+                            }
+                        } while (cantidadAInsertar < 1 || cantidadAInsertar > 100);
+                        break;
+                    default:
+                        System.out.print("Indique la cantidad de registros a ingresar (1-100k): ");
+                        cantidadAInsertar = input.nextInt();
+                        System.out.println("");
+                        do {
+                            if (cantidadAInsertar < 1 || cantidadAInsertar > 100000) {
+                                System.out.print("Error: cantidad inválida. Por favor, elija una cantidad válida: ");
+                                cantidadAInsertar = input.nextInt();
+                                System.out.println("");
+                            }
+                        } while (cantidadAInsertar < 1 || cantidadAInsertar > 100000);
+                        break;
+                    }
                     System.out.println(
                             "Se ingresarán " + cantidadAInsertar + " registros en la tabla " + tableName + ".\n");
 
                     // Operación CREATE (Alta de registros)
                     element.insertData(dbName, tableName, cantidadAInsertar);
 
-                    // Eliminación de la BD.
                     System.out.println("Motor: " + element.getEngineName() + "\nOperación 'CREATE' finalizada.\n");
 
                     // Presione ENTER para continuar
@@ -284,7 +299,7 @@ public class Main {
         Iterator<MotorBD> itr = ll.iterator();
         while (itr.hasNext()) {
             MotorBD element = itr.next();
-            System.out.printf("%-25s %-20s\n", element.getEngineName(), element.getStatsCreateOp());
+            System.out.printf("%-25s %-20s\n", element.getEngineName(), element.getStatsCreateOperation());
         }
 
         System.out.println("");

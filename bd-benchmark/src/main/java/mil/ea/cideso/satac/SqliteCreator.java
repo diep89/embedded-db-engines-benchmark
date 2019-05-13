@@ -123,7 +123,7 @@ public class SqliteCreator extends MotorBD {
                 setPstmt(getConn().prepareStatement(getSql()));
                 getPstmt().setInt(1, j);
                 getPstmt().setString(2, "M");
-                getPstmt().setInt(3, 11111111);
+                getPstmt().setInt(3, j);
                 getPstmt().executeUpdate();
                 getTimer().stop();
                 if (getConn() != null) {
@@ -158,17 +158,12 @@ public class SqliteCreator extends MotorBD {
         System.out.println("");
         System.out.println("");
 
+        // Forma de tomar el tiempo alternativa.
         // tiempoFin = System.currentTimeMillis();
         // tiempoTest = tiempoFin - tiempoInicio;
         // (tiempoTest / 1000)
 
-        // System.out.println("");
-        // System.out.printf("El tiempo de ejecución fue de " + timer + ".\n");
-        // System.out.println("");
-
-        // Guardo el valor del timer en la variable 'timerReturned'.
-        // Esta variable debe ser recuperada desde el main.
-        setStatsCreateOp(getTimer().toString());
+        setStatsCreateOperation(getTimer().toString());
 
         // Reseteo el timer.
         setTimer(getTimer().reset());
