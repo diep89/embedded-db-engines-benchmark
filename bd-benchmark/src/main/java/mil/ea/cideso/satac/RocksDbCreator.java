@@ -56,7 +56,6 @@ public class RocksDbCreator extends MotorBD {
     public void insertData(String dbName, String tableName, int cantidadAInsertar) {
         try {
             RocksDB db = getDb(dbName);
-            // System.out.println("La BD se ha generado correctamente.\n");
             for (int i = 0; i < cantidadAInsertar; i++) {
                 for (int j = 0; j < getAttributesQty(); j++) {
                     if (getAttributesType()[j] == "int") {
@@ -91,6 +90,17 @@ public class RocksDbCreator extends MotorBD {
         } catch (RocksDBException e) {
             e.printStackTrace(System.err);
         }
+    }
+
+    @Override
+    public void readData(String dbName, String tableName) {
+
+    }
+
+    @Override
+    public void updateData(String dbName, String tableName, String[] attributesList, String[] attributesType,
+            String[] attributesLength) {
+
     }
 
     @Override

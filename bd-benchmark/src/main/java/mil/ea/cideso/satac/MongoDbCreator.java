@@ -46,6 +46,17 @@ public class MongoDbCreator extends MotorBD {
     }
 
     @Override
+    public void readData(String dbName, String tableName) {
+
+    }
+
+    @Override
+    public void updateData(String dbName, String tableName, String[] attributesList, String[] attributesType,
+            String[] attributesLength) {
+
+    }
+
+    @Override
     public void dropDatabase(String dbName) {
 
     }
@@ -82,4 +93,5 @@ public class MongoDbCreator extends MotorBD {
      * 
      * while(it.hasNext()) { System.out.println(it.next()); i++; }
      */
+
 }

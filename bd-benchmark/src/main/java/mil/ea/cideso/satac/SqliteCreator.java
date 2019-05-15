@@ -100,7 +100,7 @@ public class SqliteCreator extends MotorBD {
 
     }
 
-    // Función para operaciones CREATE
+    // Función para operación CREATE
     @Override
     public void insertData(String dbName, String tableName, int cantidadAInsertar) {
 
@@ -168,6 +168,123 @@ public class SqliteCreator extends MotorBD {
         // Reseteo el timer.
         setTimer(getTimer().reset());
 
+    }
+
+    // Función para operación READ
+    @Override
+    public void readData(String dbName, String tableName) {
+        setSql("SELECT * FROM " + tableName);
+
+        try {
+            getTimer().start();
+            getConnection(getUrl());
+            setStmt(getConn().createStatement());
+            setRs(getStmt().executeQuery(getSql()));
+            getTimer().stop();
+
+            // Recorro los resultados y los muestro por pantalla
+            int i = 1;
+            System.out.println("Registros leídos:\n");
+            System.out.printf("%-10s %-10s %-10s %-10s\n", "Id", "Edad", "Sexo", "Telefono");
+            while (getRs().next()) {
+                System.out.printf("%-10d %-10s %-10s %-10s\n", i, getRs().getInt("edad"), getRs().getString("sexo"),
+                        getRs().getInt("telefono"));
+                i++;
+            }
+            System.out.println("");
+            setStatsReadOperation(getTimer().toString()); // Guardo el valor del timer
+            setTimer(getTimer().reset()); // Reseteo el timer.
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (getRs() != null)
+                    getRs().close();
+                if (getStmt() != null)
+                    getStmt().close();
+                if (getConn() != null)
+                    getConn().close();
+            } catch (SQLException e) {
+                System.out.println("Error.");
+                System.out.println("Detalle del error: \n" + e.getMessage());
+                System.exit(1);
+            }
+        }
+    }
+
+    // Función para operación UPDATE
+    @Override
+    public void updateData(String dbName, String tableName, String[] attributesList, String[] attributesType,
+            String[] attributesLength) {
+
+        // Lógica para la generación de la sentencia SQL de inserción de datos.
+        // setSql("UPDATE " + tableName + " SET name = ? , " + "capacity = ? " + "WHERE
+        // sexo = ?");
+        setSql("UPDATE " + tableName + " SET ");
+
+        for (int k = 0; k < getAttributesQty() - 1; k++) {
+            setSql(getSql().concat(getAttributesList()[k] + " = ? , "));
+        }
+        setSql(getSql().concat(getAttributesList()[getAttributesQty() - 1] + " = ? WHERE sexo = ?"));
+
+        // tiempoInicio = System.currentTimeMillis();
+        try {
+            getTimer().start();
+            getConnection(getUrl());
+            setPstmt(getConn().prepareStatement(getSql()));
+            getPstmt().setInt(1, 10);
+            getPstmt().setString(2, "F");
+            getPstmt().setInt(3, 10);
+            getPstmt().setString(4, "M");
+            getPstmt().executeUpdate();
+            getTimer().stop();
+
+            if (getConn() != null) {
+                setSql("SELECT * FROM " + tableName);
+                try {
+                    getConnection(getUrl());
+                    setStmt(getConn().createStatement());
+                    setRs(getStmt().executeQuery(getSql()));
+
+                    // Recorro los resultados y los muestro por pantalla
+                    int i = 1;
+                    System.out.println("Registros actualizados correctamente.");
+                    System.out.println("Lista de registros actualizada: \n");
+                    System.out.printf("%-10s %-10s %-10s %-10s\n", "Id", "Edad", "Sexo", "Telefono");
+                    while (getRs().next()) {
+                        System.out.printf("%-10d %-10s %-10s %-10s\n", i, getRs().getInt("edad"),
+                                getRs().getString("sexo"), getRs().getInt("telefono"));
+                        i++;
+                    }
+                    System.out.println("");
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                }
+
+            }
+        }
+
+        catch (SQLException e) {
+            System.out.println("Error.");
+            System.out.println("Detalle del error: \n" + e.getMessage());
+            System.exit(1);
+        }
+
+        finally {
+            try {
+                if (getPstmt() != null)
+                    getPstmt().close();
+                if (getConn() != null)
+                    getConn().close();
+            } catch (SQLException e) {
+                System.out.println("Error.");
+                System.out.println("Detalle del error: \n" + e.getMessage());
+                System.exit(1);
+            }
+        }
+
+        setStatsUpdateOperation(getTimer().toString());
+        setTimer(getTimer().reset()); // Reseteo el timer.
     }
 
     // Función (opcional) para eliminar la BD generada

@@ -10,7 +10,8 @@ public class Main {
         int menuOption;
 
         // Nombre de la BD a generar.
-        String dbName = "testDb";
+        // Se inicializa dentro del loop de pruebas.
+        String dbName;
 
         // Nombre de la tabla a generar.
         String tableName = "TestTable";
@@ -22,40 +23,34 @@ public class Main {
 
         // Variables auxiliares.
         Scanner input = new Scanner(System.in);
-        int cantidadAInsertar;
+        int cantidadAInsertar = -1;
         String eliminar;
-
-        // int attributeQty;
-        // String attributeName;
-        // String attributeType;
-        // Integer attributeSize = null;
-        // Integer attributeValue = null;
-        // String attributeText = null;
+        int counter = 1;
+        int waitMillis = 1500;
 
         // Instanciación de las clases creadoras de BD.
-        // SqliteCreator sqlite = new SqliteCreator();
+        SqliteCreator sqlite = new SqliteCreator();
         // MongoDbCreator mongo = new MongoDbCreator();
-        RocksDbCreator rocks = new RocksDbCreator();
+        // RocksDbCreator rocks = new RocksDbCreator();
 
         // Creación de lista que contiene las instancias creadas anteriormente.
         LinkedList<MotorBD> ll = new LinkedList<MotorBD>();
-        // ll.add(sqlite);
+        ll.add(sqlite);
         // ll.add(mongo);
-        ll.add(rocks);
+        // ll.add(rocks);
 
         System.out.println("Practica Profesional Supervisada");
+        waitTime(waitMillis);
         System.out.println("Benchmark de motores de BD embebidos");
+        waitTime(waitMillis);
         System.out.println("");
-        // System.out.println("Lista de motores de BD en el test:");
-        // for (int i = 0; i < motoresNombres.length; i++) {
-        // System.out.println("- " + motoresNombres[i]);
-        // }
-        // System.out.println("");
 
         do {
             System.out.println("Opciones:");
+            waitTime(waitMillis);
             System.out.println("1 - Test automatizado");
             System.out.println("2 - Test con ingreso manual de atributos");
+            waitTime(2500);
             System.out.println("");
             System.out.print("Por favor, elija una opción (0 para finalizar): ");
             menuOption = input.nextInt();
@@ -71,45 +66,74 @@ public class Main {
             switch (menuOption) {
             // Test automatizado
             case 1:
-                System.out.println("\n***\n");
-                System.out.println("Inicio de test automatizado");
-                System.out.println("");
-                System.out.println("Se realizarán operaciones CRUD.\n");
-                // Presione ENTER para continuar
-                System.out.print("Presione ENTER para continuar...");
-                try {
-                    System.in.read();
-                } catch (Exception e) {
-                    e.printStackTrace();
+                System.out.println("***\n");
+                System.out.println("Inicio de test automatizado\n");
+                waitTime(waitMillis);
+                System.out.println("Se realizarán operaciones CRUD (Create, Read, Update, Delete).\n");
+                waitTime(waitMillis);
+                if (cantidadAInsertar == -1) {
+                    System.out.print(
+                            "Indique la cantidad de registros a ingresar durante las operaciones de creación (1-100): ");
+                    cantidadAInsertar = input.nextInt();
+                    System.out.println("");
+                    do {
+                        if (cantidadAInsertar < 1 || cantidadAInsertar > 100) {
+                            System.out.print("Error: cantidad inválida. Por favor, elija una cantidad válida: ");
+                            cantidadAInsertar = input.nextInt();
+                            System.out.println("");
+                        }
+                    } while (cantidadAInsertar < 1 || cantidadAInsertar > 100);
                 }
-                System.out.println("");
+                // System.out.println("");
+                waitTime(waitMillis);
+
                 // Creación de objeto 'iterator' para recorrer todas las instancias contenidas
                 // en la lista.
                 Iterator<MotorBD> itr = ll.iterator();
                 while (itr.hasNext()) {
                     MotorBD element = itr.next();
-                    System.out.printf("Motor: %s v%s\n\n", element.getEngineName(), element.getEngineVersion());
+                    System.out.printf("Motor %d: %s v%s\n\n", counter, element.getEngineName(),
+                            element.getEngineVersion());
+                    waitTime(waitMillis);
                     System.out.println("1. Operación CREATE:\n");
-                    dbName = dbName + "-" + element.getEngineName();
+                    waitTime(waitMillis);
+                    dbName = "testDb" + "-" + element.getEngineName();
                     element.createNewDatabase(dbName);
 
-                    // Mensaje informativo sobre atributos.
-                    System.out.println("Se procede a realizar la creación de la tabla de prueba en la BD.");
-                    System.out.println("Los atributos que se crearán son: ");
-                    for (int j = 0; j < attributesList.length; j++) {
-                        System.out.printf("%-10s " + attributesType[j] + "(" + attributesLength[j] + ")\n",
-                                attributesList[j]);
+                    switch (element.getEngineName().toLowerCase()) {
+                    case "sqlite":
+                        // Mensaje informativo sobre atributos.
+                        System.out.println("Se procede a realizar la creación de la tabla de prueba en la BD.");
+                        waitTime(waitMillis);
+                        System.out.println("Los atributos que se crearán son: ");
+                        waitTime(waitMillis);
+                        for (int j = 0; j < attributesList.length; j++) {
+                            System.out.printf("%-10s " + attributesType[j] + "(" + attributesLength[j] + ")\n",
+                                    attributesList[j]);
+                            waitTime(1000);
+                        }
+                        System.out.println("");
+                        break;
+                    case "rocksdb":
+                        // Mensaje informativo sobre atributos.
+                        System.out.println(
+                                "Debido a la naturaleza del motor de BD, no se realizará la creación de una tabla.");
+                        waitTime(waitMillis);
+                        System.out.println(
+                                "Para realizar una comparativa correcta, se realizará la inserción de pares clave-valor respetando el siguiente formato de atributos: ");
+                        waitTime(waitMillis);
+                        for (int j = 0; j < attributesList.length; j++) {
+                            System.out.printf("%-10s " + attributesType[j] + "(" + attributesLength[j] + ")\n",
+                                    attributesList[j]);
+                            waitTime(1000);
+                        }
+                        System.out.println("");
+                        break;
+                    default:
+                        break;
                     }
-                    System.out.println("");
 
-                    // Presione ENTER para continuar
-                    System.out.print("Presione ENTER para continuar...");
-                    try {
-                        System.in.read();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    System.out.println("");
+                    waitTime(2000);
 
                     // Creación de la tabla 'TestTable'
                     // En la creación de una nueva tabla se crea automáticamente el atributo "id"
@@ -119,55 +143,67 @@ public class Main {
                     // Mensaje informativo.
                     // Pedido de ingreso de cantidad de registros a generar.
                     System.out.println("Generación y alta de registros en la BD.");
+                    waitTime(waitMillis);
 
                     switch (element.getEngineName().toLowerCase()) {
-                    case "rocksdb":
-                        System.out.print("Indique la cantidad de registros a ingresar (1-100): ");
-                        cantidadAInsertar = input.nextInt();
-                        System.out.println("");
-                        do {
-                            if (cantidadAInsertar < 1 || cantidadAInsertar > 100) {
-                                System.out.print("Error: cantidad inválida. Por favor, elija una cantidad válida: ");
-                                cantidadAInsertar = input.nextInt();
-                                System.out.println("");
-                            }
-                        } while (cantidadAInsertar < 1 || cantidadAInsertar > 100);
+                    case "sqlite":
+                        System.out.println(
+                                "Se ingresarán " + cantidadAInsertar + " registros en la tabla " + tableName + ".\n");
+                        waitTime(waitMillis);
                         break;
+                    case "rocksdb":
+                        System.out.println("Se ingresarán " + cantidadAInsertar + " registros en la BD.\n");
+                        waitTime(waitMillis);
+                        break;
+
                     default:
-                        System.out.print("Indique la cantidad de registros a ingresar (1-100k): ");
-                        cantidadAInsertar = input.nextInt();
-                        System.out.println("");
-                        do {
-                            if (cantidadAInsertar < 1 || cantidadAInsertar > 100000) {
-                                System.out.print("Error: cantidad inválida. Por favor, elija una cantidad válida: ");
-                                cantidadAInsertar = input.nextInt();
-                                System.out.println("");
-                            }
-                        } while (cantidadAInsertar < 1 || cantidadAInsertar > 100000);
                         break;
                     }
-                    System.out.println(
-                            "Se ingresarán " + cantidadAInsertar + " registros en la tabla " + tableName + ".\n");
 
                     // Operación CREATE (Alta de registros)
                     element.insertData(dbName, tableName, cantidadAInsertar);
 
                     System.out.println("Motor: " + element.getEngineName() + "\nOperación 'CREATE' finalizada.\n");
+                    waitTime(waitMillis);
+                    pressEnter();
 
-                    // Presione ENTER para continuar
-                    System.out.print("Presione ENTER para continuar...");
-                    try {
-                        System.in.read();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
                     System.out.println("");
 
                     // OPERACIÓN READ
-                    // OPERACIÓN UPDATE
-                    // OPERACIÓN DELETE
+                    System.out.println("2. Operación READ:\n");
+                    waitTime(waitMillis);
+                    System.out.println("Se leerán los registros ingresados en la BD.\n");
+                    pressEnter();
+                    System.out.println("");
 
-                    // Opcional: Descomentar para eliminar la BD generada.
+                    element.readData(dbName, tableName);
+
+                    // Mensaje informativo
+                    System.out.println("Motor: " + element.getEngineName() + "\nOperación 'READ' finalizada.\n");
+                    waitTime(waitMillis);
+                    pressEnter();
+                    System.out.println("");
+
+                    // OPERACIÓN UPDATE
+                    System.out.println("3. Operación UPDATE:\n");
+                    waitTime(waitMillis);
+                    System.out.println("Se actualizarán los registros ingresados en la BD con nuevos datos.\n");
+                    pressEnter();
+                    System.out.println("");
+
+                    element.updateData(dbName, tableName, attributesList, attributesType, attributesLength);
+                    System.out.println("Motor: " + element.getEngineName() + "\nOperación 'UPDATE' finalizada.\n");
+                    waitTime(waitMillis);
+                    pressEnter();
+                    System.out.println("");
+
+                    // Mensaje informativo
+                    // System.out.println("Motor: " + element.getEngineName() + "\nOperación
+                    // 'UPDATE' finalizada.\n");
+                    // waitTime(waitMillis);
+                    // pressEnter();
+
+                    // OPERACIÓN DELETE
                     // do {
                     // System.out.print("¿Desea eliminar la BD (Y/N)? ");
                     // eliminar = input.next();
@@ -187,7 +223,8 @@ public class Main {
                     // }
                     // }
 
-                    System.out.println("");
+                    // System.out.println("");
+                    counter++;
                 }
                 menuOption = 0;
                 break;
@@ -274,32 +311,25 @@ public class Main {
             } // Cierro switch
         } while (menuOption != 0);
 
-        // Presione ENTER para continuar
-        // System.out.print("Presione ENTER para continuar...");
-        // try {
-        // System.in.read();
-        // } catch (Exception e) {
-        // e.printStackTrace();
-        // }
-        // System.out.println("");
-
         // Tabla para mostrar resultados
         // CRUD: Create, Read, Update, Delete !!!!!!!!!!!!!!!!
         System.out.println("");
         System.out.println("***");
         System.out.println("");
         System.out.println("Resultados del benchmark");
-        System.out.println("");
         System.out.println("Operaciones CRUD (Create, Read, Update, Delete)");
         System.out.println("");
-        System.out.printf("%-25s %-20s", "Motor", "Create");
+        waitTime(waitMillis);
+        System.out.printf("%-15s %-15s %-15s %-15s %-15s", "Motor", "Create", "Read", "Update", "Delete");
         System.out.println("");
         System.out.println("");
 
         Iterator<MotorBD> itr = ll.iterator();
         while (itr.hasNext()) {
             MotorBD element = itr.next();
-            System.out.printf("%-25s %-20s\n", element.getEngineName(), element.getStatsCreateOperation());
+            System.out.printf("%-15s %-15s %-15s %-15s %-15s\n", element.getEngineName(),
+                    element.getStatsCreateOperation(), element.getStatsReadOperation(),
+                    element.getStatsUpdateOperation(), element.getStatsDeleteOperation());
         }
 
         System.out.println("");
@@ -307,4 +337,25 @@ public class Main {
 
         input.close();
     }
+
+    public static void pressEnter() {
+        Scanner scanner;
+        System.out.println("Presione ENTER para continuar...");
+        try {
+            scanner = new Scanner(System.in);
+            scanner.nextLine();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void waitTime(int waitMilliseconds) {
+        // Bloque para parar la aplicación
+        try {
+            Thread.sleep(waitMilliseconds);
+        } catch (InterruptedException e1) {
+            e1.printStackTrace();
+        }
+    }
+
 }

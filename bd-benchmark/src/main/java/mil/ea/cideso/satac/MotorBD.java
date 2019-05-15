@@ -5,6 +5,7 @@ import java.sql.Connection;
 // import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -26,6 +27,7 @@ public abstract class MotorBD {
     private Connection conn;
     private Statement stmt;
     private PreparedStatement pstmt;
+    private ResultSet rs;
 
     // Timer
     private Stopwatch timer = null;
@@ -33,7 +35,26 @@ public abstract class MotorBD {
 
     // Atributos para guardar resultados de pruebas
     String statsCreateOperation;
+    String statsReadOperation;
+    String statsUpdateOperation;
+    String statsDeleteOperation;
 
+    // Métodos
+    public abstract void createNewDatabase(String dbName);
+
+    public abstract void createNewTable(String dbName, String tableName, String[] attributesList,
+            String[] attributesType, String[] attributesLength);
+
+    public abstract void insertData(String dbName, String tableName, int cantidadAInsertar);
+
+    public abstract void readData(String dbName, String tableName);
+
+    public abstract void updateData(String dbName, String tableName, String[] attributesList, String[] attributesType,
+            String[] attributesLength);
+
+    public abstract void dropDatabase(String dbName);
+
+    // Getters y Setters
     /**
      * @return the engineName
      */
@@ -238,14 +259,61 @@ public abstract class MotorBD {
         this.statsCreateOperation = statsCreateOperation;
     }
 
-    public abstract void createNewDatabase(String dbName);
+    /**
+     * @return the statsReadOperation
+     */
+    public String getStatsReadOperation() {
+        return statsReadOperation;
+    }
 
-    public abstract void createNewTable(String dbName, String tableName, String[] attributesList,
-            String[] attributesType, String[] attributesLength);
+    /**
+     * @param statsReadOperation the statsReadOperation to set
+     */
+    public void setStatsReadOperation(String statsReadOperation) {
+        this.statsReadOperation = statsReadOperation;
+    }
 
-    public abstract void insertData(String dbName, String tableName, int cantidadAInsertar);
+    /**
+     * @return the rs
+     */
+    public ResultSet getRs() {
+        return rs;
+    }
 
-    public abstract void dropDatabase(String dbName);
+    /**
+     * @param rs the rs to set
+     */
+    public void setRs(ResultSet rs) {
+        this.rs = rs;
+    }
+
+    /**
+     * @return the statsUpdateOperation
+     */
+    public String getStatsUpdateOperation() {
+        return statsUpdateOperation;
+    }
+
+    /**
+     * @param statsUpdateOperation the statsUpdateOperation to set
+     */
+    public void setStatsUpdateOperation(String statsUpdateOperation) {
+        this.statsUpdateOperation = statsUpdateOperation;
+    }
+
+    /**
+     * @return the statsDeleteOperation
+     */
+    public String getStatsDeleteOperation() {
+        return statsDeleteOperation;
+    }
+
+    /**
+     * @param statsDeleteOperation the statsDeleteOperation to set
+     */
+    public void setStatsDeleteOperation(String statsDeleteOperation) {
+        this.statsDeleteOperation = statsDeleteOperation;
+    }
 
     // Funciones para configurar test automatizado
 
