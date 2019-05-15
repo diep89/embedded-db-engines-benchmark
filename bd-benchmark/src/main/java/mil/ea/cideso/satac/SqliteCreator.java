@@ -218,8 +218,6 @@ public class SqliteCreator extends MotorBD {
             String[] attributesLength) {
 
         // Lógica para la generación de la sentencia SQL de inserción de datos.
-        // setSql("UPDATE " + tableName + " SET name = ? , " + "capacity = ? " + "WHERE
-        // sexo = ?");
         setSql("UPDATE " + tableName + " SET ");
 
         for (int k = 0; k < getAttributesQty() - 1; k++) {
@@ -227,7 +225,6 @@ public class SqliteCreator extends MotorBD {
         }
         setSql(getSql().concat(getAttributesList()[getAttributesQty() - 1] + " = ? WHERE sexo = ?"));
 
-        // tiempoInicio = System.currentTimeMillis();
         try {
             getTimer().start();
             getConnection(getUrl());
@@ -284,6 +281,45 @@ public class SqliteCreator extends MotorBD {
         }
 
         setStatsUpdateOperation(getTimer().toString());
+        setTimer(getTimer().reset()); // Reseteo el timer.
+    }
+
+    @Override
+    public void deleteData(String dbName, String tableName) {
+        setSql("DELETE FROM " + tableName + " WHERE sexo = ? ");
+
+        try {
+            getTimer().start();
+            getConnection(getUrl());
+            setPstmt(getConn().prepareStatement(getSql()));
+            getPstmt().setString(1, "F");
+            getPstmt().executeUpdate();
+            getTimer().stop();
+            if (getConn() != null) {
+                System.out.println("Registros eliminados correctamente.");
+            }
+        }
+
+        catch (SQLException e) {
+            System.out.println("Error.");
+            System.out.println("Detalle del error: \n" + e.getMessage());
+            System.exit(1);
+        }
+
+        finally {
+            try {
+                if (getPstmt() != null)
+                    getPstmt().close();
+                if (getConn() != null)
+                    getConn().close();
+            } catch (SQLException e) {
+                System.out.println("Error.");
+                System.out.println("Detalle del error: \n" + e.getMessage());
+                System.exit(1);
+            }
+        }
+
+        setStatsDeleteOperation(getTimer().toString());
         setTimer(getTimer().reset()); // Reseteo el timer.
     }
 

@@ -197,13 +197,20 @@ public class Main {
                     pressEnter();
                     System.out.println("");
 
-                    // Mensaje informativo
-                    // System.out.println("Motor: " + element.getEngineName() + "\nOperación
-                    // 'UPDATE' finalizada.\n");
-                    // waitTime(waitMillis);
-                    // pressEnter();
-
                     // OPERACIÓN DELETE
+                    System.out.println("4. Operación DELETE:\n");
+                    waitTime(waitMillis);
+                    System.out.println("Se eliminarán los registros ingresados en la BD.\n");
+                    pressEnter();
+                    System.out.println("");
+
+                    element.deleteData(dbName, tableName);
+                    System.out.println("Motor: " + element.getEngineName() + "\nOperación 'DELETE' finalizada.\n");
+                    waitTime(waitMillis);
+                    pressEnter();
+                    System.out.println("");
+
+                    // EXTRA
                     // do {
                     // System.out.print("¿Desea eliminar la BD (Y/N)? ");
                     // eliminar = input.next();

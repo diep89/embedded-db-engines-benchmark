@@ -104,6 +104,11 @@ public class RocksDbCreator extends MotorBD {
     }
 
     @Override
+    public void deleteData(String dbName, String tableName) {
+
+    }
+
+    @Override
     public void dropDatabase(String dbName) {
 
     }

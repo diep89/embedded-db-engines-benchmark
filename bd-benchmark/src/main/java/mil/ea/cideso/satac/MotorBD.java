@@ -52,6 +52,8 @@ public abstract class MotorBD {
     public abstract void updateData(String dbName, String tableName, String[] attributesList, String[] attributesType,
             String[] attributesLength);
 
+    public abstract void deleteData(String dbName, String tableName);
+
     public abstract void dropDatabase(String dbName);
 
     // Getters y Setters
