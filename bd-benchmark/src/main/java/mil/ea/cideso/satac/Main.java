@@ -17,6 +17,7 @@ public class Main {
         String tableName = "TestTable";
 
         // Atributos definidos para el test automatizado.
+        // Solo se aceptan los tipos de archivo 'int' y 'varchar'
         String attributesList[] = { "Edad", "Sexo", "Telefono" };
         String attributesType[] = { "int", "varchar", "int" };
         String attributesLength[] = { "2", "1", "8" };
@@ -29,14 +30,14 @@ public class Main {
         int waitMillis = 1500;
 
         // Instanciación de las clases creadoras de BD.
-        SqliteCreator sqlite = new SqliteCreator();
-        // MongoDbCreator mongo = new MongoDbCreator();
+        // SqliteCreator sqlite = new SqliteCreator();
+        MongoDbCreator mongo = new MongoDbCreator();
         // RocksDbCreator rocks = new RocksDbCreator();
 
         // Creación de lista que contiene las instancias creadas anteriormente.
         LinkedList<MotorBD> ll = new LinkedList<MotorBD>();
-        ll.add(sqlite);
-        // ll.add(mongo);
+        // ll.add(sqlite);
+        ll.add(mongo);
         // ll.add(rocks);
 
         System.out.println("Practica Profesional Supervisada");
@@ -114,6 +115,20 @@ public class Main {
                         }
                         System.out.println("");
                         break;
+                    case "mongo":
+                        // Mensaje informativo sobre atributos.
+                        System.out.println("Se procede a realizar la creación de la colección de prueba en la BD.");
+                        waitTime(waitMillis);
+                        System.out.println(
+                                "Para realizar una comparativa correcta, se realizará la inserción de documentos (dentro de la colección) que contengan el siguiente formato de atributos: ");
+                        waitTime(waitMillis);
+                        for (int j = 0; j < attributesList.length; j++) {
+                            System.out.printf("%-10s " + attributesType[j] + "(" + attributesLength[j] + ")\n",
+                                    attributesList[j]);
+                            waitTime(1000);
+                        }
+                        System.out.println("");
+                        break;
                     case "rocksdb":
                         // Mensaje informativo sobre atributos.
                         System.out.println(
@@ -152,6 +167,7 @@ public class Main {
                         waitTime(waitMillis);
                         break;
                     case "rocksdb":
+                    case "mongo":
                         System.out.println("Se ingresarán " + cantidadAInsertar + " registros en la BD.\n");
                         waitTime(waitMillis);
                         break;

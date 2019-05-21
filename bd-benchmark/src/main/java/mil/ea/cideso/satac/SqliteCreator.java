@@ -131,7 +131,11 @@ public class SqliteCreator extends MotorBD {
                     // System.out.println("The driver name is " + meta.getDriverName());
                     // System.out.println("A new record (" + (j + 1) + ") has been inserted.");
                     // System.out.println("");
-                    System.out.print((j + 1) + " - ");
+                    if (j + 1 < cantidadAInsertar) {
+                        System.out.print((j + 1) + " - ");
+                    } else {
+                        System.out.print((j + 1) + ".");
+                    }
                 }
             }
 
@@ -296,7 +300,7 @@ public class SqliteCreator extends MotorBD {
             getPstmt().executeUpdate();
             getTimer().stop();
             if (getConn() != null) {
-                System.out.println("Registros eliminados correctamente.");
+                System.out.println("Registros eliminados correctamente.\n");
             }
         }
 
