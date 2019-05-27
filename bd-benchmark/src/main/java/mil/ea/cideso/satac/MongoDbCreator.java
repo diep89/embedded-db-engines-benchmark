@@ -1,5 +1,7 @@
 package mil.ea.cideso.satac;
 
+import com.mongodb.embedded.client.*;
+
 import com.mongodb.ConnectionString;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoClient;
@@ -8,12 +10,20 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
-import com.mongodb.MongoCredential;
 import org.bson.Document;
+
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.model.Projections;
+import com.mongodb.client.model.Sorts;
+import static com.mongodb.client.model.Projections.*;
+import static com.mongodb.client.model.Sorts.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MongoDbCreator extends MotorBD {
 
@@ -30,8 +40,28 @@ public class MongoDbCreator extends MotorBD {
     // Si la BD no existe, es generada automáticamente.
     @Override
     public void createNewDatabase(String dbName) {
-        mongoClient = getClient();
+        MongoEmbeddedSettings esettings = MongoEmbeddedSettings.builder().libraryPath(
+                "C:/Users/Diego/Desktop/mongodb-src-r4.0.9/src/mongo/embedded/mongo_embedded/java/src/com/mongodb/embedded/capi")
+                .build();
+        com.mongodb.embedded.client.MongoClients.init(esettings);
+        // MongoClients.init(esettings);
+
+        // Let's make the driver logging quiet
+        Logger mongoLogger = Logger.getLogger("org.mongodb.driver");
+        mongoLogger.setLevel(Level.OFF);
+
+        // Get a client object that's using the Embedded MongoDB database
+        MongoClientSettings csettings = MongoClientSettings.builder().dbPath("/tmp").build();
+        mongoClient = com.mongodb.embedded.client.MongoClients.create(csettings);
+
+        // mongoClient = getClient();
         MongoDatabase db = getDatabase(dbName, mongoClient);
+
+        // Configuro el logger para que no rompa las bolas salvo que sea importante
+        // Logger mongoLogger = Logger.getLogger("org.mongodb.driver");
+        mongoLogger = Logger.getLogger("org.mongodb.driver");
+        mongoLogger.setLevel(Level.SEVERE);
+
         db.createCollection("sampleCollection"); // Genero una colección dummy para que se genere la BD.
         System.out.println("La BD se ha generado correctamente.\n");
         mongoClient.close();
@@ -205,6 +235,7 @@ public class MongoDbCreator extends MotorBD {
         // You can instantiate a MongoClient object without any parameters to connect to
         // a MongoDB instance running on localhost on port 27017:
         MongoClient mongoClient = MongoClients.create();
+        // MongoClient mongoClient = new MongoClient();
         return mongoClient;
     }
 

@@ -31,14 +31,17 @@ public class Main {
 
         // Instanciación de las clases creadoras de BD.
         // SqliteCreator sqlite = new SqliteCreator();
-        MongoDbCreator mongo = new MongoDbCreator();
+        // MongoDbCreator mongo = new MongoDbCreator();
         // RocksDbCreator rocks = new RocksDbCreator();
+        // RavenDbCreator raven = new RavenDbCreator();
+        ObjectBoxCreator objectBox = new ObjectBoxCreator();
 
         // Creación de lista que contiene las instancias creadas anteriormente.
         LinkedList<MotorBD> ll = new LinkedList<MotorBD>();
         // ll.add(sqlite);
-        ll.add(mongo);
+        // ll.add(mongo);
         // ll.add(rocks);
+        ll.add(objectBox);
 
         System.out.println("Practica Profesional Supervisada");
         waitTime(waitMillis);
@@ -115,6 +118,20 @@ public class Main {
                         }
                         System.out.println("");
                         break;
+                    case "objectBox":
+                        // Mensaje informativo sobre atributos.
+                        System.out.println("Se procede a realizar la creación de la BD.");
+                        waitTime(waitMillis);
+                        System.out.println(
+                                "Para realizar una comparativa correcta, se realizará la inserción de registros que contengan el siguiente formato de atributos: ");
+                        waitTime(waitMillis);
+                        for (int j = 0; j < attributesList.length; j++) {
+                            System.out.printf("%-10s " + attributesType[j] + "(" + attributesLength[j] + ")\n",
+                                    attributesList[j]);
+                            waitTime(1000);
+                        }
+                        System.out.println("");
+                        break;
                     case "mongo":
                         // Mensaje informativo sobre atributos.
                         System.out.println("Se procede a realizar la creación de la colección de prueba en la BD.");
@@ -168,6 +185,7 @@ public class Main {
                         break;
                     case "rocksdb":
                     case "mongo":
+                    case "objectBox":
                         System.out.println("Se ingresarán " + cantidadAInsertar + " registros en la BD.\n");
                         waitTime(waitMillis);
                         break;

@@ -17,11 +17,6 @@ public class SqliteCreator extends MotorBD {
         setUrl("jdbc:sqlite:" + dbName + ".db");
 
         try {
-            // Descomentar para eliminar la BD.
-            // setSql("DROP DATABASE IF EXISTS " + dbName + ";");
-            // setStmt(getConn().createStatement());
-            // getStmt().execute(getSql());
-
             getConnection(getUrl());
             if (getConn() != null) {
                 DatabaseMetaData meta = getConn().getMetaData();
