@@ -18,6 +18,11 @@
       <name>JCenter Repository</name>
       <url>http://jcenter.bintray.com/</url>
     </repository>
+    <!-- <repository>
+      <id>Geomajas Repository</id>
+      <name>Geomajas Repository</name>
+      <url>http://maven.geomajas.org/</url>
+    </repository> -->
   </repositories>
   <dependencies>
     <dependency>
@@ -34,10 +39,16 @@
       <version>3.27.2.1</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/com.db4o/com.db4o -->
-    <!-- <dependency>
+    <dependency>
       <groupId>com.db4o</groupId>
       <artifactId>com.db4o</artifactId>
       <version>7.7.67</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.db4o/db4o-core-java5 -->
+    <!-- <dependency>
+      <groupId>com.db4o</groupId>
+      <artifactId>db4o-core-java5</artifactId>
+      <version>8.0.184.15484</version>
     </dependency> -->
     <!-- https://search.maven.org/artifact/org.rocksdb/rocksdbjni/6.0.1/jar -->
     <dependency>
@@ -52,16 +63,22 @@
       <version>2.3.4</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
-    <dependency>
+    <!-- <dependency>
       <groupId>org.mongodb</groupId>
       <artifactId>mongo-java-driver</artifactId>
       <version>3.11.0-beta3</version>
-    </dependency>
+    </dependency> -->
     <!-- https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-embedded -->
-    <dependency>
+    <!-- <dependency>
       <groupId>org.mongodb</groupId>
       <artifactId>mongodb-driver-embedded</artifactId>
       <version>3.8.2</version>
+    </dependency> -->
+    <!-- https://mvnrepository.com/artifact/de.flapdoodle.embed/de.flapdoodle.embed.mongo -->
+    <dependency>
+      <groupId>de.flapdoodle.embed</groupId>
+      <artifactId>de.flapdoodle.embed.mongo</artifactId>
+      <version>2.2.0</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/net.ravendb/ravendb -->
     <dependency>

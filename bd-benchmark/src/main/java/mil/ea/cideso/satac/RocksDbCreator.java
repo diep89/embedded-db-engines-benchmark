@@ -37,9 +37,10 @@ public class RocksDbCreator extends MotorBD {
             RocksDB db = getDb(dbName);
             System.out.println("La BD se ha generado correctamente.\n");
             db.close();
-
         } catch (RocksDBException e) {
             e.printStackTrace(System.err);
+        } finally {
+
         }
     }
 

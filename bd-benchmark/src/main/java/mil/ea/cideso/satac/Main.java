@@ -1,6 +1,6 @@
 package mil.ea.cideso.satac;
 
-import java.io.File;
+// import java.io.File;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -25,7 +25,7 @@ public class Main {
         // Variables auxiliares.
         Scanner input = new Scanner(System.in);
         int cantidadAInsertar = -1;
-        String eliminar;
+        // String eliminar;
         int counter = 1;
         int waitMillis = 1500;
 
@@ -34,14 +34,16 @@ public class Main {
         // MongoDbCreator mongo = new MongoDbCreator();
         // RocksDbCreator rocks = new RocksDbCreator();
         // RavenDbCreator raven = new RavenDbCreator();
-        ObjectBoxCreator objectBox = new ObjectBoxCreator();
+        // ObjectBoxCreator objectBox = new ObjectBoxCreator();
+        Db4oCreator db4o = new Db4oCreator();
 
         // Creación de lista que contiene las instancias creadas anteriormente.
         LinkedList<MotorBD> ll = new LinkedList<MotorBD>();
         // ll.add(sqlite);
         // ll.add(mongo);
         // ll.add(rocks);
-        ll.add(objectBox);
+        // ll.add(objectBox);
+        ll.add(db4o);
 
         System.out.println("Practica Profesional Supervisada");
         waitTime(waitMillis);
@@ -119,6 +121,7 @@ public class Main {
                         System.out.println("");
                         break;
                     case "objectBox":
+                    case "db4o":
                         // Mensaje informativo sobre atributos.
                         System.out.println("Se procede a realizar la creación de la BD.");
                         waitTime(waitMillis);
@@ -186,6 +189,7 @@ public class Main {
                     case "rocksdb":
                     case "mongo":
                     case "objectBox":
+                    case "db4o":
                         System.out.println("Se ingresarán " + cantidadAInsertar + " registros en la BD.\n");
                         waitTime(waitMillis);
                         break;
