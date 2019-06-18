@@ -10,7 +10,6 @@ import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 import com.db4o.ext.Db4oException;
 import com.db4o.query.*;
-import com.db4o.types.Db4oCollection;
 
 public class Db4oCreator extends MotorBD {
 

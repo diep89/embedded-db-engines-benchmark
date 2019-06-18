@@ -30,18 +30,18 @@ public class Main {
         int waitMillis = 1500;
 
         // Instanciación de las clases creadoras de BD.
-        // SqliteCreator sqlite = new SqliteCreator();
+        SqliteCreator sqlite = new SqliteCreator();
         // MongoDbCreator mongo = new MongoDbCreator();
-        // RocksDbCreator rocks = new RocksDbCreator();
+        RocksDbCreator rocks = new RocksDbCreator();
         // RavenDbCreator raven = new RavenDbCreator();
         // ObjectBoxCreator objectBox = new ObjectBoxCreator();
         Db4oCreator db4o = new Db4oCreator();
 
         // Creación de lista que contiene las instancias creadas anteriormente.
         LinkedList<MotorBD> ll = new LinkedList<MotorBD>();
-        // ll.add(sqlite);
+        ll.add(sqlite);
         // ll.add(mongo);
-        // ll.add(rocks);
+        ll.add(rocks);
         // ll.add(objectBox);
         ll.add(db4o);
 
@@ -79,16 +79,16 @@ public class Main {
                 waitTime(waitMillis);
                 if (cantidadAInsertar == -1) {
                     System.out.print(
-                            "Indique la cantidad de registros a ingresar durante las operaciones de creación (1-100): ");
+                            "Indique la cantidad de registros a ingresar durante las operaciones de creación (1-1000): ");
                     cantidadAInsertar = input.nextInt();
                     System.out.println("");
                     do {
-                        if (cantidadAInsertar < 1 || cantidadAInsertar > 100) {
+                        if (cantidadAInsertar < 1 || cantidadAInsertar > 1000) {
                             System.out.print("Error: cantidad inválida. Por favor, elija una cantidad válida: ");
                             cantidadAInsertar = input.nextInt();
                             System.out.println("");
                         }
-                    } while (cantidadAInsertar < 1 || cantidadAInsertar > 100);
+                    } while (cantidadAInsertar < 1 || cantidadAInsertar > 1000);
                 }
                 // System.out.println("");
                 waitTime(waitMillis);

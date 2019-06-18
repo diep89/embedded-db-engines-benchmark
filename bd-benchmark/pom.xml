@@ -86,6 +86,13 @@
       <artifactId>ravendb</artifactId>
       <version>4.1.6</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/de.flapdoodle.embed/de.flapdoodle.embed.mongo -->
+    <dependency>
+      <groupId>de.flapdoodle.embed</groupId>
+      <artifactId>de.flapdoodle.embed.mongo</artifactId>
+      <version>2.2.0</version>
+    </dependency>
+    
     <!-- Guava: Herramienta para implementar un timer -->
     <dependency>
       <groupId>com.google.guava</groupId>
@@ -154,6 +161,86 @@
               <goals>
                 <!-- goal must be "invoke" -->
                 <goal>invoke</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <!-- Maven plugin wrapper for flapdoodle.de embedded MongoDB API -->
+        <!-- https://github.com/Syncleus/maven-mongodb-plugin -->
+        <plugin>
+          <groupId>com.syncleus.maven.plugins</groupId>
+          <artifactId>maven-mongodb-plugin</artifactId>
+          <version>1.1.1</version>
+          <executions>
+            <execution>
+              <id>start</id>
+              <goals>
+                <goal>start</goal>
+              </goals>
+              <configuration>
+                <bindIp>127.0.0.1</bindIp>
+                <!-- optional, default is to listen on all interfaces -->
+                <features>
+                  <feature>sync_delay</feature>
+                  <feature>text_search</feature>
+                </features>
+                <!-- optional, a list of MongoDB features to enable, default is
+                     none -->
+                
+                <imports>
+                  <import>
+                    <!-- <database>my_db</database> -->
+                    <!-- optional, name of the database, if null it will
+                             fallback to defaultImportDatabase -->
+                    
+                    <collection>TestTable</collection>
+                    <!-- required, name of the collection to import data -->
+                    
+                    <file>import_file.json</file>
+                    <!-- required, name of the json file to import -->
+                    
+                    <!-- <upsertOnImport>true</upsertOnImport> -->
+                    <!-- optional, default true, if true it will do an upsert on
+                             each document imported -->
+                    
+                    <!-- <dropOnImport>false</dropOnImport> -->
+                    <!-- optional, default true, if true it will do a drop the
+                             collection before starts to import -->
+                    
+                    <!-- <timeout>20000</timeout> -->
+                    <!-- optional, default 20000, it will fail if it takes more
+                             than this time importing a file (time in millis) -->
+                    
+                  </import>
+                </imports>
+                <!-- optional, More imports are accepted and it will be
+                     executed in strict order (if parallel is not set) -->
+                
+                <initializations>
+                  <initialization>
+                    <databaseName>testDb-MongoDB</databaseName>
+                    <!-- required, The name of the database to execute
+                             the scripts on -->
+                    
+                    <scripts>
+                      <script>/home/me/stuff/scriptDirectory</script>
+                      <script>/home/me/stuff/scriptFile.js</script>
+                    </scripts>
+                    <!-- required, The list of scripts to be executed can
+                             specify individual scripts or folders. When
+                             specifying a folder all files in folder must
+                             be a valid script. -->
+                  </initialization>
+                </initializations>
+                <!-- optional, Specifies a collection of initialization scripts
+                     to be run across various databases in the MongoDB instance,
+                     WARNING: initializations are deprecated, avoid using them.-->
+              </configuration>
+            </execution>
+            <execution>
+              <id>stop</id>
+              <goals>
+                <goal>stop</goal>
               </goals>
             </execution>
           </executions>
