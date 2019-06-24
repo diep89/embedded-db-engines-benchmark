@@ -2,6 +2,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "CodeLens (Launch) - ObjectBoxTransformer",
+      "request": "launch",
+      "mainClass": "mil.ea.cideso.satac.ObjectBoxTransformer",
+      "projectName": "bd-benchmark"
+    },
+    {
+      "type": "java",
       "name": "CodeLens (Launch) - Conversions",
       "request": "launch",
       "mainClass": "mil.ea.cideso.satac.Conversions",

@@ -18,6 +18,11 @@
       <name>JCenter Repository</name>
       <url>http://jcenter.bintray.com/</url>
     </repository>
+    <repository>
+      <id>Mulesoft</id>
+      <name>Mulesoft Repository</name>
+      <url>https://repository.mulesoft.org/nexus/content/repositories/public/</url>
+    </repository>
     <!-- <repository>
       <id>Geomajas Repository</id>
       <name>Geomajas Repository</name>
@@ -62,6 +67,19 @@
       <artifactId>objectbox-java</artifactId>
       <version>2.3.4</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/io.objectbox/objectbox-windows -->
+    <dependency>
+      <groupId>io.objectbox</groupId>
+      <artifactId>objectbox-windows</artifactId>
+      <version>2.3.4</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/io.objectbox/objectbox-gradle-plugin -->
+    <dependency>
+      <groupId>io.objectbox</groupId>
+      <artifactId>objectbox-gradle-plugin</artifactId>
+      <version>2.3.4</version>
+    </dependency>
+    
     <!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
     <!-- <dependency>
       <groupId>org.mongodb</groupId>
@@ -75,24 +93,52 @@
       <version>3.8.2</version>
     </dependency> -->
     <!-- https://mvnrepository.com/artifact/de.flapdoodle.embed/de.flapdoodle.embed.mongo -->
-    <dependency>
+    <!-- <dependency>
       <groupId>de.flapdoodle.embed</groupId>
       <artifactId>de.flapdoodle.embed.mongo</artifactId>
       <version>2.2.0</version>
-    </dependency>
+    </dependency> -->
+    <!-- https://mvnrepository.com/artifact/org.mongodb/mongodb-driver -->
+    <!-- <dependency>
+      <groupId>org.mongodb</groupId>
+      <artifactId>mongodb-driver</artifactId>
+      <version>3.11.0-beta3</version>
+    </dependency> -->
+    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+    <!-- <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.8.0-beta4</version>
+    </dependency> -->
+    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
+    <!-- <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>1.8.0-beta4</version>
+    </dependency> -->
+    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-jdk14 -->
+    <!-- <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-jdk14</artifactId>
+      <version>1.8.0-beta4</version>
+    </dependency> -->
+    <!-- <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>2.9.0</version>
+    </dependency> -->
+    <!-- <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.2.3</version> -->
+    <!--  </dependency> -->
+    
     <!-- https://mvnrepository.com/artifact/net.ravendb/ravendb -->
     <dependency>
       <groupId>net.ravendb</groupId>
       <artifactId>ravendb</artifactId>
       <version>4.1.6</version>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/de.flapdoodle.embed/de.flapdoodle.embed.mongo -->
-    <dependency>
-      <groupId>de.flapdoodle.embed</groupId>
-      <artifactId>de.flapdoodle.embed.mongo</artifactId>
-      <version>2.2.0</version>
-    </dependency>
-    
     <!-- Guava: Herramienta para implementar un timer -->
     <dependency>
       <groupId>com.google.guava</groupId>
@@ -117,6 +163,37 @@
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.8.0</version>
+          <configuration>
+            <annotationProcessorPaths>
+              <path>
+                <groupId>io.objectbox</groupId>
+                <artifactId>objectbox-processor</artifactId>
+                <version>2.3.4</version>
+              </path>
+            </annotationProcessorPaths>
+            <annotationProcessors>
+              <annotationProcessor>io.objectbox.processor.ObjectBoxProcessorShim</annotationProcessor>
+            </annotationProcessors>
+            <compilerArgs>
+              <arg>-Aobjectbox.modelPath=${project.basedir}/objectbox-models/default.json</arg>
+            </compilerArgs>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>exec-maven-plugin</artifactId>
+          <version>1.6.0</version>
+          <executions>
+            <execution>
+              <phase>compile</phase>
+              <goals>
+                <goal>java</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <mainClass>io.objectbox.maven.Transformer</mainClass>
+          </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>

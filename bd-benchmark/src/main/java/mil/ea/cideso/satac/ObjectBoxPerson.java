@@ -8,16 +8,16 @@ import io.objectbox.annotation.NameInDb;
 public class ObjectBoxPerson {
 
     @Id
-    public long id;
+    private long id;
 
     @NameInDb("EDAD")
-    public int edad;
+    private int edad;
 
     @NameInDb("SEXO")
-    public String sexo;
+    private String sexo;
 
     @NameInDb("TELEFONO")
-    public int tel;
+    private int tel;
 
     public ObjectBoxPerson(long id, int edad, String sexo, int tel) {
         this.id = id;
@@ -26,27 +26,38 @@ public class ObjectBoxPerson {
         this.tel = tel;
     }
 
-    private int getEdad() {
+    public ObjectBoxPerson() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long newId) {
+        id = newId;
+    }
+
+    public int getEdad() {
         return edad;
     }
 
-    private void setEdad(int newEdad) {
+    public void setEdad(int newEdad) {
         edad = newEdad;
     }
 
-    private String getSexo() {
+    public String getSexo() {
         return sexo;
     }
 
-    private void setSexo(String newSexo) {
+    public void setSexo(String newSexo) {
         sexo = newSexo;
     }
 
-    private int getTel() {
+    public int getTel() {
         return tel;
     }
 
-    private void setTel(int newTel) {
+    public void setTel(int newTel) {
         tel = newTel;
     }
 }

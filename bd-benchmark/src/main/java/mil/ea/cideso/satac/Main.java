@@ -1,12 +1,13 @@
 package mil.ea.cideso.satac;
 
-// import java.io.File;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws IOException {
         int menuOption;
 
         // Nombre de la BD a generar.
@@ -30,20 +31,20 @@ public class Main {
         int waitMillis = 1500;
 
         // Instanciación de las clases creadoras de BD.
-        SqliteCreator sqlite = new SqliteCreator();
+        // SqliteCreator sqlite = new SqliteCreator();
         // MongoDbCreator mongo = new MongoDbCreator();
-        RocksDbCreator rocks = new RocksDbCreator();
+        // RocksDbCreator rocks = new RocksDbCreator();
         // RavenDbCreator raven = new RavenDbCreator();
-        // ObjectBoxCreator objectBox = new ObjectBoxCreator();
-        Db4oCreator db4o = new Db4oCreator();
+        ObjectBoxCreator objectBox = new ObjectBoxCreator();
+        // Db4oCreator db4o = new Db4oCreator();
 
         // Creación de lista que contiene las instancias creadas anteriormente.
         LinkedList<MotorBD> ll = new LinkedList<MotorBD>();
-        ll.add(sqlite);
+        // ll.add(sqlite);
         // ll.add(mongo);
-        ll.add(rocks);
-        // ll.add(objectBox);
-        ll.add(db4o);
+        // ll.add(rocks);
+        ll.add(objectBox);
+        // ll.add(db4o);
 
         System.out.println("Practica Profesional Supervisada");
         waitTime(waitMillis);

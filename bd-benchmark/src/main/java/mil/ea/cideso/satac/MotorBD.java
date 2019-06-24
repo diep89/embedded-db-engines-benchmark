@@ -1,5 +1,6 @@
 package mil.ea.cideso.satac;
 
+import java.io.IOException;
 // import java.util.ArrayList;
 import java.sql.Connection;
 // import java.sql.DatabaseMetaData;
@@ -40,7 +41,7 @@ public abstract class MotorBD {
     String statsDeleteOperation;
 
     // Métodos
-    public abstract void createNewDatabase(String dbName);
+    public abstract void createNewDatabase(String dbName) throws IOException;
 
     public abstract void createNewTable(String dbName, String tableName, String[] attributesList,
             String[] attributesType, String[] attributesLength);
