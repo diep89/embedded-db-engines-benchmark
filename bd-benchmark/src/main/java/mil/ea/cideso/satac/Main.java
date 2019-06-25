@@ -6,7 +6,6 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Main {
-
     public static void main(String[] args) throws IOException {
         int menuOption;
 
@@ -31,20 +30,23 @@ public class Main {
         int waitMillis = 1500;
 
         // Instanciación de las clases creadoras de BD.
-        // SqliteCreator sqlite = new SqliteCreator();
-        // MongoDbCreator mongo = new MongoDbCreator();
-        // RocksDbCreator rocks = new RocksDbCreator();
-        // RavenDbCreator raven = new RavenDbCreator();
+        SqliteCreator sqlite = new SqliteCreator();
+        RocksDbCreator rocks = new RocksDbCreator();
         ObjectBoxCreator objectBox = new ObjectBoxCreator();
-        // Db4oCreator db4o = new Db4oCreator();
+        Db4oCreator db4o = new Db4oCreator();
+        H2Creator h2 = new H2Creator();
+        // MongoDbCreator mongo = new MongoDbCreator();
+        // RavenDbCreator raven = new RavenDbCreator();
 
         // Creación de lista que contiene las instancias creadas anteriormente.
         LinkedList<MotorBD> ll = new LinkedList<MotorBD>();
-        // ll.add(sqlite);
-        // ll.add(mongo);
-        // ll.add(rocks);
+        ll.add(sqlite);
+        ll.add(rocks);
         ll.add(objectBox);
-        // ll.add(db4o);
+        ll.add(db4o);
+        ll.add(h2);
+        // ll.add(mongo);
+        // ll.add(raven);
 
         System.out.println("Practica Profesional Supervisada");
         waitTime(waitMillis);
@@ -109,6 +111,7 @@ public class Main {
 
                     switch (element.getEngineName().toLowerCase()) {
                     case "sqlite":
+                    case "h2":
                         // Mensaje informativo sobre atributos.
                         System.out.println("Se procede a realizar la creación de la tabla de prueba en la BD.");
                         waitTime(waitMillis);
@@ -183,6 +186,7 @@ public class Main {
 
                     switch (element.getEngineName().toLowerCase()) {
                     case "sqlite":
+                    case "h2":
                         System.out.println(
                                 "Se ingresarán " + cantidadAInsertar + " registros en la tabla " + tableName + ".\n");
                         waitTime(waitMillis);
@@ -275,7 +279,9 @@ public class Main {
                 menuOption = 0;
                 break;
             case 2:
-                // Test con carga de atributos manual
+                System.out.println("La entrada manual de atributos se encuentra temporalmente deshabilitada.\n");
+
+                // Test con c ga de atributos manual
                 // Comando para ver estructura de tabla en SQLite:
                 // PRAGMA table_info(testtable);
                 // Devuelve una tabla:

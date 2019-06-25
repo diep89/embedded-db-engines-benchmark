@@ -6,5 +6,6 @@ d:\proyectoPps\bd-benchmark\src\main\java\mil\ea\cideso\satac\RocksDbCreator.jav
 d:\proyectoPps\bd-benchmark\src\main\java\mil\ea\cideso\satac\RavenDbCreator.java
 d:\proyectoPps\bd-benchmark\src\main\java\mil\ea\cideso\satac\Db4oCreator.java
 d:\proyectoPps\bd-benchmark\src\main\java\mil\ea\cideso\satac\MotorBD.java
+d:\proyectoPps\bd-benchmark\src\main\java\mil\ea\cideso\satac\H2Creator.java
 d:\proyectoPps\bd-benchmark\src\main\java\mil\ea\cideso\satac\ObjectBoxTransformer.java
 d:\proyectoPps\bd-benchmark\src\main\java\mil\ea\cideso\satac\SqliteCreator.java

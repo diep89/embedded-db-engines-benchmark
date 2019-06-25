@@ -5,13 +5,16 @@ import mil.ea.cideso.satac.ObjectBoxPerson;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import io.objectbox.Box;
 import io.objectbox.BoxStore;
 
 public class ObjectBoxCreator extends MotorBD {
     private static BoxStore store = null;
+    Box<ObjectBoxPerson> personsBox = null;
     int cantidadAInsertar;
 
     public ObjectBoxCreator() {
@@ -61,7 +64,8 @@ public class ObjectBoxCreator extends MotorBD {
         int tel;
         this.cantidadAInsertar = cantidadAInsertar;
 
-        Box<ObjectBoxPerson> box = store.boxFor(ObjectBoxPerson.class);
+        getTimer().start();
+        personsBox = store.boxFor(ObjectBoxPerson.class);
 
         for (int i = 0; i < cantidadAInsertar; i++) {
             edad = i;
@@ -69,38 +73,95 @@ public class ObjectBoxCreator extends MotorBD {
             tel = i;
 
             // Se indica id = 0 para que ObjectBox asigne un ID automáticamente
-            box.put(new ObjectBoxPerson(0, edad, sexo, tel));
+            personsBox.put(new ObjectBoxPerson(0, edad, sexo, tel));
+            getTimer().stop();
+
+            if (i + 1 < cantidadAInsertar) {
+                System.out.print((i + 1) + " - ");
+            } else {
+                System.out.print((i + 1) + ".");
+            }
+            getTimer().start();
         }
+        getTimer().stop();
 
-        store.close();
+        System.out.println("");
+        System.out.println("");
 
-        // long id = box.put(person);
-        // // Create Person
-        // person = box.get(id);
-        // // Read
-        // person.setLastName("Black");
-        // box.put(person); // Update
-        // box.remove(person); // Delete
+        setStatsCreateOperation(getTimer().toString()); // Guardo el timer para operación CREATE.
+        setTimer(getTimer().reset()); // Reseteo el timer.
     }
 
     @Override
     public void readData(String dbName, String tableName) {
-        System.out.println(box.count() + " persons in ObjectBox database: ");
+        getTimer().start();
+        long cantidadDePersonas = personsBox.count();
+        List<ObjectBoxPerson> personsList = personsBox.getAll();
+        Iterator<ObjectBoxPerson> personsListIter = personsList.iterator();
+        getTimer().stop();
 
-        for (ObjectBoxPerson p : box.getAll()) {
-            System.out.println(p);
+        System.out.println("Se encontraron " + cantidadDePersonas + " personas en la BD: \n");
+        System.out.println("Registros leídos:\n");
+        System.out.printf("%-10s %-10s %-10s %-10s\n", "Id", "Edad", "Sexo", "Telefono");
+
+        while (personsListIter.hasNext()) {
+            ObjectBoxPerson person = personsListIter.next();
+            System.out.printf("%-10d %-10s %-10s %-10s\n", person.getId(), person.getEdad(), person.getSexo(),
+                    person.getTel());
         }
+
+        System.out.println("");
+
+        setStatsReadOperation(getTimer().toString()); // Guardo el timer para operación READ.
+        setTimer(getTimer().reset()); // Reseteo el timer.
     }
 
     @Override
     public void updateData(String dbName, String tableName, String[] attributesList, String[] attributesType,
             String[] attributesLength) {
+        getTimer().start();
+        List<ObjectBoxPerson> personsList = personsBox.getAll();
+        Iterator<ObjectBoxPerson> personsListIter = personsList.iterator();
 
+        while (personsListIter.hasNext()) {
+            ObjectBoxPerson person = personsListIter.next();
+            person.setEdad(10);
+            person.setSexo("M");
+            person.setTel(10);
+            personsBox.put(person);
+        }
+        getTimer().stop();
+
+        personsListIter = null;
+        personsList = personsBox.getAll();
+        personsListIter = personsList.iterator();
+
+        System.out.println("Registros actualizados correctamente.");
+        System.out.println("Lista de registros actualizada: \n");
+        System.out.printf("%-10s %-10s %-10s %-10s\n", "Id", "Edad", "Sexo", "Telefono");
+        while (personsListIter.hasNext()) {
+            ObjectBoxPerson person = personsListIter.next();
+            System.out.printf("%-10d %-10s %-10s %-10s\n", person.getId(), person.getEdad(), person.getSexo(),
+                    person.getTel());
+        }
+
+        System.out.println("");
+
+        setStatsUpdateOperation(getTimer().toString()); // Guardo el timer para operación READ.
+        setTimer(getTimer().reset()); // Reseteo el timer.
     }
 
     @Override
     public void deleteData(String dbName, String tableName) {
+        getTimer().start();
+        personsBox.removeAll();
+        store.close();
+        getTimer().stop();
 
+        System.out.println("Registros eliminados correctamente.\n");
+
+        setStatsDeleteOperation(getTimer().toString()); // Guardo el timer para operación READ.
+        setTimer(getTimer().reset()); // Reseteo el timer.
     }
 
     @Override
