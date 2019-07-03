@@ -31,20 +31,20 @@ public class Main {
 
         // Instanciación de las clases creadoras de BD.
         SqliteCreator sqlite = new SqliteCreator();
-        RocksDbCreator rocks = new RocksDbCreator();
+        // RocksDbCreator rocks = new RocksDbCreator();
         ObjectBoxCreator objectBox = new ObjectBoxCreator();
-        Db4oCreator db4o = new Db4oCreator();
-        H2Creator h2 = new H2Creator();
+        // Db4oCreator db4o = new Db4oCreator();
+        // H2Creator h2 = new H2Creator();
         // MongoDbCreator mongo = new MongoDbCreator();
         // RavenDbCreator raven = new RavenDbCreator();
 
         // Creación de lista que contiene las instancias creadas anteriormente.
         LinkedList<MotorBD> ll = new LinkedList<MotorBD>();
         ll.add(sqlite);
-        ll.add(rocks);
+        // ll.add(rocks);
         ll.add(objectBox);
-        ll.add(db4o);
-        ll.add(h2);
+        // ll.add(db4o);
+        // ll.add(h2);
         // ll.add(mongo);
         // ll.add(raven);
 
