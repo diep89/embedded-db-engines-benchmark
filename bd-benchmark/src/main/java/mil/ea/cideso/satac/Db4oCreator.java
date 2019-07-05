@@ -1,6 +1,6 @@
 package mil.ea.cideso.satac;
 
-import mil.ea.cideso.satac.Db4oPerson;
+import mil.ea.cideso.satac.Db4oAmenazaWrapper;
 
 import java.util.Iterator;
 
@@ -41,10 +41,7 @@ public class Db4oCreator extends MotorBD {
     @Override
     public void createNewTable(String dbName, String tableName, String[] attributesList, String[] attributesType,
             String[] attributesLength) {
-        setAttributesQty(attributesList.length);
-        setAttributesList(attributesList);
-        setAttributesType(attributesType);
-        setAttributesLength(attributesLength);
+
     }
 
     @Override
@@ -56,8 +53,13 @@ public class Db4oCreator extends MotorBD {
             db = getDb(dbName);
 
             for (int i = 0; i < cantidadAInsertar; i++) {
-                Db4oPerson person = new Db4oPerson(i, "M", i);
-                db.store(person);
+                Db4oTiempo tiempo = new Db4oTiempo(1);
+                Db4oPosicion posicion = new Db4oPosicion(1.5, 1.5, 1);
+                Db4oEquipamiento equipamiento = new Db4oEquipamiento(1, 1, 1);
+                Db4oInformante informante = new Db4oInformante("Test");
+                Db4oAmenaza amenaza = new Db4oAmenaza(i, tiempo, 1, posicion, 1, 1, 1, equipamiento, informante);
+                Db4oAmenazaWrapper amenazaWrapper = new Db4oAmenazaWrapper(amenaza, true, false);
+                db.store(amenazaWrapper);
                 getTimer().stop();
                 if (i + 1 < cantidadAInsertar) {
                     System.out.print((i + 1) + " - ");
