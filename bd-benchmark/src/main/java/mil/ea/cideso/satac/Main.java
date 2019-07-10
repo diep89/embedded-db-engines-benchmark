@@ -30,7 +30,7 @@ public class Main {
         // Instanciación de las clases creadoras de BD.
         // SqliteCreator sqlite = new SqliteCreator();
         // RocksDbCreator rocks = new RocksDbCreator();
-        // ObjectBoxCreator objectBox = new ObjectBoxCreator();
+        ObjectBoxCreator objectBox = new ObjectBoxCreator();
         Db4oCreator db4o = new Db4oCreator();
         // H2Creator h2 = new H2Creator();
         // MongoDbCreator mongo = new MongoDbCreator();
@@ -40,7 +40,7 @@ public class Main {
         LinkedList<MotorBD> ll = new LinkedList<MotorBD>();
         // ll.add(sqlite);
         // ll.add(rocks);
-        // ll.add(objectBox);
+        ll.add(objectBox);
         ll.add(db4o);
         // ll.add(h2);
         // ll.add(mongo);
@@ -102,24 +102,8 @@ public class Main {
             System.out.println("Generación y alta de registros en la BD.");
             waitTime(waitMillis);
 
-            switch (element.getEngineName().toLowerCase()) {
-            case "sqlite":
-            case "h2":
-                System.out
-                        .println("Se ingresarán " + cantidadAInsertar + " registros en la tabla " + tableName + ".\n");
-                waitTime(waitMillis);
-                break;
-            case "rocksdb":
-            case "mongo":
-            case "objectBox":
-            case "db4o":
-                System.out.println("Se ingresarán " + cantidadAInsertar + " registros en la BD.\n");
-                waitTime(waitMillis);
-                break;
-
-            default:
-                break;
-            }
+            System.out.println("Se ingresarán " + cantidadAInsertar + " registros en la BD.\n");
+            waitTime(waitMillis);
 
             // Operación CREATE (Alta de registros)
             element.insertData(dbName, tableName, cantidadAInsertar);
