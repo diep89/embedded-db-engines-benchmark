@@ -1,11 +1,11 @@
 package mil.ea.cideso.satac;
 
-public class Db4oEquipamiento {
+public class Equipamiento {
     private int cantidad;
     private int equipo;
     private int tipo;
 
-    public Db4oEquipamiento(int cantidad, int equipo, int tipo) {
+    public Equipamiento(int cantidad, int equipo, int tipo) {
         this.cantidad = cantidad;
         this.equipo = equipo;
         this.tipo = tipo;

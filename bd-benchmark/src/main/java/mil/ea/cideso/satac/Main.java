@@ -90,68 +90,6 @@ public class Main {
             dbName = "testDb" + "-" + element.getEngineName();
             element.createNewDatabase(dbName);
 
-            switch (element.getEngineName().toLowerCase()) {
-            case "sqlite":
-            case "h2":
-                // Mensaje informativo sobre atributos.
-                System.out.println("Se procede a realizar la creación de la tabla de prueba en la BD.");
-                waitTime(waitMillis);
-                System.out.println("Los atributos que se crearán son: ");
-                waitTime(waitMillis);
-                for (int j = 0; j < attributesList.length; j++) {
-                    System.out.printf("%-10s " + attributesType[j] + "(" + attributesLength[j] + ")\n",
-                            attributesList[j]);
-                    waitTime(1000);
-                }
-                System.out.println("");
-                break;
-            case "objectBox":
-            case "db4o":
-                // Mensaje informativo sobre atributos.
-                System.out.println("Se procede a realizar la creación de la BD.");
-                waitTime(waitMillis);
-                System.out.println(
-                        "Para realizar una comparativa correcta, se realizará la inserción de registros que contengan el siguiente formato de atributos: ");
-                waitTime(waitMillis);
-                for (int j = 0; j < attributesList.length; j++) {
-                    System.out.printf("%-10s " + attributesType[j] + "(" + attributesLength[j] + ")\n",
-                            attributesList[j]);
-                    waitTime(1000);
-                }
-                System.out.println("");
-                break;
-            case "mongo":
-                // Mensaje informativo sobre atributos.
-                System.out.println("Se procede a realizar la creación de la colección de prueba en la BD.");
-                waitTime(waitMillis);
-                System.out.println(
-                        "Para realizar una comparativa correcta, se realizará la inserción de documentos (dentro de la colección) que contengan el siguiente formato de atributos: ");
-                waitTime(waitMillis);
-                for (int j = 0; j < attributesList.length; j++) {
-                    System.out.printf("%-10s " + attributesType[j] + "(" + attributesLength[j] + ")\n",
-                            attributesList[j]);
-                    waitTime(1000);
-                }
-                System.out.println("");
-                break;
-            case "rocksdb":
-                // Mensaje informativo sobre atributos.
-                System.out.println("Debido a la naturaleza del motor de BD, no se realizará la creación de una tabla.");
-                waitTime(waitMillis);
-                System.out.println(
-                        "Para realizar una comparativa correcta, se realizará la inserción de pares clave-valor respetando el siguiente formato de atributos: ");
-                waitTime(waitMillis);
-                for (int j = 0; j < attributesList.length; j++) {
-                    System.out.printf("%-10s " + attributesType[j] + "(" + attributesLength[j] + ")\n",
-                            attributesList[j]);
-                    waitTime(1000);
-                }
-                System.out.println("");
-                break;
-            default:
-                break;
-            }
-
             waitTime(2000);
 
             // Creación de la tabla 'TestTable'

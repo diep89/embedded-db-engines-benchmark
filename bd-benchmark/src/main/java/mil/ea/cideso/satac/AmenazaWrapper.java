@@ -1,23 +1,23 @@
 package mil.ea.cideso.satac;
 
-import mil.ea.cideso.satac.Db4oAmenaza;
+import mil.ea.cideso.satac.Amenaza;
 
-public class Db4oAmenazaWrapper {
-    private Db4oAmenaza amenaza;
+public class AmenazaWrapper {
+    private Amenaza amenaza;
     private boolean visible;
     private boolean leido;
 
-    public Db4oAmenazaWrapper(Db4oAmenaza amenaza, boolean visible, boolean leido) {
+    public AmenazaWrapper(Amenaza amenaza, boolean visible, boolean leido) {
         this.amenaza = amenaza;
         this.visible = visible;
         this.leido = leido;
     }
 
-    public Db4oAmenaza getAmenaza() {
+    public Amenaza getAmenaza() {
         return amenaza;
     }
 
-    public void setAmenaza(Db4oAmenaza amenaza) {
+    public void setAmenaza(Amenaza amenaza) {
         this.amenaza = amenaza;
     }
 

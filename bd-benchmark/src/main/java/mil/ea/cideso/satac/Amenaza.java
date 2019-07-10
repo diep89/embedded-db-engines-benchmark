@@ -1,20 +1,20 @@
 package mil.ea.cideso.satac;
 
-import mil.ea.cideso.satac.Db4oEquipamiento;
-import mil.ea.cideso.satac.Db4oTiempo;
-import mil.ea.cideso.satac.Db4oPosicion;
-import mil.ea.cideso.satac.Db4oInformante;
+import mil.ea.cideso.satac.Equipamiento;
+import mil.ea.cideso.satac.Tiempo;
+import mil.ea.cideso.satac.Posicion;
+import mil.ea.cideso.satac.Informante;
 
-public class Db4oAmenaza {
+public class Amenaza {
     private int id;
-    private Db4oTiempo tiempo;
+    private Tiempo tiempo;
     private int codigoSimbolo;
-    private Db4oPosicion posicion;
+    private Posicion posicion;
     private int radioAccion;
     private int identificacion;
     private int tamanios;
-    private Db4oEquipamiento equipamiento;
-    private Db4oInformante informante;
+    private Equipamiento equipamiento;
+    private Informante informante;
 
     public int getId() {
         return id;

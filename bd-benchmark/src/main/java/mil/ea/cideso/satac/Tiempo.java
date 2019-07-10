@@ -1,10 +1,10 @@
 package mil.ea.cideso.satac;
 
-public class Db4oTiempo {
+public class Tiempo {
 
     private int epoch;
 
-    public Db4oTiempo(int epoch) {
+    public Tiempo(int epoch) {
         this.epoch = epoch;
     }
 

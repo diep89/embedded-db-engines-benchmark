@@ -1,12 +1,12 @@
 package mil.ea.cideso.satac;
 
-public class Db4oPosicion {
+public class Posicion {
 
     private double latitud;
     private double longitud;
     private int milisegundosFechaHora;
 
-    public Db4oPosicion(double latitud, double longitud, int milisegundosFechaHora) {
+    public Posicion(double latitud, double longitud, int milisegundosFechaHora) {
         this.latitud = latitud;
         this.longitud = longitud;
         this.milisegundosFechaHora = milisegundosFechaHora;

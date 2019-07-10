@@ -2,12 +2,9 @@ package mil.ea.cideso.satac;
 
 import mil.ea.cideso.satac.ObjectBoxPerson;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import io.objectbox.Box;
 import io.objectbox.BoxStore;
@@ -27,17 +24,6 @@ public class ObjectBoxCreator extends MotorBD {
             store = MyObjectBox.builder().name(dbName).build();
         }
     }
-
-    // public Box<ObjectBoxPerson> getBox(ObjectBoxPerson person, String dbName) {
-    // if (store == null) {
-    // try {
-    // createMyObjectBox(dbName);
-    // } catch (IOException e) {
-    // e.printStackTrace();
-    // }
-    // }
-    // return store.boxFor(person.class);
-    // }
 
     @Override
     public void createNewDatabase(String dbName) {
@@ -59,18 +45,12 @@ public class ObjectBoxCreator extends MotorBD {
 
     @Override
     public void insertData(String dbName, String tableName, int cantidadAInsertar) {
-        int edad;
-        String sexo;
-        int tel;
         this.cantidadAInsertar = cantidadAInsertar;
 
         getTimer().start();
         personsBox = store.boxFor(ObjectBoxPerson.class);
 
         for (int i = 0; i < cantidadAInsertar; i++) {
-            edad = i;
-            sexo = "M";
-            tel = i;
 
             // Se indica id = 0 para que ObjectBox asigne un ID automáticamente
             personsBox.put(new ObjectBoxPerson(0, edad, sexo, tel));

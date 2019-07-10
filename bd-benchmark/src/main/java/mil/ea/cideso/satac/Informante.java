@@ -1,10 +1,10 @@
 package mil.ea.cideso.satac;
 
-public class Db4oInformante {
+public class Informante {
 
     private String id;
 
-    public Db4oInformante(String id) {
+    public Informante(String id) {
         this.id = id;
     }
 
