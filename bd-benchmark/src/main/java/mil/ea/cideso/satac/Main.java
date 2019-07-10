@@ -180,7 +180,6 @@ public class Main {
         }
 
         // Tabla para mostrar resultados
-        // CRUD: Create, Read, Update, Delete !!!!!!!!!!!!!!!!
         System.out.println("");
         System.out.println("***");
         System.out.println("");
