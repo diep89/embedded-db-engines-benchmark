@@ -53,12 +53,12 @@ public class Db4oCreator extends MotorBD {
             db = getDb(dbName);
 
             for (int i = 0; i < cantidadAInsertar; i++) {
-                Db4oTiempo tiempo = new Db4oTiempo(1);
-                Db4oPosicion posicion = new Db4oPosicion(1.5, 1.5, 1);
-                Db4oEquipamiento equipamiento = new Db4oEquipamiento(1, 1, 1);
-                Db4oInformante informante = new Db4oInformante("Test");
-                Db4oAmenaza amenaza = new Db4oAmenaza(i, tiempo, 1, posicion, 1, 1, 1, equipamiento, informante);
-                Db4oAmenazaWrapper amenazaWrapper = new Db4oAmenazaWrapper(amenaza, true, false);
+                Tiempo tiempo = new Tiempo(1);
+                Posicion posicion = new Posicion(1.5, 1.5, 1);
+                Equipamiento equipamiento = new Equipamiento(1, 1, 1);
+                Informante informante = new Informante("Test");
+                Amenaza amenaza = new Amenaza(i, tiempo, 1, posicion, 1, 1, 1, equipamiento, informante);
+                AmenazaWrapper amenazaWrapper = new AmenazaWrapper(amenaza, true, false);
                 db.store(amenazaWrapper);
                 getTimer().stop();
                 if (i + 1 < cantidadAInsertar) {

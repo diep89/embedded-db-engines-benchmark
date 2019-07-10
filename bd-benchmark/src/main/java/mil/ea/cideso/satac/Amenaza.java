@@ -24,11 +24,11 @@ public class Amenaza {
         this.id = id;
     }
 
-    public Db4oTiempo getTiempo() {
+    public Tiempo getTiempo() {
         return tiempo;
     }
 
-    public void setTiempo(Db4oTiempo tiempo) {
+    public void setTiempo(Tiempo tiempo) {
         this.tiempo = tiempo;
     }
 
@@ -40,11 +40,11 @@ public class Amenaza {
         this.codigoSimbolo = codigoSimbolo;
     }
 
-    public Db4oPosicion getPosicion() {
+    public Posicion getPosicion() {
         return posicion;
     }
 
-    public void setPosicion(Db4oPosicion posicion) {
+    public void setPosicion(Posicion posicion) {
         this.posicion = posicion;
     }
 
@@ -72,24 +72,24 @@ public class Amenaza {
         this.tamanios = tamanios;
     }
 
-    public Db4oEquipamiento getEquipamiento() {
+    public Equipamiento getEquipamiento() {
         return equipamiento;
     }
 
-    public void setEquipamiento(Db4oEquipamiento equipamiento) {
+    public void setEquipamiento(Equipamiento equipamiento) {
         this.equipamiento = equipamiento;
     }
 
-    public Db4oInformante getInformante() {
+    public Informante getInformante() {
         return informante;
     }
 
-    public void setInformante(Db4oInformante informante) {
+    public void setInformante(Informante informante) {
         this.informante = informante;
     }
 
-    public Db4oAmenaza(int id, Db4oTiempo tiempo, int codigoSimbolo, Db4oPosicion posicion, int radioAccion,
-            int identificacion, int tamanios, Db4oEquipamiento equipamiento, Db4oInformante informante) {
+    public Amenaza(int id, Tiempo tiempo, int codigoSimbolo, Posicion posicion, int radioAccion, int identificacion,
+            int tamanios, Equipamiento equipamiento, Informante informante) {
         this.id = id;
         this.tiempo = tiempo;
         this.codigoSimbolo = codigoSimbolo;
