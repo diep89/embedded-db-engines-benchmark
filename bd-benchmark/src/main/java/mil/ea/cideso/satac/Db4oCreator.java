@@ -1,6 +1,6 @@
 package mil.ea.cideso.satac;
 
-import mil.ea.cideso.satac.Db4oAmenazaWrapper;
+import mil.ea.cideso.satac.AmenazaWrapper;
 
 import java.util.Iterator;
 
