@@ -87,8 +87,8 @@ public class Db4oCreator extends MotorBD {
             db = getDb(dbName);
 
             Query query = db.query();
-            query.constrain(Db4oAmenazaWrapper.class);
-            ObjectSet<Db4oAmenazaWrapper> result = query.execute();
+            query.constrain(AmenazaWrapper.class);
+            ObjectSet<AmenazaWrapper> result = query.execute();
 
             getTimer().stop();
 
@@ -116,20 +116,20 @@ public class Db4oCreator extends MotorBD {
             db = getDb(dbName);
 
             Query query = db.query();
-            query.constrain(Db4oAmenazaWrapper.class);
-            ObjectSet<Db4oAmenazaWrapper> result = query.execute();
-            Iterator<Db4oAmenazaWrapper> db4oItr = result.iterator();
+            query.constrain(AmenazaWrapper.class);
+            ObjectSet<AmenazaWrapper> result = query.execute();
+            Iterator<AmenazaWrapper> itr = result.iterator();
 
             int i = 0;
 
-            while (db4oItr.hasNext()) {
-                Db4oAmenazaWrapper amenazaWrapper = db4oItr.next();
+            while (itr.hasNext()) {
+                AmenazaWrapper amenazaWrapper = itr.next();
 
-                Db4oTiempo tiempo = new Db4oTiempo(2);
-                Db4oPosicion posicion = new Db4oPosicion(2.5, 2.5, 2);
-                Db4oEquipamiento equipamiento = new Db4oEquipamiento(2, 2, 2);
-                Db4oInformante informante = new Db4oInformante("Test2");
-                Db4oAmenaza amenaza = new Db4oAmenaza(i, tiempo, 2, posicion, 2, 2, 2, equipamiento, informante);
+                Tiempo tiempo = new Tiempo(2);
+                Posicion posicion = new Posicion(2.5, 2.5, 2);
+                Equipamiento equipamiento = new Equipamiento(2, 2, 2);
+                Informante informante = new Informante("Test2");
+                Amenaza amenaza = new Amenaza(i, tiempo, 2, posicion, 2, 2, 2, equipamiento, informante);
 
                 amenazaWrapper.setAmenaza(amenaza);
                 amenazaWrapper.setLeido(true);
@@ -157,12 +157,12 @@ public class Db4oCreator extends MotorBD {
             db = getDb(dbName);
 
             Query query = db.query();
-            query.constrain(Db4oAmenazaWrapper.class);
-            ObjectSet<Db4oAmenazaWrapper> result = query.execute();
-            Iterator<Db4oAmenazaWrapper> db4oItr = result.iterator();
+            query.constrain(AmenazaWrapper.class);
+            ObjectSet<AmenazaWrapper> result = query.execute();
+            Iterator<AmenazaWrapper> itr = result.iterator();
 
-            while (db4oItr.hasNext()) {
-                db.delete(db4oItr.next());
+            while (itr.hasNext()) {
+                db.delete(itr.next());
             }
 
             getTimer().stop();

@@ -1,6 +1,6 @@
 package mil.ea.cideso.satac;
 
-import mil.ea.cideso.satac.ObjectBoxPerson;
+import mil.ea.cideso.satac.ObjectBoxAmenazaWrapper;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -11,7 +11,7 @@ import io.objectbox.BoxStore;
 
 public class ObjectBoxCreator extends MotorBD {
     private static BoxStore store = null;
-    Box<ObjectBoxPerson> personsBox = null;
+    Box<ObjectBoxAmenazaWrapper> amenazaBox = null;
     int cantidadAInsertar;
 
     public ObjectBoxCreator() {
@@ -48,12 +48,19 @@ public class ObjectBoxCreator extends MotorBD {
         this.cantidadAInsertar = cantidadAInsertar;
 
         getTimer().start();
-        personsBox = store.boxFor(ObjectBoxPerson.class);
+        amenazaBox = store.boxFor(ObjectBoxAmenazaWrapper.class);
 
         for (int i = 0; i < cantidadAInsertar; i++) {
 
+            Tiempo tiempo = new Tiempo(1);
+            Posicion posicion = new Posicion(1.5, 1.5, 1);
+            Equipamiento equipamiento = new Equipamiento(1, 1, 1);
+            Informante informante = new Informante("Test");
+            Amenaza amenaza = new Amenaza(i, tiempo, 1, posicion, 1, 1, 1, equipamiento, informante);
+            ObjectBoxAmenazaWrapper amenazaWrapper = new ObjectBoxAmenazaWrapper(0, amenaza, true, false);
+
             // Se indica id = 0 para que ObjectBox asigne un ID automáticamente
-            personsBox.put(new ObjectBoxPerson(0, edad, sexo, tel));
+            amenazaBox.put(amenazaWrapper);
             getTimer().stop();
 
             if (i + 1 < cantidadAInsertar) {
@@ -75,21 +82,11 @@ public class ObjectBoxCreator extends MotorBD {
     @Override
     public void readData(String dbName, String tableName) {
         getTimer().start();
-        long cantidadDePersonas = personsBox.count();
-        List<ObjectBoxPerson> personsList = personsBox.getAll();
-        Iterator<ObjectBoxPerson> personsListIter = personsList.iterator();
+        long cantidadDeAmenazas = amenazaBox.count();
         getTimer().stop();
 
-        System.out.println("Se encontraron " + cantidadDePersonas + " personas en la BD: \n");
-        System.out.println("Registros leídos:\n");
-        System.out.printf("%-10s %-10s %-10s %-10s\n", "Id", "Edad", "Sexo", "Telefono");
-
-        while (personsListIter.hasNext()) {
-            ObjectBoxPerson person = personsListIter.next();
-            System.out.printf("%-10d %-10s %-10s %-10s\n", person.getId(), person.getEdad(), person.getSexo(),
-                    person.getTel());
-        }
-
+        System.out.println("Se encontraron " + cantidadDeAmenazas + " personas en la BD: \n");
+        System.out.println("Registros leídos correctamente.\n");
         System.out.println("");
 
         setStatsReadOperation(getTimer().toString()); // Guardo el timer para operación READ.
@@ -100,31 +97,28 @@ public class ObjectBoxCreator extends MotorBD {
     public void updateData(String dbName, String tableName, String[] attributesList, String[] attributesType,
             String[] attributesLength) {
         getTimer().start();
-        List<ObjectBoxPerson> personsList = personsBox.getAll();
-        Iterator<ObjectBoxPerson> personsListIter = personsList.iterator();
+        List<ObjectBoxAmenazaWrapper> amenazaList = amenazaBox.getAll();
+        Iterator<ObjectBoxAmenazaWrapper> amenazaListIter = amenazaList.iterator();
 
-        while (personsListIter.hasNext()) {
-            ObjectBoxPerson person = personsListIter.next();
-            person.setEdad(10);
-            person.setSexo("M");
-            person.setTel(10);
-            personsBox.put(person);
+        int i = 0;
+
+        while (amenazaListIter.hasNext()) {
+            ObjectBoxAmenazaWrapper amenazaWrapper = amenazaListIter.next();
+
+            Tiempo tiempo = new Tiempo(2);
+            Posicion posicion = new Posicion(2.5, 2.5, 2);
+            Equipamiento equipamiento = new Equipamiento(2, 2, 2);
+            Informante informante = new Informante("Test2");
+            Amenaza amenaza = new Amenaza(i, tiempo, 2, posicion, 2, 2, 2, equipamiento, informante);
+
+            amenazaWrapper.setAmenaza(amenaza);
+            amenazaWrapper.setLeido(true);
+            amenazaBox.put(amenazaWrapper);
+            i++;
         }
         getTimer().stop();
 
-        personsListIter = null;
-        personsList = personsBox.getAll();
-        personsListIter = personsList.iterator();
-
         System.out.println("Registros actualizados correctamente.");
-        System.out.println("Lista de registros actualizada: \n");
-        System.out.printf("%-10s %-10s %-10s %-10s\n", "Id", "Edad", "Sexo", "Telefono");
-        while (personsListIter.hasNext()) {
-            ObjectBoxPerson person = personsListIter.next();
-            System.out.printf("%-10d %-10s %-10s %-10s\n", person.getId(), person.getEdad(), person.getSexo(),
-                    person.getTel());
-        }
-
         System.out.println("");
 
         setStatsUpdateOperation(getTimer().toString()); // Guardo el timer para operación READ.
@@ -134,11 +128,12 @@ public class ObjectBoxCreator extends MotorBD {
     @Override
     public void deleteData(String dbName, String tableName) {
         getTimer().start();
-        personsBox.removeAll();
+        amenazaBox.removeAll();
         store.close();
         getTimer().stop();
 
-        System.out.println("Registros eliminados correctamente.\n");
+        System.out.println("Registros eliminados correctamente.");
+        System.out.println("");
 
         setStatsDeleteOperation(getTimer().toString()); // Guardo el timer para operación READ.
         setTimer(getTimer().reset()); // Reseteo el timer.
