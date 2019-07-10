@@ -87,23 +87,14 @@ public class Db4oCreator extends MotorBD {
             db = getDb(dbName);
 
             Query query = db.query();
-            query.constrain(Db4oPerson.class);
-            ObjectSet<Db4oPerson> result = query.execute();
-            // Db4oPerson person = (Db4oPerson) result.next();
-            Iterator<Db4oPerson> db4oItr = result.iterator();
+            query.constrain(Db4oAmenazaWrapper.class);
+            ObjectSet<Db4oAmenazaWrapper> result = query.execute();
 
             getTimer().stop();
-            int i = 1;
 
-            System.out.println("Registros leídos:\n");
-            System.out.printf("%-10s %-10s %-10s %-10s\n", "Id", "Edad", "Sexo", "Telefono");
-
-            while (db4oItr.hasNext()) {
-                Db4oPerson person = db4oItr.next();
-                System.out.printf("%-10d %-10s %-10s %-10s\n", i, person.getEdad(), person.getSexo(), person.getTel());
-                i++;
+            if (result != null) {
+                System.out.println("Registros leídos correctamente.\n");
             }
-            System.out.println("");
 
             getTimer().start();
             db.close();
@@ -125,36 +116,30 @@ public class Db4oCreator extends MotorBD {
             db = getDb(dbName);
 
             Query query = db.query();
-            query.constrain(Db4oPerson.class);
-            ObjectSet<Db4oPerson> result = query.execute();
-            Iterator<Db4oPerson> db4oItr = result.iterator();
+            query.constrain(Db4oAmenazaWrapper.class);
+            ObjectSet<Db4oAmenazaWrapper> result = query.execute();
+            Iterator<Db4oAmenazaWrapper> db4oItr = result.iterator();
 
-            int i = 1;
+            int i = 0;
 
             while (db4oItr.hasNext()) {
-                Db4oPerson person = db4oItr.next();
-                person.setEdad(10);
-                person.setSexo("F");
-                person.setTel(10);
-                db.store(person);
-            }
+                Db4oAmenazaWrapper amenazaWrapper = db4oItr.next();
 
-            getTimer().stop();
-            db4oItr = null;
-            db4oItr = result.iterator();
-            System.out.println("Registros actualizados correctamente.");
-            System.out.println("Lista de registros actualizada: \n");
-            System.out.printf("%-10s %-10s %-10s %-10s\n", "Id", "Edad", "Sexo", "Telefono");
-            while (db4oItr.hasNext()) {
-                Db4oPerson person = db4oItr.next();
-                System.out.printf("%-10d %-10s %-10s %-10s\n", i, person.getEdad(), person.getSexo(), person.getTel());
+                Db4oTiempo tiempo = new Db4oTiempo(2);
+                Db4oPosicion posicion = new Db4oPosicion(2.5, 2.5, 2);
+                Db4oEquipamiento equipamiento = new Db4oEquipamiento(2, 2, 2);
+                Db4oInformante informante = new Db4oInformante("Test2");
+                Db4oAmenaza amenaza = new Db4oAmenaza(i, tiempo, 2, posicion, 2, 2, 2, equipamiento, informante);
+
+                amenazaWrapper.setAmenaza(amenaza);
+                amenazaWrapper.setLeido(true);
+                db.store(amenazaWrapper);
                 i++;
             }
-            System.out.println("");
 
-            getTimer().start();
             db.close();
             getTimer().stop();
+            System.out.println("Registros actualizados correctamente.\n");
 
             System.out.println("");
             setStatsUpdateOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
@@ -172,9 +157,9 @@ public class Db4oCreator extends MotorBD {
             db = getDb(dbName);
 
             Query query = db.query();
-            query.constrain(Db4oPerson.class);
-            ObjectSet<Db4oPerson> result = query.execute();
-            Iterator<Db4oPerson> db4oItr = result.iterator();
+            query.constrain(Db4oAmenazaWrapper.class);
+            ObjectSet<Db4oAmenazaWrapper> result = query.execute();
+            Iterator<Db4oAmenazaWrapper> db4oItr = result.iterator();
 
             while (db4oItr.hasNext()) {
                 db.delete(db4oItr.next());
