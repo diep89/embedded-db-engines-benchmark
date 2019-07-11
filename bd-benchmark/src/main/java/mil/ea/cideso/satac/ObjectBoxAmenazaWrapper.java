@@ -4,20 +4,19 @@ import io.objectbox.annotation.Entity;
 import io.objectbox.annotation.Id;
 import io.objectbox.annotation.NameInDb;
 
-import mil.ea.cideso.satac.Amenaza;
+import mil.ea.cideso.satac.ObjectBoxAmenaza;
 
 @Entity
 public class ObjectBoxAmenazaWrapper {
     @Id
     private long id;
-    @NameInDb("AMENAZA")
-    private Amenaza amenaza;
+    private ObjectBoxAmenaza amenaza;
     @NameInDb("VISIBLE")
     private boolean visible;
     @NameInDb("LEIDO")
     private boolean leido;
 
-    public ObjectBoxAmenazaWrapper(long id, Amenaza amenaza, boolean visible, boolean leido) {
+    public ObjectBoxAmenazaWrapper(long id, ObjectBoxAmenaza amenaza, boolean visible, boolean leido) {
         this.id = id;
         this.amenaza = amenaza;
         this.visible = visible;
@@ -28,11 +27,11 @@ public class ObjectBoxAmenazaWrapper {
 
     }
 
-    public Amenaza getAmenaza() {
+    public ObjectBoxAmenaza getAmenaza() {
         return amenaza;
     }
 
-    public void setAmenaza(Amenaza amenaza) {
+    public void setAmenaza(ObjectBoxAmenaza amenaza) {
         this.amenaza = amenaza;
     }
 

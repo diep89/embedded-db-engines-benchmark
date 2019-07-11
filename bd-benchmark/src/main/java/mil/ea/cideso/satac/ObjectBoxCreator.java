@@ -52,11 +52,11 @@ public class ObjectBoxCreator extends MotorBD {
 
         for (int i = 0; i < cantidadAInsertar; i++) {
 
-            Tiempo tiempo = new Tiempo(1);
-            Posicion posicion = new Posicion(1.5, 1.5, 1);
-            Equipamiento equipamiento = new Equipamiento(1, 1, 1);
-            Informante informante = new Informante("Test");
-            Amenaza amenaza = new Amenaza(i, tiempo, 1, posicion, 1, 1, 1, equipamiento, informante);
+            ObjectBoxTiempo tiempo = new ObjectBoxTiempo(0, 1);
+            ObjectBoxPosicion posicion = new ObjectBoxPosicion(0, 1.5, 1.5, 1);
+            ObjectBoxEquipamiento equipamiento = new ObjectBoxEquipamiento(0, 1, 1, 1);
+            ObjectBoxInformante informante = new ObjectBoxInformante(0);
+            ObjectBoxAmenaza amenaza = new ObjectBoxAmenaza(i, tiempo, 1, posicion, 1, 1, 1, equipamiento, informante);
             ObjectBoxAmenazaWrapper amenazaWrapper = new ObjectBoxAmenazaWrapper(0, amenaza, true, false);
 
             // Se indica id = 0 para que ObjectBox asigne un ID automáticamente
@@ -105,11 +105,11 @@ public class ObjectBoxCreator extends MotorBD {
         while (amenazaListIter.hasNext()) {
             ObjectBoxAmenazaWrapper amenazaWrapper = amenazaListIter.next();
 
-            Tiempo tiempo = new Tiempo(2);
-            Posicion posicion = new Posicion(2.5, 2.5, 2);
-            Equipamiento equipamiento = new Equipamiento(2, 2, 2);
-            Informante informante = new Informante("Test2");
-            Amenaza amenaza = new Amenaza(i, tiempo, 2, posicion, 2, 2, 2, equipamiento, informante);
+            ObjectBoxTiempo tiempo = new ObjectBoxTiempo(0, 2);
+            ObjectBoxPosicion posicion = new ObjectBoxPosicion(0, 2.5, 2.5, 2);
+            ObjectBoxEquipamiento equipamiento = new ObjectBoxEquipamiento(0, 2, 2, 2);
+            ObjectBoxInformante informante = new ObjectBoxInformante(0);
+            ObjectBoxAmenaza amenaza = new ObjectBoxAmenaza(i, tiempo, 2, posicion, 2, 2, 2, equipamiento, informante);
 
             amenazaWrapper.setAmenaza(amenaza);
             amenazaWrapper.setLeido(true);
