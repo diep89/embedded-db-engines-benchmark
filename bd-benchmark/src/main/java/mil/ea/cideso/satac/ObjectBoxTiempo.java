@@ -2,16 +2,22 @@ package mil.ea.cideso.satac;
 
 import io.objectbox.annotation.Entity;
 import io.objectbox.annotation.Id;
+import io.objectbox.relation.ToOne;
 
 @Entity
 public class ObjectBoxTiempo {
     @Id
     private long id;
     private int epoch;
+    public ToOne<ObjectBoxAmenaza> amenaza;
 
-    public ObjectBoxTiempo(long id, int epoch) {
+    public ObjectBoxTiempo() {
+    }
+
+    public ObjectBoxTiempo(long id, int epoch, long amenazaId) {
         this.id = id;
         this.epoch = epoch;
+        this.amenaza.setTargetId(amenazaId);
     }
 
     public int getEpoch() {

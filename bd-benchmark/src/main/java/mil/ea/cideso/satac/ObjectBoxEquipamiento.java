@@ -2,6 +2,7 @@ package mil.ea.cideso.satac;
 
 import io.objectbox.annotation.Entity;
 import io.objectbox.annotation.Id;
+import io.objectbox.relation.ToOne;
 
 @Entity
 public class ObjectBoxEquipamiento {
@@ -10,12 +11,14 @@ public class ObjectBoxEquipamiento {
     private int cantidad;
     private int equipo;
     private int tipo;
+    public ToOne<ObjectBoxAmenaza> amenaza;
 
-    public ObjectBoxEquipamiento(long id, int cantidad, int equipo, int tipo) {
+    public ObjectBoxEquipamiento(long id, int cantidad, int equipo, int tipo, long amenazaId) {
         this.id = id;
         this.cantidad = cantidad;
         this.equipo = equipo;
         this.tipo = tipo;
+        this.amenaza.setTargetId(amenazaId);
     }
 
     public int getCantidad() {

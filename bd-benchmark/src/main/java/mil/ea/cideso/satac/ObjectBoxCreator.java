@@ -1,6 +1,11 @@
 package mil.ea.cideso.satac;
 
 import mil.ea.cideso.satac.ObjectBoxAmenazaWrapper;
+import mil.ea.cideso.satac.ObjectBoxAmenaza;
+import mil.ea.cideso.satac.ObjectBoxTiempo;
+import mil.ea.cideso.satac.ObjectBoxPosicion;
+import mil.ea.cideso.satac.ObjectBoxEquipamiento;
+import mil.ea.cideso.satac.ObjectBoxInformante;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -11,7 +16,12 @@ import io.objectbox.BoxStore;
 
 public class ObjectBoxCreator extends MotorBD {
     private static BoxStore store = null;
-    Box<ObjectBoxAmenazaWrapper> amenazaBox = null;
+    Box<ObjectBoxTiempo> tiempoBox = null;
+    Box<ObjectBoxPosicion> posicionBox = null;
+    Box<ObjectBoxEquipamiento> equipamientoBox = null;
+    Box<ObjectBoxInformante> informanteBox = null;
+    Box<ObjectBoxAmenaza> amenazaBox = null;
+    Box<ObjectBoxAmenazaWrapper> amenazaWrapperBox = null;
     int cantidadAInsertar;
 
     public ObjectBoxCreator() {
@@ -48,19 +58,36 @@ public class ObjectBoxCreator extends MotorBD {
         this.cantidadAInsertar = cantidadAInsertar;
 
         getTimer().start();
-        amenazaBox = store.boxFor(ObjectBoxAmenazaWrapper.class);
+        tiempoBox = store.boxFor(ObjectBoxTiempo.class);
+        posicionBox = store.boxFor(ObjectBoxPosicion.class);
+        equipamientoBox = store.boxFor(ObjectBoxEquipamiento.class);
+        informanteBox = store.boxFor(ObjectBoxInformante.class);
+        amenazaBox = store.boxFor(ObjectBoxAmenaza.class);
+        amenazaWrapperBox = store.boxFor(ObjectBoxAmenazaWrapper.class);
 
         for (int i = 0; i < cantidadAInsertar; i++) {
 
-            ObjectBoxTiempo tiempo = new ObjectBoxTiempo(0, 1);
-            ObjectBoxPosicion posicion = new ObjectBoxPosicion(0, 1.5, 1.5, 1);
-            ObjectBoxEquipamiento equipamiento = new ObjectBoxEquipamiento(0, 1, 1, 1);
-            ObjectBoxInformante informante = new ObjectBoxInformante(0);
-            ObjectBoxAmenaza amenaza = new ObjectBoxAmenaza(i, tiempo, 1, posicion, 1, 1, 1, equipamiento, informante);
-            ObjectBoxAmenazaWrapper amenazaWrapper = new ObjectBoxAmenazaWrapper(0, amenaza, true, false);
-
             // Se indica id = 0 para que ObjectBox asigne un ID automáticamente
-            amenazaBox.put(amenazaWrapper);
+            ObjectBoxTiempo tiempo = new ObjectBoxTiempo(0, 1, 0);
+            ObjectBoxPosicion posicion = new ObjectBoxPosicion(0, 1.5, 1.5, 1, 0);
+            ObjectBoxEquipamiento equipamiento = new ObjectBoxEquipamiento(0, 1, 1, 1, 0);
+            ObjectBoxInformante informante = new ObjectBoxInformante(0, 0);
+            ObjectBoxAmenaza amenaza = new ObjectBoxAmenaza(i, 1, 1, 1, 1, 0);
+            ObjectBoxAmenazaWrapper amenazaWrapper = new ObjectBoxAmenazaWrapper(0, true, false);
+
+            // Declaración de relaciones entre objetos:
+            tiempo.amenaza.setTarget(amenaza);
+            posicion.amenaza.setTarget(amenaza);
+            equipamiento.amenaza.setTarget(amenaza);
+            informante.amenaza.setTarget(amenaza);
+            amenaza.amenazaWrapper.setTarget(amenazaWrapper);
+
+            tiempoBox.put(tiempo);
+            posicionBox.put(posicion);
+            equipamientoBox.put(equipamiento);
+            informanteBox.put(informante);
+            amenazaBox.put(amenaza);
+            amenazaWrapperBox.put(amenazaWrapper);
             getTimer().stop();
 
             if (i + 1 < cantidadAInsertar) {
@@ -85,8 +112,8 @@ public class ObjectBoxCreator extends MotorBD {
         long cantidadDeAmenazas = amenazaBox.count();
         getTimer().stop();
 
-        System.out.println("Se encontraron " + cantidadDeAmenazas + " personas en la BD: \n");
         System.out.println("Registros leídos correctamente.\n");
+        System.out.println("Se encontraron " + cantidadDeAmenazas + " amenazas guardadas en la BD.\n");
         System.out.println("");
 
         setStatsReadOperation(getTimer().toString()); // Guardo el timer para operación READ.
@@ -97,23 +124,33 @@ public class ObjectBoxCreator extends MotorBD {
     public void updateData(String dbName, String tableName, String[] attributesList, String[] attributesType,
             String[] attributesLength) {
         getTimer().start();
-        List<ObjectBoxAmenazaWrapper> amenazaList = amenazaBox.getAll();
-        Iterator<ObjectBoxAmenazaWrapper> amenazaListIter = amenazaList.iterator();
+        List<ObjectBoxAmenazaWrapper> amenazaWrapperList = amenazaWrapperBox.getAll();
+        Iterator<ObjectBoxAmenazaWrapper> amenazaListIter = amenazaWrapperList.iterator();
 
         int i = 0;
 
         while (amenazaListIter.hasNext()) {
             ObjectBoxAmenazaWrapper amenazaWrapper = amenazaListIter.next();
 
-            ObjectBoxTiempo tiempo = new ObjectBoxTiempo(0, 2);
-            ObjectBoxPosicion posicion = new ObjectBoxPosicion(0, 2.5, 2.5, 2);
-            ObjectBoxEquipamiento equipamiento = new ObjectBoxEquipamiento(0, 2, 2, 2);
-            ObjectBoxInformante informante = new ObjectBoxInformante(0);
-            ObjectBoxAmenaza amenaza = new ObjectBoxAmenaza(i, tiempo, 2, posicion, 2, 2, 2, equipamiento, informante);
-
-            amenazaWrapper.setAmenaza(amenaza);
+            ObjectBoxTiempo tiempo = new ObjectBoxTiempo(0, 2, 0);
+            ObjectBoxPosicion posicion = new ObjectBoxPosicion(0, 2.5, 2.5, 2, 0);
+            ObjectBoxEquipamiento equipamiento = new ObjectBoxEquipamiento(0, 2, 2, 2, 0);
+            ObjectBoxInformante informante = new ObjectBoxInformante(0, 0);
+            ObjectBoxAmenaza amenaza = new ObjectBoxAmenaza(i, 2, 2, 2, 2, 0);
             amenazaWrapper.setLeido(true);
-            amenazaBox.put(amenazaWrapper);
+
+            tiempo.amenaza.setTarget(amenaza);
+            posicion.amenaza.setTarget(amenaza);
+            equipamiento.amenaza.setTarget(amenaza);
+            informante.amenaza.setTarget(amenaza);
+            amenaza.amenazaWrapper.setTarget(amenazaWrapper);
+
+            tiempoBox.put(tiempo);
+            posicionBox.put(posicion);
+            equipamientoBox.put(equipamiento);
+            informanteBox.put(informante);
+            amenazaBox.put(amenaza);
+            amenazaWrapperBox.put(amenazaWrapper);
             i++;
         }
         getTimer().stop();

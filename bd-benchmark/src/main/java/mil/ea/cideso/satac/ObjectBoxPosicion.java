@@ -2,6 +2,7 @@ package mil.ea.cideso.satac;
 
 import io.objectbox.annotation.Entity;
 import io.objectbox.annotation.Id;
+import io.objectbox.relation.ToOne;
 
 @Entity
 public class ObjectBoxPosicion {
@@ -10,12 +11,14 @@ public class ObjectBoxPosicion {
     private double latitud;
     private double longitud;
     private int milisegundosFechaHora;
+    public ToOne<ObjectBoxAmenaza> amenaza;
 
-    public ObjectBoxPosicion(long id, double latitud, double longitud, int milisegundosFechaHora) {
+    public ObjectBoxPosicion(long id, double latitud, double longitud, int milisegundosFechaHora, long amenazaId) {
         this.id = id;
         this.latitud = latitud;
         this.longitud = longitud;
         this.milisegundosFechaHora = milisegundosFechaHora;
+        this.amenaza.setTargetId(amenazaId);
     }
 
     public double getLatitud() {
