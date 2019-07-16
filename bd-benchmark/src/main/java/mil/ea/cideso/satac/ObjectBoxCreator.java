@@ -8,7 +8,6 @@ import mil.ea.cideso.satac.ObjectBoxEquipamiento;
 import mil.ea.cideso.satac.ObjectBoxInformante;
 
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.List;
 
 import io.objectbox.Box;
@@ -16,12 +15,12 @@ import io.objectbox.BoxStore;
 
 public class ObjectBoxCreator extends MotorBD {
     private static BoxStore store = null;
-    Box<ObjectBoxTiempo> tiempoBox = null;
-    Box<ObjectBoxPosicion> posicionBox = null;
-    Box<ObjectBoxEquipamiento> equipamientoBox = null;
-    Box<ObjectBoxInformante> informanteBox = null;
-    Box<ObjectBoxAmenaza> amenazaBox = null;
-    Box<ObjectBoxAmenazaWrapper> amenazaWrapperBox = null;
+    private Box<ObjectBoxTiempo> tiempoBox = null;
+    private Box<ObjectBoxPosicion> posicionBox = null;
+    private Box<ObjectBoxEquipamiento> equipamientoBox = null;
+    private Box<ObjectBoxInformante> informanteBox = null;
+    private Box<ObjectBoxAmenaza> amenazaBox = null;
+    private Box<ObjectBoxAmenazaWrapper> amenazaWrapperBox = null;
     int cantidadAInsertar;
 
     public ObjectBoxCreator() {
@@ -47,10 +46,7 @@ public class ObjectBoxCreator extends MotorBD {
     @Override
     public void createNewTable(String dbName, String tableName, String[] attributesList, String[] attributesType,
             String[] attributesLength) {
-        setAttributesQty(attributesList.length);
-        setAttributesList(attributesList);
-        setAttributesType(attributesType);
-        setAttributesLength(attributesLength);
+
     }
 
     @Override
@@ -58,36 +54,33 @@ public class ObjectBoxCreator extends MotorBD {
         this.cantidadAInsertar = cantidadAInsertar;
 
         getTimer().start();
-        tiempoBox = store.boxFor(ObjectBoxTiempo.class);
-        posicionBox = store.boxFor(ObjectBoxPosicion.class);
-        equipamientoBox = store.boxFor(ObjectBoxEquipamiento.class);
-        informanteBox = store.boxFor(ObjectBoxInformante.class);
-        amenazaBox = store.boxFor(ObjectBoxAmenaza.class);
-        amenazaWrapperBox = store.boxFor(ObjectBoxAmenazaWrapper.class);
 
         for (int i = 0; i < cantidadAInsertar; i++) {
 
-            // Se indica id = 0 para que ObjectBox asigne un ID automáticamente
-            ObjectBoxTiempo tiempo = new ObjectBoxTiempo(0, 1, 0);
-            ObjectBoxPosicion posicion = new ObjectBoxPosicion(0, 1.5, 1.5, 1, 0);
-            ObjectBoxEquipamiento equipamiento = new ObjectBoxEquipamiento(0, 1, 1, 1, 0);
-            ObjectBoxInformante informante = new ObjectBoxInformante(0, 0);
-            ObjectBoxAmenaza amenaza = new ObjectBoxAmenaza(i, 1, 1, 1, 1, 0);
+            // Creación de elementos a persistir.
+            // Se indica id = 0 para que ObjectBox asigne un ID automáticamente.
             ObjectBoxAmenazaWrapper amenazaWrapper = new ObjectBoxAmenazaWrapper(0, true, false);
+            ObjectBoxAmenaza amenaza = new ObjectBoxAmenaza(0, 1, 1, 1, 1);
+            ObjectBoxTiempo tiempo = new ObjectBoxTiempo(0, 1);
+            ObjectBoxPosicion posicion = new ObjectBoxPosicion(0, 1.5, 1.5, 1);
+            ObjectBoxEquipamiento equipamiento = new ObjectBoxEquipamiento(0, 1, 1, 1);
+            ObjectBoxInformante informante = new ObjectBoxInformante(0);
 
             // Declaración de relaciones entre objetos:
+            amenaza.amenazaWrapper.setTarget(amenazaWrapper);
             tiempo.amenaza.setTarget(amenaza);
             posicion.amenaza.setTarget(amenaza);
             equipamiento.amenaza.setTarget(amenaza);
             informante.amenaza.setTarget(amenaza);
-            amenaza.amenazaWrapper.setTarget(amenazaWrapper);
 
-            tiempoBox.put(tiempo);
-            posicionBox.put(posicion);
-            equipamientoBox.put(equipamiento);
-            informanteBox.put(informante);
-            amenazaBox.put(amenaza);
-            amenazaWrapperBox.put(amenazaWrapper);
+            // Guardo elementos en sus respectivos box.
+            getAmenazaWrapperBox().put(amenazaWrapper);
+            getAmenazaBox().put(amenaza);
+            getTiempoBox().put(tiempo);
+            getPosicionBox().put(posicion);
+            getEquipamientoBox().put(equipamiento);
+            getInformanteBox().put(informante);
+
             getTimer().stop();
 
             if (i + 1 < cantidadAInsertar) {
@@ -109,7 +102,12 @@ public class ObjectBoxCreator extends MotorBD {
     @Override
     public void readData(String dbName, String tableName) {
         getTimer().start();
-        long cantidadDeAmenazas = amenazaBox.count();
+        // Se realiza un query al box de AmenazaWrapper con un filtro
+        // que devuelva todos los elementos. En este caso, el filtro es
+        // tener seteado el campo leído en 'false'.
+        List<ObjectBoxAmenazaWrapper> amenazaWrapperList = getAmenazaWrapperBox().query()
+                .equal(ObjectBoxAmenazaWrapper_.leido, false).build().find();
+        int cantidadDeAmenazas = amenazaWrapperList.size();
         getTimer().stop();
 
         System.out.println("Registros leídos correctamente.\n");
@@ -124,35 +122,44 @@ public class ObjectBoxCreator extends MotorBD {
     public void updateData(String dbName, String tableName, String[] attributesList, String[] attributesType,
             String[] attributesLength) {
         getTimer().start();
-        List<ObjectBoxAmenazaWrapper> amenazaWrapperList = amenazaWrapperBox.getAll();
-        Iterator<ObjectBoxAmenazaWrapper> amenazaListIter = amenazaWrapperList.iterator();
 
-        int i = 0;
-
-        while (amenazaListIter.hasNext()) {
-            ObjectBoxAmenazaWrapper amenazaWrapper = amenazaListIter.next();
-
-            ObjectBoxTiempo tiempo = new ObjectBoxTiempo(0, 2, 0);
-            ObjectBoxPosicion posicion = new ObjectBoxPosicion(0, 2.5, 2.5, 2, 0);
-            ObjectBoxEquipamiento equipamiento = new ObjectBoxEquipamiento(0, 2, 2, 2, 0);
-            ObjectBoxInformante informante = new ObjectBoxInformante(0, 0);
-            ObjectBoxAmenaza amenaza = new ObjectBoxAmenaza(i, 2, 2, 2, 2, 0);
+        // Actualizo los objetos AmenazaWrapper
+        for (ObjectBoxAmenazaWrapper amenazaWrapper : getAmenazaWrapperBox().getAll()) {
             amenazaWrapper.setLeido(true);
-
-            tiempo.amenaza.setTarget(amenaza);
-            posicion.amenaza.setTarget(amenaza);
-            equipamiento.amenaza.setTarget(amenaza);
-            informante.amenaza.setTarget(amenaza);
-            amenaza.amenazaWrapper.setTarget(amenazaWrapper);
-
-            tiempoBox.put(tiempo);
-            posicionBox.put(posicion);
-            equipamientoBox.put(equipamiento);
-            informanteBox.put(informante);
-            amenazaBox.put(amenaza);
-            amenazaWrapperBox.put(amenazaWrapper);
-            i++;
         }
+
+        // Actualizo los objetos Amenaza
+        for (ObjectBoxAmenaza amenaza : getAmenazaBox().getAll()) {
+            amenaza.setCodigoSimbolo(2);
+            amenaza.setRadioAccion(2);
+            amenaza.setIdentificacion(2);
+            amenaza.setTamanios(2);
+        }
+
+        // Actualizo el objeto Tiempo
+        for (ObjectBoxTiempo tiempo : getTiempoBox().getAll()) {
+            tiempo.setEpoch(2);
+        }
+
+        // Actualizo el objeto Posicion
+        for (ObjectBoxPosicion posicion : getPosicionBox().getAll()) {
+            posicion.setLatitud(2.5);
+            posicion.setLongitud(2.5);
+            posicion.setMilisegundosFechaHora(2);
+        }
+
+        // Actualizo el objeto Equipamiento
+        for (ObjectBoxEquipamiento equipamiento : getEquipamientoBox().getAll()) {
+            equipamiento.setCantidad(2);
+            equipamiento.setEquipo(2);
+            equipamiento.setTipo(2);
+        }
+
+        // Dado que el objeto 'Informante' no contiene atributos modificables,
+        // no se realiza modificación alguna.
+
+        // No se modifica ninguna de las relaciones entre los objetos.
+
         getTimer().stop();
 
         System.out.println("Registros actualizados correctamente.");
@@ -165,7 +172,12 @@ public class ObjectBoxCreator extends MotorBD {
     @Override
     public void deleteData(String dbName, String tableName) {
         getTimer().start();
-        amenazaBox.removeAll();
+        getAmenazaWrapperBox().removeAll();
+        getAmenazaBox().removeAll();
+        getTiempoBox().removeAll();
+        getPosicionBox().removeAll();
+        getEquipamientoBox().removeAll();
+        getInformanteBox().removeAll();
         store.close();
         getTimer().stop();
 
@@ -179,5 +191,71 @@ public class ObjectBoxCreator extends MotorBD {
     @Override
     public void dropDatabase(String dbName) {
 
+    }
+
+    public Box<ObjectBoxTiempo> getTiempoBox() {
+        if (tiempoBox == null) {
+            tiempoBox = store.boxFor(ObjectBoxTiempo.class);
+        }
+        return tiempoBox;
+    }
+
+    public void setTiempoBox(Box<ObjectBoxTiempo> tiempoBox) {
+        this.tiempoBox = tiempoBox;
+    }
+
+    public Box<ObjectBoxPosicion> getPosicionBox() {
+        if (posicionBox == null) {
+            posicionBox = store.boxFor(ObjectBoxPosicion.class);
+        }
+        return posicionBox;
+    }
+
+    public void setPosicionBox(Box<ObjectBoxPosicion> posicionBox) {
+        this.posicionBox = posicionBox;
+    }
+
+    public Box<ObjectBoxEquipamiento> getEquipamientoBox() {
+        if (equipamientoBox == null) {
+            equipamientoBox = store.boxFor(ObjectBoxEquipamiento.class);
+        }
+        return equipamientoBox;
+    }
+
+    public void setEquipamientoBox(Box<ObjectBoxEquipamiento> equipamientoBox) {
+        this.equipamientoBox = equipamientoBox;
+    }
+
+    public Box<ObjectBoxInformante> getInformanteBox() {
+        if (informanteBox == null) {
+            informanteBox = store.boxFor(ObjectBoxInformante.class);
+        }
+        return informanteBox;
+    }
+
+    public void setInformanteBox(Box<ObjectBoxInformante> informanteBox) {
+        this.informanteBox = informanteBox;
+    }
+
+    public Box<ObjectBoxAmenaza> getAmenazaBox() {
+        if (amenazaBox == null) {
+            amenazaBox = store.boxFor(ObjectBoxAmenaza.class);
+        }
+        return amenazaBox;
+    }
+
+    public void setAmenazaBox(Box<ObjectBoxAmenaza> amenazaBox) {
+        this.amenazaBox = amenazaBox;
+    }
+
+    public Box<ObjectBoxAmenazaWrapper> getAmenazaWrapperBox() {
+        if (amenazaBox == null) {
+            amenazaBox = store.boxFor(ObjectBoxAmenaza.class);
+        }
+        return amenazaWrapperBox;
+    }
+
+    public void setAmenazaWrapperBox(Box<ObjectBoxAmenazaWrapper> amenazaWrapperBox) {
+        this.amenazaWrapperBox = amenazaWrapperBox;
     }
 }

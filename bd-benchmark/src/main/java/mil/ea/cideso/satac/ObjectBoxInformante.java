@@ -11,9 +11,11 @@ public class ObjectBoxInformante {
     private long id;
     public ToOne<ObjectBoxAmenaza> amenaza;
 
-    public ObjectBoxInformante(long id, long amenazaId) {
+    public ObjectBoxInformante() {
+    }
+
+    public ObjectBoxInformante(long id) {
         this.id = id;
-        this.amenaza.setTargetId(amenazaId);
     }
 
     public long getId() {

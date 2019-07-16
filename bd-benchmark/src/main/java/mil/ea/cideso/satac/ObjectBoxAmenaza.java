@@ -17,14 +17,12 @@ public class ObjectBoxAmenaza {
     public ObjectBoxAmenaza() {
     }
 
-    public ObjectBoxAmenaza(int id, int codigoSimbolo, int radioAccion, int identificacion, int tamanios,
-            long amenazaWrapperId) {
+    public ObjectBoxAmenaza(int id, int codigoSimbolo, int radioAccion, int identificacion, int tamanios) {
         this.id = id;
         this.codigoSimbolo = codigoSimbolo;
         this.radioAccion = radioAccion;
         this.identificacion = identificacion;
         this.tamanios = tamanios;
-        this.amenazaWrapper.setTargetId(amenazaWrapperId);
     }
 
     public long getId() {

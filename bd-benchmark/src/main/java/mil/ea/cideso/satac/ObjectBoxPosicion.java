@@ -13,12 +13,14 @@ public class ObjectBoxPosicion {
     private int milisegundosFechaHora;
     public ToOne<ObjectBoxAmenaza> amenaza;
 
-    public ObjectBoxPosicion(long id, double latitud, double longitud, int milisegundosFechaHora, long amenazaId) {
+    public ObjectBoxPosicion() {
+    }
+
+    public ObjectBoxPosicion(long id, double latitud, double longitud, int milisegundosFechaHora) {
         this.id = id;
         this.latitud = latitud;
         this.longitud = longitud;
         this.milisegundosFechaHora = milisegundosFechaHora;
-        this.amenaza.setTargetId(amenazaId);
     }
 
     public double getLatitud() {

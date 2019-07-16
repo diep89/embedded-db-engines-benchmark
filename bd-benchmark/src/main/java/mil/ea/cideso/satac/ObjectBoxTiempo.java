@@ -14,10 +14,9 @@ public class ObjectBoxTiempo {
     public ObjectBoxTiempo() {
     }
 
-    public ObjectBoxTiempo(long id, int epoch, long amenazaId) {
+    public ObjectBoxTiempo(long id, int epoch) {
         this.id = id;
         this.epoch = epoch;
-        this.amenaza.setTargetId(amenazaId);
     }
 
     public int getEpoch() {

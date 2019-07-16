@@ -13,12 +13,14 @@ public class ObjectBoxEquipamiento {
     private int tipo;
     public ToOne<ObjectBoxAmenaza> amenaza;
 
-    public ObjectBoxEquipamiento(long id, int cantidad, int equipo, int tipo, long amenazaId) {
+    public ObjectBoxEquipamiento() {
+    }
+
+    public ObjectBoxEquipamiento(long id, int cantidad, int equipo, int tipo) {
         this.id = id;
         this.cantidad = cantidad;
         this.equipo = equipo;
         this.tipo = tipo;
-        this.amenaza.setTargetId(amenazaId);
     }
 
     public int getCantidad() {

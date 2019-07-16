@@ -3,6 +3,7 @@ package mil.ea.cideso.satac;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -31,17 +32,17 @@ public class Main {
         // SqliteCreator sqlite = new SqliteCreator();
         // RocksDbCreator rocks = new RocksDbCreator();
         ObjectBoxCreator objectBox = new ObjectBoxCreator();
-        Db4oCreator db4o = new Db4oCreator();
+        // Db4oCreator db4o = new Db4oCreator();
         // H2Creator h2 = new H2Creator();
         // MongoDbCreator mongo = new MongoDbCreator();
         // RavenDbCreator raven = new RavenDbCreator();
 
         // Creación de lista que contiene las instancias creadas anteriormente.
-        LinkedList<MotorBD> ll = new LinkedList<MotorBD>();
+        List<MotorBD> ll = new LinkedList<>();
         // ll.add(sqlite);
         // ll.add(rocks);
         ll.add(objectBox);
-        ll.add(db4o);
+        // ll.add(db4o);
         // ll.add(h2);
         // ll.add(mongo);
         // ll.add(raven);
