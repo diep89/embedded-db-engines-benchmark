@@ -2,22 +2,27 @@ package mil.ea.cideso.satac;
 
 import io.objectbox.annotation.Entity;
 import io.objectbox.annotation.Id;
+import io.objectbox.annotation.NameInDb;
 import io.objectbox.relation.ToOne;
 
 @Entity
 public class ObjectBoxAmenaza {
     @Id
     private long id;
+    @NameInDb("COD_SIMBOLO")
     private int codigoSimbolo;
+    @NameInDb("RADIO_ACCION")
     private int radioAccion;
+    @NameInDb("IDENTIFICACION")
     private int identificacion;
+    @NameInDb("TAMANIOS")
     private int tamanios;
     public ToOne<ObjectBoxAmenazaWrapper> amenazaWrapper;
 
     public ObjectBoxAmenaza() {
     }
 
-    public ObjectBoxAmenaza(int id, int codigoSimbolo, int radioAccion, int identificacion, int tamanios) {
+    public ObjectBoxAmenaza(long id, int codigoSimbolo, int radioAccion, int identificacion, int tamanios) {
         this.id = id;
         this.codigoSimbolo = codigoSimbolo;
         this.radioAccion = radioAccion;
