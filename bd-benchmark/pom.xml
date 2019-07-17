@@ -9,8 +9,9 @@
   <url>http://www.example.com</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <objectboxVersion>2.3.4</objectboxVersion>
   </properties>
   <repositories>
     <repository>
@@ -29,6 +30,7 @@
       <url>http://maven.geomajas.org/</url>
     </repository> -->
   </repositories>
+  
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -166,6 +168,7 @@
           <version>3.0.2</version>
         </plugin>
         <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.8.0</version>
           <configuration>
@@ -184,20 +187,20 @@
             </compilerArgs>
           </configuration>
         </plugin>
+        <!-- Runs the ObjectBox byte-code transformer after Maven finishes compiling -->
         <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>exec-maven-plugin</artifactId>
-          <version>1.6.0</version>
+          <groupId>io.objectbox</groupId>
+          <artifactId>objectbox-maven-plugin</artifactId>
+          <version>1.0.0</version>
           <executions>
             <execution>
-              <phase>compile</phase>
               <goals>
-                <goal>java</goal>
+                <goal>transform</goal>
               </goals>
             </execution>
           </executions>
           <configuration>
-            <mainClass>io.objectbox.maven.Transformer</mainClass>
+            <debug>true</debug>
           </configuration>
         </plugin>
         <plugin>

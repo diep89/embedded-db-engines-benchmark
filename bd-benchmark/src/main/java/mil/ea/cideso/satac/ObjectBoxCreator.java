@@ -14,7 +14,7 @@ import io.objectbox.Box;
 import io.objectbox.BoxStore;
 
 public class ObjectBoxCreator extends MotorBD {
-    private static BoxStore store = null;
+    private BoxStore store = null;
     private Box<ObjectBoxTiempo> tiempoBox = null;
     private Box<ObjectBoxPosicion> posicionBox = null;
     private Box<ObjectBoxEquipamiento> equipamientoBox = null;
@@ -29,8 +29,8 @@ public class ObjectBoxCreator extends MotorBD {
     }
 
     private void createMyObjectBox(String dbName) throws IOException {
-        if (store == null) {
-            store = MyObjectBox.builder().name(dbName).build();
+        if (getStore() == null) {
+            setStore(MyObjectBox.builder().name(dbName).build());
         }
     }
 
@@ -59,12 +59,19 @@ public class ObjectBoxCreator extends MotorBD {
 
             // Creación de elementos a persistir.
             // Se indica id = 0 para que ObjectBox asigne un ID automáticamente.
-            ObjectBoxAmenazaWrapper amenazaWrapper = new ObjectBoxAmenazaWrapper(0, true, false);
-            ObjectBoxAmenaza amenaza = new ObjectBoxAmenaza(0, 1, 1, 1, 1);
-            ObjectBoxTiempo tiempo = new ObjectBoxTiempo(0, 1);
-            ObjectBoxPosicion posicion = new ObjectBoxPosicion(0, 1.5, 1.5, 1);
-            ObjectBoxEquipamiento equipamiento = new ObjectBoxEquipamiento(0, 1, 1, 1);
-            ObjectBoxInformante informante = new ObjectBoxInformante(0);
+            ObjectBoxAmenazaWrapper amenazaWrapper = new ObjectBoxAmenazaWrapper(i, true, false);
+            ObjectBoxAmenaza amenaza = new ObjectBoxAmenaza(i, 1, 1, 1, 1);
+            ObjectBoxTiempo tiempo = new ObjectBoxTiempo(i, 1);
+            ObjectBoxPosicion posicion = new ObjectBoxPosicion(i, 1.5, 1.5, 1);
+            ObjectBoxEquipamiento equipamiento = new ObjectBoxEquipamiento(i, 1, 1, 1);
+            ObjectBoxInformante informante = new ObjectBoxInformante(i);
+
+            // Declaración de relaciones entre objetos:
+            amenaza.amenazaWrapper.setTarget(amenazaWrapper);
+            tiempo.amenaza.setTarget(amenaza);
+            posicion.amenaza.setTarget(amenaza);
+            equipamiento.amenaza.setTarget(amenaza);
+            informante.amenaza.setTarget(amenaza);
 
             // Guardo elementos en sus respectivos box.
             getAmenazaWrapperBox().put(amenazaWrapper);
@@ -73,13 +80,6 @@ public class ObjectBoxCreator extends MotorBD {
             getPosicionBox().put(posicion);
             getEquipamientoBox().put(equipamiento);
             getInformanteBox().put(informante);
-
-            // Declaración de relaciones entre objetos:
-            amenaza.amenazaWrapper.setTarget(amenazaWrapper);
-            tiempo.amenaza.setTarget(amenaza);
-            posicion.amenaza.setTarget(amenaza);
-            equipamiento.amenaza.setTarget(amenaza);
-            informante.amenaza.setTarget(amenaza);
 
             getTimer().stop();
 
@@ -195,7 +195,7 @@ public class ObjectBoxCreator extends MotorBD {
 
     public Box<ObjectBoxTiempo> getTiempoBox() {
         if (tiempoBox == null) {
-            tiempoBox = store.boxFor(ObjectBoxTiempo.class);
+            tiempoBox = getStore().boxFor(ObjectBoxTiempo.class);
         }
         return tiempoBox;
     }
@@ -206,7 +206,7 @@ public class ObjectBoxCreator extends MotorBD {
 
     public Box<ObjectBoxPosicion> getPosicionBox() {
         if (posicionBox == null) {
-            posicionBox = store.boxFor(ObjectBoxPosicion.class);
+            posicionBox = getStore().boxFor(ObjectBoxPosicion.class);
         }
         return posicionBox;
     }
@@ -217,7 +217,7 @@ public class ObjectBoxCreator extends MotorBD {
 
     public Box<ObjectBoxEquipamiento> getEquipamientoBox() {
         if (equipamientoBox == null) {
-            equipamientoBox = store.boxFor(ObjectBoxEquipamiento.class);
+            equipamientoBox = getStore().boxFor(ObjectBoxEquipamiento.class);
         }
         return equipamientoBox;
     }
@@ -228,7 +228,7 @@ public class ObjectBoxCreator extends MotorBD {
 
     public Box<ObjectBoxInformante> getInformanteBox() {
         if (informanteBox == null) {
-            informanteBox = store.boxFor(ObjectBoxInformante.class);
+            informanteBox = getStore().boxFor(ObjectBoxInformante.class);
         }
         return informanteBox;
     }
@@ -239,7 +239,7 @@ public class ObjectBoxCreator extends MotorBD {
 
     public Box<ObjectBoxAmenaza> getAmenazaBox() {
         if (amenazaBox == null) {
-            amenazaBox = store.boxFor(ObjectBoxAmenaza.class);
+            amenazaBox = getStore().boxFor(ObjectBoxAmenaza.class);
         }
         return amenazaBox;
     }
@@ -250,7 +250,7 @@ public class ObjectBoxCreator extends MotorBD {
 
     public Box<ObjectBoxAmenazaWrapper> getAmenazaWrapperBox() {
         if (amenazaWrapperBox == null) {
-            amenazaWrapperBox = store.boxFor(ObjectBoxAmenazaWrapper.class);
+            amenazaWrapperBox = getStore().boxFor(ObjectBoxAmenazaWrapper.class);
         }
         return amenazaWrapperBox;
     }
@@ -258,4 +258,13 @@ public class ObjectBoxCreator extends MotorBD {
     public void setAmenazaWrapperBox(Box<ObjectBoxAmenazaWrapper> amenazaWrapperBox) {
         this.amenazaWrapperBox = amenazaWrapperBox;
     }
+
+    public BoxStore getStore() {
+        return store;
+    }
+
+    public void setStore(BoxStore store) {
+        this.store = store;
+    }
+
 }

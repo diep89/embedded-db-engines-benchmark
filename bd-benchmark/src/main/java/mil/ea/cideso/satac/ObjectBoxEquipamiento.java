@@ -6,7 +6,7 @@ import io.objectbox.relation.ToOne;
 
 @Entity
 public class ObjectBoxEquipamiento {
-    @Id
+    @Id(assignable = true)
     private long id;
     private int cantidad;
     private int equipo;

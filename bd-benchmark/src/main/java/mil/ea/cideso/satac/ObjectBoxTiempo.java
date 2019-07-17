@@ -6,7 +6,7 @@ import io.objectbox.relation.ToOne;
 
 @Entity
 public class ObjectBoxTiempo {
-    @Id
+    @Id(assignable = true)
     private long id;
     private int epoch;
     public ToOne<ObjectBoxAmenaza> amenaza;

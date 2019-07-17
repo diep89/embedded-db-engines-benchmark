@@ -6,20 +6,20 @@ import io.objectbox.annotation.NameInDb;
 
 @Entity
 public class ObjectBoxAmenazaWrapper {
-    @Id
+    @Id(assignable = true)
     private long id;
     @NameInDb("VISIBLE")
     private boolean visible;
     @NameInDb("LEIDO")
     private boolean leido;
 
-    public ObjectBoxAmenazaWrapper() {
-    }
-
     public ObjectBoxAmenazaWrapper(long id, boolean visible, boolean leido) {
         this.id = id;
         this.visible = visible;
         this.leido = leido;
+    }
+
+    public ObjectBoxAmenazaWrapper() {
     }
 
     public boolean isVisible() {

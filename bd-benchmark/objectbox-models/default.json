@@ -22,10 +22,163 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "20:762276309871376794",
+      "lastPropertyId": "2:7259921110052549409",
+      "name": "ObjectBoxInformante",
+      "properties": [
+        {
+          "id": "1:692740350113488949",
+          "name": "id"
+        },
+        {
+          "id": "2:7259921110052549409",
+          "indexId": "21:5097073380376365764",
+          "name": "amenazaId"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "21:817290013461194831",
+      "lastPropertyId": "5:5936682496885563831",
+      "name": "ObjectBoxPosicion",
+      "properties": [
+        {
+          "id": "1:3624747658063965436",
+          "name": "id"
+        },
+        {
+          "id": "2:675202021900061281",
+          "name": "latitud"
+        },
+        {
+          "id": "3:8704048525956505367",
+          "name": "longitud"
+        },
+        {
+          "id": "4:678566407512920462",
+          "name": "milisegundosFechaHora"
+        },
+        {
+          "id": "5:5936682496885563831",
+          "indexId": "22:4486674359423430237",
+          "name": "amenazaId"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "22:8837593753382111941",
+      "lastPropertyId": "3:1045744224749562830",
+      "name": "ObjectBoxTiempo",
+      "properties": [
+        {
+          "id": "1:7446801481043334941",
+          "name": "id"
+        },
+        {
+          "id": "2:9209594532084457915",
+          "name": "epoch"
+        },
+        {
+          "id": "3:1045744224749562830",
+          "indexId": "23:6125069199937370220",
+          "name": "amenazaId"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "23:2516559585413246700",
+      "lastPropertyId": "4:1402595115536384762",
+      "name": "ObjectBoxPerson",
+      "properties": [
+        {
+          "id": "1:5826832496673409398",
+          "name": "id"
+        },
+        {
+          "id": "2:1036999844763008899",
+          "name": "EDAD"
+        },
+        {
+          "id": "3:1927282933185304502",
+          "name": "SEXO"
+        },
+        {
+          "id": "4:1402595115536384762",
+          "name": "TELEFONO"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "24:2244730668731092873",
+      "lastPropertyId": "5:3418817616034142586",
+      "name": "ObjectBoxEquipamiento",
+      "properties": [
+        {
+          "id": "1:1694040423192813014",
+          "name": "id"
+        },
+        {
+          "id": "2:7931582210633450972",
+          "name": "cantidad"
+        },
+        {
+          "id": "3:8078848032754799710",
+          "name": "equipo"
+        },
+        {
+          "id": "4:752382438344094258",
+          "name": "tipo"
+        },
+        {
+          "id": "5:3418817616034142586",
+          "indexId": "24:7746980606105388982",
+          "name": "amenazaId"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "25:304860840535918459",
+      "lastPropertyId": "6:8715097865316564559",
+      "name": "ObjectBoxAmenaza",
+      "properties": [
+        {
+          "id": "1:7667374904469816072",
+          "name": "id"
+        },
+        {
+          "id": "2:4577646152217643796",
+          "name": "COD_SIMBOLO"
+        },
+        {
+          "id": "3:5324750419490847998",
+          "name": "RADIO_ACCION"
+        },
+        {
+          "id": "4:1774940241127980473",
+          "name": "IDENTIFICACION"
+        },
+        {
+          "id": "5:3474025865870949732",
+          "name": "TAMANIOS"
+        },
+        {
+          "id": "6:8715097865316564559",
+          "indexId": "25:3584728091846747328",
+          "name": "amenazaWrapperId"
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "19:1679561696471593635",
-  "lastIndexId": "20:2181893728447715698",
+  "lastEntityId": "25:304860840535918459",
+  "lastIndexId": "25:3584728091846747328",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 4,

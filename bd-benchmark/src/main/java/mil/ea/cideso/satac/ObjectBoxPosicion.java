@@ -6,7 +6,7 @@ import io.objectbox.relation.ToOne;
 
 @Entity
 public class ObjectBoxPosicion {
-    @Id
+    @Id(assignable = true)
     private long id;
     private double latitud;
     private double longitud;

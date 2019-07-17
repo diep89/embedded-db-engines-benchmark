@@ -7,7 +7,7 @@ import io.objectbox.relation.ToOne;
 
 @Entity
 public class ObjectBoxAmenaza {
-    @Id
+    @Id(assignable = true)
     private long id;
     @NameInDb("COD_SIMBOLO")
     private int codigoSimbolo;
@@ -17,7 +17,7 @@ public class ObjectBoxAmenaza {
     private int identificacion;
     @NameInDb("TAMANIOS")
     private int tamanios;
-    public ToOne<ObjectBoxAmenazaWrapper> amenazaWrapper;
+    ToOne<ObjectBoxAmenazaWrapper> amenazaWrapper;
 
     public ObjectBoxAmenaza() {
     }

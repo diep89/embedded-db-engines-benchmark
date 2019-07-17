@@ -7,7 +7,7 @@ import io.objectbox.relation.ToOne;
 @Entity
 public class ObjectBoxInformante {
 
-    @Id
+    @Id(assignable = true)
     private long id;
     public ToOne<ObjectBoxAmenaza> amenaza;
 
