@@ -58,7 +58,6 @@ public class ObjectBoxCreator extends MotorBD {
         for (int i = 0; i < cantidadAInsertar; i++) {
 
             // Creación de elementos a persistir.
-            // Se indica id = 0 para que ObjectBox asigne un ID automáticamente.
             ObjectBoxAmenazaWrapper amenazaWrapper = new ObjectBoxAmenazaWrapper(i, true, false);
             ObjectBoxAmenaza amenaza = new ObjectBoxAmenaza(i, 1, 1, 1, 1);
             ObjectBoxTiempo tiempo = new ObjectBoxTiempo(i, 1);
@@ -67,19 +66,17 @@ public class ObjectBoxCreator extends MotorBD {
             ObjectBoxInformante informante = new ObjectBoxInformante(i);
 
             // Declaración de relaciones entre objetos:
-            amenaza.amenazaWrapper.setTarget(amenazaWrapper);
-            tiempo.amenaza.setTarget(amenaza);
-            posicion.amenaza.setTarget(amenaza);
-            equipamiento.amenaza.setTarget(amenaza);
-            informante.amenaza.setTarget(amenaza);
-
-            // Guardo elementos en sus respectivos box.
-            getAmenazaWrapperBox().put(amenazaWrapper);
-            getAmenazaBox().put(amenaza);
+            // tiempo.amenaza.setTarget(amenaza);
             getTiempoBox().put(tiempo);
-            getPosicionBox().put(posicion);
-            getEquipamientoBox().put(equipamiento);
-            getInformanteBox().put(informante);
+            // posicion.amenaza.setTarget(amenaza);
+            // getPosicionBox().put(posicion);
+            // equipamiento.amenaza.setTarget(amenaza);
+            // getEquipamientoBox().put(equipamiento);
+            // informante.amenaza.setTarget(amenaza);
+            // getInformanteBox().put(informante);
+            // amenaza.amenazaWrapper.setTarget(amenazaWrapper);
+            // getAmenazaBox().put(amenaza);
+            getAmenazaWrapperBox().put(amenazaWrapper);
 
             getTimer().stop();
 

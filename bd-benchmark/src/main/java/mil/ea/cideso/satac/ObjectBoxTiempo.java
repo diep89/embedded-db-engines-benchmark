@@ -9,7 +9,7 @@ public class ObjectBoxTiempo {
     @Id(assignable = true)
     private long id;
     private int epoch;
-    public ToOne<ObjectBoxAmenaza> amenaza;
+    ToOne<ObjectBoxAmenaza> amenaza;
 
     public ObjectBoxTiempo() {
     }
