@@ -12,6 +12,8 @@ public class ObjectBoxInformante {
     public ToOne<ObjectBoxAmenaza> amenaza;
 
     public ObjectBoxInformante() {
+        this.amenaza = new ToOne<>(this, ObjectBoxInformante_.amenaza);
+
     }
 
     public ObjectBoxInformante(long id) {

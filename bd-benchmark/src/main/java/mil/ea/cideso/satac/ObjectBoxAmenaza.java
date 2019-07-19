@@ -20,8 +20,6 @@ public class ObjectBoxAmenaza {
 	private int tamanios;
 	public ToOne<ObjectBoxAmenazaWrapper> amenazaWrapper;
 
-	// transient BoxStore __boxStore;
-
 	public ObjectBoxAmenaza(long id, int codigoSimbolo, int radioAccion, int identificacion, int tamanios) {
 		this.id = id;
 		this.codigoSimbolo = codigoSimbolo;

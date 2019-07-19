@@ -14,6 +14,7 @@ public class ObjectBoxEquipamiento {
     public ToOne<ObjectBoxAmenaza> amenaza;
 
     public ObjectBoxEquipamiento() {
+        this.amenaza = new ToOne<>(this, ObjectBoxEquipamiento_.amenaza);
     }
 
     public ObjectBoxEquipamiento(long id, int cantidad, int equipo, int tipo) {

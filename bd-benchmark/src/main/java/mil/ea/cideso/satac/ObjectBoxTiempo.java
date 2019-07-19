@@ -12,6 +12,7 @@ public class ObjectBoxTiempo {
     ToOne<ObjectBoxAmenaza> amenaza;
 
     public ObjectBoxTiempo() {
+        this.amenaza = new ToOne<>(this, ObjectBoxTiempo_.amenaza);
     }
 
     public ObjectBoxTiempo(long id, int epoch) {

@@ -14,6 +14,7 @@ public class ObjectBoxPosicion {
     public ToOne<ObjectBoxAmenaza> amenaza;
 
     public ObjectBoxPosicion() {
+        this.amenaza = new ToOne<>(this, ObjectBoxPosicion_.amenaza);
     }
 
     public ObjectBoxPosicion(long id, double latitud, double longitud, int milisegundosFechaHora) {

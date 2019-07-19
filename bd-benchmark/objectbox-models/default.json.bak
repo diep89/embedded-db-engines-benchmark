@@ -22,10 +22,163 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "31:6905775538317860807",
+      "lastPropertyId": "4:7442703234109497017",
+      "name": "ObjectBoxPerson",
+      "properties": [
+        {
+          "id": "1:4834683013568858332",
+          "name": "id"
+        },
+        {
+          "id": "2:4274062519951900712",
+          "name": "EDAD"
+        },
+        {
+          "id": "3:1653393608264832859",
+          "name": "SEXO"
+        },
+        {
+          "id": "4:7442703234109497017",
+          "name": "TELEFONO"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "32:951639038417635563",
+      "lastPropertyId": "3:7678365383255851321",
+      "name": "ObjectBoxTiempo",
+      "properties": [
+        {
+          "id": "1:6772375005996471301",
+          "name": "id"
+        },
+        {
+          "id": "2:3919581117220672651",
+          "name": "epoch"
+        },
+        {
+          "id": "3:7678365383255851321",
+          "indexId": "30:7942937416095166419",
+          "name": "amenazaId"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "33:6775578439719497709",
+      "lastPropertyId": "6:8295584087952457562",
+      "name": "ObjectBoxAmenaza",
+      "properties": [
+        {
+          "id": "1:139919355391757077",
+          "name": "id"
+        },
+        {
+          "id": "2:8443390640239564332",
+          "name": "COD_SIMBOLO"
+        },
+        {
+          "id": "3:3568302903755266802",
+          "name": "RADIO_ACCION"
+        },
+        {
+          "id": "4:6967212122831203524",
+          "name": "IDENTIFICACION"
+        },
+        {
+          "id": "5:3429685391728034304",
+          "name": "TAMANIOS"
+        },
+        {
+          "id": "6:8295584087952457562",
+          "indexId": "31:2801455223855837435",
+          "name": "amenazaWrapperId"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "34:5954893126871178788",
+      "lastPropertyId": "5:2349140321332806459",
+      "name": "ObjectBoxPosicion",
+      "properties": [
+        {
+          "id": "1:8442512127869702999",
+          "name": "id"
+        },
+        {
+          "id": "2:4499610147961730658",
+          "name": "latitud"
+        },
+        {
+          "id": "3:2759713801053244775",
+          "name": "longitud"
+        },
+        {
+          "id": "4:4525180401486711825",
+          "name": "milisegundosFechaHora"
+        },
+        {
+          "id": "5:2349140321332806459",
+          "indexId": "32:3599383615532106909",
+          "name": "amenazaId"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "35:3887606372148522807",
+      "lastPropertyId": "5:2742124604712351214",
+      "name": "ObjectBoxEquipamiento",
+      "properties": [
+        {
+          "id": "1:7230372959696109555",
+          "name": "id"
+        },
+        {
+          "id": "2:339658808526342783",
+          "name": "cantidad"
+        },
+        {
+          "id": "3:2358397406851491769",
+          "name": "equipo"
+        },
+        {
+          "id": "4:3751593336557791485",
+          "name": "tipo"
+        },
+        {
+          "id": "5:2742124604712351214",
+          "indexId": "33:5580964915063828192",
+          "name": "amenazaId"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "36:5543128250903807439",
+      "lastPropertyId": "2:5773496870857245456",
+      "name": "ObjectBoxInformante",
+      "properties": [
+        {
+          "id": "1:3858964884460772579",
+          "name": "id"
+        },
+        {
+          "id": "2:5773496870857245456",
+          "indexId": "34:7438152189881103474",
+          "name": "amenazaId"
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "30:4420519483762335540",
-  "lastIndexId": "29:1473258231684838479",
+  "lastEntityId": "36:5543128250903807439",
+  "lastIndexId": "34:7438152189881103474",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 4,

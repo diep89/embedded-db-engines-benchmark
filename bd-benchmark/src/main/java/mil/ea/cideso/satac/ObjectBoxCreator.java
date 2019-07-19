@@ -54,29 +54,34 @@ public class ObjectBoxCreator extends MotorBD {
 			amenazaWrapper.setVisible(true);
 			amenazaWrapper.setLeido(false);
 			ObjectBoxAmenaza amenaza = new ObjectBoxAmenaza();
-			// System.out.println(amenaza.amenazaWrapper == null);
 			amenaza.setCodigoSimbolo(1);
 			amenaza.setIdentificacion(1);
 			amenaza.setRadioAccion(1);
 			amenaza.setTamanios(1);
-			// ObjectBoxTiempo tiempo = new ObjectBoxTiempo(i + 1, 1);
-			// ObjectBoxPosicion posicion = new ObjectBoxPosicion(i, 1.5, 1.5, 1);
-			// ObjectBoxEquipamiento equipamiento = new ObjectBoxEquipamiento(i, 1, 1, 1);
-			// ObjectBoxInformante informante = new ObjectBoxInformante(i);
+			ObjectBoxTiempo tiempo = new ObjectBoxTiempo();
+			tiempo.setEpoch(1);
+			ObjectBoxPosicion posicion = new ObjectBoxPosicion();
+			posicion.setLatitud(1.5);
+			posicion.setLongitud(1.5);
+			posicion.setMilisegundosFechaHora(1);
+			ObjectBoxEquipamiento equipamiento = new ObjectBoxEquipamiento();
+			equipamiento.setCantidad(1);
+			equipamiento.setEquipo(1);
+			equipamiento.setTipo(1);
+			ObjectBoxInformante informante = new ObjectBoxInformante();
 
 			// Declaración de relaciones entre objetos:
-			// tiempo.amenaza.setTarget(amenaza);
-			// getTiempoBox().put(tiempo);
-			// posicion.amenaza.setTarget(amenaza);
-			// getPosicionBox().put(posicion);
-			// equipamiento.amenaza.setTarget(amenaza);
-			// getEquipamientoBox().put(equipamiento);
-			// informante.amenaza.setTarget(amenaza);
-			// getInformanteBox().put(informante);
-
 			getAmenazaWrapperBox().put(amenazaWrapper);
 			amenaza.amenazaWrapper.setTarget(amenazaWrapper);
 			getAmenazaBox().put(amenaza);
+			tiempo.amenaza.setTarget(amenaza);
+			getTiempoBox().put(tiempo);
+			posicion.amenaza.setTarget(amenaza);
+			getPosicionBox().put(posicion);
+			equipamiento.amenaza.setTarget(amenaza);
+			getEquipamientoBox().put(equipamiento);
+			informante.amenaza.setTarget(amenaza);
+			getInformanteBox().put(informante);
 
 			getTimer().stop();
 
@@ -111,11 +116,13 @@ public class ObjectBoxCreator extends MotorBD {
 		System.out.println("Se encontraron " + cantidadDeAmenazas + " amenazas guardadas en la BD.\n");
 
 		for (ObjectBoxAmenazaWrapper amenazaWrapper : getAmenazaWrapperBox().getAll()) {
-			System.out.println(amenazaWrapper.id);
+			System.out.println("AmenazaWrapper Id: " + amenazaWrapper.id);
 		}
 
+		System.out.println("");
+
 		for (ObjectBoxAmenaza amenaza : getAmenazaBox().getAll()) {
-			System.out.println(amenaza.id);
+			System.out.println("Amenaza Id: " + amenaza.id);
 		}
 
 		System.out.println("");
