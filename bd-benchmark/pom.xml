@@ -1,336 +1,306 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>mil.ea.cideso.satac</groupId>
-  <artifactId>bd-benchmark</artifactId>
-  <version>1.0</version>
-  <name>bd-benchmark</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    <objectboxVersion>2.3.4</objectboxVersion>
-  </properties>
-  <repositories>
-    <repository>
-      <id>JCenter Repository</id>
-      <name>JCenter Repository</name>
-      <url>http://jcenter.bintray.com/</url>
-    </repository>
-    <repository>
-      <id>Mulesoft</id>
-      <name>Mulesoft Repository</name>
-      <url>https://repository.mulesoft.org/nexus/content/repositories/public/</url>
-    </repository>
-    <!-- <repository>
-      <id>Geomajas Repository</id>
-      <name>Geomajas Repository</name>
-      <url>http://maven.geomajas.org/</url>
-    </repository> -->
-  </repositories>
-  
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <scope>test</scope>
-    </dependency>
-    <!-- Motores de BD -->
-    <!-- https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc -->
-    <dependency>
-      <groupId>org.xerial</groupId>
-      <artifactId>sqlite-jdbc</artifactId>
-      <version>3.27.2.1</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/com.db4o/com.db4o -->
-    <dependency>
-      <groupId>com.db4o</groupId>
-      <artifactId>com.db4o</artifactId>
-      <version>7.7.67</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/com.db4o/db4o-core-java5 -->
-    <!-- <dependency>
-      <groupId>com.db4o</groupId>
-      <artifactId>db4o-core-java5</artifactId>
-      <version>8.0.184.15484</version>
-    </dependency> -->
-    <!-- https://search.maven.org/artifact/org.rocksdb/rocksdbjni/6.0.1/jar -->
-    <dependency>
-      <groupId>org.rocksdb</groupId>
-      <artifactId>rocksdbjni</artifactId>
-      <version>6.0.1</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/io.objectbox/objectbox-java -->
-    <dependency>
-      <groupId>io.objectbox</groupId>
-      <artifactId>objectbox-java</artifactId>
-      <version>2.3.4</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/io.objectbox/objectbox-windows -->
-    <dependency>
-      <groupId>io.objectbox</groupId>
-      <artifactId>objectbox-windows</artifactId>
-      <version>2.3.4</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/io.objectbox/objectbox-gradle-plugin -->
-    <dependency>
-      <groupId>io.objectbox</groupId>
-      <artifactId>objectbox-gradle-plugin</artifactId>
-      <version>2.3.4</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
-    <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
-      <version>1.4.199</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
-    <!-- <dependency>
-      <groupId>org.mongodb</groupId>
-      <artifactId>mongo-java-driver</artifactId>
-      <version>3.11.0-beta3</version>
-    </dependency> -->
-    <!-- https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-embedded -->
-    <!-- <dependency>
-      <groupId>org.mongodb</groupId>
-      <artifactId>mongodb-driver-embedded</artifactId>
-      <version>3.8.2</version>
-    </dependency> -->
-    <!-- https://mvnrepository.com/artifact/de.flapdoodle.embed/de.flapdoodle.embed.mongo -->
-    <!-- <dependency>
-      <groupId>de.flapdoodle.embed</groupId>
-      <artifactId>de.flapdoodle.embed.mongo</artifactId>
-      <version>2.2.0</version>
-    </dependency> -->
-    <!-- https://mvnrepository.com/artifact/org.mongodb/mongodb-driver -->
-    <!-- <dependency>
-      <groupId>org.mongodb</groupId>
-      <artifactId>mongodb-driver</artifactId>
-      <version>3.11.0-beta3</version>
-    </dependency> -->
-    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
-    <!-- <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>1.8.0-beta4</version>
-    </dependency> -->
-    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
-    <!-- <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-simple</artifactId>
-      <version>1.8.0-beta4</version>
-    </dependency> -->
-    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-jdk14 -->
-    <!-- <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-jdk14</artifactId>
-      <version>1.8.0-beta4</version>
-    </dependency> -->
-    <!-- <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-api</artifactId>
-      <version>2.9.0</version>
-    </dependency> -->
-    <!-- <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
-      <version>1.2.3</version> -->
-    <!--  </dependency> -->
-    
-    <!-- https://mvnrepository.com/artifact/net.ravendb/ravendb -->
-    <dependency>
-      <groupId>net.ravendb</groupId>
-      <artifactId>ravendb</artifactId>
-      <version>4.1.6</version>
-    </dependency>
-    <!-- Guava: Herramienta para implementar un timer -->
-    <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava</artifactId>
-      <version>27.1-jre</version>
-    </dependency>
-  </dependencies>
-  <build>
-    <pluginManagement>
-      <!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
-      <plugins>
-        <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
-        <plugin>
-          <artifactId>maven-clean-plugin</artifactId>
-          <version>3.1.0</version>
-        </plugin>
-        <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
-        <plugin>
-          <artifactId>maven-resources-plugin</artifactId>
-          <version>3.0.2</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.8.0</version>
-          <configuration>
-            <annotationProcessorPaths>
-              <path>
-                <groupId>io.objectbox</groupId>
-                <artifactId>objectbox-processor</artifactId>
-                <version>2.3.4</version>
-              </path>
-            </annotationProcessorPaths>
-            <annotationProcessors>
-              <annotationProcessor>io.objectbox.processor.ObjectBoxProcessorShim</annotationProcessor>
-            </annotationProcessors>
-            <compilerArgs>
-              <arg>-Aobjectbox.modelPath=${project.basedir}/objectbox-models/default.json</arg>
-            </compilerArgs>
-          </configuration>
-        </plugin>
-        <!-- Runs the ObjectBox byte-code transformer after Maven finishes compiling -->
-        <plugin>
-          <groupId>io.objectbox</groupId>
-          <artifactId>objectbox-maven-plugin</artifactId>
-          <version>1.0.0</version>
-          <executions>
-            <execution>
-              <goals>
-                <goal>transform</goal>
-              </goals>
-            </execution>
-          </executions>
-          <configuration>
-            <debug>true</debug>
-          </configuration>
-        </plugin>
-        <plugin>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>2.22.1</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-jar-plugin</artifactId>
-          <version>3.0.2</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-install-plugin</artifactId>
-          <version>2.5.2</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-deploy-plugin</artifactId>
-          <version>2.8.2</version>
-        </plugin>
-        <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
-        <plugin>
-          <artifactId>maven-site-plugin</artifactId>
-          <version>3.7.1</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-project-info-reports-plugin</artifactId>
-          <version>3.0.0</version>
-        </plugin>
-        <!-- Plugin para compilar un proyecto Gradle en Maven -->
-        <plugin>
-          <groupId>org.fortasoft</groupId>
-          <artifactId>gradle-maven-plugin</artifactId>
-          <version>1.0.8</version>
-          <configuration>
-            <tasks>
-              <!-- this would effectively call "gradle doSomething" -->
-              <task>doSomething</task>
-            </tasks>
-          </configuration>
-          <executions>
-            <execution>
-              <!-- You can bind this to any phase you like -->
-              <phase>compile</phase>
-              <goals>
-                <!-- goal must be "invoke" -->
-                <goal>invoke</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
-        <!-- Maven plugin wrapper for flapdoodle.de embedded MongoDB API -->
-        <!-- https://github.com/Syncleus/maven-mongodb-plugin -->
-        <plugin>
-          <groupId>com.syncleus.maven.plugins</groupId>
-          <artifactId>maven-mongodb-plugin</artifactId>
-          <version>1.1.1</version>
-          <executions>
-            <execution>
-              <id>start</id>
-              <goals>
-                <goal>start</goal>
-              </goals>
-              <configuration>
-                <bindIp>127.0.0.1</bindIp>
-                <!-- optional, default is to listen on all interfaces -->
-                <features>
-                  <feature>sync_delay</feature>
-                  <feature>text_search</feature>
-                </features>
-                <!-- optional, a list of MongoDB features to enable, default is
-                     none -->
-                
-                <imports>
-                  <import>
-                    <!-- <database>my_db</database> -->
-                    <!-- optional, name of the database, if null it will
-                             fallback to defaultImportDatabase -->
-                    
-                    <collection>TestTable</collection>
-                    <!-- required, name of the collection to import data -->
-                    
-                    <file>import_file.json</file>
-                    <!-- required, name of the json file to import -->
-                    
-                    <!-- <upsertOnImport>true</upsertOnImport> -->
-                    <!-- optional, default true, if true it will do an upsert on
-                             each document imported -->
-                    
-                    <!-- <dropOnImport>false</dropOnImport> -->
-                    <!-- optional, default true, if true it will do a drop the
-                             collection before starts to import -->
-                    
-                    <!-- <timeout>20000</timeout> -->
-                    <!-- optional, default 20000, it will fail if it takes more
-                             than this time importing a file (time in millis) -->
-                    
-                  </import>
-                </imports>
-                <!-- optional, More imports are accepted and it will be
-                     executed in strict order (if parallel is not set) -->
-                
-                <initializations>
-                  <initialization>
-                    <databaseName>testDb-MongoDB</databaseName>
-                    <!-- required, The name of the database to execute
-                             the scripts on -->
-                    
-                    <scripts>
-                      <script>/home/me/stuff/scriptDirectory</script>
-                      <script>/home/me/stuff/scriptFile.js</script>
-                    </scripts>
-                    <!-- required, The list of scripts to be executed can
-                             specify individual scripts or folders. When
-                             specifying a folder all files in folder must
-                             be a valid script. -->
-                  </initialization>
-                </initializations>
-                <!-- optional, Specifies a collection of initialization scripts
-                     to be run across various databases in the MongoDB instance,
-                     WARNING: initializations are deprecated, avoid using them.-->
-              </configuration>
-            </execution>
-            <execution>
-              <id>stop</id>
-              <goals>
-                <goal>stop</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>mil.ea.cideso.satac</groupId>
+	<artifactId>bd-benchmark</artifactId>
+	<version>1.0</version>
+	<name>bd-benchmark</name>
+	<!-- FIXME change it to the project's website -->
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<objectboxVersion>2.3.4</objectboxVersion>
+	</properties>
+	<repositories>
+		<repository>
+			<id>JCenter Repository</id>
+			<name>JCenter Repository</name>
+			<url>http://jcenter.bintray.com/</url>
+		</repository>
+		<repository>
+			<id>Mulesoft</id>
+			<name>Mulesoft Repository</name>
+			<url>https://repository.mulesoft.org/nexus/content/repositories/public/</url>
+		</repository>
+		<!-- <repository> <id>Geomajas Repository</id> <name>Geomajas Repository</name> 
+			<url>http://maven.geomajas.org/</url> </repository> -->
+	</repositories>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- Motores de BD -->
+		<!-- https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc -->
+		<dependency>
+			<groupId>org.xerial</groupId>
+			<artifactId>sqlite-jdbc</artifactId>
+			<version>3.27.2.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.db4o/com.db4o -->
+		<dependency>
+			<groupId>com.db4o</groupId>
+			<artifactId>com.db4o</artifactId>
+			<version>7.7.67</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.db4o/db4o-core-java5 -->
+		<!-- <dependency> <groupId>com.db4o</groupId> <artifactId>db4o-core-java5</artifactId> 
+			<version>8.0.184.15484</version> </dependency> -->
+		<!-- https://search.maven.org/artifact/org.rocksdb/rocksdbjni/6.0.1/jar -->
+		<dependency>
+			<groupId>org.rocksdb</groupId>
+			<artifactId>rocksdbjni</artifactId>
+			<version>6.0.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.objectbox/objectbox-java -->
+		<dependency>
+			<groupId>io.objectbox</groupId>
+			<artifactId>objectbox-java</artifactId>
+			<version>2.3.4</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.objectbox/objectbox-windows -->
+		<dependency>
+			<groupId>io.objectbox</groupId>
+			<artifactId>objectbox-windows</artifactId>
+			<version>2.3.4</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.objectbox/objectbox-gradle-plugin -->
+		<dependency>
+			<groupId>io.objectbox</groupId>
+			<artifactId>objectbox-gradle-plugin</artifactId>
+			<version>2.3.4</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.199</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
+		<!-- <dependency> <groupId>org.mongodb</groupId> <artifactId>mongo-java-driver</artifactId> 
+			<version>3.11.0-beta3</version> </dependency> -->
+		<!-- https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-embedded -->
+		<!-- <dependency> <groupId>org.mongodb</groupId> <artifactId>mongodb-driver-embedded</artifactId> 
+			<version>3.8.2</version> </dependency> -->
+		<!-- https://mvnrepository.com/artifact/de.flapdoodle.embed/de.flapdoodle.embed.mongo -->
+		<!-- <dependency> <groupId>de.flapdoodle.embed</groupId> <artifactId>de.flapdoodle.embed.mongo</artifactId> 
+			<version>2.2.0</version> </dependency> -->
+		<!-- https://mvnrepository.com/artifact/org.mongodb/mongodb-driver -->
+		<!-- <dependency> <groupId>org.mongodb</groupId> <artifactId>mongodb-driver</artifactId> 
+			<version>3.11.0-beta3</version> </dependency> -->
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+		<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-api</artifactId> 
+			<version>1.8.0-beta4</version> </dependency> -->
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
+		<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-simple</artifactId> 
+			<version>1.8.0-beta4</version> </dependency> -->
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-jdk14 -->
+		<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-jdk14</artifactId> 
+			<version>1.8.0-beta4</version> </dependency> -->
+		<!-- <dependency> <groupId>org.apache.logging.log4j</groupId> <artifactId>log4j-api</artifactId> 
+			<version>2.9.0</version> </dependency> -->
+		<!-- <dependency> <groupId>ch.qos.logback</groupId> <artifactId>logback-classic</artifactId> 
+			<version>1.2.3</version> -->
+		<!-- </dependency> -->
+
+		<!-- https://mvnrepository.com/artifact/net.ravendb/ravendb -->
+		<dependency>
+			<groupId>net.ravendb</groupId>
+			<artifactId>ravendb</artifactId>
+			<version>4.1.6</version>
+		</dependency>
+		<!-- Guava: Herramienta para implementar un timer -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>27.1-jre</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<pluginManagement>
+			<!-- lock down plugins versions to avoid using Maven defaults (may be 
+				moved to parent pom) -->
+			<plugins>
+				<!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+				<plugin>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>3.1.0</version>
+				</plugin>
+				<!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>3.0.2</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.8.0</version>
+					<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+						<annotationProcessorPaths>
+							<path>
+								<groupId>io.objectbox</groupId>
+								<artifactId>objectbox-processor</artifactId>
+								<version>2.3.4</version>
+							</path>
+						</annotationProcessorPaths>
+						<annotationProcessors>
+							<annotationProcessor>io.objectbox.processor.ObjectBoxProcessorShim</annotationProcessor>
+						</annotationProcessors>
+						<compilerArgs>
+							<arg>-Aobjectbox.modelPath=${project.basedir}/objectbox-models/default.json</arg>
+						</compilerArgs>
+					</configuration>
+				</plugin>
+				<!-- Runs the ObjectBox byte-code transformer after Maven finishes compiling -->
+				<plugin>
+					<groupId>io.objectbox</groupId>
+					<artifactId>objectbox-maven-plugin</artifactId>
+					<version>1.0.0</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>transform</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<debug>true</debug>
+					</configuration>
+				</plugin>
+				<plugin>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.22.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>3.0.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>2.5.2</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.8.2</version>
+				</plugin>
+				<!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+				<plugin>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.7.1</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-project-info-reports-plugin</artifactId>
+					<version>3.0.0</version>
+				</plugin>
+				<!-- Plugin para compilar un proyecto Gradle en Maven -->
+				<plugin>
+					<groupId>org.fortasoft</groupId>
+					<artifactId>gradle-maven-plugin</artifactId>
+					<version>1.0.8</version>
+					<configuration>
+						<tasks>
+							<!-- this would effectively call "gradle doSomething" -->
+							<task>doSomething</task>
+						</tasks>
+					</configuration>
+					<executions>
+						<execution>
+							<!-- You can bind this to any phase you like -->
+							<phase>compile</phase>
+							<goals>
+								<!-- goal must be "invoke" -->
+								<goal>invoke</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<!-- Maven plugin wrapper for flapdoodle.de embedded MongoDB API -->
+				<!-- https://github.com/Syncleus/maven-mongodb-plugin -->
+				<plugin>
+					<groupId>com.syncleus.maven.plugins</groupId>
+					<artifactId>maven-mongodb-plugin</artifactId>
+					<version>1.1.1</version>
+					<executions>
+						<execution>
+							<id>start</id>
+							<goals>
+								<goal>start</goal>
+							</goals>
+							<configuration>
+								<bindIp>127.0.0.1</bindIp>
+								<!-- optional, default is to listen on all interfaces -->
+								<features>
+									<feature>sync_delay</feature>
+									<feature>text_search</feature>
+								</features>
+								<!-- optional, a list of MongoDB features to enable, default is none -->
+
+								<imports>
+									<import>
+										<!-- <database>my_db</database> -->
+										<!-- optional, name of the database, if null it will fallback to 
+											defaultImportDatabase -->
+
+										<collection>TestTable</collection>
+										<!-- required, name of the collection to import data -->
+
+										<file>import_file.json</file>
+										<!-- required, name of the json file to import -->
+
+										<!-- <upsertOnImport>true</upsertOnImport> -->
+										<!-- optional, default true, if true it will do an upsert on each 
+											document imported -->
+
+										<!-- <dropOnImport>false</dropOnImport> -->
+										<!-- optional, default true, if true it will do a drop the collection 
+											before starts to import -->
+
+										<!-- <timeout>20000</timeout> -->
+										<!-- optional, default 20000, it will fail if it takes more than 
+											this time importing a file (time in millis) -->
+
+									</import>
+								</imports>
+								<!-- optional, More imports are accepted and it will be executed 
+									in strict order (if parallel is not set) -->
+
+								<initializations>
+									<initialization>
+										<databaseName>testDb-MongoDB</databaseName>
+										<!-- required, The name of the database to execute the scripts 
+											on -->
+
+										<scripts>
+											<script>/home/me/stuff/scriptDirectory</script>
+											<script>/home/me/stuff/scriptFile.js</script>
+										</scripts>
+										<!-- required, The list of scripts to be executed can specify individual 
+											scripts or folders. When specifying a folder all files in folder must be 
+											a valid script. -->
+									</initialization>
+								</initializations>
+								<!-- optional, Specifies a collection of initialization scripts to 
+									be run across various databases in the MongoDB instance, WARNING: initializations 
+									are deprecated, avoid using them. -->
+							</configuration>
+						</execution>
+						<execution>
+							<id>stop</id>
+							<goals>
+								<goal>stop</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 </project>
