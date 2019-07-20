@@ -1,34 +1,13 @@
 package mil.ea.cideso.satac;
 
 import java.io.IOException;
-// import java.util.ArrayList;
-import java.sql.Connection;
-// import java.sql.DatabaseMetaData;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 import com.google.common.base.Stopwatch;
 
 public abstract class MotorBD {
     private String engineName;
     private String engineVersion;
-    private String url;
-    private String sql;
-
-    // Lista de atributos para generar la tabla de prueba
-    private String[] attributesList;
-    private String[] attributesType;
-    private String[] attributesLength;
-    private int attributesQty;
-
-    // Atributos para conexión SQL
-    private Connection conn;
-    private Statement stmt;
-    private PreparedStatement pstmt;
-    private ResultSet rs;
+    private String dbName;
 
     // Timer
     private Stopwatch timer = null;
@@ -43,19 +22,17 @@ public abstract class MotorBD {
     // Métodos
     public abstract void createNewDatabase(String dbName) throws IOException;
 
-    public abstract void createNewTable(String dbName, String tableName, String[] attributesList,
-            String[] attributesType, String[] attributesLength);
+    public abstract void createNewTable(String tableName);
 
-    public abstract void insertData(String dbName, String tableName, int cantidadAInsertar);
+    public abstract void insertData(int cantidadAInsertar);
 
-    public abstract void readData(String dbName, String tableName);
+    public abstract void readData();
 
-    public abstract void updateData(String dbName, String tableName, String[] attributesList, String[] attributesType,
-            String[] attributesLength);
+    public abstract void updateData();
 
-    public abstract void deleteData(String dbName, String tableName);
+    public abstract void deleteData();
 
-    public abstract void dropDatabase(String dbName);
+    public abstract void dropDatabase();
 
     // Getters y Setters
     /**
@@ -90,138 +67,6 @@ public abstract class MotorBD {
     }
 
     /**
-     * @return the pstmt
-     */
-    public PreparedStatement getPstmt() {
-        return pstmt;
-    }
-
-    /**
-     * @return the stmt
-     */
-    public Statement getStmt() {
-        return stmt;
-    }
-
-    /**
-     * @param stmt the stmt to set
-     */
-    public void setStmt(Statement stmt) {
-        this.stmt = stmt;
-    }
-
-    /**
-     * @param pstmt the pstmt to set
-     */
-    public void setPstmt(PreparedStatement pstmt) {
-        this.pstmt = pstmt;
-    }
-
-    /**
-     * @return the url
-     */
-    public String getUrl() {
-        if (url == null) {
-            url = new String();
-        }
-        return url;
-    }
-
-    /**
-     * @param url the url to set
-     */
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    /**
-     * @return the sql
-     */
-    public String getSql() {
-        if (sql == null) {
-            sql = new String();
-        }
-        return sql;
-    }
-
-    /**
-     * @param sql the sql to set
-     */
-    public void setSql(String sql) {
-        this.sql = sql;
-    }
-
-    /**
-     * @return the attributesList
-     */
-    public String[] getAttributesList() {
-        return attributesList;
-    }
-
-    /**
-     * @param attributesList the attributesList to set
-     */
-    public void setAttributesList(String[] attributesList) {
-        this.attributesList = attributesList;
-    }
-
-    /**
-     * @return the attributesType
-     */
-    public String[] getAttributesType() {
-        return attributesType;
-    }
-
-    /**
-     * @param attributesType the attributesType to set
-     */
-    public void setAttributesType(String[] attributesType) {
-        this.attributesType = attributesType;
-    }
-
-    /**
-     * @return the attributesLength
-     */
-    public String[] getAttributesLength() {
-        return attributesLength;
-    }
-
-    /**
-     * @param attributesLength the attributesLength to set
-     */
-    public void setAttributesLength(String[] attributesLength) {
-        this.attributesLength = attributesLength;
-    }
-
-    /**
-     * @return the attributesQty
-     */
-    public int getAttributesQty() {
-        return attributesQty;
-    }
-
-    /**
-     * @param attributesQty the attributesQty to set
-     */
-    public void setAttributesQty(int attributesQty) {
-        this.attributesQty = attributesQty;
-    }
-
-    /**
-     * @return the conn
-     */
-    public Connection getConn() {
-        return conn;
-    }
-
-    /**
-     * @param conn the conn to set
-     */
-    public void setConn(Connection conn) {
-        this.conn = conn;
-    }
-
-    /**
      * @return the timer
      */
     public Stopwatch getTimer() {
@@ -236,16 +81,6 @@ public abstract class MotorBD {
      */
     public void setTimer(Stopwatch timer) {
         this.timer = timer;
-    }
-
-    // Función para generar la conexión a la BD
-    public Connection getConnection(String url) {
-        try {
-            conn = DriverManager.getConnection(url);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return conn;
     }
 
     /**
@@ -277,20 +112,6 @@ public abstract class MotorBD {
     }
 
     /**
-     * @return the rs
-     */
-    public ResultSet getRs() {
-        return rs;
-    }
-
-    /**
-     * @param rs the rs to set
-     */
-    public void setRs(ResultSet rs) {
-        this.rs = rs;
-    }
-
-    /**
      * @return the statsUpdateOperation
      */
     public String getStatsUpdateOperation() {
@@ -316,6 +137,14 @@ public abstract class MotorBD {
      */
     public void setStatsDeleteOperation(String statsDeleteOperation) {
         this.statsDeleteOperation = statsDeleteOperation;
+    }
+
+    public String getDbName() {
+        return dbName;
+    }
+
+    public void setDbName(String dbName) {
+        this.dbName = dbName;
     }
 
     // Funciones para configurar test automatizado

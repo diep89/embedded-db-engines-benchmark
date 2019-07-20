@@ -15,12 +15,6 @@ public class Main {
         // Nombre de la tabla a generar.
         String tableName = "TestTable";
 
-        // Atributos definidos para el test automatizado.
-        // Solo se aceptan los tipos de archivo 'int' y 'varchar'
-        String attributesList[] = { "Edad", "Sexo", "Telefono" };
-        String attributesType[] = { "int", "varchar", "int" };
-        String attributesLength[] = { "2", "1", "8" };
-
         // Variables auxiliares.
         Scanner input = new Scanner(System.in);
         int cantidadAInsertar = -1;
@@ -30,9 +24,9 @@ public class Main {
 
         // Instanciación de las clases creadoras de BD.
         // SqliteCreator sqlite = new SqliteCreator();
-        // RocksDbCreator rocks = new RocksDbCreator();
-        ObjectBoxCreator objectBox = new ObjectBoxCreator();
         // Db4oCreator db4o = new Db4oCreator();
+        // ObjectBoxCreator objectBox = new ObjectBoxCreator();
+        RocksDbCreator rocks = new RocksDbCreator();
         // H2Creator h2 = new H2Creator();
         // MongoDbCreator mongo = new MongoDbCreator();
         // RavenDbCreator raven = new RavenDbCreator();
@@ -40,9 +34,9 @@ public class Main {
         // Creación de lista que contiene las instancias creadas anteriormente.
         List<MotorBD> ll = new LinkedList<>();
         // ll.add(sqlite);
-        // ll.add(rocks);
-        ll.add(objectBox);
         // ll.add(db4o);
+        // ll.add(objectBox);
+        ll.add(rocks);
         // ll.add(h2);
         // ll.add(mongo);
         // ll.add(raven);
@@ -96,7 +90,7 @@ public class Main {
             // Creación de la tabla 'TestTable'
             // En la creación de una nueva tabla se crea automáticamente el atributo "id"
             // como PK. Input de nombre de tabla deshabilitado.
-            element.createNewTable(dbName, tableName, attributesList, attributesType, attributesLength);
+            element.createNewTable(tableName);
 
             // Mensaje informativo.
             // Pedido de ingreso de cantidad de registros a generar.
@@ -107,7 +101,7 @@ public class Main {
             waitTime(waitMillis);
 
             // Operación CREATE (Alta de registros)
-            element.insertData(dbName, tableName, cantidadAInsertar);
+            element.insertData(cantidadAInsertar);
 
             System.out.println("Motor: " + element.getEngineName() + "\nOperación 'CREATE' finalizada.\n");
             waitTime(waitMillis);
@@ -122,7 +116,7 @@ public class Main {
             pressEnter();
             System.out.println("");
 
-            element.readData(dbName, tableName);
+            element.readData();
 
             // Mensaje informativo
             System.out.println("Motor: " + element.getEngineName() + "\nOperación 'READ' finalizada.\n");
@@ -137,7 +131,7 @@ public class Main {
             pressEnter();
             System.out.println("");
 
-            element.updateData(dbName, tableName, attributesList, attributesType, attributesLength);
+            element.updateData();
             System.out.println("Motor: " + element.getEngineName() + "\nOperación 'UPDATE' finalizada.\n");
             waitTime(waitMillis);
             pressEnter();
@@ -150,7 +144,7 @@ public class Main {
             pressEnter();
             System.out.println("");
 
-            element.deleteData(dbName, tableName);
+            element.deleteData();
             System.out.println("Motor: " + element.getEngineName() + "\nOperación 'DELETE' finalizada.\n");
             waitTime(waitMillis);
             pressEnter();

@@ -14,7 +14,7 @@ public class ObjectBoxCreator extends MotorBD {
 	private Box<ObjectBoxInformante> informanteBox = null;
 	private Box<ObjectBoxAmenaza> amenazaBox = null;
 	private Box<ObjectBoxAmenazaWrapper> amenazaWrapperBox = null;
-	int cantidadAInsertar;
+	private int cantidadAInsertar;
 
 	public ObjectBoxCreator() {
 		setEngineName("ObjectBox");
@@ -29,6 +29,7 @@ public class ObjectBoxCreator extends MotorBD {
 
 	@Override
 	public void createNewDatabase(String dbName) {
+		setDbName(dbName);
 		try {
 			createMyObjectBox(dbName);
 		} catch (IOException e) {
@@ -37,14 +38,13 @@ public class ObjectBoxCreator extends MotorBD {
 	}
 
 	@Override
-	public void createNewTable(String dbName, String tableName, String[] attributesList, String[] attributesType,
-			String[] attributesLength) {
+	public void createNewTable(String tableName) {
 
 	}
 
 	@Override
-	public void insertData(String dbName, String tableName, int cantidadAInsertar) {
-		this.cantidadAInsertar = cantidadAInsertar;
+	public void insertData(int cantidadAInsertar) {
+		setCantidadAInsertar(cantidadAInsertar);
 
 		getTimer().start();
 
@@ -102,7 +102,7 @@ public class ObjectBoxCreator extends MotorBD {
 	}
 
 	@Override
-	public void readData(String dbName, String tableName) {
+	public void readData() {
 		getTimer().start();
 		// Se realiza un query al box de objetos AmenazaWrapper con un filtro
 		// que devuelva todos los elementos. En este caso, el filtro seteado es
@@ -133,8 +133,7 @@ public class ObjectBoxCreator extends MotorBD {
 	}
 
 	@Override
-	public void updateData(String dbName, String tableName, String[] attributesList, String[] attributesType,
-			String[] attributesLength) {
+	public void updateData() {
 		getTimer().start();
 
 		// Actualizo los objetos AmenazaWrapper
@@ -189,7 +188,7 @@ public class ObjectBoxCreator extends MotorBD {
 	}
 
 	@Override
-	public void deleteData(String dbName, String tableName) {
+	public void deleteData() {
 		getTimer().start();
 		getAmenazaWrapperBox().removeAll();
 		getAmenazaBox().removeAll();
@@ -208,7 +207,7 @@ public class ObjectBoxCreator extends MotorBD {
 	}
 
 	@Override
-	public void dropDatabase(String dbName) {
+	public void dropDatabase() {
 
 	}
 
@@ -284,6 +283,14 @@ public class ObjectBoxCreator extends MotorBD {
 
 	public void setStore(BoxStore store) {
 		this.store = store;
+	}
+
+	public int getCantidadAInsertar() {
+		return cantidadAInsertar;
+	}
+
+	public void setCantidadAInsertar(int cantidadAInsertar) {
+		this.cantidadAInsertar = cantidadAInsertar;
 	}
 
 }

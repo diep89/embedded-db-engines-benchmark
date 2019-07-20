@@ -1,9 +1,27 @@
 package mil.ea.cideso.satac;
 
-import java.sql.DatabaseMetaData;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.DatabaseMetaData;
 
 public class SqliteCreator extends MotorBD {
+
+    private String dbName;
+    private String tableName;
+    private int cantidadAInsertar;
+
+    private String url;
+    private String sql;
+
+    // Atributos para conexión SQL
+    private Connection conn;
+    private Statement stmt;
+    private PreparedStatement pstmt;
+    private ResultSet rs;
 
     public SqliteCreator() {
         setEngineName("SQLite");
@@ -13,8 +31,9 @@ public class SqliteCreator extends MotorBD {
     // Función para crear una nueva BD.
     @Override
     public void createNewDatabase(String dbName) {
+        setDbName(dbName);
         // String url = "jdbc:sqlite:C:/sqlite/db/" + dbName;
-        setUrl("jdbc:sqlite:" + dbName + ".db");
+        setUrl("jdbc:sqlite:" + getDbName() + ".db");
 
         try {
             getConnection(getUrl());
@@ -43,14 +62,12 @@ public class SqliteCreator extends MotorBD {
 
     // Función para crear una nueva tabla en la BD.
     @Override
-    public void createNewTable(String dbName, String tableName, String[] attributesList, String[] attributesType,
-            String[] attributesLength) {
+    public void createNewTable(String tableName) {
 
-        setSql("CREATE TABLE IF NOT EXISTS " + tableName + " (" + "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ");
-        setAttributesList(attributesList);
-        setAttributesType(attributesType);
-        setAttributesLength(attributesLength);
-        setAttributesQty(getAttributesList().length);
+        setTableName(tableName);
+
+        setSql("CREATE TABLE IF NOT EXISTS " + getTableName() + " ("
+                + "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ");
 
         for (int i = 0; i < getAttributesQty() - 1; i++) {
             setSql(getSql().concat(
@@ -97,10 +114,12 @@ public class SqliteCreator extends MotorBD {
 
     // Función para operación CREATE
     @Override
-    public void insertData(String dbName, String tableName, int cantidadAInsertar) {
+    public void insertData(int cantidadAInsertar) {
+
+        setCantidadAInsertar(cantidadAInsertar);
 
         // Lógica para la generación de la sentencia SQL de inserción de datos.
-        setSql("INSERT INTO " + tableName + " (");
+        setSql("INSERT INTO " + getTableName() + " (");
         for (int k = 0; k < getAttributesQty() - 1; k++) {
             setSql(getSql().concat(getAttributesList()[k] + ", "));
         }
@@ -171,7 +190,7 @@ public class SqliteCreator extends MotorBD {
 
     // Función para operación READ
     @Override
-    public void readData(String dbName, String tableName) {
+    public void readData() {
         setSql("SELECT * FROM " + tableName);
 
         try {
@@ -213,8 +232,7 @@ public class SqliteCreator extends MotorBD {
 
     // Función para operación UPDATE
     @Override
-    public void updateData(String dbName, String tableName, String[] attributesList, String[] attributesType,
-            String[] attributesLength) {
+    public void updateData() {
 
         // Lógica para la generación de la sentencia SQL de inserción de datos.
         setSql("UPDATE " + tableName + " SET ");
@@ -284,7 +302,7 @@ public class SqliteCreator extends MotorBD {
     }
 
     @Override
-    public void deleteData(String dbName, String tableName) {
+    public void deleteData() {
         setSql("DELETE FROM " + tableName + " WHERE sexo = ? ");
 
         try {
@@ -324,7 +342,7 @@ public class SqliteCreator extends MotorBD {
 
     // Función (opcional) para eliminar la BD generada
     @Override
-    public void dropDatabase(String dbName) {
+    public void dropDatabase() {
         setSql("DROP DATABASE " + dbName + ".db");
 
         try {
@@ -354,6 +372,100 @@ public class SqliteCreator extends MotorBD {
             }
         }
 
+    }
+
+    // Función para generar la conexión a la BD
+    public Connection getConnection(String url) {
+        try {
+            conn = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return conn;
+    }
+
+    public void setConn(Connection conn) {
+        this.conn = conn;
+    }
+
+    public Statement getStmt() {
+        return stmt;
+    }
+
+    public void setStmt(Statement stmt) {
+        this.stmt = stmt;
+    }
+
+    public PreparedStatement getPstmt() {
+        return pstmt;
+    }
+
+    public void setPstmt(PreparedStatement pstmt) {
+        this.pstmt = pstmt;
+    }
+
+    public ResultSet getRs() {
+        return rs;
+    }
+
+    public void setRs(ResultSet rs) {
+        this.rs = rs;
+    }
+
+    public String getTableName() {
+        return tableName;
+    }
+
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
+    }
+
+    public int getCantidadAInsertar() {
+        return cantidadAInsertar;
+    }
+
+    public void setCantidadAInsertar(int cantidadAInsertar) {
+        this.cantidadAInsertar = cantidadAInsertar;
+    }
+
+    public String getDbName() {
+        return dbName;
+    }
+
+    public void setDbName(String dbName) {
+        this.dbName = dbName;
+    }
+
+    /**
+     * @return the url
+     */
+    public String getUrl() {
+        if (url == null) {
+            url = new String();
+        }
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    /**
+     * @return the sql
+     */
+    public String getSql() {
+        if (sql == null) {
+            sql = new String();
+        }
+        return sql;
+    }
+
+    public void setSql(String sql) {
+        this.sql = sql;
+    }
+
+    public Connection getConn() {
+        return conn;
     }
 
     // Funciones para configurar test manual

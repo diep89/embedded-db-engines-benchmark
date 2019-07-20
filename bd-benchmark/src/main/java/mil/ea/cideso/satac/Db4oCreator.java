@@ -14,7 +14,7 @@ import com.db4o.query.*;
 public class Db4oCreator extends MotorBD {
 
     ObjectContainer db = null;
-    // private int cantidadAInsertar;
+    private int cantidadAInsertar;
 
     public Db4oCreator() {
         setEngineName("db4o");
@@ -28,8 +28,9 @@ public class Db4oCreator extends MotorBD {
 
     @Override
     public void createNewDatabase(String dbName) {
+        setDbName(dbName);
         try {
-            db = getDb(dbName);
+            db = getDb(getDbName());
             System.out.println("La BD se ha generado correctamente.\n");
         } catch (Db4oException e) {
             e.printStackTrace(System.err);
@@ -39,18 +40,17 @@ public class Db4oCreator extends MotorBD {
     }
 
     @Override
-    public void createNewTable(String dbName, String tableName, String[] attributesList, String[] attributesType,
-            String[] attributesLength) {
+    public void createNewTable(String tableName) {
 
     }
 
     @Override
-    public void insertData(String dbName, String tableName, int cantidadAInsertar) {
-        // this.cantidadAInsertar = cantidadAInsertar;
+    public void insertData(int cantidadAInsertar) {
+        setCantidadAInsertar(cantidadAInsertar);
 
         try {
             getTimer().start();
-            db = getDb(dbName);
+            db = getDb(getDbName());
 
             for (int i = 0; i < cantidadAInsertar; i++) {
                 Tiempo tiempo = new Tiempo(1);
@@ -81,10 +81,10 @@ public class Db4oCreator extends MotorBD {
     }
 
     @Override
-    public void readData(String dbName, String tableName) {
+    public void readData() {
         try {
             getTimer().start();
-            db = getDb(dbName);
+            db = getDb(getDbName());
 
             Query query = db.query();
             query.constrain(AmenazaWrapper.class);
@@ -109,11 +109,10 @@ public class Db4oCreator extends MotorBD {
     }
 
     @Override
-    public void updateData(String dbName, String tableName, String[] attributesList, String[] attributesType,
-            String[] attributesLength) {
+    public void updateData() {
         try {
             getTimer().start();
-            db = getDb(dbName);
+            db = getDb(getDbName());
 
             Query query = db.query();
             query.constrain(AmenazaWrapper.class);
@@ -151,10 +150,10 @@ public class Db4oCreator extends MotorBD {
     }
 
     @Override
-    public void deleteData(String dbName, String tableName) {
+    public void deleteData() {
         try {
             getTimer().start();
-            db = getDb(dbName);
+            db = getDb(getDbName());
 
             Query query = db.query();
             query.constrain(AmenazaWrapper.class);
@@ -182,7 +181,23 @@ public class Db4oCreator extends MotorBD {
     }
 
     @Override
-    public void dropDatabase(String dbName) {
+    public void dropDatabase() {
 
+    }
+
+    public ObjectContainer getDb() {
+        return db;
+    }
+
+    public void setDb(ObjectContainer db) {
+        this.db = db;
+    }
+
+    public int getCantidadAInsertar() {
+        return cantidadAInsertar;
+    }
+
+    public void setCantidadAInsertar(int cantidadAInsertar) {
+        this.cantidadAInsertar = cantidadAInsertar;
     }
 }
