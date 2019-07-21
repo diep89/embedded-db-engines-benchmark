@@ -13,9 +13,10 @@ import org.rocksdb.RocksDBException;
 
 public class RocksDbCreator extends MotorBD {
 
-    int cantidadAInsertar;
+    private int cantidadAInsertar;
     private List<String> listaClaves = new ArrayList<>();
     private List<String> listaValores = new ArrayList<>();
+    private AmenazaWrapper amenazaWrapper = null;
 
     public void generateNewAmenazaWrapper(int i) {
 
@@ -45,7 +46,7 @@ public class RocksDbCreator extends MotorBD {
 
         boolean visible = true;
         boolean leido = false;
-        AmenazaWrapper amenazaWrapper = new AmenazaWrapper(amenaza, visible, leido);
+        setAmenazaWrapper(new AmenazaWrapper(amenaza, visible, leido));
 
         // Lleno las listas 'listaClaves' y 'listaValores' (de tipo byte[]) con los
         // atributos de todos los objetos.
@@ -54,38 +55,38 @@ public class RocksDbCreator extends MotorBD {
 
         // Tanto las claves como los valores se convierten de su tipo original a String
         // y luego a byte[].
-        getListaClaves().add(i, "leido");
-        getListaValores().add(i, String.valueOf(amenazaWrapper.isLeido()));
-        getListaClaves().add(i, "visible");
-        getListaValores().add(i, String.valueOf(amenazaWrapper.isVisible()));
+        getListaClaves().add("leido");
+        getListaValores().add(String.valueOf(amenazaWrapper.isLeido()));
+        getListaClaves().add("visible");
+        getListaValores().add(String.valueOf(amenazaWrapper.isVisible()));
 
-        getListaClaves().add(i, "id");
-        getListaValores().add(i, String.valueOf(amenazaWrapper.getAmenaza().getId()));
-        getListaClaves().add(i, "codigoSimbolo");
-        getListaValores().add(i, String.valueOf(amenazaWrapper.getAmenaza().getCodigoSimbolo()));
-        getListaClaves().add(i, "radioAccion");
-        getListaValores().add(i, String.valueOf(amenazaWrapper.getAmenaza().getRadioAccion()));
-        getListaClaves().add(i, "identificacion");
-        getListaValores().add(i, String.valueOf(amenazaWrapper.getAmenaza().getIdentificacion()));
-        getListaClaves().add(i, "tamanios");
-        getListaValores().add(i, String.valueOf(amenazaWrapper.getAmenaza().getTamanios()));
+        getListaClaves().add("id");
+        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getId()));
+        getListaClaves().add("codigoSimbolo");
+        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getCodigoSimbolo()));
+        getListaClaves().add("radioAccion");
+        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getRadioAccion()));
+        getListaClaves().add("identificacion");
+        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getIdentificacion()));
+        getListaClaves().add("tamanios");
+        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getTamanios()));
 
-        getListaClaves().add(i, "cantidad");
-        getListaValores().add(i, String.valueOf(amenazaWrapper.getAmenaza().getEquipamiento().getCantidad()));
-        getListaClaves().add(i, "equipo");
-        getListaValores().add(i, String.valueOf(amenazaWrapper.getAmenaza().getEquipamiento().getEquipo()));
-        getListaClaves().add(i, "tipo");
-        getListaValores().add(i, String.valueOf(amenazaWrapper.getAmenaza().getEquipamiento().getTipo()));
+        getListaClaves().add("cantidad");
+        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getEquipamiento().getCantidad()));
+        getListaClaves().add("equipo");
+        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getEquipamiento().getEquipo()));
+        getListaClaves().add("tipo");
+        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getEquipamiento().getTipo()));
 
-        getListaClaves().add(i, "epoch");
-        getListaValores().add(i, String.valueOf(amenazaWrapper.getAmenaza().getTiempo().getEpoch()));
+        getListaClaves().add("epoch");
+        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getTiempo().getEpoch()));
 
-        getListaClaves().add(i, "latitud");
-        getListaValores().add(i, String.valueOf(amenazaWrapper.getAmenaza().getPosicion().getLatitud()));
-        getListaClaves().add(i, "longitud");
-        getListaValores().add(i, String.valueOf(amenazaWrapper.getAmenaza().getPosicion().getLongitud()));
-        getListaClaves().add(i, "milisegundosFechaHora");
-        getListaValores().add(i, String.valueOf(amenazaWrapper.getAmenaza().getPosicion().getMilisegundosFechaHora()));
+        getListaClaves().add("latitud");
+        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getPosicion().getLatitud()));
+        getListaClaves().add("longitud");
+        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getPosicion().getLongitud()));
+        getListaClaves().add("milisegundosFechaHora");
+        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getPosicion().getMilisegundosFechaHora()));
 
     }
 
@@ -126,39 +127,38 @@ public class RocksDbCreator extends MotorBD {
 
         // Tanto las claves como los valores se convierten de su tipo original a String
         // y luego a byte[].
-        getListaClaves().add(i, "leido");
-        getListaValores().add(i, String.valueOf(amenazaWrapper.isLeido()));
-        getListaClaves().add(i, "visible");
-        getListaValores().add(i, String.valueOf(amenazaWrapper.isVisible()));
+        getListaClaves().add("leido");
+        getListaValores().add(String.valueOf(amenazaWrapper.isLeido()));
+        getListaClaves().add("visible");
+        getListaValores().add(String.valueOf(amenazaWrapper.isVisible()));
 
-        getListaClaves().add(i, "id");
-        getListaValores().add(i, String.valueOf(amenazaWrapper.getAmenaza().getId()));
-        getListaClaves().add(i, "codigoSimbolo");
-        getListaValores().add(i, String.valueOf(amenazaWrapper.getAmenaza().getCodigoSimbolo()));
-        getListaClaves().add(i, "radioAccion");
-        getListaValores().add(i, String.valueOf(amenazaWrapper.getAmenaza().getRadioAccion()));
-        getListaClaves().add(i, "identificacion");
-        getListaValores().add(i, String.valueOf(amenazaWrapper.getAmenaza().getIdentificacion()));
-        getListaClaves().add(i, "tamanios");
-        getListaValores().add(i, String.valueOf(amenazaWrapper.getAmenaza().getTamanios()));
+        getListaClaves().add("id");
+        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getId()));
+        getListaClaves().add("codigoSimbolo");
+        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getCodigoSimbolo()));
+        getListaClaves().add("radioAccion");
+        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getRadioAccion()));
+        getListaClaves().add("identificacion");
+        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getIdentificacion()));
+        getListaClaves().add("tamanios");
+        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getTamanios()));
 
-        getListaClaves().add(i, "cantidad");
-        getListaValores().add(i, String.valueOf(amenazaWrapper.getAmenaza().getEquipamiento().getCantidad()));
-        getListaClaves().add(i, "equipo");
-        getListaValores().add(i, String.valueOf(amenazaWrapper.getAmenaza().getEquipamiento().getEquipo()));
-        getListaClaves().add(i, "tipo");
-        getListaValores().add(i, String.valueOf(amenazaWrapper.getAmenaza().getEquipamiento().getTipo()));
+        getListaClaves().add("cantidad");
+        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getEquipamiento().getCantidad()));
+        getListaClaves().add("equipo");
+        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getEquipamiento().getEquipo()));
+        getListaClaves().add("tipo");
+        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getEquipamiento().getTipo()));
 
-        getListaClaves().add(i, "epoch");
-        getListaValores().add(i, String.valueOf(amenazaWrapper.getAmenaza().getTiempo().getEpoch()));
+        getListaClaves().add("epoch");
+        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getTiempo().getEpoch()));
 
-        getListaClaves().add(i, "latitud");
-        getListaValores().add(i, String.valueOf(amenazaWrapper.getAmenaza().getPosicion().getLatitud()));
-        getListaClaves().add(i, "longitud");
-        getListaValores().add(i, String.valueOf(amenazaWrapper.getAmenaza().getPosicion().getLongitud()));
-        getListaClaves().add(i, "milisegundosFechaHora");
-        getListaValores().add(i, String.valueOf(amenazaWrapper.getAmenaza().getPosicion().getMilisegundosFechaHora()));
-
+        getListaClaves().add("latitud");
+        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getPosicion().getLatitud()));
+        getListaClaves().add("longitud");
+        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getPosicion().getLongitud()));
+        getListaClaves().add("milisegundosFechaHora");
+        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getPosicion().getMilisegundosFechaHora()));
     }
 
     public RocksDbCreator() {
@@ -201,7 +201,7 @@ public class RocksDbCreator extends MotorBD {
 
             // En cada iteración genero un objeto AmenazaWrapper e inserto
             // sus atributos en la BD.
-            for (int i = 0; i < cantidadAInsertar; i++) {
+            for (int i = 0; i < getCantidadAInsertar(); i++) {
 
                 generateNewAmenazaWrapper(i);
 
@@ -210,12 +210,12 @@ public class RocksDbCreator extends MotorBD {
 
                 while (itrClaves.hasNext() && itrValores.hasNext()) {
                     byte[] key = new String(itrClaves.next() + "_" + i).getBytes();
-                    byte[] value = new String(itrValores.next() + "_" + i).getBytes();
+                    byte[] value = new String(itrValores.next()).getBytes();
                     db.put(key, value);
                 }
 
                 getTimer().stop();
-                if (i + 1 < cantidadAInsertar) {
+                if (i + 1 < getCantidadAInsertar()) {
                     System.out.print((i + 1) + " - ");
                 } else {
                     System.out.print((i + 1) + ".");
@@ -273,8 +273,6 @@ public class RocksDbCreator extends MotorBD {
             getTimer().start();
             RocksDB db = getDb(getDbName());
             RocksIterator rocksIter = db.newIterator();
-            Iterator<String> itrClaves = getListaClaves().iterator();
-            Iterator<String> itrValores = getListaValores().iterator();
 
             for (int i = 0; i < cantidadAInsertar; i++) {
 
@@ -285,18 +283,26 @@ public class RocksDbCreator extends MotorBD {
                 // se podría generar el arreglo con los i elementos que se quieren crear
                 // (guardado
                 // en cantidadAInsertar). Evaluarlo.
+                // IDEA: Crear un método convertir, el cual siempre te devuelve el equivalente
+                // de tipo byte[] del objeto que le mandas.
+                // IDEA (ligada a la idea de arriba): Separar conversión a byte de código de
+                // alta, modificación y baja.
 
                 generateAmenazaWrapperUpdate(i);
-                String keyToFindString = new String(itrClaves.next() + "_" + i);
-                byte[] keyToFind = keyToFindString.getBytes();
-                byte[] newValue = itrValores.next().getBytes();
-                byte[] currentValue = db.get(keyToFind);
+                Iterator<String> itrClaves = getListaClaves().iterator();
+                Iterator<String> itrValores = getListaValores().iterator();
 
-                for (rocksIter.seekToFirst(); rocksIter.isValid(); rocksIter.next()) {
-                    if (currentValue != null) { // currentValue == null if key1 does not exist in db.
-                        if (currentValue != newValue) {
-                            db.delete(keyToFind);
-                            db.put(new String(keyToFindString + "_" + i).getBytes(), newValue);
+                while (itrClaves.hasNext() && itrValores.hasNext()) {
+                    String keyToFindString = new String(itrClaves.next() + "_" + i);
+                    byte[] keyToFind = keyToFindString.getBytes();
+                    byte[] newValue = itrValores.next().getBytes();
+                    byte[] currentValue = db.get(keyToFind);
+                    for (rocksIter.seekToFirst(); rocksIter.isValid(); rocksIter.next()) {
+                        if (currentValue != null) { // currentValue == null if key1 does not exist in db.
+                            if (currentValue != newValue) {
+                                db.delete(keyToFind);
+                                db.put(new String(keyToFindString).getBytes(), newValue);
+                            }
                         }
                     }
                 }
@@ -382,6 +388,14 @@ public class RocksDbCreator extends MotorBD {
 
     public void setCantidadAInsertar(int cantidadAInsertar) {
         this.cantidadAInsertar = cantidadAInsertar;
+    }
+
+    public AmenazaWrapper getAmenazaWrapper() {
+        return amenazaWrapper;
+    }
+
+    public void setAmenazaWrapper(AmenazaWrapper amenazaWrapper) {
+        this.amenazaWrapper = amenazaWrapper;
     }
 
     // Métodos auxiliares
