@@ -250,10 +250,11 @@ public class RocksDbCreator extends MotorBD {
             for (rocksIter.seekToFirst(); rocksIter.isValid(); rocksIter.next()) {
                 String key = new String(rocksIter.key(), StandardCharsets.UTF_8);
                 String val = new String(rocksIter.value(), StandardCharsets.UTF_8);
-                getTimer().stop();
-                System.out.printf("%-5d Clave: %-15s Valor: %-15s\n", i, key, val);
-                i++;
-                getTimer().start();
+                // getTimer().stop();
+                // Habilitar para mostrar en pantalla el resultado de la consulta
+                // System.out.printf("%-5d Clave: %-15s Valor: %-15s\n", i, key, val);
+                // i++;
+                // getTimer().start();
             }
             rocksIter.close();
             db.close();
@@ -275,18 +276,6 @@ public class RocksDbCreator extends MotorBD {
             RocksIterator rocksIter = db.newIterator();
 
             for (int i = 0; i < cantidadAInsertar; i++) {
-
-                // ARREGLAR DONDE EMPIEZA Y TERMINA CADA LOOP.
-                // CORREGIR PRINCIPIO Y FIN DE LOOP DE LOS ITERADORES.
-                // IDEA/MEJORA: en los métodos 'generateNewAmenazaWrapper' y
-                // 'generateAmenazaWrapperUpdate'
-                // se podría generar el arreglo con los i elementos que se quieren crear
-                // (guardado
-                // en cantidadAInsertar). Evaluarlo.
-                // IDEA: Crear un método convertir, el cual siempre te devuelve el equivalente
-                // de tipo byte[] del objeto que le mandas.
-                // IDEA (ligada a la idea de arriba): Separar conversión a byte de código de
-                // alta, modificación y baja.
 
                 generateAmenazaWrapperUpdate(i);
                 Iterator<String> itrClaves = getListaClaves().iterator();
