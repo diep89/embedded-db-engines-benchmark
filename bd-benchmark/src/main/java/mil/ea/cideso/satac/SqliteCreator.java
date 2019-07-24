@@ -13,7 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Iterator;
+// import java.util.Iterator;
 import java.util.List;
 import java.sql.DatabaseMetaData;
 
@@ -243,16 +243,18 @@ public class SqliteCreator extends MotorBD {
             getTimer().stop();
 
             // Comprobación
-            EntityManager em = getEmf().createEntityManager();
-            TypedQuery<AmenazaWrapper> query = em.createQuery("SELECT p FROM AmenazaWrapper p", AmenazaWrapper.class);
-            List<AmenazaWrapper> results = query.getResultList();
-            Iterator<AmenazaWrapper> itr = results.iterator();
+            // EntityManager em = getEmf().createEntityManager();
+            // TypedQuery<AmenazaWrapper> query = em.createQuery("SELECT p FROM
+            // AmenazaWrapper p", AmenazaWrapper.class);
+            // List<AmenazaWrapper> results = query.getResultList();
+            // Iterator<AmenazaWrapper> itr = results.iterator();
 
-            while (itr.hasNext()) {
-                AmenazaWrapper el = itr.next();
-                System.out.printf("AmenazaWrapper\n Id: %d\n Leido: %b\n Visible: %b\n", el.getId(), el.isLeido(),
-                        el.isVisible());
-            }
+            // while (itr.hasNext()) {
+            // AmenazaWrapper el = itr.next();
+            // System.out.printf("AmenazaWrapper\n Id: %d\n Leido: %b\n Visible: %b\n",
+            // el.getId(), el.isLeido(),
+            // el.isVisible());
+            // }
         }
 
         catch (PersistenceException e) {
@@ -437,73 +439,4 @@ public class SqliteCreator extends MotorBD {
         this.emf = emf;
     }
 
-    // Funciones para configurar test manual
-
-    /*
-     * public void createNewAttribute(String dbName, String tableName, String
-     * AttributeName, String attributeType, Integer attributeSize) {
-     * 
-     * for (String i : url) { try { if (AttributeName.equalsIgnoreCase("varchar")) {
-     * sql = "ALTER TABLE " + tableName + " ADD " + AttributeName + " " +
-     * attributeType + "(" + attributeSize + ")"; } else { sql = "ALTER TABLE " +
-     * tableName + " ADD " + AttributeName + " " + attributeType; } conn =
-     * connect(i); setStmt(conn.createStatement()); getStmt().execute(sql); if (conn
-     * != null) { DatabaseMetaData meta = conn.getMetaData();
-     * System.out.println("The driver name is " + meta.getDriverName());
-     * System.out.println("A new attribute has been created."); if
-     * (attributeType.equalsIgnoreCase("varchar")) { System.out.println("Database: "
-     * + dbName + "\nTable: " + tableName + "\nAttribute: " + AttributeName + " (" +
-     * attributeType.toUpperCase() + "(" + attributeSize + "))\n"); } else {
-     * System.out.println("Database: " + dbName + "\nTable: " + tableName +
-     * "\nAttribute: " + AttributeName + " (" + attributeType.toUpperCase() +
-     * ")\n"); } } }
-     * 
-     * catch (SQLException e) { System.out.println("Error.");
-     * System.out.println("Detalle del error: \n" + e.getMessage()); System.exit(1);
-     * }
-     * 
-     * finally { try { if (getStmt() != null) getStmt().close(); if (conn != null)
-     * conn.close(); } catch (SQLException e) { System.out.println("Error.");
-     * System.out.println("Detalle del error: \n" + e.getMessage()); System.exit(1);
-     * } } } }
-     * 
-     * public void insertText(String dbName, String tableName, String attributeName,
-     * String attributeText) {
-     * 
-     * for (String i : url) { try { sql = "INSERT INTO " + tableName + "(" +
-     * attributeName + ") VALUES (?)"; conn = connect(i);
-     * setPstmt(conn.prepareStatement(sql)); getPstmt().setString(1, attributeText);
-     * getPstmt().executeUpdate(); if (conn != null) { DatabaseMetaData meta =
-     * conn.getMetaData(); System.out.println("The driver name is " +
-     * meta.getDriverName());
-     * System.out.println("A new attribute has been entered.");
-     * System.out.println("Database: " + dbName + "\nTable: " + tableName +
-     * "\nAttribute: " + attributeName + "\nAttribute Value: " + attributeText +
-     * "\n"); } } catch (SQLException e) {
-     * System.out.println("Error en base de datos");
-     * System.out.println("Detalle del error: \n" + e.getMessage()); System.exit(1);
-     * } finally { try { if (getPstmt() != null) getPstmt().close(); if (conn !=
-     * null) conn.close(); } catch (SQLException e) { System.out.println("Error.");
-     * System.out.println("Detalle del error: \n" + e.getMessage()); System.exit(1);
-     * } } } }
-     * 
-     * public void insertNumber(String dbName, String tableName, String
-     * attributeName, Integer attributeValue) {
-     * 
-     * for (String i : url) { try { sql = "INSERT INTO " + tableName + "(" +
-     * attributeName + ") VALUES (?)"; conn = connect(i);
-     * setPstmt(conn.prepareStatement(sql)); getPstmt().setInt(1, attributeValue);
-     * getPstmt().executeUpdate(); if (conn != null) { DatabaseMetaData meta =
-     * conn.getMetaData(); System.out.println("The driver name is " +
-     * meta.getDriverName());
-     * System.out.println("A new attribute has been entered.");
-     * System.out.println("Database: " + dbName + "\nTable: " + tableName +
-     * "\nAttribute: " + attributeName + "\nAttribute Value: " + attributeValue +
-     * "\n"); } } catch (SQLException e) { System.out.println("Error.");
-     * System.out.println("Detalle del error: \n" + e.getMessage()); System.exit(1);
-     * } finally { try { if (getPstmt() != null) getPstmt().close(); if (conn !=
-     * null) conn.close(); } catch (SQLException e) { System.out.println("Error.");
-     * System.out.println("Detalle del error: \n" + e.getMessage()); System.exit(1);
-     * } } } }
-     */
 }
