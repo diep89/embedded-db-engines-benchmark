@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "5:8938304138651243141",
-      "lastPropertyId": "4:703620353997251131",
+      "lastPropertyId": "5:3312172110701714084",
       "name": "ObjectBoxAmenazaWrapper",
       "properties": [
         {
@@ -19,6 +19,11 @@
         {
           "id": "3:957433180326748103",
           "name": "LEIDO"
+        },
+        {
+          "id": "5:3312172110701714084",
+          "indexId": "35:1214592795292086881",
+          "name": "amenazaId"
         }
       ],
       "relations": []
@@ -154,7 +159,7 @@
     }
   ],
   "lastEntityId": "36:5543128250903807439",
-  "lastIndexId": "34:7438152189881103474",
+  "lastIndexId": "35:1214592795292086881",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 4,
