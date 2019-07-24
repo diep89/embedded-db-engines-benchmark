@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd" version="2.1">
+    <persistence-unit name="SQLitePersistence">
+        <!-- <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider> -->
+        <!-- <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider> -->
+        <class>mil.ea.cideso.satac.AmenazaWrapper</class>
+        <class>mil.ea.cideso.satac.Amenaza</class>
+        <class>mil.ea.cideso.satac.Tiempo</class>
+        <class>mil.ea.cideso.satac.Informante</class>
+        <class>mil.ea.cideso.satac.Equipamiento</class>
+        <class>mil.ea.cideso.satac.Posicion</class>
+        
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:D:\proyectoPps\testDb-SQLite.db" />
+            <property name="javax.persistence.jdbc.user" value="" />
+            <property name="javax.persistence.jdbc.password" value="" />
+            <!-- <property name="hibernate.connection.driver_class" value="org.sqlite.JDBC" /> -->
+            <!-- <property name="hibernate.connection.url" value="jdbc:sqlite:D:\proyectoPps\testDb-SQLite.db" /> -->
+            <!-- <property name="hibernate.dialect" value="org.hibernate.dialect.SQLiteDialect" /> -->
+            <!-- <property name="hibernate.connection.username" value="" />
+            <property name="hibernate.connection.password" value="" /> -->
+            <property name="hibernate.show_sql" value="false" />
+            <!-- <property name="hibernate.connection.pool_size" value="1" /> -->
+            <!-- <property name="hibernate.connection.user" value="" /> -->
+            <!-- <property name="hibernate.connection.autocommit" value="true" /> -->
+            <property name="hibernate.hbm2ddl.auto" value="create" />
+        </properties>
+    </persistence-unit>
+</persistence>

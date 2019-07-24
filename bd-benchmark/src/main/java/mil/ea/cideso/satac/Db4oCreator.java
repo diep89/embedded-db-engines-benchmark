@@ -4,7 +4,6 @@ import mil.ea.cideso.satac.AmenazaWrapper;
 
 import java.util.Iterator;
 
-// import com.db4o.Db4o;
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
@@ -40,11 +39,6 @@ public class Db4oCreator extends MotorBD {
     }
 
     @Override
-    public void createNewTable(String tableName) {
-
-    }
-
-    @Override
     public void insertData(int cantidadAInsertar) {
         setCantidadAInsertar(cantidadAInsertar);
 
@@ -53,12 +47,12 @@ public class Db4oCreator extends MotorBD {
             db = getDb(getDbName());
 
             for (int i = 0; i < cantidadAInsertar; i++) {
-                Tiempo tiempo = new Tiempo(1);
-                Posicion posicion = new Posicion(1.5, 1.5, 1);
-                Equipamiento equipamiento = new Equipamiento(1, 1, 1);
-                Informante informante = new Informante("Test");
+                Tiempo tiempo = new Tiempo(i, 1);
+                Posicion posicion = new Posicion(i, 1.5, 1.5, 1);
+                Equipamiento equipamiento = new Equipamiento(i, 1, 1, 1);
+                Informante informante = new Informante(i);
                 Amenaza amenaza = new Amenaza(i, tiempo, 1, posicion, 1, 1, 1, equipamiento, informante);
-                AmenazaWrapper amenazaWrapper = new AmenazaWrapper(amenaza, true, false);
+                AmenazaWrapper amenazaWrapper = new AmenazaWrapper(i, amenaza, true, false);
                 db.store(amenazaWrapper);
                 getTimer().stop();
                 if (i + 1 < cantidadAInsertar) {
@@ -119,21 +113,21 @@ public class Db4oCreator extends MotorBD {
             ObjectSet<AmenazaWrapper> result = query.execute();
             Iterator<AmenazaWrapper> itr = result.iterator();
 
-            int i = 0;
-
             while (itr.hasNext()) {
                 AmenazaWrapper amenazaWrapper = itr.next();
-
-                Tiempo tiempo = new Tiempo(2);
-                Posicion posicion = new Posicion(2.5, 2.5, 2);
-                Equipamiento equipamiento = new Equipamiento(2, 2, 2);
-                Informante informante = new Informante("Test2");
-                Amenaza amenaza = new Amenaza(i, tiempo, 2, posicion, 2, 2, 2, equipamiento, informante);
-
-                amenazaWrapper.setAmenaza(amenaza);
+                amenazaWrapper.getAmenaza().getTiempo().setEpoch(2);
+                amenazaWrapper.getAmenaza().setCodigoSimbolo(2);
+                amenazaWrapper.getAmenaza().getPosicion().setLatitud(2.5);
+                amenazaWrapper.getAmenaza().getPosicion().setLongitud(2.5);
+                amenazaWrapper.getAmenaza().getPosicion().setMilisegundosFechaHora(2);
+                amenazaWrapper.getAmenaza().setRadioAccion(2);
+                amenazaWrapper.getAmenaza().setIdentificacion(2);
+                amenazaWrapper.getAmenaza().setTamanios(2);
+                amenazaWrapper.getAmenaza().getEquipamiento().setCantidad(2);
+                amenazaWrapper.getAmenaza().getEquipamiento().setEquipo(2);
+                amenazaWrapper.getAmenaza().getEquipamiento().setTipo(2);
                 amenazaWrapper.setLeido(true);
                 db.store(amenazaWrapper);
-                i++;
             }
 
             db.close();

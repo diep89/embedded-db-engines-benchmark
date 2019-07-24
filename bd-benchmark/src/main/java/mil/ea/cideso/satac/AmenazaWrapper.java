@@ -1,13 +1,28 @@
 package mil.ea.cideso.satac;
 
-import mil.ea.cideso.satac.Amenaza;
+import javax.persistence.Entity;
+// import javax.persistence.ForeignKey;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table
 public class AmenazaWrapper {
-    private Amenaza amenaza;
+
+    @Id
+    private int id;
     private boolean visible;
     private boolean leido;
+    @OneToOne
+    private Amenaza amenaza;
 
-    public AmenazaWrapper(Amenaza amenaza, boolean visible, boolean leido) {
+    public AmenazaWrapper() {
+
+    }
+
+    public AmenazaWrapper(int id, Amenaza amenaza, boolean visible, boolean leido) {
+        this.id = id;
         this.amenaza = amenaza;
         this.visible = visible;
         this.leido = leido;
@@ -35,6 +50,14 @@ public class AmenazaWrapper {
 
     public void setLeido(boolean leido) {
         this.leido = leido;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 }

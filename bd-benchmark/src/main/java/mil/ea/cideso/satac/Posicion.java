@@ -1,12 +1,27 @@
 package mil.ea.cideso.satac;
 
-public class Posicion {
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table
+public class Posicion {
+    @Id
+    private int id;
     private double latitud;
     private double longitud;
     private int milisegundosFechaHora;
+    @OneToOne
+    private Amenaza amenaza;
 
-    public Posicion(double latitud, double longitud, int milisegundosFechaHora) {
+    public Posicion() {
+
+    }
+
+    public Posicion(int id, double latitud, double longitud, int milisegundosFechaHora) {
+        this.id = id;
         this.latitud = latitud;
         this.longitud = longitud;
         this.milisegundosFechaHora = milisegundosFechaHora;
@@ -34,6 +49,22 @@ public class Posicion {
 
     public void setMilisegundosFechaHora(int milisegundosFechaHora) {
         this.milisegundosFechaHora = milisegundosFechaHora;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Amenaza getAmenaza() {
+        return amenaza;
+    }
+
+    public void setAmenaza(Amenaza amenaza) {
+        this.amenaza = amenaza;
     }
 
 }

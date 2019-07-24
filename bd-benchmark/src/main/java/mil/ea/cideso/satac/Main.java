@@ -8,12 +8,16 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
+        @SuppressWarnings("unused")
+        org.jboss.logging.Logger logger = org.jboss.logging.Logger.getLogger("org.hibernate");
+        java.util.logging.Logger.getLogger("org.hibernate").setLevel(java.util.logging.Level.SEVERE);
+
         // Nombre de la BD a generar.
         // Se inicializa automáticamente dentro del loop de pruebas.
         String dbName;
 
         // Nombre de la tabla a generar.
-        String tableName = "TestTable";
+        // String tableName = "TestTable";
 
         // Variables auxiliares.
         Scanner input = new Scanner(System.in);
@@ -23,20 +27,20 @@ public class Main {
         int waitMillis = 1500;
 
         // Instanciación de las clases creadoras de BD.
-        // SqliteCreator sqlite = new SqliteCreator();
+        SqliteCreator sqlite = new SqliteCreator();
         // Db4oCreator db4o = new Db4oCreator();
         // ObjectBoxCreator objectBox = new ObjectBoxCreator();
-        RocksDbCreator rocks = new RocksDbCreator();
+        // RocksDbCreator rocks = new RocksDbCreator();
         // H2Creator h2 = new H2Creator();
         // MongoDbCreator mongo = new MongoDbCreator();
         // RavenDbCreator raven = new RavenDbCreator();
 
         // Creación de lista que contiene las instancias creadas anteriormente.
         List<MotorBD> ll = new LinkedList<>();
-        // ll.add(sqlite);
+        ll.add(sqlite);
         // ll.add(db4o);
         // ll.add(objectBox);
-        ll.add(rocks);
+        // ll.add(rocks);
         // ll.add(h2);
         // ll.add(mongo);
         // ll.add(raven);
@@ -79,6 +83,12 @@ public class Main {
         while (itr.hasNext()) {
             MotorBD element = itr.next();
             System.out.printf("Motor %d: %s v%s\n\n", counter, element.getEngineName(), element.getEngineVersion());
+            if (element.getProviderName() != null) {
+                System.out.printf("Provider: %s v%s\n\n", element.getProviderName(), element.getProviderVersion());
+                System.out.println("Mensajes LOG: OFF.");
+                waitTime(waitMillis);
+                System.out.println("");
+            }
             waitTime(waitMillis);
             System.out.println("1. Operación CREATE:\n");
             waitTime(waitMillis);
@@ -86,11 +96,6 @@ public class Main {
             element.createNewDatabase(dbName);
 
             waitTime(2000);
-
-            // Creación de la tabla 'TestTable'
-            // En la creación de una nueva tabla se crea automáticamente el atributo "id"
-            // como PK. Input de nombre de tabla deshabilitado.
-            element.createNewTable(tableName);
 
             // Mensaje informativo.
             // Pedido de ingreso de cantidad de registros a generar.

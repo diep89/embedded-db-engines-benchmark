@@ -1,11 +1,27 @@
 package mil.ea.cideso.satac;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table
 public class Equipamiento {
+    @Id
+    private int id;
     private int cantidad;
     private int equipo;
     private int tipo;
+    @OneToOne
+    private Amenaza amenaza;
 
-    public Equipamiento(int cantidad, int equipo, int tipo) {
+    public Equipamiento() {
+
+    }
+
+    public Equipamiento(int id, int cantidad, int equipo, int tipo) {
+        this.id = id;
         this.cantidad = cantidad;
         this.equipo = equipo;
         this.tipo = tipo;
@@ -33,5 +49,21 @@ public class Equipamiento {
 
     public void setTipo(int tipo) {
         this.tipo = tipo;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Amenaza getAmenaza() {
+        return amenaza;
+    }
+
+    public void setAmenaza(Amenaza amenaza) {
+        this.amenaza = amenaza;
     }
 }

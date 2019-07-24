@@ -38,11 +38,6 @@ public class ObjectBoxCreator extends MotorBD {
 	}
 
 	@Override
-	public void createNewTable(String tableName) {
-
-	}
-
-	@Override
 	public void insertData(int cantidadAInsertar) {
 		setCantidadAInsertar(cantidadAInsertar);
 
@@ -71,6 +66,7 @@ public class ObjectBoxCreator extends MotorBD {
 			ObjectBoxInformante informante = new ObjectBoxInformante();
 
 			// Declaración de relaciones entre objetos:
+			amenazaWrapper.amenaza.setTarget(amenaza);
 			getAmenazaWrapperBox().put(amenazaWrapper);
 			amenaza.amenazaWrapper.setTarget(amenazaWrapper);
 			getAmenazaBox().put(amenaza);
@@ -109,21 +105,22 @@ public class ObjectBoxCreator extends MotorBD {
 		// el campo leído en 'false'.
 		List<ObjectBoxAmenazaWrapper> amenazaWrapperList = getAmenazaWrapperBox().query()
 				.equal(ObjectBoxAmenazaWrapper_.leido, false).build().find();
-		int cantidadDeAmenazas = amenazaWrapperList.size();
 		getTimer().stop();
+		int cantidadDeAmenazas = amenazaWrapperList.size();
 
 		System.out.println("Registros leídos correctamente.");
 		System.out.println("Se encontraron " + cantidadDeAmenazas + " amenazas guardadas en la BD.\n");
 
-		for (ObjectBoxAmenazaWrapper amenazaWrapper : getAmenazaWrapperBox().getAll()) {
-			System.out.println("AmenazaWrapper Id: " + amenazaWrapper.id);
-		}
+		// for (ObjectBoxAmenazaWrapper amenazaWrapper :
+		// getAmenazaWrapperBox().getAll()) {
+		// System.out.println("AmenazaWrapper Id: " + amenazaWrapper.id);
+		// }
 
-		System.out.println("");
+		// System.out.println("");
 
-		for (ObjectBoxAmenaza amenaza : getAmenazaBox().getAll()) {
-			System.out.println("Amenaza Id: " + amenaza.id);
-		}
+		// for (ObjectBoxAmenaza amenaza : getAmenazaBox().getAll()) {
+		// System.out.println("Amenaza Id: " + amenaza.id);
+		// }
 
 		System.out.println("");
 		System.out.println("");

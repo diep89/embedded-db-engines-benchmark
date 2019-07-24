@@ -21,20 +21,20 @@ public class RocksDbCreator extends MotorBD {
     public void generateNewAmenazaWrapper(int i) {
 
         // Genero los objetos que componen al objeto AmenazaWrapper
-        Informante informante = new Informante("1");
+        Informante informante = new Informante(i);
 
         double latitud = 1.5;
         double longitud = 1.5;
         int milisegundosFechaHora = 1;
-        Posicion posicion = new Posicion(latitud, longitud, milisegundosFechaHora);
+        Posicion posicion = new Posicion(i, latitud, longitud, milisegundosFechaHora);
 
         int epoch = 1;
-        Tiempo tiempo = new Tiempo(epoch);
+        Tiempo tiempo = new Tiempo(i, epoch);
 
         int cantidad = 1;
         int equipo = 1;
         int tipo = 1;
-        Equipamiento equipamiento = new Equipamiento(cantidad, equipo, tipo);
+        Equipamiento equipamiento = new Equipamiento(i, cantidad, equipo, tipo);
 
         int id = i;
         int codigoSimbolo = 1;
@@ -46,7 +46,7 @@ public class RocksDbCreator extends MotorBD {
 
         boolean visible = true;
         boolean leido = false;
-        setAmenazaWrapper(new AmenazaWrapper(amenaza, visible, leido));
+        setAmenazaWrapper(new AmenazaWrapper(i, amenaza, visible, leido));
 
         // Lleno las listas 'listaClaves' y 'listaValores' (de tipo byte[]) con los
         // atributos de todos los objetos.
@@ -93,20 +93,20 @@ public class RocksDbCreator extends MotorBD {
     public void generateAmenazaWrapperUpdate(int i) {
 
         // Genero los objetos que componen al objeto AmenazaWrapper
-        Informante informante = new Informante("1");
+        Informante informante = new Informante(i);
 
         double latitud = 2.5;
         double longitud = 2.5;
         int milisegundosFechaHora = 2;
-        Posicion posicion = new Posicion(latitud, longitud, milisegundosFechaHora);
+        Posicion posicion = new Posicion(i, latitud, longitud, milisegundosFechaHora);
 
         int epoch = 2;
-        Tiempo tiempo = new Tiempo(epoch);
+        Tiempo tiempo = new Tiempo(i, epoch);
 
         int cantidad = 2;
         int equipo = 2;
         int tipo = 2;
-        Equipamiento equipamiento = new Equipamiento(cantidad, equipo, tipo);
+        Equipamiento equipamiento = new Equipamiento(i, cantidad, equipo, tipo);
 
         int id = i;
         int codigoSimbolo = 2;
@@ -118,7 +118,7 @@ public class RocksDbCreator extends MotorBD {
 
         boolean visible = true;
         boolean leido = true;
-        AmenazaWrapper amenazaWrapper = new AmenazaWrapper(amenaza, visible, leido);
+        AmenazaWrapper amenazaWrapper = new AmenazaWrapper(i, amenaza, visible, leido);
 
         // Lleno las listas 'listaClaves' y 'listaValores' (de tipo byte[]) con los
         // atributos de todos los objetos.
@@ -187,11 +187,6 @@ public class RocksDbCreator extends MotorBD {
     }
 
     @Override
-    public void createNewTable(String tableName) {
-
-    }
-
-    @Override
     public void insertData(int cantidadAInsertar) {
         setCantidadAInsertar(cantidadAInsertar);
 
@@ -245,7 +240,7 @@ public class RocksDbCreator extends MotorBD {
             RocksIterator rocksIter = db.newIterator();
             getTimer().stop();
 
-            int i = 1;
+            // int i = 1;
             getTimer().start();
             for (rocksIter.seekToFirst(); rocksIter.isValid(); rocksIter.next()) {
                 String key = new String(rocksIter.key(), StandardCharsets.UTF_8);

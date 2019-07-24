@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>mil.ea.cideso.satac</groupId>
 	<artifactId>bd-benchmark</artifactId>
@@ -28,7 +26,7 @@
 		<!-- <repository> <id>Geomajas Repository</id> <name>Geomajas Repository</name> 
 			<url>http://maven.geomajas.org/</url> </repository> -->
 	</repositories>
-
+	
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -108,7 +106,7 @@
 		<!-- <dependency> <groupId>ch.qos.logback</groupId> <artifactId>logback-classic</artifactId> 
 			<version>1.2.3</version> -->
 		<!-- </dependency> -->
-
+		
 		<!-- https://mvnrepository.com/artifact/net.ravendb/ravendb -->
 		<dependency>
 			<groupId>net.ravendb</groupId>
@@ -121,8 +119,54 @@
 			<artifactId>guava</artifactId>
 			<version>27.1-jre</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api -->
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>javax.persistence-api</artifactId>
+			<version>2.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.1-api -->
+		<!-- <dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.1-api</artifactId>
+			<version>1.0.2.Final</version>
+		</dependency> -->
+		<!-- Segunda opción: Habilitar para probar -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.4.3.Final</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.zsoltfabok/sqlite-dialect -->
+		<dependency>
+			<groupId>com.zsoltfabok</groupId>
+			<artifactId>sqlite-dialect</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.26</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.26</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources/META-INF</directory>
+				<targetPath>META-INF</targetPath>
+				<includes>
+					<include>persistence.xml</include>
+				</includes>
+			</resource>
+		</resources>
 		<pluginManagement>
 			<!-- lock down plugins versions to avoid using Maven defaults (may be 
 				moved to parent pom) -->
@@ -136,6 +180,25 @@
 				<plugin>
 					<artifactId>maven-resources-plugin</artifactId>
 					<version>3.0.2</version>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>build-helper-maven-plugin</artifactId>
+					<version>1.7</version>
+					<executions>
+						<execution>
+							<id>add-source</id>
+							<phase>generate-sources</phase>
+							<goals>
+								<goal>add-source</goal>
+							</goals>
+							<configuration>
+								<sources>
+									<source>src/test/resources</source>
+								</sources>
+							</configuration>
+						</execution>
+					</executions>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -242,42 +305,42 @@
 									<feature>text_search</feature>
 								</features>
 								<!-- optional, a list of MongoDB features to enable, default is none -->
-
+								
 								<imports>
 									<import>
 										<!-- <database>my_db</database> -->
 										<!-- optional, name of the database, if null it will fallback to 
 											defaultImportDatabase -->
-
+										
 										<collection>TestTable</collection>
 										<!-- required, name of the collection to import data -->
-
+										
 										<file>import_file.json</file>
 										<!-- required, name of the json file to import -->
-
+										
 										<!-- <upsertOnImport>true</upsertOnImport> -->
 										<!-- optional, default true, if true it will do an upsert on each 
 											document imported -->
-
+										
 										<!-- <dropOnImport>false</dropOnImport> -->
 										<!-- optional, default true, if true it will do a drop the collection 
 											before starts to import -->
-
+										
 										<!-- <timeout>20000</timeout> -->
 										<!-- optional, default 20000, it will fail if it takes more than 
 											this time importing a file (time in millis) -->
-
+										
 									</import>
 								</imports>
 								<!-- optional, More imports are accepted and it will be executed 
 									in strict order (if parallel is not set) -->
-
+								
 								<initializations>
 									<initialization>
 										<databaseName>testDb-MongoDB</databaseName>
 										<!-- required, The name of the database to execute the scripts 
 											on -->
-
+										
 										<scripts>
 											<script>/home/me/stuff/scriptDirectory</script>
 											<script>/home/me/stuff/scriptFile.js</script>

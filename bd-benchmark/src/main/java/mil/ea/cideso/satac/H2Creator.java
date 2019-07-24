@@ -2,8 +2,24 @@ package mil.ea.cideso.satac;
 
 import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class H2Creator extends MotorBD {
+
+    private String tableName;
+
+    private String url;
+    private String sql;
+
+    // Atributos para conexión SQL
+    private Connection conn;
+    private Statement stmt;
+    private PreparedStatement pstmt;
+    private ResultSet rs;
 
     public H2Creator() {
         setEngineName("H2");
@@ -13,6 +29,8 @@ public class H2Creator extends MotorBD {
     // Función para crear una nueva BD.
     @Override
     public void createNewDatabase(String dbName) {
+        setDbName(dbName);
+
         setUrl("jdbc:h2:./" + dbName);
 
         try {
@@ -37,77 +55,11 @@ public class H2Creator extends MotorBD {
                 System.exit(1);
             }
         }
-
-    }
-
-    // Función para crear una nueva tabla en la BD.
-    @Override
-    public void createNewTable(String dbName, String tableName, String[] attributesList, String[] attributesType,
-            String[] attributesLength) {
-
-        setSql("CREATE TABLE IF NOT EXISTS " + tableName + " (" + "id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT, ");
-        setAttributesList(attributesList);
-        setAttributesType(attributesType);
-        setAttributesLength(attributesLength);
-        setAttributesQty(getAttributesList().length);
-
-        for (int i = 0; i < getAttributesQty() - 1; i++) {
-            setSql(getSql().concat(
-                    getAttributesList()[i] + " " + getAttributesType()[i] + "(" + getAttributesLength()[i] + "), "));
-        }
-        // En la siguiente línea, se debe concatenar al string 'sql' la última
-        // ocurrencia de la lista de atributos.
-        // Para ello utilizo 'attributesList.length', pero hay que restarle 1.
-        // (El método length la cantidad de elementos contando a partir de '1',
-        // pero el string 'sql' inicia en '0')
-        setSql(getSql()
-                .concat(getAttributesList()[getAttributesQty() - 1] + " " + getAttributesType()[getAttributesQty() - 1]
-                        + "(" + getAttributesLength()[getAttributesQty() - 1] + "));"));
-
-        try {
-            getConnection(getUrl());
-            setStmt(getConn().createStatement());
-            getStmt().execute(getSql());
-            if (getConn() != null) {
-                DatabaseMetaData meta = getConn().getMetaData();
-                System.out.println("Driver: " + meta.getDriverName());
-                System.out.println("La tabla se ha generado correctamente.");
-                System.out.println("BD: " + dbName + ".db\nTabla: " + tableName + "\n");
-            }
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-
-        finally {
-            try {
-                if (getStmt() != null)
-                    getStmt().close();
-                if (getConn() != null)
-                    getConn().close();
-            } catch (SQLException e) {
-                System.out.println("Error.");
-                System.out.println("Detalle del error: \n" + e.getMessage());
-                System.exit(1);
-            }
-        }
-
     }
 
     // Función para operación CREATE
     @Override
-    public void insertData(String dbName, String tableName, int cantidadAInsertar) {
-
-        // Lógica para la generación de la sentencia SQL de inserción de datos.
-        setSql("INSERT INTO " + tableName + " (");
-        for (int k = 0; k < getAttributesQty() - 1; k++) {
-            setSql(getSql().concat(getAttributesList()[k] + ", "));
-        }
-        setSql(getSql().concat(getAttributesList()[getAttributesQty() - 1] + ") VALUES ("));
-        for (int k = 0; k < getAttributesQty() - 1; k++) {
-            setSql(getSql().concat("?, "));
-        }
-        setSql(getSql().concat("?);"));
+    public void insertData(int cantidadAInsertar) {
 
         // tiempoInicio = System.currentTimeMillis();
         for (int j = 0; j < cantidadAInsertar; j++) {
@@ -170,7 +122,7 @@ public class H2Creator extends MotorBD {
 
     // Función para operación READ
     @Override
-    public void readData(String dbName, String tableName) {
+    public void readData() {
         setSql("SELECT * FROM " + tableName);
 
         try {
@@ -212,16 +164,7 @@ public class H2Creator extends MotorBD {
 
     // Función para operación UPDATE
     @Override
-    public void updateData(String dbName, String tableName, String[] attributesList, String[] attributesType,
-            String[] attributesLength) {
-
-        // Lógica para la generación de la sentencia SQL de inserción de datos.
-        setSql("UPDATE " + tableName + " SET ");
-
-        for (int k = 0; k < getAttributesQty() - 1; k++) {
-            setSql(getSql().concat(getAttributesList()[k] + " = ? , "));
-        }
-        setSql(getSql().concat(getAttributesList()[getAttributesQty() - 1] + " = ? WHERE sexo = ?"));
+    public void updateData() {
 
         try {
             getTimer().start();
@@ -283,7 +226,7 @@ public class H2Creator extends MotorBD {
     }
 
     @Override
-    public void deleteData(String dbName, String tableName) {
+    public void deleteData() {
         setSql("DELETE FROM " + tableName + " WHERE sexo = ? ");
 
         try {
@@ -323,8 +266,8 @@ public class H2Creator extends MotorBD {
 
     // Función (opcional) para eliminar la BD generada
     @Override
-    public void dropDatabase(String dbName) {
-        setSql("DROP DATABASE " + dbName + ".db");
+    public void dropDatabase() {
+        setSql("DROP DATABASE " + getDbName() + ".db");
 
         try {
             getConnection(getUrl());
@@ -352,5 +295,70 @@ public class H2Creator extends MotorBD {
                 System.exit(1);
             }
         }
+    }
+
+    public String getTableName() {
+        return tableName;
+    }
+
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getSql() {
+        return sql;
+    }
+
+    public void setSql(String sql) {
+        this.sql = sql;
+    }
+
+    public Connection getConn() {
+        return conn;
+    }
+
+    public void setConn(Connection conn) {
+        this.conn = conn;
+    }
+
+    public Connection getConnection(String url) {
+        try {
+            conn = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return conn;
+    }
+
+    public Statement getStmt() {
+        return stmt;
+    }
+
+    public void setStmt(Statement stmt) {
+        this.stmt = stmt;
+    }
+
+    public PreparedStatement getPstmt() {
+        return pstmt;
+    }
+
+    public void setPstmt(PreparedStatement pstmt) {
+        this.pstmt = pstmt;
+    }
+
+    public ResultSet getRs() {
+        return rs;
+    }
+
+    public void setRs(ResultSet rs) {
+        this.rs = rs;
     }
 }

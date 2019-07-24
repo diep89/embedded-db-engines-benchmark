@@ -7,6 +7,8 @@ import com.google.common.base.Stopwatch;
 public abstract class MotorBD {
     private String engineName;
     private String engineVersion;
+    private String providerName;
+    private String providerVersion;
     private String dbName;
 
     // Timer
@@ -21,8 +23,6 @@ public abstract class MotorBD {
 
     // Métodos
     public abstract void createNewDatabase(String dbName) throws IOException;
-
-    public abstract void createNewTable(String tableName);
 
     public abstract void insertData(int cantidadAInsertar);
 
@@ -145,6 +145,22 @@ public abstract class MotorBD {
 
     public void setDbName(String dbName) {
         this.dbName = dbName;
+    }
+
+    public String getProviderName() {
+        return providerName;
+    }
+
+    public void setProviderName(String providerName) {
+        this.providerName = providerName;
+    }
+
+    public String getProviderVersion() {
+        return providerVersion;
+    }
+
+    public void setProviderVersion(String providerVersion) {
+        this.providerVersion = providerVersion;
     }
 
     // Funciones para configurar test automatizado
