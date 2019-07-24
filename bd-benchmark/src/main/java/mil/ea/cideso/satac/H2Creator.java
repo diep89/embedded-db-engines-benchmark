@@ -5,33 +5,45 @@ import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+// import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+import javax.persistence.PersistenceException;
+import javax.persistence.TypedQuery;
 
 public class H2Creator extends MotorBD {
 
-    private String tableName;
+    private int cantidadAInsertar;
 
     private String url;
     private String sql;
 
     // Atributos para conexión SQL
-    private Connection conn;
+    private static Connection conn;
     private Statement stmt;
     private PreparedStatement pstmt;
-    private ResultSet rs;
+    // private ResultSet rs;
+
+    private EntityManagerFactory emf;
 
     public H2Creator() {
         setEngineName("H2");
         setEngineVersion("1.4.199");
+        setProviderName("Hibernate");
+        setProviderVersion("5.4.3");
     }
 
     // Función para crear una nueva BD.
     @Override
     public void createNewDatabase(String dbName) {
         setDbName(dbName);
-
-        setUrl("jdbc:h2:./" + dbName);
+        setUrl("jdbc:h2:./" + getDbName());
 
         try {
             getConnection(getUrl());
@@ -43,15 +55,21 @@ public class H2Creator extends MotorBD {
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            System.out.println("Detalle del error: \n" + e.getMessage());
+            System.out.println("\nStacktrace:\n\n");
+            e.printStackTrace();
+            System.exit(1);
         }
 
         finally {
             try {
-                if (getConn() != null)
-                    getConn().close();
+                if (conn != null)
+                    conn.close();
             } catch (SQLException e) {
                 System.out.println("Error.");
                 System.out.println("Detalle del error: \n" + e.getMessage());
+                System.out.println("\nStacktrace:\n\n");
+                e.printStackTrace();
                 System.exit(1);
             }
         }
@@ -60,50 +78,62 @@ public class H2Creator extends MotorBD {
     // Función para operación CREATE
     @Override
     public void insertData(int cantidadAInsertar) {
+        setCantidadAInsertar(cantidadAInsertar);
 
-        // tiempoInicio = System.currentTimeMillis();
-        for (int j = 0; j < cantidadAInsertar; j++) {
-            try {
-                getTimer().start();
-                getConnection(getUrl());
-                setPstmt(getConn().prepareStatement(getSql()));
-                getPstmt().setInt(1, j);
-                getPstmt().setString(2, "M");
-                getPstmt().setInt(3, j);
-                getPstmt().executeUpdate();
+        try {
+            getTimer().start();
+            setEmf(Persistence.createEntityManagerFactory("H2Persistence"));
+
+            for (int i = 0; i < getCantidadAInsertar(); i++) {
+                Tiempo tiempo = new Tiempo(i, 1);
+                Posicion posicion = new Posicion(i, 1.5, 1.5, 1);
+                Equipamiento equipamiento = new Equipamiento(i, 1, 1, 1);
+                Informante informante = new Informante(i);
+                Amenaza amenaza = new Amenaza(i, tiempo, 1, posicion, 1, 1, 1, equipamiento, informante);
+                AmenazaWrapper amenazaWrapper = new AmenazaWrapper(i, amenaza, true, false);
+
+                // Declaro relaciones
+                amenazaWrapper.setAmenaza(amenaza);
+                amenaza.setAmenazaWrapper(amenazaWrapper);
+                amenaza.setInformante(informante);
+                amenaza.setEquipamiento(equipamiento);
+                amenaza.setPosicion(posicion);
+                amenaza.setTiempo(tiempo);
+                informante.setAmenaza(amenaza);
+                equipamiento.setAmenaza(amenaza);
+                posicion.setAmenaza(amenaza);
+                tiempo.setAmenaza(amenaza);
+
+                // Persisto objetos
+                EntityManager em = getEmf().createEntityManager();
+                EntityTransaction txn = em.getTransaction();
+                txn.begin();
+                em.persist(amenazaWrapper);
+                em.persist(amenaza);
+                em.persist(informante);
+                em.persist(equipamiento);
+                em.persist(posicion);
+                em.persist(tiempo);
+                txn.commit();
+                em.close();
+
                 getTimer().stop();
-                if (getConn() != null) {
-                    // DatabaseMetaData meta = conn.getMetaData();
-                    // System.out.println("The driver name is " + meta.getDriverName());
-                    // System.out.println("A new record (" + (j + 1) + ") has been inserted.");
-                    // System.out.println("");
-                    if (j + 1 < cantidadAInsertar) {
-                        System.out.print((j + 1) + " - ");
-                    } else {
-                        System.out.print((j + 1) + ".");
-                    }
+                if (i + 1 < getCantidadAInsertar()) {
+                    System.out.print((i + 1) + " - ");
+                } else {
+                    System.out.print((i + 1) + ".");
                 }
+                getTimer().start();
             }
-
-            catch (SQLException e) {
-                System.out.println("Error.");
-                System.out.println("Detalle del error: \n" + e.getMessage());
-                System.exit(1);
-            }
-
-            finally {
-                try {
-                    if (getPstmt() != null)
-                        getPstmt().close();
-                    if (getConn() != null)
-                        getConn().close();
-                } catch (SQLException e) {
-                    System.out.println("Error.");
-                    System.out.println("Detalle del error: \n" + e.getMessage());
-                    System.exit(1);
-                }
-            }
+        } catch (PersistenceException e) {
+            System.out.println("Error.");
+            System.out.println("Detalle del error: \n" + e.getMessage());
+            System.out.println("\nStacktrace:\n\n");
+            e.printStackTrace();
+            System.exit(1);
         }
+
+        getTimer().stop();
 
         System.out.println("");
         System.out.println("");
@@ -114,152 +144,156 @@ public class H2Creator extends MotorBD {
         // (tiempoTest / 1000)
 
         setStatsCreateOperation(getTimer().toString());
-
-        // Reseteo el timer.
-        setTimer(getTimer().reset());
+        setTimer(getTimer().reset()); // Reseteo el timer.
 
     }
 
     // Función para operación READ
     @Override
     public void readData() {
-        setSql("SELECT * FROM " + tableName);
 
         try {
             getTimer().start();
-            getConnection(getUrl());
-            setStmt(getConn().createStatement());
-            setRs(getStmt().executeQuery(getSql()));
+
+            EntityManager em = getEmf().createEntityManager();
+            TypedQuery<AmenazaWrapper> query = em.createQuery("SELECT p FROM AmenazaWrapper p", AmenazaWrapper.class);
+            List<AmenazaWrapper> results = query.getResultList();
+
             getTimer().stop();
 
-            // Recorro los resultados y los muestro por pantalla
-            int i = 1;
-            System.out.println("Registros leídos:\n");
-            System.out.printf("%-10s %-10s %-10s %-10s\n", "Id", "Edad", "Sexo", "Telefono");
-            while (getRs().next()) {
-                System.out.printf("%-10d %-10s %-10s %-10s\n", i, getRs().getInt("edad"), getRs().getString("sexo"),
-                        getRs().getInt("telefono"));
-                i++;
-            }
+            // Comprobación
+            // Iterator<AmenazaWrapper> itr = results.iterator();
+            // System.out.println("");
+            // while (itr.hasNext()) {
+            // AmenazaWrapper el = itr.next();
+            // System.out.printf("AmenazaWrapper\nId: %d\nLeido: %b\nVisible: %b\n\n",
+            // el.getId(), el.isLeido(),
+            // el.isVisible());
+            // }
+            // System.out.println("");
+
+            System.out.println("Registros leídos correctamente.");
+
             System.out.println("");
+            System.out.println("");
+
             setStatsReadOperation(getTimer().toString()); // Guardo el valor del timer
             setTimer(getTimer().reset()); // Reseteo el timer.
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        } finally {
-            try {
-                if (getRs() != null)
-                    getRs().close();
-                if (getStmt() != null)
-                    getStmt().close();
-                if (getConn() != null)
-                    getConn().close();
-            } catch (SQLException e) {
-                System.out.println("Error.");
-                System.out.println("Detalle del error: \n" + e.getMessage());
-                System.exit(1);
-            }
+
+        } catch (PersistenceException e) {
+            System.out.println("Error.");
+            System.out.println("Detalle del error: \n" + e.getMessage());
+            System.out.println("\nStacktrace:\n\n");
+            e.printStackTrace();
+            System.exit(1);
         }
+
     }
 
     // Función para operación UPDATE
     @Override
     public void updateData() {
-
         try {
             getTimer().start();
-            getConnection(getUrl());
-            setPstmt(getConn().prepareStatement(getSql()));
-            getPstmt().setInt(1, 10);
-            getPstmt().setString(2, "F");
-            getPstmt().setInt(3, 10);
-            getPstmt().setString(4, "M");
-            getPstmt().executeUpdate();
+
+            for (int i = 0; i < getCantidadAInsertar(); i++) {
+                EntityManager em = getEmf().createEntityManager();
+                AmenazaWrapper amenazaWrapper = em.find(AmenazaWrapper.class, i);
+                EntityTransaction txn = em.getTransaction();
+                txn.begin();
+                amenazaWrapper.getAmenaza().getTiempo().setEpoch(2);
+                amenazaWrapper.getAmenaza().setCodigoSimbolo(2);
+                amenazaWrapper.getAmenaza().getPosicion().setLatitud(2.5);
+                amenazaWrapper.getAmenaza().getPosicion().setLongitud(2.5);
+                amenazaWrapper.getAmenaza().getPosicion().setMilisegundosFechaHora(2);
+                amenazaWrapper.getAmenaza().setRadioAccion(2);
+                amenazaWrapper.getAmenaza().setIdentificacion(2);
+                amenazaWrapper.getAmenaza().setTamanios(2);
+                amenazaWrapper.getAmenaza().getEquipamiento().setCantidad(2);
+                amenazaWrapper.getAmenaza().getEquipamiento().setEquipo(2);
+                amenazaWrapper.getAmenaza().getEquipamiento().setTipo(2);
+                amenazaWrapper.setLeido(true);
+                txn.commit();
+                em.close();
+            }
+
             getTimer().stop();
 
-            if (getConn() != null) {
-                setSql("SELECT * FROM " + tableName);
-                try {
-                    getConnection(getUrl());
-                    setStmt(getConn().createStatement());
-                    setRs(getStmt().executeQuery(getSql()));
+            // Comprobación
+            // EntityManager em = getEmf().createEntityManager();
+            // TypedQuery<AmenazaWrapper> query = em.createQuery("SELECT p FROM
+            // AmenazaWrapper p", AmenazaWrapper.class);
+            // List<AmenazaWrapper> results = query.getResultList();
+            // Iterator<AmenazaWrapper> itr = results.iterator();
 
-                    // Recorro los resultados y los muestro por pantalla
-                    int i = 1;
-                    System.out.println("Registros actualizados correctamente.");
-                    System.out.println("Lista de registros actualizada: \n");
-                    System.out.printf("%-10s %-10s %-10s %-10s\n", "Id", "Edad", "Sexo", "Telefono");
-                    while (getRs().next()) {
-                        System.out.printf("%-10d %-10s %-10s %-10s\n", i, getRs().getInt("edad"),
-                                getRs().getString("sexo"), getRs().getInt("telefono"));
-                        i++;
-                    }
-                    System.out.println("");
-                } catch (SQLException e) {
-                    System.out.println(e.getMessage());
-                }
-
-            }
+            // while (itr.hasNext()) {
+            // AmenazaWrapper el = itr.next();
+            // System.out.printf("AmenazaWrapper\nId: %d\nLeido: %b\nVisible: %b\n\n",
+            // el.getId(), el.isLeido(),
+            // el.isVisible());
+            // }
         }
 
-        catch (SQLException e) {
+        catch (PersistenceException e) {
             System.out.println("Error.");
             System.out.println("Detalle del error: \n" + e.getMessage());
+            System.out.println("\nStacktrace:\n\n");
+            e.printStackTrace();
             System.exit(1);
         }
 
-        finally {
-            try {
-                if (getPstmt() != null)
-                    getPstmt().close();
-                if (getConn() != null)
-                    getConn().close();
-            } catch (SQLException e) {
-                System.out.println("Error.");
-                System.out.println("Detalle del error: \n" + e.getMessage());
-                System.exit(1);
-            }
-        }
-
+        System.out.println("Registros actualizados correctamente.");
+        System.out.println("");
+        System.out.println("");
         setStatsUpdateOperation(getTimer().toString());
         setTimer(getTimer().reset()); // Reseteo el timer.
     }
 
     @Override
     public void deleteData() {
-        setSql("DELETE FROM " + tableName + " WHERE sexo = ? ");
-
         try {
             getTimer().start();
-            getConnection(getUrl());
-            setPstmt(getConn().prepareStatement(getSql()));
-            getPstmt().setString(1, "F");
-            getPstmt().executeUpdate();
-            getTimer().stop();
-            if (getConn() != null) {
-                System.out.println("Registros eliminados correctamente.\n");
+
+            for (int i = 0; i < getCantidadAInsertar(); i++) {
+                EntityManager em = getEmf().createEntityManager();
+                AmenazaWrapper amenazaWrapper = em.find(AmenazaWrapper.class, i);
+                Amenaza amenaza = em.find(Amenaza.class, i);
+                Tiempo tiempo = em.find(Tiempo.class, i);
+                Equipamiento equipamiento = em.find(Equipamiento.class, i);
+                Informante informante = em.find(Informante.class, i);
+                Posicion posicion = em.find(Posicion.class, i);
+                EntityTransaction txn = em.getTransaction();
+                txn.begin();
+                em.remove(amenazaWrapper);
+                em.remove(amenaza);
+                em.remove(tiempo);
+                em.remove(equipamiento);
+                em.remove(informante);
+                em.remove(posicion);
+                txn.commit();
+                em.close();
             }
+
+            getTimer().stop();
+
+            System.out.println("Registros eliminados correctamente.");
         }
 
-        catch (SQLException e) {
+        catch (PersistenceException e) {
             System.out.println("Error.");
             System.out.println("Detalle del error: \n" + e.getMessage());
+            System.out.println("\nStacktrace:\n\n");
+            e.printStackTrace();
             System.exit(1);
         }
 
         finally {
-            try {
-                if (getPstmt() != null)
-                    getPstmt().close();
-                if (getConn() != null)
-                    getConn().close();
-            } catch (SQLException e) {
-                System.out.println("Error.");
-                System.out.println("Detalle del error: \n" + e.getMessage());
-                System.exit(1);
-            }
+            if (getEmf() != null)
+                getEmf().close();
         }
 
+        System.out.println("");
+        System.out.println("");
         setStatsDeleteOperation(getTimer().toString());
         setTimer(getTimer().reset()); // Reseteo el timer.
     }
@@ -295,14 +329,6 @@ public class H2Creator extends MotorBD {
                 System.exit(1);
             }
         }
-    }
-
-    public String getTableName() {
-        return tableName;
-    }
-
-    public void setTableName(String tableName) {
-        this.tableName = tableName;
     }
 
     public String getUrl() {
@@ -354,11 +380,27 @@ public class H2Creator extends MotorBD {
         this.pstmt = pstmt;
     }
 
-    public ResultSet getRs() {
-        return rs;
+    // public ResultSet getRs() {
+    // return rs;
+    // }
+
+    // public void setRs(ResultSet rs) {
+    // this.rs = rs;
+    // }
+
+    public int getCantidadAInsertar() {
+        return cantidadAInsertar;
     }
 
-    public void setRs(ResultSet rs) {
-        this.rs = rs;
+    public void setCantidadAInsertar(int cantidadAInsertar) {
+        this.cantidadAInsertar = cantidadAInsertar;
+    }
+
+    public EntityManagerFactory getEmf() {
+        return emf;
+    }
+
+    public void setEmf(EntityManagerFactory emf) {
+        this.emf = emf;
     }
 }

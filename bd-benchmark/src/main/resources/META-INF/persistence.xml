@@ -29,4 +29,24 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd" version="2.1">
             <property name="hibernate.hbm2ddl.auto" value="create" />
         </properties>
     </persistence-unit>
+    
+    <persistence-unit name="H2Persistence">
+        <class>mil.ea.cideso.satac.AmenazaWrapper</class>
+        <class>mil.ea.cideso.satac.Amenaza</class>
+        <class>mil.ea.cideso.satac.Tiempo</class>
+        <class>mil.ea.cideso.satac.Informante</class>
+        <class>mil.ea.cideso.satac.Equipamiento</class>
+        <class>mil.ea.cideso.satac.Posicion</class>
+        
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:D:\proyectoPps\testDb-H2" />
+            <!-- <property name="javax.persistence.jdbc.url" value="jdbc:h2:D:\proyectoPps\" /> -->
+            <property name="javax.persistence.jdbc.user" value="" />
+            <property name="javax.persistence.jdbc.password" value="" />
+            <property name="hibernate.show_sql" value="false" />
+            <property name="hibernate.hbm2ddl.auto" value="create" />
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
+        </properties>
+    </persistence-unit>
 </persistence>

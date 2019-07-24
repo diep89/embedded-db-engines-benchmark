@@ -26,8 +26,6 @@ import javax.persistence.TypedQuery;
 
 public class SqliteCreator extends MotorBD {
 
-    private String dbName;
-    private String tableName;
     private int cantidadAInsertar;
 
     private String url;
@@ -57,7 +55,6 @@ public class SqliteCreator extends MotorBD {
 
         try {
             getConnection(getUrl());
-
             if (getConn() != null) {
                 DatabaseMetaData meta = getConn().getMetaData();
                 System.out.println("Driver: " + meta.getDriverName());
@@ -79,6 +76,8 @@ public class SqliteCreator extends MotorBD {
             } catch (SQLException e) {
                 System.out.println("Error.");
                 System.out.println("Detalle del error: \n" + e.getMessage());
+                System.out.println("\nStacktrace:\n\n");
+                e.printStackTrace();
                 System.exit(1);
             }
         }
@@ -94,7 +93,7 @@ public class SqliteCreator extends MotorBD {
             // getConnection(getUrl());
             setEmf(Persistence.createEntityManagerFactory("SQLitePersistence"));
 
-            for (int i = 0; i < cantidadAInsertar; i++) {
+            for (int i = 0; i < getCantidadAInsertar(); i++) {
                 Tiempo tiempo = new Tiempo(i, 1);
                 Posicion posicion = new Posicion(i, 1.5, 1.5, 1);
                 Equipamiento equipamiento = new Equipamiento(i, 1, 1, 1);
@@ -135,13 +134,6 @@ public class SqliteCreator extends MotorBD {
                 }
                 getTimer().start();
             }
-
-            getTimer().stop();
-
-            System.out.println("");
-            System.out.println("");
-            setStatsCreateOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
-            setTimer(getTimer().reset()); // Reseteo el timer.
         } catch (PersistenceException e) {
             System.out.println("Error.");
             System.out.println("Detalle del error: \n" + e.getMessage());
@@ -150,32 +142,40 @@ public class SqliteCreator extends MotorBD {
             System.exit(1);
         }
 
-        // ********************************************
-        // EJEMPLO PARA CONSULTA
+        getTimer().stop();
 
-        // // Find the number of Point objects in the database:
-        // Query q1 = em.createQuery("SELECT COUNT(p) FROM Point p");
-        // System.out.println("Total Points: " + q1.getSingleResult());
+        System.out.println("");
+        System.out.println("");
 
-        // // Find the average X value:
-        // Query q2 = em.createQuery("SELECT AVG(p.x) FROM Point p");
-        // System.out.println("Average X: " + q2.getSingleResult());
-
-        // // Retrieve all the Point objects from the database:
-        // TypedQuery<Point> query = em.createQuery("SELECT p FROM Point p",
-        // Point.class);
-        // List<Point> results = query.getResultList();
-        // for (Point p : results) {
-        // System.out.println(p);
-        // }
-
-        // ********************************************
-
+        setStatsCreateOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
+        setTimer(getTimer().reset()); // Reseteo el timer.
     }
+
+    // ********************************************
+    // EJEMPLO PARA CONSULTA
+
+    // // Find the number of Point objects in the database:
+    // Query q1 = em.createQuery("SELECT COUNT(p) FROM Point p");
+    // System.out.println("Total Points: " + q1.getSingleResult());
+
+    // // Find the average X value:
+    // Query q2 = em.createQuery("SELECT AVG(p.x) FROM Point p");
+    // System.out.println("Average X: " + q2.getSingleResult());
+
+    // // Retrieve all the Point objects from the database:
+    // TypedQuery<Point> query = em.createQuery("SELECT p FROM Point p",
+    // Point.class);
+    // List<Point> results = query.getResultList();
+    // for (Point p : results) {
+    // System.out.println(p);
+    // }
+
+    // ********************************************
 
     // Función para operación READ
     @Override
     public void readData() {
+
         try {
             getTimer().start();
 
@@ -185,19 +185,25 @@ public class SqliteCreator extends MotorBD {
 
             getTimer().stop();
 
-            Iterator<AmenazaWrapper> itr = results.iterator();
-            while (itr.hasNext()) {
-                AmenazaWrapper el = itr.next();
-                System.out.printf("AmenazaWrapper\n Id: %d\n Leido: %b\n Visible: %b\n", el.getId(), el.isLeido(),
-                        el.isVisible());
-            }
+            // Comprobación
+            // Iterator<AmenazaWrapper> itr = results.iterator();
+            // System.out.println("");
+            // while (itr.hasNext()) {
+            // AmenazaWrapper el = itr.next();
+            // System.out.printf("AmenazaWrapper\nId: %d\n Leido: %b\n Visible: %b\n\n",
+            // el.getId(), el.isLeido(),
+            // el.isVisible());
+            // }
+            // System.out.println("");
 
             System.out.println("Registros leídos correctamente.");
 
             System.out.println("");
             System.out.println("");
+
             setStatsReadOperation(getTimer().toString()); // Guardo el valor del timer
             setTimer(getTimer().reset()); // Reseteo el timer.
+
         } catch (PersistenceException e) {
             System.out.println("Error.");
             System.out.println("Detalle del error: \n" + e.getMessage());
@@ -236,6 +242,7 @@ public class SqliteCreator extends MotorBD {
 
             getTimer().stop();
 
+            // Comprobación
             EntityManager em = getEmf().createEntityManager();
             TypedQuery<AmenazaWrapper> query = em.createQuery("SELECT p FROM AmenazaWrapper p", AmenazaWrapper.class);
             List<AmenazaWrapper> results = query.getResultList();
@@ -315,7 +322,7 @@ public class SqliteCreator extends MotorBD {
     // Función (opcional) para eliminar la BD generada
     @Override
     public void dropDatabase() {
-        setSql("DROP DATABASE " + dbName + ".db");
+        setSql("DROP DATABASE " + getDbName() + ".db");
 
         try {
             getConnection(getUrl());
@@ -386,28 +393,12 @@ public class SqliteCreator extends MotorBD {
         this.rs = rs;
     }
 
-    public String getTableName() {
-        return tableName;
-    }
-
-    public void setTableName(String tableName) {
-        this.tableName = tableName;
-    }
-
     public int getCantidadAInsertar() {
         return cantidadAInsertar;
     }
 
     public void setCantidadAInsertar(int cantidadAInsertar) {
         this.cantidadAInsertar = cantidadAInsertar;
-    }
-
-    public String getDbName() {
-        return dbName;
-    }
-
-    public void setDbName(String dbName) {
-        this.dbName = dbName;
     }
 
     /**

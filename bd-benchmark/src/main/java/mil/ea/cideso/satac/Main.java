@@ -27,21 +27,21 @@ public class Main {
         int waitMillis = 1500;
 
         // Instanciación de las clases creadoras de BD.
-        SqliteCreator sqlite = new SqliteCreator();
+        // SqliteCreator sqlite = new SqliteCreator();
         // Db4oCreator db4o = new Db4oCreator();
         // ObjectBoxCreator objectBox = new ObjectBoxCreator();
         // RocksDbCreator rocks = new RocksDbCreator();
-        // H2Creator h2 = new H2Creator();
+        H2Creator h2 = new H2Creator();
         // MongoDbCreator mongo = new MongoDbCreator();
         // RavenDbCreator raven = new RavenDbCreator();
 
         // Creación de lista que contiene las instancias creadas anteriormente.
         List<MotorBD> ll = new LinkedList<>();
-        ll.add(sqlite);
+        // ll.add(sqlite);
         // ll.add(db4o);
         // ll.add(objectBox);
         // ll.add(rocks);
-        // ll.add(h2);
+        ll.add(h2);
         // ll.add(mongo);
         // ll.add(raven);
 
@@ -85,7 +85,7 @@ public class Main {
             System.out.printf("Motor %d: %s v%s\n\n", counter, element.getEngineName(), element.getEngineVersion());
             if (element.getProviderName() != null) {
                 System.out.printf("Provider: %s v%s\n\n", element.getProviderName(), element.getProviderVersion());
-                System.out.println("Mensajes LOG: OFF.");
+                System.out.println("Mensajes LOG: SEVERE.");
                 waitTime(waitMillis);
                 System.out.println("");
             }
