@@ -110,7 +110,6 @@ public class Main {
 
             System.out.println("Motor: " + element.getEngineName() + "\nOperación 'CREATE' finalizada.\n");
             waitTime(waitMillis);
-            pressEnter();
 
             System.out.println("");
 
@@ -118,7 +117,7 @@ public class Main {
             System.out.println("2. Operación READ:\n");
             waitTime(waitMillis);
             System.out.println("Se leerán los registros ingresados en la BD.\n");
-            pressEnter();
+            waitTime(waitMillis);
             System.out.println("");
 
             element.readData();
@@ -126,33 +125,30 @@ public class Main {
             // Mensaje informativo
             System.out.println("Motor: " + element.getEngineName() + "\nOperación 'READ' finalizada.\n");
             waitTime(waitMillis);
-            pressEnter();
             System.out.println("");
 
             // OPERACIÓN UPDATE
             System.out.println("3. Operación UPDATE:\n");
             waitTime(waitMillis);
             System.out.println("Se actualizarán los registros ingresados en la BD con nuevos datos.\n");
-            pressEnter();
+            waitTime(waitMillis);
             System.out.println("");
 
             element.updateData();
             System.out.println("Motor: " + element.getEngineName() + "\nOperación 'UPDATE' finalizada.\n");
             waitTime(waitMillis);
-            pressEnter();
             System.out.println("");
 
             // OPERACIÓN DELETE
             System.out.println("4. Operación DELETE:\n");
             waitTime(waitMillis);
             System.out.println("Se eliminarán los registros ingresados en la BD.\n");
-            pressEnter();
+            waitTime(waitMillis);
             System.out.println("");
 
             element.deleteData();
             System.out.println("Motor: " + element.getEngineName() + "\nOperación 'DELETE' finalizada.\n");
             waitTime(waitMillis);
-            pressEnter();
             System.out.println("");
 
             // EXTRA
