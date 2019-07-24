@@ -7,7 +7,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 // import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.Iterator;
+// import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -349,10 +349,6 @@ public class H2Creator extends MotorBD {
 
     public Connection getConn() {
         return conn;
-    }
-
-    public void setConn(Connection conn) {
-        this.conn = conn;
     }
 
     public Connection getConnection(String url) {
