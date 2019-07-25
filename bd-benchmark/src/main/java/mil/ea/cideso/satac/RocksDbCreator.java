@@ -295,17 +295,17 @@ public class RocksDbCreator extends MotorBD {
             getTimer().stop();
 
             System.out.println("Registros actualizados correctamente.");
-            System.out.println("Lista de registros actualizada: \n");
-            int i = 0;
-            rocksIter = null;
-            rocksIter = db.newIterator();
-            for (rocksIter.seekToFirst(); rocksIter.isValid(); rocksIter.next()) {
-                String key = new String(rocksIter.key(), StandardCharsets.UTF_8);
-                String val = new String(rocksIter.value(), StandardCharsets.UTF_8);
-                System.out.printf("%-5d Clave: %-15s Valor: %-15s\n", i, key, val);
-                i++;
-            }
-            rocksIter.close();
+            // System.out.println("Lista de registros actualizada: \n");
+            // int i = 0;
+            // rocksIter = null;
+            // rocksIter = db.newIterator();
+            // for (rocksIter.seekToFirst(); rocksIter.isValid(); rocksIter.next()) {
+            // String key = new String(rocksIter.key(), StandardCharsets.UTF_8);
+            // String val = new String(rocksIter.value(), StandardCharsets.UTF_8);
+            // System.out.printf("%-5d Clave: %-15s Valor: %-15s\n", i, key, val);
+            // i++;
+            // }
+            // rocksIter.close();
             getTimer().start();
             db.close();
             getTimer().stop();
