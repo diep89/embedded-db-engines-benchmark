@@ -62,16 +62,16 @@ public class Main {
         waitTime(waitMillis);
         if (cantidadAInsertar == -1) {
             System.out.print(
-                    "Indique la cantidad de registros a ingresar durante las operaciones de creación (1-1000): ");
+                    "Indique la cantidad de registros a ingresar durante las operaciones de creación (1-10000): ");
             cantidadAInsertar = input.nextInt();
             System.out.println("");
             do {
-                if (cantidadAInsertar < 1 || cantidadAInsertar > 1000) {
+                if (cantidadAInsertar < 1 || cantidadAInsertar > 10000) {
                     System.out.print("Error: cantidad inválida. Por favor, elija una cantidad válida: ");
                     cantidadAInsertar = input.nextInt();
                     System.out.println("");
                 }
-            } while (cantidadAInsertar < 1 || cantidadAInsertar > 1000);
+            } while (cantidadAInsertar < 1 || cantidadAInsertar > 10000);
         }
         // System.out.println("");
         waitTime(waitMillis);
@@ -223,3 +223,101 @@ public class Main {
     }
 
 }
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+     
+      
+     
+     
+     
+     
+      
+     
+      
+     
+     
+     
+      
+     
+     
+     
+      
+     
+     
+     
+     
+     
+     
+     
+      
+     
+     
+     
+      
+     
+     
+     
+      
+     
+     
+      
+     
+     
+     
+     
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+        
+         
+                 
+    
+
+    
+
+    
