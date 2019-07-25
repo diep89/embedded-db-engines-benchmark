@@ -22,6 +22,7 @@ public class ObjectBoxAmenazaWrapper {
 	}
 
 	public ObjectBoxAmenazaWrapper() {
+		this.amenaza = new ToOne<>(this, ObjectBoxAmenazaWrapper_.amenaza);
 	}
 
 	public boolean isVisible() {

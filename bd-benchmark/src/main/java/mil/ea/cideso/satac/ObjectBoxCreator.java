@@ -66,10 +66,10 @@ public class ObjectBoxCreator extends MotorBD {
 			ObjectBoxInformante informante = new ObjectBoxInformante();
 
 			// Declaración de relaciones entre objetos:
-			amenazaWrapper.amenaza.setTarget(amenaza);
 			getAmenazaWrapperBox().put(amenazaWrapper);
 			amenaza.amenazaWrapper.setTarget(amenazaWrapper);
 			getAmenazaBox().put(amenaza);
+			amenazaWrapper.amenaza.setTarget(amenaza);
 			tiempo.amenaza.setTarget(amenaza);
 			getTiempoBox().put(tiempo);
 			posicion.amenaza.setTarget(amenaza);
