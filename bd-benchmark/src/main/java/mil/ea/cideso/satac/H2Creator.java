@@ -4,10 +4,6 @@ import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-// import java.sql.ResultSet;
-import java.sql.Statement;
-// import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -22,13 +18,9 @@ public class H2Creator extends MotorBD {
     private int cantidadAInsertar;
 
     private String url;
-    private String sql;
 
     // Atributos para conexión SQL
     private static Connection conn;
-    private Statement stmt;
-    private PreparedStatement pstmt;
-    // private ResultSet rs;
 
     private EntityManagerFactory emf;
 
@@ -301,50 +293,34 @@ public class H2Creator extends MotorBD {
     // Función (opcional) para eliminar la BD generada
     @Override
     public void dropDatabase() {
-        setSql("DROP DATABASE " + getDbName() + ".db");
+        // setSql("DROP DATABASE " + getDbName() + ".db");
 
-        try {
-            getConnection(getUrl());
-            getStmt().execute(getSql());
-            if (getConn() != null) {
-                DatabaseMetaData meta = getConn().getMetaData();
-                System.out.println("Driver: " + meta.getDriverName());
-                System.out.println("La BD se ha eliminado correctamente.\n");
-            }
+        // try {
+        // getConnection(getUrl());
+        // getStmt().execute(getSql());
+        // if (getConn() != null) {
+        // DatabaseMetaData meta = getConn().getMetaData();
+        // System.out.println("Driver: " + meta.getDriverName());
+        // System.out.println("La BD se ha eliminado correctamente.\n");
+        // }
 
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            System.out.println("");
-        }
+        // } catch (SQLException e) {
+        // System.out.println(e.getMessage());
+        // System.out.println("");
+        // }
 
-        finally {
-            try {
-                if (getConn() != null)
-                    getConn().close();
-                if (getStmt() != null)
-                    getStmt().close();
-            } catch (SQLException e) {
-                System.out.println("Error.");
-                System.out.println("Detalle del error: \n" + e.getMessage());
-                System.exit(1);
-            }
-        }
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getSql() {
-        return sql;
-    }
-
-    public void setSql(String sql) {
-        this.sql = sql;
+        // finally {
+        // try {
+        // if (getConn() != null)
+        // getConn().close();
+        // if (getStmt() != null)
+        // getStmt().close();
+        // } catch (SQLException e) {
+        // System.out.println("Error.");
+        // System.out.println("Detalle del error: \n" + e.getMessage());
+        // System.exit(1);
+        // }
+        // }
     }
 
     public Connection getConn() {
@@ -358,22 +334,6 @@ public class H2Creator extends MotorBD {
             System.out.println(e.getMessage());
         }
         return conn;
-    }
-
-    public Statement getStmt() {
-        return stmt;
-    }
-
-    public void setStmt(Statement stmt) {
-        this.stmt = stmt;
-    }
-
-    public PreparedStatement getPstmt() {
-        return pstmt;
-    }
-
-    public void setPstmt(PreparedStatement pstmt) {
-        this.pstmt = pstmt;
     }
 
     // public ResultSet getRs() {
@@ -398,5 +358,13 @@ public class H2Creator extends MotorBD {
 
     public void setEmf(EntityManagerFactory emf) {
         this.emf = emf;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

@@ -23,10 +23,7 @@
 			<name>Mulesoft Repository</name>
 			<url>https://repository.mulesoft.org/nexus/content/repositories/public/</url>
 		</repository>
-		<!-- <repository> <id>Geomajas Repository</id> <name>Geomajas Repository</name> 
-			<url>http://maven.geomajas.org/</url> </repository> -->
 	</repositories>
-	
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -39,7 +36,7 @@
 		<dependency>
 			<groupId>org.xerial</groupId>
 			<artifactId>sqlite-jdbc</artifactId>
-			<version>3.27.2.1</version>
+			<version>3.28.0</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.db4o/com.db4o -->
 		<dependency>
@@ -47,9 +44,6 @@
 			<artifactId>com.db4o</artifactId>
 			<version>7.7.67</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.db4o/db4o-core-java5 -->
-		<!-- <dependency> <groupId>com.db4o</groupId> <artifactId>db4o-core-java5</artifactId> 
-			<version>8.0.184.15484</version> </dependency> -->
 		<!-- https://search.maven.org/artifact/org.rocksdb/rocksdbjni/6.0.1/jar -->
 		<dependency>
 			<groupId>org.rocksdb</groupId>
@@ -80,39 +74,6 @@
 			<artifactId>h2</artifactId>
 			<version>1.4.199</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
-		<!-- <dependency> <groupId>org.mongodb</groupId> <artifactId>mongo-java-driver</artifactId> 
-			<version>3.11.0-beta3</version> </dependency> -->
-		<!-- https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-embedded -->
-		<!-- <dependency> <groupId>org.mongodb</groupId> <artifactId>mongodb-driver-embedded</artifactId> 
-			<version>3.8.2</version> </dependency> -->
-		<!-- https://mvnrepository.com/artifact/de.flapdoodle.embed/de.flapdoodle.embed.mongo -->
-		<!-- <dependency> <groupId>de.flapdoodle.embed</groupId> <artifactId>de.flapdoodle.embed.mongo</artifactId> 
-			<version>2.2.0</version> </dependency> -->
-		<!-- https://mvnrepository.com/artifact/org.mongodb/mongodb-driver -->
-		<!-- <dependency> <groupId>org.mongodb</groupId> <artifactId>mongodb-driver</artifactId> 
-			<version>3.11.0-beta3</version> </dependency> -->
-		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
-		<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-api</artifactId> 
-			<version>1.8.0-beta4</version> </dependency> -->
-		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
-		<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-simple</artifactId> 
-			<version>1.8.0-beta4</version> </dependency> -->
-		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-jdk14 -->
-		<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-jdk14</artifactId> 
-			<version>1.8.0-beta4</version> </dependency> -->
-		<!-- <dependency> <groupId>org.apache.logging.log4j</groupId> <artifactId>log4j-api</artifactId> 
-			<version>2.9.0</version> </dependency> -->
-		<!-- <dependency> <groupId>ch.qos.logback</groupId> <artifactId>logback-classic</artifactId> 
-			<version>1.2.3</version> -->
-		<!-- </dependency> -->
-		
-		<!-- https://mvnrepository.com/artifact/net.ravendb/ravendb -->
-		<dependency>
-			<groupId>net.ravendb</groupId>
-			<artifactId>ravendb</artifactId>
-			<version>4.1.6</version>
-		</dependency>
 		<!-- Guava: Herramienta para implementar un timer -->
 		<dependency>
 			<groupId>com.google.guava</groupId>
@@ -131,7 +92,6 @@
 			<artifactId>hibernate-jpa-2.1-api</artifactId>
 			<version>1.0.2.Final</version>
 		</dependency> -->
-		<!-- Segunda opción: Habilitar para probar -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
@@ -305,42 +265,42 @@
 									<feature>text_search</feature>
 								</features>
 								<!-- optional, a list of MongoDB features to enable, default is none -->
-								
+
 								<imports>
 									<import>
 										<!-- <database>my_db</database> -->
 										<!-- optional, name of the database, if null it will fallback to 
 											defaultImportDatabase -->
-										
+
 										<collection>TestTable</collection>
 										<!-- required, name of the collection to import data -->
-										
+
 										<file>import_file.json</file>
 										<!-- required, name of the json file to import -->
-										
+
 										<!-- <upsertOnImport>true</upsertOnImport> -->
 										<!-- optional, default true, if true it will do an upsert on each 
 											document imported -->
-										
+
 										<!-- <dropOnImport>false</dropOnImport> -->
 										<!-- optional, default true, if true it will do a drop the collection 
 											before starts to import -->
-										
+
 										<!-- <timeout>20000</timeout> -->
 										<!-- optional, default 20000, it will fail if it takes more than 
 											this time importing a file (time in millis) -->
-										
+
 									</import>
 								</imports>
 								<!-- optional, More imports are accepted and it will be executed 
 									in strict order (if parallel is not set) -->
-								
+
 								<initializations>
 									<initialization>
 										<databaseName>testDb-MongoDB</databaseName>
 										<!-- required, The name of the database to execute the scripts 
 											on -->
-										
+
 										<scripts>
 											<script>/home/me/stuff/scriptDirectory</script>
 											<script>/home/me/stuff/scriptFile.js</script>

@@ -1,7 +1,6 @@
 package mil.ea.cideso.satac;
 
 import javax.persistence.Entity;
-// import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;

@@ -9,11 +9,7 @@ package mil.ea.cideso.satac;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-// import java.util.Iterator;
 import java.util.List;
 import java.sql.DatabaseMetaData;
 
@@ -29,19 +25,15 @@ public class SqliteCreator extends MotorBD {
     private int cantidadAInsertar;
 
     private String url;
-    private String sql;
 
     // Atributos para conexión SQL
     private static Connection conn = null;
-    private Statement stmt;
-    private PreparedStatement pstmt;
-    private ResultSet rs;
 
     private EntityManagerFactory emf;
 
     public SqliteCreator() {
         setEngineName("SQLite");
-        setEngineVersion("3.27.2.1");
+        setEngineVersion("3.28.0");
         setProviderName("Hibernate");
         setProviderVersion("5.4.3");
     }
@@ -324,34 +316,34 @@ public class SqliteCreator extends MotorBD {
     // Función (opcional) para eliminar la BD generada
     @Override
     public void dropDatabase() {
-        setSql("DROP DATABASE " + getDbName() + ".db");
+        // setSql("DROP DATABASE " + getDbName() + ".db");
 
-        try {
-            getConnection(getUrl());
-            getStmt().execute(getSql());
-            if (getConn() != null) {
-                DatabaseMetaData meta = getConn().getMetaData();
-                System.out.println("Driver: " + meta.getDriverName());
-                System.out.println("La BD se ha eliminado correctamente.\n");
-            }
+        // try {
+        // getConnection(getUrl());
+        // getStmt().execute(getSql());
+        // if (getConn() != null) {
+        // DatabaseMetaData meta = getConn().getMetaData();
+        // System.out.println("Driver: " + meta.getDriverName());
+        // System.out.println("La BD se ha eliminado correctamente.\n");
+        // }
 
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            System.out.println("");
-        }
+        // } catch (SQLException e) {
+        // System.out.println(e.getMessage());
+        // System.out.println("");
+        // }
 
-        finally {
-            try {
-                if (getConn() != null)
-                    getConn().close();
-                if (getStmt() != null)
-                    getStmt().close();
-            } catch (SQLException e) {
-                System.out.println("Error.");
-                System.out.println("Detalle del error: \n" + e.getMessage());
-                System.exit(1);
-            }
-        }
+        // finally {
+        // try {
+        // if (getConn() != null)
+        // getConn().close();
+        // if (getStmt() != null)
+        // getStmt().close();
+        // } catch (SQLException e) {
+        // System.out.println("Error.");
+        // System.out.println("Detalle del error: \n" + e.getMessage());
+        // System.exit(1);
+        // }
+        // }
 
     }
 
@@ -369,30 +361,6 @@ public class SqliteCreator extends MotorBD {
 
     public Connection getConn() {
         return conn;
-    }
-
-    public Statement getStmt() {
-        return stmt;
-    }
-
-    public void setStmt(Statement stmt) {
-        this.stmt = stmt;
-    }
-
-    public PreparedStatement getPstmt() {
-        return pstmt;
-    }
-
-    public void setPstmt(PreparedStatement pstmt) {
-        this.pstmt = pstmt;
-    }
-
-    public ResultSet getRs() {
-        return rs;
-    }
-
-    public void setRs(ResultSet rs) {
-        this.rs = rs;
     }
 
     public int getCantidadAInsertar() {
@@ -415,20 +383,6 @@ public class SqliteCreator extends MotorBD {
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    /**
-     * @return the sql
-     */
-    public String getSql() {
-        if (sql == null) {
-            sql = new String();
-        }
-        return sql;
-    }
-
-    public void setSql(String sql) {
-        this.sql = sql;
     }
 
     public EntityManagerFactory getEmf() {

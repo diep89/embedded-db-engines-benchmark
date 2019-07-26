@@ -32,8 +32,6 @@ public class Main {
         ObjectBoxCreator objectBox = new ObjectBoxCreator();
         RocksDbCreator rocks = new RocksDbCreator();
         H2Creator h2 = new H2Creator();
-        // MongoDbCreator mongo = new MongoDbCreator();
-        // RavenDbCreator raven = new RavenDbCreator();
 
         // Creación de lista que contiene las instancias creadas anteriormente.
         List<MotorBD> ll = new LinkedList<>();
@@ -42,8 +40,6 @@ public class Main {
         ll.add(objectBox);
         ll.add(rocks);
         ll.add(h2);
-        // ll.add(mongo);
-        // ll.add(raven);
 
         System.out.println("Practica Profesional Supervisada");
         waitTime(waitMillis);
