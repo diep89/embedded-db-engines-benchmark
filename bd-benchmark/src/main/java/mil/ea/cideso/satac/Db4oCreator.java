@@ -29,8 +29,12 @@ public class Db4oCreator extends MotorBD {
     public void createNewDatabase(String dbName) {
         setDbName(dbName);
         try {
+            getTimer().start();
             db = getDb(getDbName());
+            getTimer().stop();
             System.out.println("La BD se ha generado correctamente.\n");
+            setStatsCreateOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
+            setTimer(getTimer().reset()); // Reseteo el timer.
         } catch (Db4oException e) {
             e.printStackTrace(System.err);
         } finally {
@@ -67,7 +71,7 @@ public class Db4oCreator extends MotorBD {
 
             System.out.println("");
             System.out.println("");
-            setStatsCreateOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
+            setStatsInsertOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
             setTimer(getTimer().reset()); // Reseteo el timer.
         } catch (Db4oException e) {
             e.printStackTrace(System.err);

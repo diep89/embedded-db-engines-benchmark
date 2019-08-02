@@ -180,16 +180,18 @@ public class Main {
         System.out.println("");
 
         waitTime(waitMillis);
-        System.out.printf("%-15s %-15s %-15s %-15s %-15s", "Motor", "Create", "Read", "Update", "Delete");
+        System.out.printf("%-15s %-15s %-15s %-15s %-15s %-15s", "Motor", "Create", "Insert", "Read", "Update",
+                "Delete");
         System.out.println("");
         System.out.println("");
 
         Iterator<MotorBD> itrResults = ll.iterator();
         while (itrResults.hasNext()) {
             MotorBD element = itrResults.next();
-            System.out.printf("%-15s %-15s %-15s %-15s %-15s\n", element.getEngineName(),
-                    element.getStatsCreateOperation(), element.getStatsReadOperation(),
-                    element.getStatsUpdateOperation(), element.getStatsDeleteOperation());
+            System.out.printf("%-15s %-15s %-15s %-15s %-15s %-15s\n", element.getEngineName(),
+                    element.getStatsCreateOperation(), element.getStatsInsertOperation(),
+                    element.getStatsReadOperation(), element.getStatsUpdateOperation(),
+                    element.getStatsDeleteOperation());
         }
 
         System.out.println("");

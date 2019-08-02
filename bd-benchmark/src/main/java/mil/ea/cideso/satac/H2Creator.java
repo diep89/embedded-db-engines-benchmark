@@ -38,11 +38,15 @@ public class H2Creator extends MotorBD {
         setUrl("jdbc:h2:./" + getDbName());
 
         try {
+            getTimer().start();
             getConnection(getUrl());
+            getTimer().stop();
             if (getConn() != null) {
                 DatabaseMetaData meta = getConn().getMetaData();
                 System.out.println("Driver: " + meta.getDriverName());
                 System.out.println("La BD se ha generado correctamente.\n");
+                setStatsCreateOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
+                setTimer(getTimer().reset()); // Reseteo el timer.
             }
 
         } catch (SQLException e) {

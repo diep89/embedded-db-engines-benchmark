@@ -31,7 +31,11 @@ public class ObjectBoxCreator extends MotorBD {
 	public void createNewDatabase(String dbName) {
 		setDbName(dbName);
 		try {
+			getTimer().start();
 			createMyObjectBox(dbName);
+			getTimer().stop();
+			setStatsCreateOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
+			setTimer(getTimer().reset()); // Reseteo el timer.
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -93,7 +97,7 @@ public class ObjectBoxCreator extends MotorBD {
 		System.out.println("");
 		System.out.println("");
 
-		setStatsCreateOperation(getTimer().toString()); // Guardo el timer para operación CREATE.
+		setStatsInsertOperation(getTimer().toString()); // Guardo el timer para operación CREATE.
 		setTimer(getTimer().reset()); // Reseteo el timer.
 	}
 

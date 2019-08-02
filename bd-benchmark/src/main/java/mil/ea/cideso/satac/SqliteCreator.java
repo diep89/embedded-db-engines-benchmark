@@ -46,11 +46,15 @@ public class SqliteCreator extends MotorBD {
         setUrl("jdbc:sqlite:" + getDbName() + ".db");
 
         try {
+            getTimer().start();
             getConnection(getUrl());
+            getTimer().stop();
             if (getConn() != null) {
                 DatabaseMetaData meta = getConn().getMetaData();
                 System.out.println("Driver: " + meta.getDriverName());
                 System.out.println("La BD se ha generado correctamente.\n");
+                setStatsCreateOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
+                setTimer(getTimer().reset()); // Reseteo el timer.
             }
 
         } catch (SQLException e) {
@@ -139,7 +143,7 @@ public class SqliteCreator extends MotorBD {
         System.out.println("");
         System.out.println("");
 
-        setStatsCreateOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
+        setStatsInsertOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
         setTimer(getTimer().reset()); // Reseteo el timer.
     }
 

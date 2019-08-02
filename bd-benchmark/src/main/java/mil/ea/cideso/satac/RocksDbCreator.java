@@ -178,9 +178,13 @@ public class RocksDbCreator extends MotorBD {
         setDbName(dbName);
 
         try {
+            getTimer().start();
             RocksDB db = getDb(getDbName());
+            getTimer().stop();
             System.out.println("La BD se ha generado correctamente.\n");
             db.close();
+            setStatsCreateOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
+            setTimer(getTimer().reset()); // Reseteo el timer.
         } catch (RocksDBException e) {
             e.printStackTrace(System.err);
         }
@@ -222,7 +226,7 @@ public class RocksDbCreator extends MotorBD {
 
             System.out.println("");
             System.out.println("");
-            setStatsCreateOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
+            setStatsInsertOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
             setTimer(getTimer().reset()); // Reseteo el timer.
 
         } catch (

@@ -16,10 +16,11 @@ public abstract class MotorBD {
     // Stopwatch timer = Stopwatch.createUnstarted();
 
     // Atributos para guardar resultados de pruebas
-    String statsCreateOperation;
-    String statsReadOperation;
-    String statsUpdateOperation;
-    String statsDeleteOperation;
+    private String statsCreateOperation;
+    private String statsInsertOperation;
+    private String statsReadOperation;
+    private String statsUpdateOperation;
+    private String statsDeleteOperation;
 
     // Métodos
     public abstract void createNewDatabase(String dbName) throws IOException;
@@ -161,6 +162,14 @@ public abstract class MotorBD {
 
     public void setProviderVersion(String providerVersion) {
         this.providerVersion = providerVersion;
+    }
+
+    public String getStatsInsertOperation() {
+        return statsInsertOperation;
+    }
+
+    public void setStatsInsertOperation(String statsInsertOperation) {
+        this.statsInsertOperation = statsInsertOperation;
     }
 
     // Funciones para configurar test automatizado
