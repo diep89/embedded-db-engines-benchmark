@@ -1,6 +1,9 @@
 package mil.ea.cideso.satac;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import com.google.common.base.Stopwatch;
 
@@ -34,6 +37,125 @@ public abstract class MotorBD {
     public abstract void deleteData();
 
     public abstract void dropDatabase();
+
+    // Método para generar Amenazas (para operación INSERT)
+    // Recibe el parámetro id, el cual será establecido como el id
+    // del objeto AmenazaWrapper dentro de la BD.
+    // Devuelve una lista con todos los objetos que componen la amenaza generada.
+    public List<Object> generarAmenazaWrapper(int id) {
+        List<Object> newAmenazaList = new ArrayList<>();
+
+        Tiempo tiempo = new Tiempo();
+        tiempo.setEpoch(1);
+        newAmenazaList.add(tiempo);
+
+        Posicion posicion = new Posicion();
+        posicion.setLatitud(1.5);
+        posicion.setLongitud(1.5);
+        posicion.setMilisegundosFechaHora(1);
+        newAmenazaList.add(posicion);
+
+        Equipamiento equipamiento = new Equipamiento();
+        equipamiento.setCantidad(1);
+        equipamiento.setEquipo(1);
+        equipamiento.setTipo(1);
+        newAmenazaList.add(equipamiento);
+
+        Equipamiento equipamiento2 = new Equipamiento();
+        equipamiento2.setCantidad(1);
+        equipamiento2.setEquipo(1);
+        equipamiento2.setTipo(1);
+        newAmenazaList.add(equipamiento2);
+
+        Equipamiento equipamiento3 = new Equipamiento();
+        equipamiento3.setCantidad(1);
+        equipamiento3.setEquipo(1);
+        equipamiento3.setTipo(1);
+        newAmenazaList.add(equipamiento3);
+
+        List<Equipamiento> equipamientoList = new ArrayList<>();
+        equipamientoList.add(equipamiento);
+        equipamientoList.add(equipamiento2);
+        equipamientoList.add(equipamiento3);
+
+        Informante informante = new Informante();
+        newAmenazaList.add(informante);
+
+        Amenaza amenaza = new Amenaza();
+        amenaza.setTiempo(tiempo);
+        amenaza.setCodigoSimbolo(1);
+        amenaza.setPosicion(posicion);
+        amenaza.setRadioAccion(1);
+        amenaza.setIdentificacion(1);
+        amenaza.setTamanios(1);
+        amenaza.setEquipamientoList(equipamientoList);
+        amenaza.setInformante(informante);
+        newAmenazaList.add(amenaza);
+
+        AmenazaWrapper amenazaWrapper = new AmenazaWrapper(id, amenaza, true, false);
+        newAmenazaList.add(amenazaWrapper);
+
+        return newAmenazaList;
+    }
+
+    // Método para generar Amenazas (para operación UPDATE)
+    // Recibe el objeto AmenazaWrapper para poder acceder a todos los
+    // objetos ligados a este (Amenaza, Tiempo, EquipamientoList, etc).
+    public void updateAmenazaWrapper(AmenazaWrapper amenazaWrapper) {
+        amenazaWrapper.getAmenaza().setCodigoSimbolo(2);
+        amenazaWrapper.getAmenaza().setRadioAccion(2);
+        amenazaWrapper.getAmenaza().setIdentificacion(2);
+        amenazaWrapper.getAmenaza().setTamanios(2);
+
+        amenazaWrapper.getAmenaza().getTiempo().setEpoch(2);
+
+        amenazaWrapper.getAmenaza().getPosicion().setLatitud(2.5);
+        amenazaWrapper.getAmenaza().getPosicion().setLongitud(2.5);
+        amenazaWrapper.getAmenaza().getPosicion().setMilisegundosFechaHora(2);
+
+        List<Equipamiento> equipamientoList = amenazaWrapper.getAmenaza().getEquipamientoList();
+        Iterator<Equipamiento> itrEquipamiento = equipamientoList.iterator();
+
+        while (itrEquipamiento.hasNext()) {
+            Equipamiento equip = itrEquipamiento.next();
+            equip.setCantidad(2);
+            equip.setEquipo(2);
+            equip.setTipo(2);
+        }
+
+        amenazaWrapper.setLeido(true);
+    }
+
+    // Método para devolver todos los elementos que componen una amenaza.
+    // Recibe el objeto AmenazaWrapper para poder acceder a todos los
+    // objetos ligados a este (Amenaza, Tiempo, EquipamientoList, etc).
+    // Devuelve una lista con todos los objetos que componen la amenaza.
+    public List<Object> obtenerAmenazaWrapper(AmenazaWrapper amenazaWrapper) {
+
+        List<Object> amenazaWrapperList = new ArrayList<>();
+
+        Amenaza amenaza = amenazaWrapper.getAmenaza();
+        amenazaWrapperList.add(amenaza);
+
+        Tiempo tiempo = amenaza.getTiempo();
+        amenazaWrapperList.add(tiempo);
+
+        Informante informante = amenaza.getInformante();
+        amenazaWrapperList.add(informante);
+
+        Posicion posicion = amenaza.getPosicion();
+        amenazaWrapperList.add(posicion);
+
+        List<Equipamiento> equipamientoList = amenaza.getEquipamientoList();
+        Iterator<Equipamiento> equipamientoListItr = equipamientoList.iterator();
+
+        while (equipamientoListItr.hasNext()) {
+            Equipamiento equip = equipamientoListItr.next();
+            amenazaWrapperList.add(equip);
+        }
+
+        return amenazaWrapperList;
+    }
 
     // Getters y Setters
     /**

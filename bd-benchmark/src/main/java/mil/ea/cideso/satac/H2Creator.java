@@ -4,6 +4,7 @@ import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -81,44 +82,33 @@ public class H2Creator extends MotorBD {
             setEmf(Persistence.createEntityManagerFactory("H2Persistence"));
 
             for (int i = 0; i < getCantidadAInsertar(); i++) {
-                Tiempo tiempo = new Tiempo(i, 1);
-                Posicion posicion = new Posicion(i, 1.5, 1.5, 1);
-                Equipamiento equipamiento = new Equipamiento(i, 1, 1, 1);
-                Informante informante = new Informante(i);
-                Amenaza amenaza = new Amenaza(i, tiempo, 1, posicion, 1, 1, 1, equipamiento, informante);
-                AmenazaWrapper amenazaWrapper = new AmenazaWrapper(i, amenaza, true, false);
 
-                // Declaro relaciones
-                amenazaWrapper.setAmenaza(amenaza);
-                amenaza.setAmenazaWrapper(amenazaWrapper);
-                amenaza.setInformante(informante);
-                amenaza.setEquipamiento(equipamiento);
-                amenaza.setPosicion(posicion);
-                amenaza.setTiempo(tiempo);
-                informante.setAmenaza(amenaza);
-                equipamiento.setAmenaza(amenaza);
-                posicion.setAmenaza(amenaza);
-                tiempo.setAmenaza(amenaza);
+                // generarAmenazaWrapperInsert() genera todos los objetos que componen una
+                // amenaza, con todos sus atributos inicializados y todas sus relaciones
+                // declaradas, y los devuelve en una lista.
+                List<Object> newAmenazaList = generarAmenazaWrapper(i);
+                Iterator<Object> newAmenazaListItr = newAmenazaList.iterator();
 
-                // Persisto objetos
                 EntityManager em = getEmf().createEntityManager();
                 EntityTransaction txn = em.getTransaction();
                 txn.begin();
-                em.persist(amenazaWrapper);
-                em.persist(amenaza);
-                em.persist(informante);
-                em.persist(equipamiento);
-                em.persist(posicion);
-                em.persist(tiempo);
+
+                while (newAmenazaListItr.hasNext()) {
+                    Object element = newAmenazaListItr.next();
+                    em.persist(element);
+                }
+
                 txn.commit();
                 em.close();
 
                 getTimer().stop();
+
                 if (i + 1 < getCantidadAInsertar()) {
                     System.out.print((i + 1) + " - ");
                 } else {
                     System.out.print((i + 1) + ".");
                 }
+
                 getTimer().start();
             }
         } catch (PersistenceException e) {
@@ -134,14 +124,8 @@ public class H2Creator extends MotorBD {
         System.out.println("");
         System.out.println("");
 
-        // Forma de tomar el tiempo alternativa.
-        // tiempoFin = System.currentTimeMillis();
-        // tiempoTest = tiempoFin - tiempoInicio;
-        // (tiempoTest / 1000)
-
-        setStatsCreateOperation(getTimer().toString());
+        setStatsInsertOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
         setTimer(getTimer().reset()); // Reseteo el timer.
-
     }
 
     // Función para operación READ
@@ -195,39 +179,22 @@ public class H2Creator extends MotorBD {
             for (int i = 0; i < getCantidadAInsertar(); i++) {
                 EntityManager em = getEmf().createEntityManager();
                 AmenazaWrapper amenazaWrapper = em.find(AmenazaWrapper.class, i);
+
                 EntityTransaction txn = em.getTransaction();
                 txn.begin();
-                amenazaWrapper.getAmenaza().getTiempo().setEpoch(2);
-                amenazaWrapper.getAmenaza().setCodigoSimbolo(2);
-                amenazaWrapper.getAmenaza().getPosicion().setLatitud(2.5);
-                amenazaWrapper.getAmenaza().getPosicion().setLongitud(2.5);
-                amenazaWrapper.getAmenaza().getPosicion().setMilisegundosFechaHora(2);
-                amenazaWrapper.getAmenaza().setRadioAccion(2);
-                amenazaWrapper.getAmenaza().setIdentificacion(2);
-                amenazaWrapper.getAmenaza().setTamanios(2);
-                amenazaWrapper.getAmenaza().getEquipamiento().setCantidad(2);
-                amenazaWrapper.getAmenaza().getEquipamiento().setEquipo(2);
-                amenazaWrapper.getAmenaza().getEquipamiento().setTipo(2);
-                amenazaWrapper.setLeido(true);
+
+                // generarAmenazaWrapperUpdate() recibe el objeto amenazaWrapper (obtenido de la
+                // BD) y modifica el valor de todos sus atributos, como también, el valor de
+                // todos los atributos de todos los objetos que componen la Amenaza (Amenaza,
+                // Tiempo, Posicion, etc).
+                updateAmenazaWrapper(amenazaWrapper);
+
                 txn.commit();
                 em.close();
             }
 
             getTimer().stop();
 
-            // Comprobación
-            // EntityManager em = getEmf().createEntityManager();
-            // TypedQuery<AmenazaWrapper> query = em.createQuery("SELECT p FROM
-            // AmenazaWrapper p", AmenazaWrapper.class);
-            // List<AmenazaWrapper> results = query.getResultList();
-            // Iterator<AmenazaWrapper> itr = results.iterator();
-
-            // while (itr.hasNext()) {
-            // AmenazaWrapper el = itr.next();
-            // System.out.printf("AmenazaWrapper\nId: %d\nLeido: %b\nVisible: %b\n\n",
-            // el.getId(), el.isLeido(),
-            // el.isVisible());
-            // }
         }
 
         catch (PersistenceException e) {
@@ -251,23 +218,25 @@ public class H2Creator extends MotorBD {
             getTimer().start();
 
             for (int i = 0; i < getCantidadAInsertar(); i++) {
+
                 EntityManager em = getEmf().createEntityManager();
                 AmenazaWrapper amenazaWrapper = em.find(AmenazaWrapper.class, i);
-                Amenaza amenaza = em.find(Amenaza.class, i);
-                Tiempo tiempo = em.find(Tiempo.class, i);
-                Equipamiento equipamiento = em.find(Equipamiento.class, i);
-                Informante informante = em.find(Informante.class, i);
-                Posicion posicion = em.find(Posicion.class, i);
+                List<Object> amenazaWrapperList = obtenerAmenazaWrapper(amenazaWrapper);
+                Iterator<Object> amenazaWrapperListItr = amenazaWrapperList.iterator();
+
                 EntityTransaction txn = em.getTransaction();
                 txn.begin();
+
+                while (amenazaWrapperListItr.hasNext()) {
+                    Object element = amenazaWrapperListItr.next();
+                    em.remove(element);
+                }
+
                 em.remove(amenazaWrapper);
-                em.remove(amenaza);
-                em.remove(tiempo);
-                em.remove(equipamiento);
-                em.remove(informante);
-                em.remove(posicion);
+
                 txn.commit();
                 em.close();
+
             }
 
             getTimer().stop();

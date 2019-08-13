@@ -1,17 +1,23 @@
 package mil.ea.cideso.satac;
 
+import io.objectbox.BoxStore;
 import io.objectbox.annotation.Entity;
 import io.objectbox.annotation.Id;
+import io.objectbox.annotation.Transient;
 import io.objectbox.relation.ToOne;
 
 @Entity
 public class ObjectBoxEquipamiento {
-    @Id(assignable = true)
+    @Id
     private long id;
     private int cantidad;
     private int equipo;
     private int tipo;
+    public long amenazaId;
     public ToOne<ObjectBoxAmenaza> amenaza;
+
+    @Transient
+    BoxStore __boxStore;
 
     public ObjectBoxEquipamiento() {
         this.amenaza = new ToOne<>(this, ObjectBoxEquipamiento_.amenaza);
@@ -54,5 +60,21 @@ public class ObjectBoxEquipamiento {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public long getAmenazaId() {
+        return amenazaId;
+    }
+
+    public void setAmenazaId(long amenazaId) {
+        this.amenazaId = amenazaId;
+    }
+
+    public ObjectBoxAmenaza getAmenaza() {
+        return amenaza.getTarget();
+    }
+
+    public void setAmenaza(ObjectBoxAmenaza amenaza) {
+        this.amenaza.setTarget(amenaza);
     }
 }

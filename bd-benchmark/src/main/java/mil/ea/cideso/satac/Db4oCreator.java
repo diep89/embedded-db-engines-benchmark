@@ -3,6 +3,7 @@ package mil.ea.cideso.satac;
 import mil.ea.cideso.satac.AmenazaWrapper;
 
 import java.util.Iterator;
+import java.util.List;
 
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
@@ -51,13 +52,14 @@ public class Db4oCreator extends MotorBD {
             db = getDb(getDbName());
 
             for (int i = 0; i < cantidadAInsertar; i++) {
-                Tiempo tiempo = new Tiempo(i, 1);
-                Posicion posicion = new Posicion(i, 1.5, 1.5, 1);
-                Equipamiento equipamiento = new Equipamiento(i, 1, 1, 1);
-                Informante informante = new Informante(i);
-                Amenaza amenaza = new Amenaza(i, tiempo, 1, posicion, 1, 1, 1, equipamiento, informante);
-                AmenazaWrapper amenazaWrapper = new AmenazaWrapper(i, amenaza, true, false);
-                db.store(amenazaWrapper);
+                List<Object> newAmenazaList = generarAmenazaWrapper(i);
+                Iterator<Object> newAmenazaListItr = newAmenazaList.iterator();
+
+                while (newAmenazaListItr.hasNext()) {
+                    Object element = newAmenazaListItr.next();
+                    db.store(element);
+                }
+
                 getTimer().stop();
                 if (i + 1 < cantidadAInsertar) {
                     System.out.print((i + 1) + " - ");
@@ -94,6 +96,23 @@ public class Db4oCreator extends MotorBD {
                 System.out.println("Registros leídos correctamente.\n");
             }
 
+            // Comprobacion
+            // Query query2 = db.query();
+            // query2.constrain(AmenazaWrapper.class);
+            // ObjectSet<AmenazaWrapper> result2 = query2.execute();
+            // Iterator<AmenazaWrapper> itr2 = result2.iterator();
+
+            // while (itr2.hasNext()) {
+            // AmenazaWrapper amenazaWrapper = itr2.next();
+            // System.out.println("");
+            // System.out.printf("AmenazaWrapper Id: %d\n", amenazaWrapper.getId());
+            // System.out.printf("AmenazaWrapper Leido: %b\n", amenazaWrapper.isLeido());
+            // System.out.printf(" Amenaza Id: %d\n", amenazaWrapper.getAmenaza().getId());
+            // System.out.printf(" codigoSimbolo: %d\n",
+            // amenazaWrapper.getAmenaza().getCodigoSimbolo());
+            // System.out.println("");
+            // }
+
             getTimer().start();
             db.close();
             getTimer().stop();
@@ -119,19 +138,7 @@ public class Db4oCreator extends MotorBD {
 
             while (itr.hasNext()) {
                 AmenazaWrapper amenazaWrapper = itr.next();
-                amenazaWrapper.getAmenaza().getTiempo().setEpoch(2);
-                amenazaWrapper.getAmenaza().setCodigoSimbolo(2);
-                amenazaWrapper.getAmenaza().getPosicion().setLatitud(2.5);
-                amenazaWrapper.getAmenaza().getPosicion().setLongitud(2.5);
-                amenazaWrapper.getAmenaza().getPosicion().setMilisegundosFechaHora(2);
-                amenazaWrapper.getAmenaza().setRadioAccion(2);
-                amenazaWrapper.getAmenaza().setIdentificacion(2);
-                amenazaWrapper.getAmenaza().setTamanios(2);
-                amenazaWrapper.getAmenaza().getEquipamiento().setCantidad(2);
-                amenazaWrapper.getAmenaza().getEquipamiento().setEquipo(2);
-                amenazaWrapper.getAmenaza().getEquipamiento().setTipo(2);
-                amenazaWrapper.setLeido(true);
-                db.store(amenazaWrapper);
+                updateAmenazaWrapper(amenazaWrapper);
             }
 
             db.close();

@@ -27,19 +27,19 @@ public class Main {
         int waitMillis = 1500;
 
         // Instanciación de las clases creadoras de BD.
-        SqliteCreator sqlite = new SqliteCreator();
-        Db4oCreator db4o = new Db4oCreator();
-        ObjectBoxCreator objectBox = new ObjectBoxCreator();
+        // SqliteCreator sqlite = new SqliteCreator();
+        // Db4oCreator db4o = new Db4oCreator();
+        // ObjectBoxCreator objectBox = new ObjectBoxCreator();
         RocksDbCreator rocks = new RocksDbCreator();
-        H2Creator h2 = new H2Creator();
+        // H2Creator h2 = new H2Creator();
 
         // Creación de lista que contiene las instancias creadas anteriormente.
         List<MotorBD> ll = new LinkedList<>();
-        ll.add(sqlite);
-        ll.add(db4o);
-        ll.add(objectBox);
+        // ll.add(sqlite);
+        // ll.add(db4o);
+        // ll.add(objectBox);
         ll.add(rocks);
-        ll.add(h2);
+        // ll.add(h2);
 
         System.out.println("Practica Profesional Supervisada");
         waitTime(waitMillis);
@@ -54,7 +54,8 @@ public class Main {
         System.out.println("***\n");
         System.out.println("Inicio de test automatizado\n");
         waitTime(waitMillis);
-        System.out.println("Se realizarán operaciones CRUD (Create, Read, Update, Delete).\n");
+        System.out.println(
+                "Se realizarán 5 operaciones por motor:\n1) CREATE: Creación de la BD.\n2) INSERT: Alta de registros.\n3) READ: Lectura de los regitros.\n4) UPDATE: Modificación de registros.\n5) DELETE: Baja de registros.\n");
         waitTime(waitMillis);
         if (cantidadAInsertar == -1) {
             System.out.print(
@@ -78,13 +79,14 @@ public class Main {
 
         while (itr.hasNext()) {
             MotorBD element = itr.next();
-            System.out.printf("Motor %d: %s v%s\n\n", counter, element.getEngineName(), element.getEngineVersion());
+            System.out.printf("**********\n\n");
+            System.out.printf("Motor %d: %s v%s\n", counter, element.getEngineName(), element.getEngineVersion());
             if (element.getProviderName() != null) {
-                System.out.printf("Provider: %s v%s\n\n", element.getProviderName(), element.getProviderVersion());
+                System.out.printf("\nProvider: %s v%s\n", element.getProviderName(), element.getProviderVersion());
                 System.out.println("Mensajes LOG: SEVERE.");
                 waitTime(waitMillis);
-                System.out.println("");
             }
+            System.out.println("");
             waitTime(waitMillis);
             System.out.println("1. Operación CREATE:\n");
             waitTime(waitMillis);
@@ -93,24 +95,30 @@ public class Main {
 
             waitTime(2000);
 
-            // Mensaje informativo.
-            // Pedido de ingreso de cantidad de registros a generar.
+            System.out.println("Motor: " + element.getEngineName() + "\nOperación 'CREATE' finalizada.\n");
+            waitTime(waitMillis);
+            System.out.println("");
+
+            System.out.println("2. Operación INSERT:\n");
+            waitTime(waitMillis);
             System.out.println("Generación y alta de registros en la BD.");
             waitTime(waitMillis);
 
             System.out.println("Se ingresarán " + cantidadAInsertar + " registros en la BD.\n");
             waitTime(waitMillis);
 
-            // Operación CREATE (Alta de registros)
+            // Operación INSERT (Alta de registros)
             element.insertData(cantidadAInsertar);
 
-            System.out.println("Motor: " + element.getEngineName() + "\nOperación 'CREATE' finalizada.\n");
+            // Mensaje informativo
+            System.out.println("Motor: " + element.getEngineName() + "\nOperación 'INSERT' finalizada.\n");
             waitTime(waitMillis);
-
             System.out.println("");
 
+            pressEnter();
+
             // OPERACIÓN READ
-            System.out.println("2. Operación READ:\n");
+            System.out.println("3. Operación READ:\n");
             waitTime(waitMillis);
             System.out.println("Se leerán los registros ingresados en la BD.\n");
             waitTime(waitMillis);
@@ -123,8 +131,10 @@ public class Main {
             waitTime(waitMillis);
             System.out.println("");
 
+            pressEnter();
+
             // OPERACIÓN UPDATE
-            System.out.println("3. Operación UPDATE:\n");
+            System.out.println("4. Operación UPDATE:\n");
             waitTime(waitMillis);
             System.out.println("Se actualizarán los registros ingresados en la BD con nuevos datos.\n");
             waitTime(waitMillis);
@@ -135,8 +145,10 @@ public class Main {
             waitTime(waitMillis);
             System.out.println("");
 
+            pressEnter();
+
             // OPERACIÓN DELETE
-            System.out.println("4. Operación DELETE:\n");
+            System.out.println("5. Operación DELETE:\n");
             waitTime(waitMillis);
             System.out.println("Se eliminarán los registros ingresados en la BD.\n");
             waitTime(waitMillis);
@@ -146,6 +158,8 @@ public class Main {
             System.out.println("Motor: " + element.getEngineName() + "\nOperación 'DELETE' finalizada.\n");
             waitTime(waitMillis);
             System.out.println("");
+
+            pressEnter();
 
             // EXTRA
             // do {
@@ -176,7 +190,7 @@ public class Main {
         System.out.println("***");
         System.out.println("");
         System.out.println("Resultados del benchmark");
-        System.out.println("Operaciones CRUD (Create, Read, Update, Delete)");
+        System.out.println("Operaciones: Create, Insert, Read, Update, Delete.");
         System.out.println("");
 
         waitTime(waitMillis);

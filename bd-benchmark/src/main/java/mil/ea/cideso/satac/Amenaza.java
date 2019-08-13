@@ -1,20 +1,21 @@
 package mil.ea.cideso.satac;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import mil.ea.cideso.satac.Equipamiento;
-import mil.ea.cideso.satac.Tiempo;
-import mil.ea.cideso.satac.Posicion;
-import mil.ea.cideso.satac.Informante;
 
 @Entity
 @Table
 public class Amenaza {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @OneToOne
     private Tiempo tiempo;
@@ -24,27 +25,24 @@ public class Amenaza {
     private int radioAccion;
     private int identificacion;
     private int tamanios;
-    @OneToOne
-    private Equipamiento equipamiento;
+    @OneToMany(targetEntity = Equipamiento.class)
+    private List<Equipamiento> equipamientoList;
     @OneToOne
     private Informante informante;
-    @OneToOne
-    private AmenazaWrapper amenazaWrapper;
 
     public Amenaza() {
 
     }
 
-    public Amenaza(int id, Tiempo tiempo, int codigoSimbolo, Posicion posicion, int radioAccion, int identificacion,
-            int tamanios, Equipamiento equipamiento, Informante informante) {
-        this.id = id;
+    public Amenaza(Tiempo tiempo, int codigoSimbolo, Posicion posicion, int radioAccion, int identificacion,
+            int tamanios, List<Equipamiento> equipamientoList, Informante informante) {
         this.tiempo = tiempo;
         this.codigoSimbolo = codigoSimbolo;
         this.posicion = posicion;
         this.radioAccion = radioAccion;
         this.identificacion = identificacion;
         this.tamanios = tamanios;
-        this.equipamiento = equipamiento;
+        this.equipamientoList = equipamientoList;
         this.informante = informante;
     }
 
@@ -104,14 +102,6 @@ public class Amenaza {
         this.tamanios = tamanios;
     }
 
-    public Equipamiento getEquipamiento() {
-        return equipamiento;
-    }
-
-    public void setEquipamiento(Equipamiento equipamiento) {
-        this.equipamiento = equipamiento;
-    }
-
     public Informante getInformante() {
         return informante;
     }
@@ -120,12 +110,12 @@ public class Amenaza {
         this.informante = informante;
     }
 
-    public AmenazaWrapper getAmenazaWrapper() {
-        return amenazaWrapper;
+    public List<Equipamiento> getEquipamientoList() {
+        return equipamientoList;
     }
 
-    public void setAmenazaWrapper(AmenazaWrapper amenazaWrapper) {
-        this.amenazaWrapper = amenazaWrapper;
+    public void setEquipamientoList(List<Equipamiento> equipamientoList) {
+        this.equipamientoList = equipamientoList;
     }
 
 }

@@ -1,27 +1,26 @@
 package mil.ea.cideso.satac;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table
 public class Equipamiento {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private int cantidad;
     private int equipo;
     private int tipo;
-    @OneToOne
-    private Amenaza amenaza;
 
     public Equipamiento() {
 
     }
 
-    public Equipamiento(int id, int cantidad, int equipo, int tipo) {
-        this.id = id;
+    public Equipamiento(int cantidad, int equipo, int tipo) {
         this.cantidad = cantidad;
         this.equipo = equipo;
         this.tipo = tipo;
@@ -59,11 +58,4 @@ public class Equipamiento {
         this.id = id;
     }
 
-    public Amenaza getAmenaza() {
-        return amenaza;
-    }
-
-    public void setAmenaza(Amenaza amenaza) {
-        this.amenaza = amenaza;
-    }
 }
