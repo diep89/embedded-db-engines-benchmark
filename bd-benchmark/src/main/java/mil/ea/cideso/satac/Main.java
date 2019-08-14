@@ -27,19 +27,19 @@ public class Main {
         int waitMillis = 1500;
 
         // Instanciación de las clases creadoras de BD.
-        // SqliteCreator sqlite = new SqliteCreator();
-        // Db4oCreator db4o = new Db4oCreator();
-        // ObjectBoxCreator objectBox = new ObjectBoxCreator();
+        SqliteCreator sqlite = new SqliteCreator();
+        Db4oCreator db4o = new Db4oCreator();
+        ObjectBoxCreator objectBox = new ObjectBoxCreator();
         RocksDbCreator rocks = new RocksDbCreator();
-        // H2Creator h2 = new H2Creator();
+        H2Creator h2 = new H2Creator();
 
         // Creación de lista que contiene las instancias creadas anteriormente.
         List<MotorBD> ll = new LinkedList<>();
-        // ll.add(sqlite);
-        // ll.add(db4o);
-        // ll.add(objectBox);
+        ll.add(sqlite);
+        ll.add(db4o);
+        ll.add(objectBox);
         ll.add(rocks);
-        // ll.add(h2);
+        ll.add(h2);
 
         System.out.println("Practica Profesional Supervisada");
         waitTime(waitMillis);
@@ -115,7 +115,7 @@ public class Main {
             waitTime(waitMillis);
             System.out.println("");
 
-            pressEnter();
+            // pressEnter();
 
             // OPERACIÓN READ
             System.out.println("3. Operación READ:\n");
@@ -131,7 +131,7 @@ public class Main {
             waitTime(waitMillis);
             System.out.println("");
 
-            pressEnter();
+            // pressEnter();
 
             // OPERACIÓN UPDATE
             System.out.println("4. Operación UPDATE:\n");
@@ -145,7 +145,7 @@ public class Main {
             waitTime(waitMillis);
             System.out.println("");
 
-            pressEnter();
+            // pressEnter();
 
             // OPERACIÓN DELETE
             System.out.println("5. Operación DELETE:\n");
@@ -159,7 +159,7 @@ public class Main {
             waitTime(waitMillis);
             System.out.println("");
 
-            pressEnter();
+            // pressEnter();
 
             // EXTRA
             // do {
