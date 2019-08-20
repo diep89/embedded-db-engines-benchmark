@@ -80,6 +80,9 @@ public class H2Creator extends MotorBD {
         try {
             getTimer().start();
             setEmf(Persistence.createEntityManagerFactory("H2Persistence"));
+            EntityManager em = getEmf().createEntityManager();
+            EntityTransaction txn = em.getTransaction();
+            txn.begin();
 
             for (int i = 0; i < getCantidadAInsertar(); i++) {
 
@@ -89,17 +92,10 @@ public class H2Creator extends MotorBD {
                 List<Object> newAmenazaList = generarAmenazaWrapper(i);
                 Iterator<Object> newAmenazaListItr = newAmenazaList.iterator();
 
-                EntityManager em = getEmf().createEntityManager();
-                EntityTransaction txn = em.getTransaction();
-                txn.begin();
-
                 while (newAmenazaListItr.hasNext()) {
                     Object element = newAmenazaListItr.next();
                     em.persist(element);
                 }
-
-                txn.commit();
-                em.close();
 
                 getTimer().stop();
 
@@ -111,6 +107,10 @@ public class H2Creator extends MotorBD {
 
                 getTimer().start();
             }
+
+            txn.commit();
+            em.close();
+
         } catch (PersistenceException e) {
             System.out.println("Error.");
             System.out.println("Detalle del error: \n" + e.getMessage());
@@ -176,28 +176,25 @@ public class H2Creator extends MotorBD {
         try {
             getTimer().start();
 
-            for (int i = 0; i < getCantidadAInsertar(); i++) {
-                EntityManager em = getEmf().createEntityManager();
-                AmenazaWrapper amenazaWrapper = em.find(AmenazaWrapper.class, i);
+            EntityManager em = getEmf().createEntityManager();
+            EntityTransaction txn = em.getTransaction();
+            txn.begin();
 
-                EntityTransaction txn = em.getTransaction();
-                txn.begin();
+            for (int i = 0; i < getCantidadAInsertar(); i++) {
+                AmenazaWrapper amenazaWrapper = em.find(AmenazaWrapper.class, i);
 
                 // generarAmenazaWrapperUpdate() recibe el objeto amenazaWrapper (obtenido de la
                 // BD) y modifica el valor de todos sus atributos, como también, el valor de
                 // todos los atributos de todos los objetos que componen la Amenaza (Amenaza,
                 // Tiempo, Posicion, etc).
                 updateAmenazaWrapper(amenazaWrapper);
-
-                txn.commit();
-                em.close();
             }
 
+            txn.commit();
+            em.close();
+
             getTimer().stop();
-
-        }
-
-        catch (PersistenceException e) {
+        } catch (PersistenceException e) {
             System.out.println("Error.");
             System.out.println("Detalle del error: \n" + e.getMessage());
             System.out.println("\nStacktrace:\n\n");
@@ -216,16 +213,15 @@ public class H2Creator extends MotorBD {
     public void deleteData() {
         try {
             getTimer().start();
+            EntityManager em = getEmf().createEntityManager();
+            EntityTransaction txn = em.getTransaction();
+            txn.begin();
 
             for (int i = 0; i < getCantidadAInsertar(); i++) {
 
-                EntityManager em = getEmf().createEntityManager();
                 AmenazaWrapper amenazaWrapper = em.find(AmenazaWrapper.class, i);
                 List<Object> amenazaWrapperList = obtenerAmenazaWrapper(amenazaWrapper);
                 Iterator<Object> amenazaWrapperListItr = amenazaWrapperList.iterator();
-
-                EntityTransaction txn = em.getTransaction();
-                txn.begin();
 
                 while (amenazaWrapperListItr.hasNext()) {
                     Object element = amenazaWrapperListItr.next();
@@ -234,17 +230,15 @@ public class H2Creator extends MotorBD {
 
                 em.remove(amenazaWrapper);
 
-                txn.commit();
-                em.close();
-
             }
+
+            txn.commit();
+            em.close();
 
             getTimer().stop();
 
             System.out.println("Registros eliminados correctamente.");
-        }
-
-        catch (PersistenceException e) {
+        } catch (PersistenceException e) {
             System.out.println("Error.");
             System.out.println("Detalle del error: \n" + e.getMessage());
             System.out.println("\nStacktrace:\n\n");
