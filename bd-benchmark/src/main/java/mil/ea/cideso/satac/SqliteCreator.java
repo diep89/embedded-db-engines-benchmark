@@ -83,7 +83,7 @@ public class SqliteCreator extends MotorBD {
 
         try {
             getTimer().start();
-            setEmf(Persistence.createEntityManagerFactory("H2Persistence"));
+            setEmf(Persistence.createEntityManagerFactory("SQLitePersistence"));
             EntityManager em = getEmf().createEntityManager();
             EntityTransaction txn = em.getTransaction();
             txn.begin();
