@@ -16,9 +16,6 @@ public class Main {
         // Se inicializa automáticamente dentro del loop de pruebas.
         String dbName;
 
-        // Nombre de la tabla a generar.
-        // String tableName = "TestTable";
-
         // Variables auxiliares.
         Scanner input = new Scanner(System.in);
         int cantidadAInsertar = -1;
@@ -27,19 +24,19 @@ public class Main {
         int waitMillis = 1500;
 
         // Instanciación de las clases creadoras de BD.
-        SqliteCreator sqlite = new SqliteCreator();
-        Db4oCreator db4o = new Db4oCreator();
+        // SqliteCreator sqlite = new SqliteCreator();
+        // Db4oCreator db4o = new Db4oCreator();
         ObjectBoxCreator objectBox = new ObjectBoxCreator();
-        RocksDbCreator rocks = new RocksDbCreator();
-        H2Creator h2 = new H2Creator();
+        // RocksDbCreator rocks = new RocksDbCreator();
+        // H2Creator h2 = new H2Creator();
 
         // Creación de lista que contiene las instancias creadas anteriormente.
         List<MotorBD> ll = new LinkedList<>();
-        ll.add(sqlite);
-        ll.add(db4o);
+        // ll.add(sqlite);
+        // ll.add(db4o);
         ll.add(objectBox);
-        ll.add(rocks);
-        ll.add(h2);
+        // ll.add(rocks);
+        // ll.add(h2);
 
         System.out.println("Practica Profesional Supervisada");
         waitTime(waitMillis);
@@ -145,7 +142,7 @@ public class Main {
             waitTime(waitMillis);
             System.out.println("");
 
-            // pressEnter();
+            pressEnter();
 
             // OPERACIÓN DELETE
             System.out.println("5. Operación DELETE:\n");
