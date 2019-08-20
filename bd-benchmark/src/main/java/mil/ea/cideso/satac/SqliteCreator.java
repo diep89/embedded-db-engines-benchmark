@@ -35,7 +35,7 @@ public class SqliteCreator extends MotorBD {
         setProviderVersion("5.4.3");
     }
 
-    // Función para crear una nueva BD.
+    // Función para operación CREATE
     @Override
     public void createNewDatabase(String dbName) {
         setDbName(dbName);
@@ -76,7 +76,7 @@ public class SqliteCreator extends MotorBD {
         }
     }
 
-    // Función para operación CREATE
+    // Función para operación INSERT
     @Override
     public void insertData(int cantidadAInsertar) {
         setCantidadAInsertar(cantidadAInsertar);
