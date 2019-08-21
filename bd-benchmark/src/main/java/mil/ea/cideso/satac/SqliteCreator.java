@@ -27,6 +27,9 @@ public class SqliteCreator extends MotorBD {
     private String url;
     private static Connection conn = null;
     private EntityManagerFactory emf;
+    // Este valor debe coincidir con el especificado en la propiedad
+    // 'hibernate.jdbc.batch_size', en la persistence-unit 'SQLitePersistence' del
+    // archivo persistence.xml
     private int batchSize = 20;
 
     public SqliteCreator() {
