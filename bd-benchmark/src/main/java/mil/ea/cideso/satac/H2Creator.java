@@ -17,22 +17,23 @@ import javax.persistence.TypedQuery;
 public class H2Creator extends MotorBD {
 
     private int cantidadAInsertar;
-
     private String url;
-
     // Atributos para conexión SQL
     private static Connection conn;
-
     private EntityManagerFactory emf;
+    // Este valor debe coincidir con el especificado en la propiedad
+    // 'hibernate.jdbc.batch_size', en la persistence-unit 'H2Persistence' del
+    // archivo persistence.xml
+    private int batchSize = 20;
 
     public H2Creator() {
         setEngineName("H2");
         setEngineVersion("1.4.199");
-        setProviderName("Hibernate");
+        setProviderName("Hibernate JPA");
         setProviderVersion("5.4.3");
     }
 
-    // Función para crear una nueva BD.
+    // Función para operación CREATE
     @Override
     public void createNewDatabase(String dbName) {
         setDbName(dbName);
@@ -72,16 +73,17 @@ public class H2Creator extends MotorBD {
         }
     }
 
-    // Función para operación CREATE
+    // Función para operación INSERT
     @Override
     public void insertData(int cantidadAInsertar) {
         setCantidadAInsertar(cantidadAInsertar);
+        int j = 0;
+        getTimer().start();
+        setEmf(Persistence.createEntityManagerFactory("H2Persistence"));
+        EntityManager em = getEmf().createEntityManager();
+        EntityTransaction txn = em.getTransaction();
 
         try {
-            getTimer().start();
-            setEmf(Persistence.createEntityManagerFactory("H2Persistence"));
-            EntityManager em = getEmf().createEntityManager();
-            EntityTransaction txn = em.getTransaction();
             txn.begin();
 
             for (int i = 0; i < getCantidadAInsertar(); i++) {
@@ -93,33 +95,42 @@ public class H2Creator extends MotorBD {
                 Iterator<Object> newAmenazaListItr = newAmenazaList.iterator();
 
                 while (newAmenazaListItr.hasNext()) {
+                    if (j % getBatchSize() == 0 && j > 0) {
+                        txn.commit();
+                        txn.begin();
+                        em.clear();
+                    }
                     Object element = newAmenazaListItr.next();
                     em.persist(element);
+                    j++;
                 }
 
                 getTimer().stop();
-
                 if (i + 1 < getCantidadAInsertar()) {
                     System.out.print((i + 1) + " - ");
                 } else {
                     System.out.print((i + 1) + ".");
                 }
-
                 getTimer().start();
             }
 
             txn.commit();
-            em.close();
+
+            getTimer().stop();
 
         } catch (PersistenceException e) {
-            System.out.println("Error.");
-            System.out.println("Detalle del error: \n" + e.getMessage());
-            System.out.println("\nStacktrace:\n\n");
-            e.printStackTrace();
-            System.exit(1);
+            if (txn.isActive()) {
+                txn.rollback();
+            } else {
+                System.out.println("Error.");
+                System.out.println("Detalle del error: \n" + e.getMessage());
+                System.out.println("\nStacktrace:\n\n");
+                e.printStackTrace();
+                System.exit(1);
+            }
+        } finally {
+            em.close();
         }
-
-        getTimer().stop();
 
         System.out.println("");
         System.out.println("");
@@ -131,15 +142,13 @@ public class H2Creator extends MotorBD {
     // Función para operación READ
     @Override
     public void readData() {
+        getTimer().start();
+
+        EntityManager em = getEmf().createEntityManager();
 
         try {
-            getTimer().start();
-
-            EntityManager em = getEmf().createEntityManager();
             TypedQuery<AmenazaWrapper> query = em.createQuery("SELECT p FROM AmenazaWrapper p", AmenazaWrapper.class);
             List<AmenazaWrapper> results = query.getResultList();
-
-            getTimer().stop();
 
             // Comprobación
             // Iterator<AmenazaWrapper> itr = results.iterator();
@@ -152,32 +161,35 @@ public class H2Creator extends MotorBD {
             // }
             // System.out.println("");
 
-            System.out.println("Registros leídos correctamente.");
-
-            System.out.println("");
-            System.out.println("");
-
-            setStatsReadOperation(getTimer().toString()); // Guardo el valor del timer
-            setTimer(getTimer().reset()); // Reseteo el timer.
-
         } catch (PersistenceException e) {
             System.out.println("Error.");
             System.out.println("Detalle del error: \n" + e.getMessage());
             System.out.println("\nStacktrace:\n\n");
             e.printStackTrace();
             System.exit(1);
+        } finally {
+            em.close();
+            getTimer().stop();
         }
 
+        System.out.println("Registros leídos correctamente.");
+
+        System.out.println("");
+        System.out.println("");
+
+        setStatsReadOperation(getTimer().toString()); // Guardo el valor del timer
+        setTimer(getTimer().reset()); // Reseteo el timer.
     }
 
     // Función para operación UPDATE
     @Override
     public void updateData() {
-        try {
-            getTimer().start();
+        getTimer().start();
 
-            EntityManager em = getEmf().createEntityManager();
-            EntityTransaction txn = em.getTransaction();
+        EntityManager em = getEmf().createEntityManager();
+        EntityTransaction txn = em.getTransaction();
+
+        try {
             txn.begin();
 
             for (int i = 0; i < getCantidadAInsertar(); i++) {
@@ -191,30 +203,35 @@ public class H2Creator extends MotorBD {
             }
 
             txn.commit();
-            em.close();
 
-            getTimer().stop();
         } catch (PersistenceException e) {
             System.out.println("Error.");
             System.out.println("Detalle del error: \n" + e.getMessage());
             System.out.println("\nStacktrace:\n\n");
             e.printStackTrace();
             System.exit(1);
+        } finally {
+            em.close();
+            getTimer().stop();
         }
 
         System.out.println("Registros actualizados correctamente.");
         System.out.println("");
         System.out.println("");
+
         setStatsUpdateOperation(getTimer().toString());
         setTimer(getTimer().reset()); // Reseteo el timer.
     }
 
+    // Función para operación DELETE
     @Override
     public void deleteData() {
+        getTimer().start();
+
+        EntityManager em = getEmf().createEntityManager();
+        EntityTransaction txn = em.getTransaction();
+
         try {
-            getTimer().start();
-            EntityManager em = getEmf().createEntityManager();
-            EntityTransaction txn = em.getTransaction();
             txn.begin();
 
             for (int i = 0; i < getCantidadAInsertar(); i++) {
@@ -227,32 +244,28 @@ public class H2Creator extends MotorBD {
                     Object element = amenazaWrapperListItr.next();
                     em.remove(element);
                 }
-
                 em.remove(amenazaWrapper);
-
             }
 
             txn.commit();
-            em.close();
 
-            getTimer().stop();
-
-            System.out.println("Registros eliminados correctamente.");
         } catch (PersistenceException e) {
             System.out.println("Error.");
             System.out.println("Detalle del error: \n" + e.getMessage());
             System.out.println("\nStacktrace:\n\n");
             e.printStackTrace();
             System.exit(1);
-        }
-
-        finally {
+        } finally {
+            em.close();
             if (getEmf() != null)
                 getEmf().close();
+            getTimer().stop();
         }
 
+        System.out.println("Registros eliminados correctamente.");
         System.out.println("");
         System.out.println("");
+
         setStatsDeleteOperation(getTimer().toString());
         setTimer(getTimer().reset()); // Reseteo el timer.
     }
@@ -333,5 +346,13 @@ public class H2Creator extends MotorBD {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public int getBatchSize() {
+        return batchSize;
+    }
+
+    public void setBatchSize(int batchSize) {
+        this.batchSize = batchSize;
     }
 }
