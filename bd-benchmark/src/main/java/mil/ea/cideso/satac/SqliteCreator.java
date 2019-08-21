@@ -27,11 +27,12 @@ public class SqliteCreator extends MotorBD {
     private String url;
     private static Connection conn = null;
     private EntityManagerFactory emf;
+    private int batchSize = 20;
 
     public SqliteCreator() {
         setEngineName("SQLite");
         setEngineVersion("3.28.0");
-        setProviderName("Hibernate");
+        setProviderName("Hibernate JPA");
         setProviderVersion("5.4.3");
     }
 
@@ -80,12 +81,13 @@ public class SqliteCreator extends MotorBD {
     @Override
     public void insertData(int cantidadAInsertar) {
         setCantidadAInsertar(cantidadAInsertar);
+        int j = 0;
+        getTimer().start();
+        setEmf(Persistence.createEntityManagerFactory("SQLitePersistence"));
+        EntityManager em = getEmf().createEntityManager();
+        EntityTransaction txn = em.getTransaction();
 
         try {
-            getTimer().start();
-            setEmf(Persistence.createEntityManagerFactory("SQLitePersistence"));
-            EntityManager em = getEmf().createEntityManager();
-            EntityTransaction txn = em.getTransaction();
             txn.begin();
 
             for (int i = 0; i < getCantidadAInsertar(); i++) {
@@ -97,33 +99,42 @@ public class SqliteCreator extends MotorBD {
                 Iterator<Object> newAmenazaListItr = newAmenazaList.iterator();
 
                 while (newAmenazaListItr.hasNext()) {
+                    if (j % getBatchSize() == 0 && j > 0) {
+                        txn.commit();
+                        txn.begin();
+                        em.clear();
+                    }
                     Object element = newAmenazaListItr.next();
                     em.persist(element);
+                    j++;
                 }
 
                 getTimer().stop();
-
                 if (i + 1 < getCantidadAInsertar()) {
                     System.out.print((i + 1) + " - ");
                 } else {
                     System.out.print((i + 1) + ".");
                 }
-
                 getTimer().start();
             }
 
             txn.commit();
-            em.close();
+
+            getTimer().stop();
 
         } catch (PersistenceException e) {
-            System.out.println("Error.");
-            System.out.println("Detalle del error: \n" + e.getMessage());
-            System.out.println("\nStacktrace:\n\n");
-            e.printStackTrace();
-            System.exit(1);
+            if (txn.isActive()) {
+                txn.rollback();
+            } else {
+                System.out.println("Error.");
+                System.out.println("Detalle del error: \n" + e.getMessage());
+                System.out.println("\nStacktrace:\n\n");
+                e.printStackTrace();
+                System.exit(1);
+            }
+        } finally {
+            em.close();
         }
-
-        getTimer().stop();
 
         System.out.println("");
         System.out.println("");
@@ -135,34 +146,24 @@ public class SqliteCreator extends MotorBD {
     // Función para operación READ
     @Override
     public void readData() {
+        getTimer().start();
+
+        EntityManager em = getEmf().createEntityManager();
 
         try {
-            getTimer().start();
-
-            EntityManager em = getEmf().createEntityManager();
             TypedQuery<AmenazaWrapper> query = em.createQuery("SELECT p FROM AmenazaWrapper p", AmenazaWrapper.class);
             List<AmenazaWrapper> results = query.getResultList();
-
-            getTimer().stop();
 
             // Comprobación
             // Iterator<AmenazaWrapper> itr = results.iterator();
             // System.out.println("");
             // while (itr.hasNext()) {
             // AmenazaWrapper el = itr.next();
-            // System.out.printf("AmenazaWrapper\nId: %d\n Leido: %b\n Visible: %b\n\n",
+            // System.out.printf("AmenazaWrapper\nId: %d\nLeido: %b\nVisible: %b\n\n",
             // el.getId(), el.isLeido(),
             // el.isVisible());
             // }
             // System.out.println("");
-
-            System.out.println("Registros leídos correctamente.");
-
-            System.out.println("");
-            System.out.println("");
-
-            setStatsReadOperation(getTimer().toString()); // Guardo el valor del timer
-            setTimer(getTimer().reset()); // Reseteo el timer.
 
         } catch (PersistenceException e) {
             System.out.println("Error.");
@@ -170,17 +171,29 @@ public class SqliteCreator extends MotorBD {
             System.out.println("\nStacktrace:\n\n");
             e.printStackTrace();
             System.exit(1);
+        } finally {
+            em.close();
+            getTimer().stop();
         }
+
+        System.out.println("Registros leídos correctamente.");
+
+        System.out.println("");
+        System.out.println("");
+
+        setStatsReadOperation(getTimer().toString()); // Guardo el valor del timer
+        setTimer(getTimer().reset()); // Reseteo el timer.
     }
 
     // Función para operación UPDATE
     @Override
     public void updateData() {
-        try {
-            getTimer().start();
+        getTimer().start();
 
-            EntityManager em = getEmf().createEntityManager();
-            EntityTransaction txn = em.getTransaction();
+        EntityManager em = getEmf().createEntityManager();
+        EntityTransaction txn = em.getTransaction();
+
+        try {
             txn.begin();
 
             for (int i = 0; i < getCantidadAInsertar(); i++) {
@@ -194,30 +207,35 @@ public class SqliteCreator extends MotorBD {
             }
 
             txn.commit();
-            em.close();
 
-            getTimer().stop();
         } catch (PersistenceException e) {
             System.out.println("Error.");
             System.out.println("Detalle del error: \n" + e.getMessage());
             System.out.println("\nStacktrace:\n\n");
             e.printStackTrace();
             System.exit(1);
+        } finally {
+            em.close();
+            getTimer().stop();
         }
 
         System.out.println("Registros actualizados correctamente.");
         System.out.println("");
         System.out.println("");
+
         setStatsUpdateOperation(getTimer().toString());
         setTimer(getTimer().reset()); // Reseteo el timer.
     }
 
+    // Función para operación DELETE
     @Override
     public void deleteData() {
+        getTimer().start();
+
+        EntityManager em = getEmf().createEntityManager();
+        EntityTransaction txn = em.getTransaction();
+
         try {
-            getTimer().start();
-            EntityManager em = getEmf().createEntityManager();
-            EntityTransaction txn = em.getTransaction();
             txn.begin();
 
             for (int i = 0; i < getCantidadAInsertar(); i++) {
@@ -230,32 +248,28 @@ public class SqliteCreator extends MotorBD {
                     Object element = amenazaWrapperListItr.next();
                     em.remove(element);
                 }
-
                 em.remove(amenazaWrapper);
-
             }
 
             txn.commit();
-            em.close();
 
-            getTimer().stop();
-
-            System.out.println("Registros eliminados correctamente.");
         } catch (PersistenceException e) {
             System.out.println("Error.");
             System.out.println("Detalle del error: \n" + e.getMessage());
             System.out.println("\nStacktrace:\n\n");
             e.printStackTrace();
             System.exit(1);
-        }
-
-        finally {
+        } finally {
+            em.close();
             if (getEmf() != null)
                 getEmf().close();
+            getTimer().stop();
         }
 
+        System.out.println("Registros eliminados correctamente.");
         System.out.println("");
         System.out.println("");
+
         setStatsDeleteOperation(getTimer().toString());
         setTimer(getTimer().reset()); // Reseteo el timer.
     }
@@ -338,6 +352,14 @@ public class SqliteCreator extends MotorBD {
 
     public void setEmf(EntityManagerFactory emf) {
         this.emf = emf;
+    }
+
+    public int getBatchSize() {
+        return batchSize;
+    }
+
+    public void setBatchSize(int batchSize) {
+        this.batchSize = batchSize;
     }
 
 }
