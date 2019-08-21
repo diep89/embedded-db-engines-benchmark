@@ -24,19 +24,19 @@ public class Main {
         int waitMillis = 1500;
 
         // Instanciación de las clases creadoras de BD.
-        // SqliteCreator sqlite = new SqliteCreator();
-        // Db4oCreator db4o = new Db4oCreator();
+        SqliteCreator sqlite = new SqliteCreator();
+        Db4oCreator db4o = new Db4oCreator();
         ObjectBoxCreator objectBox = new ObjectBoxCreator();
-        // RocksDbCreator rocks = new RocksDbCreator();
-        // H2Creator h2 = new H2Creator();
+        RocksDbCreator rocks = new RocksDbCreator();
+        H2Creator h2 = new H2Creator();
 
         // Creación de lista que contiene las instancias creadas anteriormente.
         List<MotorBD> ll = new LinkedList<>();
-        // ll.add(sqlite);
-        // ll.add(db4o);
+        ll.add(sqlite);
+        ll.add(db4o);
         ll.add(objectBox);
-        // ll.add(rocks);
-        // ll.add(h2);
+        ll.add(rocks);
+        ll.add(h2);
 
         System.out.println("Practica Profesional Supervisada");
         waitTime(waitMillis);
@@ -85,13 +85,11 @@ public class Main {
             }
             System.out.println("");
             waitTime(waitMillis);
+
             System.out.println("1. Operación CREATE:\n");
             waitTime(waitMillis);
             dbName = "testDb" + "-" + element.getEngineName();
             element.createNewDatabase(dbName);
-
-            waitTime(2000);
-
             System.out.println("Motor: " + element.getEngineName() + "\nOperación 'CREATE' finalizada.\n");
             waitTime(waitMillis);
             System.out.println("");
@@ -111,8 +109,6 @@ public class Main {
             System.out.println("Motor: " + element.getEngineName() + "\nOperación 'INSERT' finalizada.\n");
             waitTime(waitMillis);
             System.out.println("");
-
-            // pressEnter();
 
             // OPERACIÓN READ
             System.out.println("3. Operación READ:\n");
@@ -155,8 +151,6 @@ public class Main {
             System.out.println("Motor: " + element.getEngineName() + "\nOperación 'DELETE' finalizada.\n");
             waitTime(waitMillis);
             System.out.println("");
-
-            // pressEnter();
 
             // EXTRA
             // do {
