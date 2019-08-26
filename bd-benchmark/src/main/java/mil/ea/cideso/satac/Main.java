@@ -18,25 +18,10 @@ public class Main {
 
         // Variables auxiliares.
         Scanner input = new Scanner(System.in);
+        int opcionMotor;
         int cantidadAInsertar = -1;
         // String eliminar;
-        int counter = 1;
         int waitMillis = 1500;
-
-        // Instanciación de las clases creadoras de BD.
-        SqliteCreator sqlite = new SqliteCreator();
-        Db4oCreator db4o = new Db4oCreator();
-        ObjectBoxCreator objectBox = new ObjectBoxCreator();
-        RocksDbCreator rocks = new RocksDbCreator();
-        H2Creator h2 = new H2Creator();
-
-        // Creación de lista que contiene las instancias creadas anteriormente.
-        List<MotorBD> ll = new LinkedList<>();
-        ll.add(sqlite);
-        ll.add(db4o);
-        ll.add(objectBox);
-        ll.add(rocks);
-        ll.add(h2);
 
         System.out.println("Practica Profesional Supervisada");
         waitTime(waitMillis);
@@ -46,6 +31,49 @@ public class Main {
         System.out.println("Test automatizado");
         waitTime(waitMillis);
         System.out.println("");
+        System.out.println("Motores de BD:");
+        waitTime(waitMillis);
+        System.out.println("");
+
+        System.out.println("1. SQLite v3.28.0");
+        System.out.println("2. DB4O v7.7.67");
+        System.out.println("3. Object Box v2.3.4");
+        System.out.println("4. RocksDB v6.0.1");
+        System.out.println("5. H2 v1.4.199");
+        waitTime(waitMillis);
+        System.out.printf("Seleccione un motor de BD: ");
+        opcionMotor = input.nextInt();
+        System.out.println("");
+        do {
+            if (opcionMotor < 1 || opcionMotor > 5) {
+                System.out.print("Error. Por favor, elija una opción válida: ");
+                opcionMotor = input.nextInt();
+                System.out.println("");
+            }
+        } while (opcionMotor < 1 || opcionMotor > 5);
+
+        List<MotorBD> ll = new LinkedList<>();
+        // Instanciación de la clase creadora de la BD.
+        switch (opcionMotor) {
+        case 1:
+            SqliteCreator sqlite = new SqliteCreator();
+            ll.add(sqlite);
+            break;
+        case 2:
+            Db4oCreator db4o = new Db4oCreator();
+            ll.add(db4o);
+        case 3:
+            ObjectBoxCreator objectBox = new ObjectBoxCreator();
+            ll.add(objectBox);
+        case 4:
+            RocksDbCreator rocks = new RocksDbCreator();
+            ll.add(rocks);
+        case 5:
+            H2Creator h2 = new H2Creator();
+            ll.add(h2);
+        default:
+            break;
+        }
 
         // Test automatizado
         System.out.println("***\n");
@@ -77,7 +105,7 @@ public class Main {
         while (itr.hasNext()) {
             MotorBD element = itr.next();
             System.out.printf("**********\n\n");
-            System.out.printf("Motor %d: %s v%s\n", counter, element.getEngineName(), element.getEngineVersion());
+            System.out.printf("Motor: %s v%s\n", element.getEngineName(), element.getEngineVersion());
             if (element.getProviderName() != null) {
                 System.out.printf("\nProvider: %s v%s\n", element.getProviderName(), element.getProviderVersion());
                 System.out.println("Mensajes LOG: SEVERE.");
@@ -173,7 +201,6 @@ public class Main {
             // }
 
             // System.out.println("");
-            counter++;
         }
 
         // Tabla para mostrar resultados
