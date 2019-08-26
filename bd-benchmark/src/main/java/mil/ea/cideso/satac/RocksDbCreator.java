@@ -320,7 +320,6 @@ public class RocksDbCreator extends MotorBD {
         try {
             getTimer().start();
             RocksDB db = getDb(getDbName());
-            RocksIterator rocksIter = db.newIterator();
 
             for (int i = 0; i < getCantidadAInsertar(); i++) {
 
@@ -333,12 +332,11 @@ public class RocksDbCreator extends MotorBD {
                     byte[] keyToFind = keyToFindString.getBytes();
                     byte[] currentValue = db.get(keyToFind);
                     byte[] newValue = itrValores.next().getBytes();
-                    for (rocksIter.seekToFirst(); rocksIter.isValid(); rocksIter.next()) {
-                        if (currentValue != null) { // currentValue == null if key1 does not exist in db.
-                            if (currentValue != newValue) {
-                                db.delete(keyToFind);
-                                db.put(new String(keyToFindString).getBytes(), newValue);
-                            }
+
+                    if (currentValue != null) {
+                        if (currentValue != newValue) {
+                            db.delete(keyToFind);
+                            db.put(keyToFindString.getBytes(), newValue);
                         }
                     }
                 }
@@ -348,6 +346,7 @@ public class RocksDbCreator extends MotorBD {
 
             System.out.println("Registros actualizados correctamente.");
             // System.out.println("Lista de registros actualizada: \n");
+            // RocksIterator rocksIter = db.newIterator();
             // int i = 0;
             // RocksIterator rocksIter2 = db.newIterator();
             // for (rocksIter2.seekToFirst(); rocksIter2.isValid(); rocksIter2.next()) {
@@ -356,8 +355,9 @@ public class RocksDbCreator extends MotorBD {
             // System.out.printf("%-5d Clave: %-15s Valor: %-15s\n", i, key, val);
             // i++;
             // }
+            // rocksIter.close();
+
             getTimer().start();
-            rocksIter.close();
             db.close();
             getTimer().stop();
 
