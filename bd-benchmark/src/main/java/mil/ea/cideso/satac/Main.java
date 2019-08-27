@@ -33,13 +33,12 @@ public class Main {
         System.out.println("");
         System.out.println("Motores de BD:");
         waitTime(waitMillis);
-        System.out.println("");
-
         System.out.println("1. SQLite v3.28.0");
         System.out.println("2. DB4O v7.7.67");
         System.out.println("3. Object Box v2.3.4");
         System.out.println("4. RocksDB v6.0.1");
         System.out.println("5. H2 v1.4.199");
+        System.out.println("");
         waitTime(waitMillis);
         System.out.printf("Seleccione un motor de BD: ");
         opcionMotor = input.nextInt();
