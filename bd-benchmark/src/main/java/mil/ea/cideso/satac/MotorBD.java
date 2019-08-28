@@ -294,16 +294,4 @@ public abstract class MotorBD {
         this.statsInsertOperation = statsInsertOperation;
     }
 
-    // Funciones para configurar test automatizado
-
-    // public abstract void createNewAttribute(String dbName, String tableName,
-    // String AttributeName, String attributeType,
-    // Integer attributeSize);
-
-    // public abstract void insertText(String dbName, String tableName, String
-    // attributeName, String attributeText);
-
-    // public abstract void insertNumber(String dbName, String tableName, String
-    // attributeName, Integer attributeValue);
-
 }
