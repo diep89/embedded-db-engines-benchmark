@@ -44,8 +44,9 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd" version="2.1">
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
+            <!-- <property name="javax.persistence.jdbc.url" value="jdbc:h2:./testDb-H2" />  -->
             <property name="javax.persistence.jdbc.url" value="jdbc:h2:./testDb-H2" />
-            <property name="javax.persistence.jdbc.user" value="" />
+            <property name="javax.persistence.jdbc.user" value="sa" />
             <property name="javax.persistence.jdbc.password" value="" />
             <property name="hibernate.show_sql" value="false" />
             <property name="hibernate.hbm2ddl.auto" value="create" />

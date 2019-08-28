@@ -15,9 +15,15 @@ import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 public class H2Creator extends MotorBD {
+    // JDBC driver name and database URL
+    static final String JDBC_DRIVER = "org.h2.Driver";
+    private String DB_URL;
+
+    // Database credentials
+    static final String USER = "sa";
+    static final String PASS = "";
 
     private int cantidadAInsertar;
-    private String url;
     // Atributos para conexión SQL
     private static Connection conn;
     private EntityManagerFactory emf;
@@ -36,29 +42,28 @@ public class H2Creator extends MotorBD {
     // Función para operación CREATE
     @Override
     public void createNewDatabase(String dbName) {
+        getTimer().start();
+
         setDbName(dbName);
-        setUrl("jdbc:h2:./" + getDbName());
+        setDB_URL("jdbc:h2:./" + getDbName());
 
         try {
-            getTimer().start();
-            setConnection(getUrl());
+            Class.forName(JDBC_DRIVER);
+            setConnection(getDB_URL(), USER, PASS);
             getTimer().stop();
             if (conn != null) {
                 DatabaseMetaData meta = conn.getMetaData();
                 System.out.println("Driver: " + meta.getDriverName());
                 System.out.println("La BD se ha generado correctamente.\n");
-                setStatsCreateOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
-                setTimer(getTimer().reset()); // Reseteo el timer.
             }
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             System.out.println("Detalle del error: \n" + e.getMessage());
             System.out.println("\nStacktrace:\n\n");
             e.printStackTrace();
-        }
-
-        finally {
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
             try {
                 if (conn != null)
                     conn.close();
@@ -69,6 +74,8 @@ public class H2Creator extends MotorBD {
                 e.printStackTrace();
             }
         }
+        setStatsCreateOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
+        setTimer(getTimer().reset()); // Reseteo el timer.
     }
 
     // Función para operación INSERT
@@ -297,21 +304,16 @@ public class H2Creator extends MotorBD {
         // }
     }
 
-    public void setConnection(String url) {
+    // Función para generar la conexión a la BD
+    public void setConnection(String dbUrl, String user, String pass) {
         try {
-            conn = DriverManager.getConnection(url);
+            if (conn == null) {
+                conn = DriverManager.getConnection(dbUrl, user, pass);
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
-
-    // public ResultSet getRs() {
-    // return rs;
-    // }
-
-    // public void setRs(ResultSet rs) {
-    // this.rs = rs;
-    // }
 
     public int getCantidadAInsertar() {
         return cantidadAInsertar;
@@ -329,19 +331,19 @@ public class H2Creator extends MotorBD {
         this.emf = emf;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
     public int getBatchSize() {
         return batchSize;
     }
 
     public void setBatchSize(int batchSize) {
         this.batchSize = batchSize;
+    }
+
+    public String getDB_URL() {
+        return DB_URL;
+    }
+
+    public void setDB_URL(String dB_URL) {
+        DB_URL = dB_URL;
     }
 }

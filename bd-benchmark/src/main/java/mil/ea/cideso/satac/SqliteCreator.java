@@ -22,9 +22,15 @@ import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 public class SqliteCreator extends MotorBD {
+    // JDBC driver name and database URL
+    static final String JDBC_DRIVER = "org.sqlite.JDBC";
+    private String DB_URL;
+
+    // Database credentials
+    static final String USER = "";
+    static final String PASS = "";
 
     private int cantidadAInsertar;
-    private String url;
     private static Connection conn = null;
     private EntityManagerFactory emf;
     // Este valor debe coincidir con el especificado en la propiedad
@@ -42,30 +48,28 @@ public class SqliteCreator extends MotorBD {
     // Función para operación CREATE
     @Override
     public void createNewDatabase(String dbName) {
+        getTimer().start();
+
         setDbName(dbName);
-        // String url = "jdbc:sqlite:C:/sqlite/db/" + dbName;
-        setUrl("jdbc:sqlite:" + getDbName() + ".db");
+        setDB_URL("jdbc:sqlite:" + getDbName() + ".db");
 
         try {
-            getTimer().start();
-            getConnection(getUrl());
+            Class.forName(JDBC_DRIVER);
+            setConnection(getDB_URL(), USER, PASS);
             getTimer().stop();
             if (conn != null) {
                 DatabaseMetaData meta = conn.getMetaData();
                 System.out.println("Driver: " + meta.getDriverName());
                 System.out.println("La BD se ha generado correctamente.\n");
-                setStatsCreateOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
-                setTimer(getTimer().reset()); // Reseteo el timer.
             }
-
         } catch (SQLException e) {
             System.out.println("Error.");
             System.out.println("Detalle del error: \n" + e.getMessage());
             System.out.println("\nStacktrace:\n\n");
             e.printStackTrace();
-        }
-
-        finally {
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
             try {
                 if (conn != null)
                     conn.close();
@@ -76,6 +80,8 @@ public class SqliteCreator extends MotorBD {
                 e.printStackTrace();
             }
         }
+        setStatsCreateOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
+        setTimer(getTimer().reset()); // Reseteo el timer.
     }
 
     // Función para operación INSERT
@@ -306,10 +312,10 @@ public class SqliteCreator extends MotorBD {
     }
 
     // Función para generar la conexión a la BD
-    public void getConnection(String url) {
+    public void setConnection(String dbUrl, String user, String pass) {
         try {
             if (conn == null) {
-                conn = DriverManager.getConnection(url);
+                conn = DriverManager.getConnection(dbUrl, user, pass);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -322,20 +328,6 @@ public class SqliteCreator extends MotorBD {
 
     public void setCantidadAInsertar(int cantidadAInsertar) {
         this.cantidadAInsertar = cantidadAInsertar;
-    }
-
-    /**
-     * @return the url
-     */
-    public String getUrl() {
-        if (url == null) {
-            url = new String();
-        }
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     public EntityManagerFactory getEmf() {
@@ -352,6 +344,14 @@ public class SqliteCreator extends MotorBD {
 
     public void setBatchSize(int batchSize) {
         this.batchSize = batchSize;
+    }
+
+    public String getDB_URL() {
+        return DB_URL;
+    }
+
+    public void setDB_URL(String dB_URL) {
+        DB_URL = dB_URL;
     }
 
 }
