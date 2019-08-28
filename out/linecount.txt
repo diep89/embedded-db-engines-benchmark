@@ -1,0 +1,388 @@
+===============================================================================
+EXTENSION NAME : linecount
+EXTENSION VERSION : 0.1.7
+-------------------------------------------------------------------------------
+count time : 2019-08-27 20:57:34
+count workspace : d:\proyectoPps
+total files : 121
+total code lines : 4768
+total comment lines : 544
+total blank lines : 930
+
+.gitignore, code is 23, comment is 0, blank is 1.
+bd-benchmark\.gitignore, code is 1, comment is 0, blank is 0.
+bd-benchmark\objectbox-models\default.json, code is 407, comment is 0, blank is 0.
+bd-benchmark\objectbox-models\default.json.bak, code is 392, comment is 0, blank is 0.
+bd-benchmark\pom.xml, code is 262, comment is 58, blank is 9.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\Amenaza.java, code is 95, comment is 0, blank is 26.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\AmenazaWrapper.java, code is 47, comment is 0, blank is 15.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\Db4oCreator.java, code is 152, comment is 22, blank is 41.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\Equipamiento.java, code is 47, comment is 0, blank is 14.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\H2Creator.java, code is 237, comment is 66, blank is 63.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\Informante.java, code is 21, comment is 0, blank is 8.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\Main.java, code is 183, comment is 36, blank is 35.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\MotorBD.java, code is 179, comment is 66, blank is 64.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\ObjectBoxAmenaza.java, code is 111, comment is 1, blank is 28.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\ObjectBoxAmenazaWrapper.java, code is 58, comment is 6, blank is 18.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\ObjectBoxCreator.java, code is 292, comment is 37, blank is 83.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\ObjectBoxEquipamiento.java, code is 63, comment is 0, blank is 17.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\ObjectBoxInformante.java, code is 39, comment is 0, blank is 12.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\ObjectBoxPosicion.java, code is 63, comment is 0, blank is 18.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\ObjectBoxTiempo.java, code is 47, comment is 0, blank is 14.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\Posicion.java, code is 47, comment is 0, blank is 14.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\RocksDbCreator.java, code is 321, comment is 53, blank is 79.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\SqliteCreator.java, code is 242, comment is 70, blank is 64.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\Tiempo.java, code is 31, comment is 0, blank is 11.
+bd-benchmark\src\main\resources\META-INF\persistence.xml, code is 45, comment is 9, blank is 4.
+bd-benchmark\src\test\java\mil\ea\cideso\satac\SQLiteTest.java, code is 9, comment is 3, blank is 4.
+bd-benchmark\target\classes\META-INF\persistence.xml, code is 45, comment is 9, blank is 4.
+bd-benchmark\target\classes\mil\ea\cideso\satac\Amenaza.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\AmenazaWrapper.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\Db4oCreator.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\Equipamiento.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\H2Creator.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\Informante.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\Main.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\MotorBD.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\MyObjectBox.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenaza.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenaza_$1.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenaza_$2.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenaza_$3.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenaza_$4.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenaza_$5.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenaza_$6.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenaza_$ObjectBoxAmenazaIdGetter.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenaza_.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenazaCursor$Factory.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenazaCursor.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenazaWrapper.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenazaWrapper_$1.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenazaWrapper_$ObjectBoxAmenazaWrapperIdGetter.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenazaWrapper_.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenazaWrapperCursor$Factory.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenazaWrapperCursor.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxCreator.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxEquipamiento.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxEquipamiento_$1.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxEquipamiento_$ObjectBoxEquipamientoIdGetter.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxEquipamiento_.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxEquipamientoCursor$Factory.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxEquipamientoCursor.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxInformante.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxInformante_$1.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxInformante_$ObjectBoxInformanteIdGetter.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxInformante_.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxInformanteCursor$Factory.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxInformanteCursor.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxPosicion.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxPosicion_$1.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxPosicion_$ObjectBoxPosicionIdGetter.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxPosicion_.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxPosicionCursor$Factory.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxPosicionCursor.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxTiempo.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxTiempo_$1.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxTiempo_$ObjectBoxTiempoIdGetter.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxTiempo_.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxTiempoCursor$Factory.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxTiempoCursor.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\Posicion.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\RocksDbCreator.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\SqliteCreator.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\Tiempo.class, it is a binary file.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\MyObjectBox.java, code is 107, comment is 7, blank is 14.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxAmenaza_.java, code is 133, comment is 10, blank is 38.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxAmenazaCursor.java, code is 90, comment is 10, blank is 13.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxAmenazaWrapper_.java, code is 81, comment is 6, blank is 29.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxAmenazaWrapperCursor.java, code is 48, comment is 10, blank is 12.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxEquipamiento_.java, code is 84, comment is 6, blank is 30.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxEquipamientoCursor.java, code is 50, comment is 10, blank is 12.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxInformante_.java, code is 75, comment is 6, blank is 27.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxInformanteCursor.java, code is 46, comment is 10, blank is 12.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxPosicion_.java, code is 84, comment is 6, blank is 30.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxPosicionCursor.java, code is 47, comment is 10, blank is 12.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxTiempo_.java, code is 78, comment is 6, blank is 28.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxTiempoCursor.java, code is 47, comment is 10, blank is 12.
+bd-benchmark\target\maven-status\maven-compiler-plugin\compile\default-compile\createdFiles.lst, code is 55, comment is 0, blank is 0.
+bd-benchmark\target\maven-status\maven-compiler-plugin\compile\default-compile\inputFiles.lst, code is 19, comment is 0, blank is 0.
+bd-benchmark\target\test-classes\mil\ea\cideso\satac\SQLiteTest.class, it is a binary file.
+d:\prueba-maven\dependency-reduced-pom.xml, code is 66, comment is 0, blank is 1.
+d:\prueba-maven\hamcrest-library-2.1.jar, it is a binary file.
+d:\prueba-maven\pom.xml, code is 61, comment is 1, blank is 0.
+d:\prueba-maven\src\main\java\hello\Greeter.java, code is 6, comment is 0, blank is 1.
+d:\prueba-maven\src\main\java\hello\HelloWorld.java, code is 10, comment is 0, blank is 3.
+d:\prueba-maven\src\test\java\hello\GreeterTest.java, code is 11, comment is 0, blank is 5.
+d:\prueba-maven\target\classes\hello\Greeter.class, it is a binary file.
+d:\prueba-maven\target\classes\hello\HelloWorld.class, it is a binary file.
+d:\prueba-maven\target\gs-maven-0.1.0-shaded.jar, it is a binary file.
+d:\prueba-maven\target\gs-maven-0.1.0.jar, it is a binary file.
+d:\prueba-maven\target\maven-archiver\pom.properties, code is 5, comment is 0, blank is 0.
+d:\prueba-maven\target\maven-status\maven-compiler-plugin\compile\default-compile\createdFiles.lst, code is 0, comment is 0, blank is 0.
+d:\prueba-maven\target\maven-status\maven-compiler-plugin\compile\default-compile\inputFiles.lst, code is 2, comment is 0, blank is 0.
+d:\prueba-maven\target\maven-status\maven-compiler-plugin\testCompile\default-testCompile\createdFiles.lst, code is 1, comment is 0, blank is 0.
+d:\prueba-maven\target\maven-status\maven-compiler-plugin\testCompile\default-testCompile\inputFiles.lst, code is 1, comment is 0, blank is 0.
+d:\prueba-maven\target\original-gs-maven-0.1.0.jar, it is a binary file.
+d:\prueba-maven\target\surefire-reports\GreeterTest.txt, code is 38, comment is 0, blank is 1.
+d:\prueba-maven\target\surefire-reports\hello.GreeterTest.txt, code is 4, comment is 0, blank is 0.
+d:\prueba-maven\target\surefire-reports\TEST-GreeterTest.xml, code is 25, comment is 0, blank is 0.
+d:\prueba-maven\target\surefire-reports\TEST-hello.GreeterTest.xml, code is 25, comment is 0, blank is 0.
+d:\prueba-maven\target\test-classes\hello\GreeterTest.class, it is a binary file.
+objectbox-jni-windows-x64.dll, it is a binary file.
+README.md, code is 10, comment is 0, blank is 4.
+===============================================================================
+===============================================================================
+EXTENSION NAME : linecount
+EXTENSION VERSION : 0.1.7
+-------------------------------------------------------------------------------
+count time : 2019-08-28 19:06:53
+count workspace : d:\proyectoPps
+total files : 126
+total code lines : 4799
+total comment lines : 533
+total blank lines : 923
+
+.gitignore, code is 25, comment is 0, blank is 1.
+bd-benchmark\.gitignore, code is 1, comment is 0, blank is 0.
+bd-benchmark\objectbox-models\default.json, code is 407, comment is 0, blank is 0.
+bd-benchmark\objectbox-models\default.json.bak, code is 392, comment is 0, blank is 0.
+bd-benchmark\pom.xml, code is 262, comment is 58, blank is 9.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\Amenaza.java, code is 95, comment is 0, blank is 26.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\AmenazaWrapper.java, code is 47, comment is 0, blank is 15.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\Db4oCreator.java, code is 152, comment is 22, blank is 41.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\Equipamiento.java, code is 47, comment is 0, blank is 14.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\H2Creator.java, code is 234, comment is 63, blank is 60.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\Informante.java, code is 21, comment is 0, blank is 8.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\Main.java, code is 185, comment is 36, blank is 36.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\MotorBD.java, code is 179, comment is 58, blank is 60.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\ObjectBoxAmenaza.java, code is 111, comment is 1, blank is 28.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\ObjectBoxAmenazaWrapper.java, code is 58, comment is 6, blank is 18.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\ObjectBoxCreator.java, code is 292, comment is 37, blank is 83.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\ObjectBoxEquipamiento.java, code is 63, comment is 0, blank is 17.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\ObjectBoxInformante.java, code is 39, comment is 0, blank is 12.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\ObjectBoxPosicion.java, code is 63, comment is 0, blank is 18.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\ObjectBoxTiempo.java, code is 47, comment is 0, blank is 14.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\Posicion.java, code is 47, comment is 0, blank is 14.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\RocksDbCreator.java, code is 321, comment is 53, blank is 79.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\SqliteCreator.java, code is 234, comment is 68, blank is 63.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\Tiempo.java, code is 31, comment is 0, blank is 11.
+bd-benchmark\src\main\resources\META-INF\persistence.xml, code is 45, comment is 10, blank is 4.
+bd-benchmark\src\test\java\mil\ea\cideso\satac\SQLiteTest.java, code is 9, comment is 3, blank is 4.
+bd-benchmark\target\bd-benchmark-1.0.jar, it is a binary file.
+bd-benchmark\target\classes\META-INF\persistence.xml, code is 45, comment is 10, blank is 4.
+bd-benchmark\target\classes\mil\ea\cideso\satac\Amenaza.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\AmenazaWrapper.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\Db4oCreator.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\Equipamiento.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\H2Creator.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\Informante.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\Main.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\MotorBD.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\MyObjectBox.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenaza.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenaza_$1.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenaza_$2.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenaza_$3.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenaza_$4.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenaza_$5.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenaza_$6.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenaza_$ObjectBoxAmenazaIdGetter.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenaza_.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenazaCursor$Factory.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenazaCursor.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenazaWrapper.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenazaWrapper_$1.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenazaWrapper_$ObjectBoxAmenazaWrapperIdGetter.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenazaWrapper_.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenazaWrapperCursor$Factory.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenazaWrapperCursor.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxCreator.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxEquipamiento.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxEquipamiento_$1.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxEquipamiento_$ObjectBoxEquipamientoIdGetter.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxEquipamiento_.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxEquipamientoCursor$Factory.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxEquipamientoCursor.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxInformante.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxInformante_$1.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxInformante_$ObjectBoxInformanteIdGetter.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxInformante_.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxInformanteCursor$Factory.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxInformanteCursor.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxPosicion.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxPosicion_$1.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxPosicion_$ObjectBoxPosicionIdGetter.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxPosicion_.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxPosicionCursor$Factory.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxPosicionCursor.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxTiempo.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxTiempo_$1.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxTiempo_$ObjectBoxTiempoIdGetter.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxTiempo_.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxTiempoCursor$Factory.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxTiempoCursor.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\Posicion.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\RocksDbCreator.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\SqliteCreator.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\Tiempo.class, it is a binary file.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\MyObjectBox.java, code is 107, comment is 7, blank is 14.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxAmenaza_.java, code is 133, comment is 10, blank is 38.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxAmenazaCursor.java, code is 90, comment is 10, blank is 13.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxAmenazaWrapper_.java, code is 81, comment is 6, blank is 29.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxAmenazaWrapperCursor.java, code is 48, comment is 10, blank is 12.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxEquipamiento_.java, code is 84, comment is 6, blank is 30.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxEquipamientoCursor.java, code is 50, comment is 10, blank is 12.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxInformante_.java, code is 75, comment is 6, blank is 27.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxInformanteCursor.java, code is 46, comment is 10, blank is 12.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxPosicion_.java, code is 84, comment is 6, blank is 30.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxPosicionCursor.java, code is 47, comment is 10, blank is 12.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxTiempo_.java, code is 78, comment is 6, blank is 28.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxTiempoCursor.java, code is 47, comment is 10, blank is 12.
+bd-benchmark\target\maven-archiver\pom.properties, code is 4, comment is 0, blank is 0.
+bd-benchmark\target\maven-status\maven-compiler-plugin\compile\default-compile\createdFiles.lst, code is 55, comment is 0, blank is 0.
+bd-benchmark\target\maven-status\maven-compiler-plugin\compile\default-compile\inputFiles.lst, code is 19, comment is 0, blank is 0.
+bd-benchmark\target\maven-status\maven-compiler-plugin\testCompile\default-testCompile\createdFiles.lst, code is 0, comment is 0, blank is 0.
+bd-benchmark\target\maven-status\maven-compiler-plugin\testCompile\default-testCompile\inputFiles.lst, code is 1, comment is 0, blank is 0.
+bd-benchmark\target\surefire-reports\mil.ea.cideso.satac.SQLiteTest.txt, code is 4, comment is 0, blank is 0.
+bd-benchmark\target\surefire-reports\TEST-mil.ea.cideso.satac.SQLiteTest.xml, code is 29, comment is 0, blank is 0.
+bd-benchmark\target\test-classes\mil\ea\cideso\satac\SQLiteTest.class, it is a binary file.
+d:\prueba-maven\dependency-reduced-pom.xml, code is 66, comment is 0, blank is 1.
+d:\prueba-maven\hamcrest-library-2.1.jar, it is a binary file.
+d:\prueba-maven\pom.xml, code is 61, comment is 1, blank is 0.
+d:\prueba-maven\src\main\java\hello\Greeter.java, code is 6, comment is 0, blank is 1.
+d:\prueba-maven\src\main\java\hello\HelloWorld.java, code is 10, comment is 0, blank is 3.
+d:\prueba-maven\src\test\java\hello\GreeterTest.java, code is 11, comment is 0, blank is 5.
+d:\prueba-maven\target\classes\hello\Greeter.class, it is a binary file.
+d:\prueba-maven\target\classes\hello\HelloWorld.class, it is a binary file.
+d:\prueba-maven\target\gs-maven-0.1.0-shaded.jar, it is a binary file.
+d:\prueba-maven\target\gs-maven-0.1.0.jar, it is a binary file.
+d:\prueba-maven\target\maven-archiver\pom.properties, code is 5, comment is 0, blank is 0.
+d:\prueba-maven\target\maven-status\maven-compiler-plugin\compile\default-compile\createdFiles.lst, code is 0, comment is 0, blank is 0.
+d:\prueba-maven\target\maven-status\maven-compiler-plugin\compile\default-compile\inputFiles.lst, code is 2, comment is 0, blank is 0.
+d:\prueba-maven\target\maven-status\maven-compiler-plugin\testCompile\default-testCompile\createdFiles.lst, code is 1, comment is 0, blank is 0.
+d:\prueba-maven\target\maven-status\maven-compiler-plugin\testCompile\default-testCompile\inputFiles.lst, code is 1, comment is 0, blank is 0.
+d:\prueba-maven\target\original-gs-maven-0.1.0.jar, it is a binary file.
+d:\prueba-maven\target\surefire-reports\GreeterTest.txt, code is 38, comment is 0, blank is 1.
+d:\prueba-maven\target\surefire-reports\hello.GreeterTest.txt, code is 4, comment is 0, blank is 0.
+d:\prueba-maven\target\surefire-reports\TEST-GreeterTest.xml, code is 25, comment is 0, blank is 0.
+d:\prueba-maven\target\surefire-reports\TEST-hello.GreeterTest.xml, code is 25, comment is 0, blank is 0.
+d:\prueba-maven\target\test-classes\hello\GreeterTest.class, it is a binary file.
+README.md, code is 10, comment is 0, blank is 4.
+===============================================================================
+===============================================================================
+EXTENSION NAME : linecount
+EXTENSION VERSION : 0.1.7
+-------------------------------------------------------------------------------
+count time : 2019-08-28 19:11:19
+count workspace : d:\proyectoPps
+total files : 105
+total code lines : 4544
+total comment lines : 532
+total blank lines : 912
+
+.gitignore, code is 25, comment is 0, blank is 1.
+bd-benchmark\.gitignore, code is 1, comment is 0, blank is 0.
+bd-benchmark\objectbox-models\default.json, code is 407, comment is 0, blank is 0.
+bd-benchmark\objectbox-models\default.json.bak, code is 392, comment is 0, blank is 0.
+bd-benchmark\pom.xml, code is 262, comment is 58, blank is 9.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\Amenaza.java, code is 95, comment is 0, blank is 26.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\AmenazaWrapper.java, code is 47, comment is 0, blank is 15.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\Db4oCreator.java, code is 152, comment is 22, blank is 41.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\Equipamiento.java, code is 47, comment is 0, blank is 14.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\H2Creator.java, code is 234, comment is 63, blank is 60.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\Informante.java, code is 21, comment is 0, blank is 8.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\Main.java, code is 185, comment is 36, blank is 36.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\MotorBD.java, code is 179, comment is 58, blank is 60.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\ObjectBoxAmenaza.java, code is 111, comment is 1, blank is 28.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\ObjectBoxAmenazaWrapper.java, code is 58, comment is 6, blank is 18.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\ObjectBoxCreator.java, code is 292, comment is 37, blank is 83.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\ObjectBoxEquipamiento.java, code is 63, comment is 0, blank is 17.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\ObjectBoxInformante.java, code is 39, comment is 0, blank is 12.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\ObjectBoxPosicion.java, code is 63, comment is 0, blank is 18.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\ObjectBoxTiempo.java, code is 47, comment is 0, blank is 14.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\Posicion.java, code is 47, comment is 0, blank is 14.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\RocksDbCreator.java, code is 321, comment is 53, blank is 79.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\SqliteCreator.java, code is 234, comment is 68, blank is 63.
+bd-benchmark\src\main\java\mil\ea\cideso\satac\Tiempo.java, code is 31, comment is 0, blank is 11.
+bd-benchmark\src\main\resources\META-INF\persistence.xml, code is 45, comment is 10, blank is 4.
+bd-benchmark\src\test\java\mil\ea\cideso\satac\SQLiteTest.java, code is 9, comment is 3, blank is 4.
+bd-benchmark\target\bd-benchmark-1.0.jar, it is a binary file.
+bd-benchmark\target\classes\META-INF\persistence.xml, code is 45, comment is 10, blank is 4.
+bd-benchmark\target\classes\mil\ea\cideso\satac\Amenaza.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\AmenazaWrapper.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\Db4oCreator.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\Equipamiento.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\H2Creator.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\Informante.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\Main.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\MotorBD.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\MyObjectBox.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenaza.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenaza_$1.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenaza_$2.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenaza_$3.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenaza_$4.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenaza_$5.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenaza_$6.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenaza_$ObjectBoxAmenazaIdGetter.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenaza_.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenazaCursor$Factory.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenazaCursor.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenazaWrapper.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenazaWrapper_$1.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenazaWrapper_$ObjectBoxAmenazaWrapperIdGetter.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenazaWrapper_.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenazaWrapperCursor$Factory.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxAmenazaWrapperCursor.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxCreator.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxEquipamiento.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxEquipamiento_$1.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxEquipamiento_$ObjectBoxEquipamientoIdGetter.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxEquipamiento_.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxEquipamientoCursor$Factory.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxEquipamientoCursor.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxInformante.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxInformante_$1.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxInformante_$ObjectBoxInformanteIdGetter.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxInformante_.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxInformanteCursor$Factory.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxInformanteCursor.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxPosicion.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxPosicion_$1.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxPosicion_$ObjectBoxPosicionIdGetter.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxPosicion_.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxPosicionCursor$Factory.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxPosicionCursor.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxTiempo.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxTiempo_$1.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxTiempo_$ObjectBoxTiempoIdGetter.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxTiempo_.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxTiempoCursor$Factory.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\ObjectBoxTiempoCursor.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\Posicion.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\RocksDbCreator.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\SqliteCreator.class, it is a binary file.
+bd-benchmark\target\classes\mil\ea\cideso\satac\Tiempo.class, it is a binary file.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\MyObjectBox.java, code is 107, comment is 7, blank is 14.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxAmenaza_.java, code is 133, comment is 10, blank is 38.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxAmenazaCursor.java, code is 90, comment is 10, blank is 13.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxAmenazaWrapper_.java, code is 81, comment is 6, blank is 29.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxAmenazaWrapperCursor.java, code is 48, comment is 10, blank is 12.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxEquipamiento_.java, code is 84, comment is 6, blank is 30.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxEquipamientoCursor.java, code is 50, comment is 10, blank is 12.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxInformante_.java, code is 75, comment is 6, blank is 27.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxInformanteCursor.java, code is 46, comment is 10, blank is 12.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxPosicion_.java, code is 84, comment is 6, blank is 30.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxPosicionCursor.java, code is 47, comment is 10, blank is 12.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxTiempo_.java, code is 78, comment is 6, blank is 28.
+bd-benchmark\target\generated-sources\annotations\mil\ea\cideso\satac\ObjectBoxTiempoCursor.java, code is 47, comment is 10, blank is 12.
+bd-benchmark\target\maven-archiver\pom.properties, code is 4, comment is 0, blank is 0.
+bd-benchmark\target\maven-status\maven-compiler-plugin\compile\default-compile\createdFiles.lst, code is 55, comment is 0, blank is 0.
+bd-benchmark\target\maven-status\maven-compiler-plugin\compile\default-compile\inputFiles.lst, code is 19, comment is 0, blank is 0.
+bd-benchmark\target\maven-status\maven-compiler-plugin\testCompile\default-testCompile\createdFiles.lst, code is 0, comment is 0, blank is 0.
+bd-benchmark\target\maven-status\maven-compiler-plugin\testCompile\default-testCompile\inputFiles.lst, code is 1, comment is 0, blank is 0.
+bd-benchmark\target\surefire-reports\mil.ea.cideso.satac.SQLiteTest.txt, code is 4, comment is 0, blank is 0.
+bd-benchmark\target\surefire-reports\TEST-mil.ea.cideso.satac.SQLiteTest.xml, code is 29, comment is 0, blank is 0.
+bd-benchmark\target\test-classes\mil\ea\cideso\satac\SQLiteTest.class, it is a binary file.
+README.md, code is 10, comment is 0, blank is 4.
+===============================================================================

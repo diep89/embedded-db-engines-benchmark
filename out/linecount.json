@@ -1,0 +1,2334 @@
+{
+    "extension": "linecount",
+    "version": "0.1.7",
+    "workspace": "d:\\proyectoPps",
+    "linecount": [
+        {
+            "version": "0.1.7",
+            "counttime": "2019-08-27 20:57:34",
+            "filesum": 121,
+            "codesum": 4768,
+            "commentsum": 544,
+            "blanksum": 930,
+            "filelist": [
+                {
+                    "blank": 1,
+                    "code": 23,
+                    "comment": 0,
+                    "filename": ".gitignore"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\.gitignore"
+                },
+                {
+                    "blank": 0,
+                    "code": 407,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\objectbox-models\\default.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 392,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\objectbox-models\\default.json.bak"
+                },
+                {
+                    "blank": 9,
+                    "code": 262,
+                    "comment": 58,
+                    "filename": "bd-benchmark\\pom.xml"
+                },
+                {
+                    "blank": 26,
+                    "code": 95,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\Amenaza.java"
+                },
+                {
+                    "blank": 15,
+                    "code": 47,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\AmenazaWrapper.java"
+                },
+                {
+                    "blank": 41,
+                    "code": 152,
+                    "comment": 22,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\Db4oCreator.java"
+                },
+                {
+                    "blank": 14,
+                    "code": 47,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\Equipamiento.java"
+                },
+                {
+                    "blank": 63,
+                    "code": 237,
+                    "comment": 66,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\H2Creator.java"
+                },
+                {
+                    "blank": 8,
+                    "code": 21,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\Informante.java"
+                },
+                {
+                    "blank": 35,
+                    "code": 183,
+                    "comment": 36,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\Main.java"
+                },
+                {
+                    "blank": 64,
+                    "code": 179,
+                    "comment": 66,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\MotorBD.java"
+                },
+                {
+                    "blank": 28,
+                    "code": 111,
+                    "comment": 1,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\ObjectBoxAmenaza.java"
+                },
+                {
+                    "blank": 18,
+                    "code": 58,
+                    "comment": 6,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaWrapper.java"
+                },
+                {
+                    "blank": 83,
+                    "code": 292,
+                    "comment": 37,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\ObjectBoxCreator.java"
+                },
+                {
+                    "blank": 17,
+                    "code": 63,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\ObjectBoxEquipamiento.java"
+                },
+                {
+                    "blank": 12,
+                    "code": 39,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\ObjectBoxInformante.java"
+                },
+                {
+                    "blank": 18,
+                    "code": 63,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\ObjectBoxPosicion.java"
+                },
+                {
+                    "blank": 14,
+                    "code": 47,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\ObjectBoxTiempo.java"
+                },
+                {
+                    "blank": 14,
+                    "code": 47,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\Posicion.java"
+                },
+                {
+                    "blank": 79,
+                    "code": 321,
+                    "comment": 53,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\RocksDbCreator.java"
+                },
+                {
+                    "blank": 64,
+                    "code": 242,
+                    "comment": 70,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\SqliteCreator.java"
+                },
+                {
+                    "blank": 11,
+                    "code": 31,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\Tiempo.java"
+                },
+                {
+                    "blank": 4,
+                    "code": 45,
+                    "comment": 9,
+                    "filename": "bd-benchmark\\src\\main\\resources\\META-INF\\persistence.xml"
+                },
+                {
+                    "blank": 4,
+                    "code": 9,
+                    "comment": 3,
+                    "filename": "bd-benchmark\\src\\test\\java\\mil\\ea\\cideso\\satac\\SQLiteTest.java"
+                },
+                {
+                    "blank": 4,
+                    "code": 45,
+                    "comment": 9,
+                    "filename": "bd-benchmark\\target\\classes\\META-INF\\persistence.xml"
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\Amenaza.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\AmenazaWrapper.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\Db4oCreator.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\Equipamiento.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\H2Creator.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\Informante.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\Main.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\MotorBD.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\MyObjectBox.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenaza.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenaza_$1.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenaza_$2.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenaza_$3.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenaza_$4.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenaza_$5.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenaza_$6.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenaza_$ObjectBoxAmenazaIdGetter.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenaza_.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaCursor$Factory.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaCursor.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaWrapper.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaWrapper_$1.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaWrapper_$ObjectBoxAmenazaWrapperIdGetter.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaWrapper_.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaWrapperCursor$Factory.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaWrapperCursor.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxCreator.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxEquipamiento.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxEquipamiento_$1.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxEquipamiento_$ObjectBoxEquipamientoIdGetter.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxEquipamiento_.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxEquipamientoCursor$Factory.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxEquipamientoCursor.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxInformante.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxInformante_$1.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxInformante_$ObjectBoxInformanteIdGetter.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxInformante_.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxInformanteCursor$Factory.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxInformanteCursor.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxPosicion.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxPosicion_$1.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxPosicion_$ObjectBoxPosicionIdGetter.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxPosicion_.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxPosicionCursor$Factory.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxPosicionCursor.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxTiempo.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxTiempo_$1.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxTiempo_$ObjectBoxTiempoIdGetter.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxTiempo_.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxTiempoCursor$Factory.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxTiempoCursor.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\Posicion.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\RocksDbCreator.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\SqliteCreator.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\Tiempo.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 14,
+                    "code": 107,
+                    "comment": 7,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\MyObjectBox.java"
+                },
+                {
+                    "blank": 38,
+                    "code": 133,
+                    "comment": 10,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxAmenaza_.java"
+                },
+                {
+                    "blank": 13,
+                    "code": 90,
+                    "comment": 10,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaCursor.java"
+                },
+                {
+                    "blank": 29,
+                    "code": 81,
+                    "comment": 6,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaWrapper_.java"
+                },
+                {
+                    "blank": 12,
+                    "code": 48,
+                    "comment": 10,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaWrapperCursor.java"
+                },
+                {
+                    "blank": 30,
+                    "code": 84,
+                    "comment": 6,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxEquipamiento_.java"
+                },
+                {
+                    "blank": 12,
+                    "code": 50,
+                    "comment": 10,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxEquipamientoCursor.java"
+                },
+                {
+                    "blank": 27,
+                    "code": 75,
+                    "comment": 6,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxInformante_.java"
+                },
+                {
+                    "blank": 12,
+                    "code": 46,
+                    "comment": 10,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxInformanteCursor.java"
+                },
+                {
+                    "blank": 30,
+                    "code": 84,
+                    "comment": 6,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxPosicion_.java"
+                },
+                {
+                    "blank": 12,
+                    "code": 47,
+                    "comment": 10,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxPosicionCursor.java"
+                },
+                {
+                    "blank": 28,
+                    "code": 78,
+                    "comment": 6,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxTiempo_.java"
+                },
+                {
+                    "blank": 12,
+                    "code": 47,
+                    "comment": 10,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxTiempoCursor.java"
+                },
+                {
+                    "blank": 0,
+                    "code": 55,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\target\\maven-status\\maven-compiler-plugin\\compile\\default-compile\\createdFiles.lst"
+                },
+                {
+                    "blank": 0,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\target\\maven-status\\maven-compiler-plugin\\compile\\default-compile\\inputFiles.lst"
+                },
+                {
+                    "filename": "bd-benchmark\\target\\test-classes\\mil\\ea\\cideso\\satac\\SQLiteTest.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 1,
+                    "code": 66,
+                    "comment": 0,
+                    "filename": "d:\\prueba-maven\\dependency-reduced-pom.xml"
+                },
+                {
+                    "filename": "d:\\prueba-maven\\hamcrest-library-2.1.jar",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 61,
+                    "comment": 1,
+                    "filename": "d:\\prueba-maven\\pom.xml"
+                },
+                {
+                    "blank": 1,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": "d:\\prueba-maven\\src\\main\\java\\hello\\Greeter.java"
+                },
+                {
+                    "blank": 3,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "d:\\prueba-maven\\src\\main\\java\\hello\\HelloWorld.java"
+                },
+                {
+                    "blank": 5,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "d:\\prueba-maven\\src\\test\\java\\hello\\GreeterTest.java"
+                },
+                {
+                    "filename": "d:\\prueba-maven\\target\\classes\\hello\\Greeter.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "d:\\prueba-maven\\target\\classes\\hello\\HelloWorld.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "d:\\prueba-maven\\target\\gs-maven-0.1.0-shaded.jar",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "d:\\prueba-maven\\target\\gs-maven-0.1.0.jar",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "d:\\prueba-maven\\target\\maven-archiver\\pom.properties"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "d:\\prueba-maven\\target\\maven-status\\maven-compiler-plugin\\compile\\default-compile\\createdFiles.lst"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "d:\\prueba-maven\\target\\maven-status\\maven-compiler-plugin\\compile\\default-compile\\inputFiles.lst"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "d:\\prueba-maven\\target\\maven-status\\maven-compiler-plugin\\testCompile\\default-testCompile\\createdFiles.lst"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "d:\\prueba-maven\\target\\maven-status\\maven-compiler-plugin\\testCompile\\default-testCompile\\inputFiles.lst"
+                },
+                {
+                    "filename": "d:\\prueba-maven\\target\\original-gs-maven-0.1.0.jar",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 1,
+                    "code": 38,
+                    "comment": 0,
+                    "filename": "d:\\prueba-maven\\target\\surefire-reports\\GreeterTest.txt"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "d:\\prueba-maven\\target\\surefire-reports\\hello.GreeterTest.txt"
+                },
+                {
+                    "blank": 0,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "d:\\prueba-maven\\target\\surefire-reports\\TEST-GreeterTest.xml"
+                },
+                {
+                    "blank": 0,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "d:\\prueba-maven\\target\\surefire-reports\\TEST-hello.GreeterTest.xml"
+                },
+                {
+                    "filename": "d:\\prueba-maven\\target\\test-classes\\hello\\GreeterTest.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "objectbox-jni-windows-x64.dll",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 4,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "README.md"
+                }
+            ]
+        },
+        {
+            "version": "0.1.7",
+            "counttime": "2019-08-28 19:06:53",
+            "filesum": 126,
+            "codesum": 4799,
+            "commentsum": 533,
+            "blanksum": 923,
+            "filelist": [
+                {
+                    "blank": 1,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": ".gitignore"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\.gitignore"
+                },
+                {
+                    "blank": 0,
+                    "code": 407,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\objectbox-models\\default.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 392,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\objectbox-models\\default.json.bak"
+                },
+                {
+                    "blank": 9,
+                    "code": 262,
+                    "comment": 58,
+                    "filename": "bd-benchmark\\pom.xml"
+                },
+                {
+                    "blank": 26,
+                    "code": 95,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\Amenaza.java"
+                },
+                {
+                    "blank": 15,
+                    "code": 47,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\AmenazaWrapper.java"
+                },
+                {
+                    "blank": 41,
+                    "code": 152,
+                    "comment": 22,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\Db4oCreator.java"
+                },
+                {
+                    "blank": 14,
+                    "code": 47,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\Equipamiento.java"
+                },
+                {
+                    "blank": 60,
+                    "code": 234,
+                    "comment": 63,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\H2Creator.java"
+                },
+                {
+                    "blank": 8,
+                    "code": 21,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\Informante.java"
+                },
+                {
+                    "blank": 36,
+                    "code": 185,
+                    "comment": 36,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\Main.java"
+                },
+                {
+                    "blank": 60,
+                    "code": 179,
+                    "comment": 58,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\MotorBD.java"
+                },
+                {
+                    "blank": 28,
+                    "code": 111,
+                    "comment": 1,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\ObjectBoxAmenaza.java"
+                },
+                {
+                    "blank": 18,
+                    "code": 58,
+                    "comment": 6,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaWrapper.java"
+                },
+                {
+                    "blank": 83,
+                    "code": 292,
+                    "comment": 37,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\ObjectBoxCreator.java"
+                },
+                {
+                    "blank": 17,
+                    "code": 63,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\ObjectBoxEquipamiento.java"
+                },
+                {
+                    "blank": 12,
+                    "code": 39,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\ObjectBoxInformante.java"
+                },
+                {
+                    "blank": 18,
+                    "code": 63,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\ObjectBoxPosicion.java"
+                },
+                {
+                    "blank": 14,
+                    "code": 47,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\ObjectBoxTiempo.java"
+                },
+                {
+                    "blank": 14,
+                    "code": 47,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\Posicion.java"
+                },
+                {
+                    "blank": 79,
+                    "code": 321,
+                    "comment": 53,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\RocksDbCreator.java"
+                },
+                {
+                    "blank": 63,
+                    "code": 234,
+                    "comment": 68,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\SqliteCreator.java"
+                },
+                {
+                    "blank": 11,
+                    "code": 31,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\Tiempo.java"
+                },
+                {
+                    "blank": 4,
+                    "code": 45,
+                    "comment": 10,
+                    "filename": "bd-benchmark\\src\\main\\resources\\META-INF\\persistence.xml"
+                },
+                {
+                    "blank": 4,
+                    "code": 9,
+                    "comment": 3,
+                    "filename": "bd-benchmark\\src\\test\\java\\mil\\ea\\cideso\\satac\\SQLiteTest.java"
+                },
+                {
+                    "filename": "bd-benchmark\\target\\bd-benchmark-1.0.jar",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 4,
+                    "code": 45,
+                    "comment": 10,
+                    "filename": "bd-benchmark\\target\\classes\\META-INF\\persistence.xml"
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\Amenaza.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\AmenazaWrapper.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\Db4oCreator.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\Equipamiento.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\H2Creator.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\Informante.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\Main.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\MotorBD.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\MyObjectBox.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenaza.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenaza_$1.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenaza_$2.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenaza_$3.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenaza_$4.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenaza_$5.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenaza_$6.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenaza_$ObjectBoxAmenazaIdGetter.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenaza_.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaCursor$Factory.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaCursor.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaWrapper.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaWrapper_$1.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaWrapper_$ObjectBoxAmenazaWrapperIdGetter.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaWrapper_.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaWrapperCursor$Factory.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaWrapperCursor.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxCreator.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxEquipamiento.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxEquipamiento_$1.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxEquipamiento_$ObjectBoxEquipamientoIdGetter.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxEquipamiento_.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxEquipamientoCursor$Factory.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxEquipamientoCursor.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxInformante.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxInformante_$1.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxInformante_$ObjectBoxInformanteIdGetter.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxInformante_.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxInformanteCursor$Factory.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxInformanteCursor.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxPosicion.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxPosicion_$1.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxPosicion_$ObjectBoxPosicionIdGetter.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxPosicion_.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxPosicionCursor$Factory.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxPosicionCursor.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxTiempo.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxTiempo_$1.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxTiempo_$ObjectBoxTiempoIdGetter.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxTiempo_.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxTiempoCursor$Factory.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxTiempoCursor.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\Posicion.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\RocksDbCreator.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\SqliteCreator.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\Tiempo.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 14,
+                    "code": 107,
+                    "comment": 7,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\MyObjectBox.java"
+                },
+                {
+                    "blank": 38,
+                    "code": 133,
+                    "comment": 10,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxAmenaza_.java"
+                },
+                {
+                    "blank": 13,
+                    "code": 90,
+                    "comment": 10,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaCursor.java"
+                },
+                {
+                    "blank": 29,
+                    "code": 81,
+                    "comment": 6,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaWrapper_.java"
+                },
+                {
+                    "blank": 12,
+                    "code": 48,
+                    "comment": 10,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaWrapperCursor.java"
+                },
+                {
+                    "blank": 30,
+                    "code": 84,
+                    "comment": 6,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxEquipamiento_.java"
+                },
+                {
+                    "blank": 12,
+                    "code": 50,
+                    "comment": 10,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxEquipamientoCursor.java"
+                },
+                {
+                    "blank": 27,
+                    "code": 75,
+                    "comment": 6,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxInformante_.java"
+                },
+                {
+                    "blank": 12,
+                    "code": 46,
+                    "comment": 10,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxInformanteCursor.java"
+                },
+                {
+                    "blank": 30,
+                    "code": 84,
+                    "comment": 6,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxPosicion_.java"
+                },
+                {
+                    "blank": 12,
+                    "code": 47,
+                    "comment": 10,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxPosicionCursor.java"
+                },
+                {
+                    "blank": 28,
+                    "code": 78,
+                    "comment": 6,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxTiempo_.java"
+                },
+                {
+                    "blank": 12,
+                    "code": 47,
+                    "comment": 10,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxTiempoCursor.java"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\target\\maven-archiver\\pom.properties"
+                },
+                {
+                    "blank": 0,
+                    "code": 55,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\target\\maven-status\\maven-compiler-plugin\\compile\\default-compile\\createdFiles.lst"
+                },
+                {
+                    "blank": 0,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\target\\maven-status\\maven-compiler-plugin\\compile\\default-compile\\inputFiles.lst"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\target\\maven-status\\maven-compiler-plugin\\testCompile\\default-testCompile\\createdFiles.lst"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\target\\maven-status\\maven-compiler-plugin\\testCompile\\default-testCompile\\inputFiles.lst"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\target\\surefire-reports\\mil.ea.cideso.satac.SQLiteTest.txt"
+                },
+                {
+                    "blank": 0,
+                    "code": 29,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\target\\surefire-reports\\TEST-mil.ea.cideso.satac.SQLiteTest.xml"
+                },
+                {
+                    "filename": "bd-benchmark\\target\\test-classes\\mil\\ea\\cideso\\satac\\SQLiteTest.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 1,
+                    "code": 66,
+                    "comment": 0,
+                    "filename": "d:\\prueba-maven\\dependency-reduced-pom.xml"
+                },
+                {
+                    "filename": "d:\\prueba-maven\\hamcrest-library-2.1.jar",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 61,
+                    "comment": 1,
+                    "filename": "d:\\prueba-maven\\pom.xml"
+                },
+                {
+                    "blank": 1,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": "d:\\prueba-maven\\src\\main\\java\\hello\\Greeter.java"
+                },
+                {
+                    "blank": 3,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "d:\\prueba-maven\\src\\main\\java\\hello\\HelloWorld.java"
+                },
+                {
+                    "blank": 5,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "d:\\prueba-maven\\src\\test\\java\\hello\\GreeterTest.java"
+                },
+                {
+                    "filename": "d:\\prueba-maven\\target\\classes\\hello\\Greeter.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "d:\\prueba-maven\\target\\classes\\hello\\HelloWorld.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "d:\\prueba-maven\\target\\gs-maven-0.1.0-shaded.jar",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "d:\\prueba-maven\\target\\gs-maven-0.1.0.jar",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "d:\\prueba-maven\\target\\maven-archiver\\pom.properties"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "d:\\prueba-maven\\target\\maven-status\\maven-compiler-plugin\\compile\\default-compile\\createdFiles.lst"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "d:\\prueba-maven\\target\\maven-status\\maven-compiler-plugin\\compile\\default-compile\\inputFiles.lst"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "d:\\prueba-maven\\target\\maven-status\\maven-compiler-plugin\\testCompile\\default-testCompile\\createdFiles.lst"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "d:\\prueba-maven\\target\\maven-status\\maven-compiler-plugin\\testCompile\\default-testCompile\\inputFiles.lst"
+                },
+                {
+                    "filename": "d:\\prueba-maven\\target\\original-gs-maven-0.1.0.jar",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 1,
+                    "code": 38,
+                    "comment": 0,
+                    "filename": "d:\\prueba-maven\\target\\surefire-reports\\GreeterTest.txt"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "d:\\prueba-maven\\target\\surefire-reports\\hello.GreeterTest.txt"
+                },
+                {
+                    "blank": 0,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "d:\\prueba-maven\\target\\surefire-reports\\TEST-GreeterTest.xml"
+                },
+                {
+                    "blank": 0,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "d:\\prueba-maven\\target\\surefire-reports\\TEST-hello.GreeterTest.xml"
+                },
+                {
+                    "filename": "d:\\prueba-maven\\target\\test-classes\\hello\\GreeterTest.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 4,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "README.md"
+                }
+            ]
+        },
+        {
+            "version": "0.1.7",
+            "counttime": "2019-08-28 19:11:19",
+            "filesum": 105,
+            "codesum": 4544,
+            "commentsum": 532,
+            "blanksum": 912,
+            "filelist": [
+                {
+                    "blank": 1,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": ".gitignore"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\.gitignore"
+                },
+                {
+                    "blank": 0,
+                    "code": 407,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\objectbox-models\\default.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 392,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\objectbox-models\\default.json.bak"
+                },
+                {
+                    "blank": 9,
+                    "code": 262,
+                    "comment": 58,
+                    "filename": "bd-benchmark\\pom.xml"
+                },
+                {
+                    "blank": 26,
+                    "code": 95,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\Amenaza.java"
+                },
+                {
+                    "blank": 15,
+                    "code": 47,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\AmenazaWrapper.java"
+                },
+                {
+                    "blank": 41,
+                    "code": 152,
+                    "comment": 22,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\Db4oCreator.java"
+                },
+                {
+                    "blank": 14,
+                    "code": 47,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\Equipamiento.java"
+                },
+                {
+                    "blank": 60,
+                    "code": 234,
+                    "comment": 63,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\H2Creator.java"
+                },
+                {
+                    "blank": 8,
+                    "code": 21,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\Informante.java"
+                },
+                {
+                    "blank": 36,
+                    "code": 185,
+                    "comment": 36,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\Main.java"
+                },
+                {
+                    "blank": 60,
+                    "code": 179,
+                    "comment": 58,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\MotorBD.java"
+                },
+                {
+                    "blank": 28,
+                    "code": 111,
+                    "comment": 1,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\ObjectBoxAmenaza.java"
+                },
+                {
+                    "blank": 18,
+                    "code": 58,
+                    "comment": 6,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaWrapper.java"
+                },
+                {
+                    "blank": 83,
+                    "code": 292,
+                    "comment": 37,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\ObjectBoxCreator.java"
+                },
+                {
+                    "blank": 17,
+                    "code": 63,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\ObjectBoxEquipamiento.java"
+                },
+                {
+                    "blank": 12,
+                    "code": 39,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\ObjectBoxInformante.java"
+                },
+                {
+                    "blank": 18,
+                    "code": 63,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\ObjectBoxPosicion.java"
+                },
+                {
+                    "blank": 14,
+                    "code": 47,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\ObjectBoxTiempo.java"
+                },
+                {
+                    "blank": 14,
+                    "code": 47,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\Posicion.java"
+                },
+                {
+                    "blank": 79,
+                    "code": 321,
+                    "comment": 53,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\RocksDbCreator.java"
+                },
+                {
+                    "blank": 63,
+                    "code": 234,
+                    "comment": 68,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\SqliteCreator.java"
+                },
+                {
+                    "blank": 11,
+                    "code": 31,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\src\\main\\java\\mil\\ea\\cideso\\satac\\Tiempo.java"
+                },
+                {
+                    "blank": 4,
+                    "code": 45,
+                    "comment": 10,
+                    "filename": "bd-benchmark\\src\\main\\resources\\META-INF\\persistence.xml"
+                },
+                {
+                    "blank": 4,
+                    "code": 9,
+                    "comment": 3,
+                    "filename": "bd-benchmark\\src\\test\\java\\mil\\ea\\cideso\\satac\\SQLiteTest.java"
+                },
+                {
+                    "filename": "bd-benchmark\\target\\bd-benchmark-1.0.jar",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 4,
+                    "code": 45,
+                    "comment": 10,
+                    "filename": "bd-benchmark\\target\\classes\\META-INF\\persistence.xml"
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\Amenaza.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\AmenazaWrapper.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\Db4oCreator.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\Equipamiento.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\H2Creator.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\Informante.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\Main.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\MotorBD.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\MyObjectBox.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenaza.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenaza_$1.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenaza_$2.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenaza_$3.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenaza_$4.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenaza_$5.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenaza_$6.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenaza_$ObjectBoxAmenazaIdGetter.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenaza_.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaCursor$Factory.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaCursor.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaWrapper.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaWrapper_$1.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaWrapper_$ObjectBoxAmenazaWrapperIdGetter.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaWrapper_.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaWrapperCursor$Factory.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaWrapperCursor.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxCreator.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxEquipamiento.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxEquipamiento_$1.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxEquipamiento_$ObjectBoxEquipamientoIdGetter.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxEquipamiento_.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxEquipamientoCursor$Factory.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxEquipamientoCursor.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxInformante.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxInformante_$1.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxInformante_$ObjectBoxInformanteIdGetter.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxInformante_.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxInformanteCursor$Factory.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxInformanteCursor.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxPosicion.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxPosicion_$1.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxPosicion_$ObjectBoxPosicionIdGetter.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxPosicion_.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxPosicionCursor$Factory.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxPosicionCursor.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxTiempo.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxTiempo_$1.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxTiempo_$ObjectBoxTiempoIdGetter.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxTiempo_.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxTiempoCursor$Factory.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\ObjectBoxTiempoCursor.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\Posicion.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\RocksDbCreator.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\SqliteCreator.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "bd-benchmark\\target\\classes\\mil\\ea\\cideso\\satac\\Tiempo.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 14,
+                    "code": 107,
+                    "comment": 7,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\MyObjectBox.java"
+                },
+                {
+                    "blank": 38,
+                    "code": 133,
+                    "comment": 10,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxAmenaza_.java"
+                },
+                {
+                    "blank": 13,
+                    "code": 90,
+                    "comment": 10,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaCursor.java"
+                },
+                {
+                    "blank": 29,
+                    "code": 81,
+                    "comment": 6,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaWrapper_.java"
+                },
+                {
+                    "blank": 12,
+                    "code": 48,
+                    "comment": 10,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxAmenazaWrapperCursor.java"
+                },
+                {
+                    "blank": 30,
+                    "code": 84,
+                    "comment": 6,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxEquipamiento_.java"
+                },
+                {
+                    "blank": 12,
+                    "code": 50,
+                    "comment": 10,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxEquipamientoCursor.java"
+                },
+                {
+                    "blank": 27,
+                    "code": 75,
+                    "comment": 6,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxInformante_.java"
+                },
+                {
+                    "blank": 12,
+                    "code": 46,
+                    "comment": 10,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxInformanteCursor.java"
+                },
+                {
+                    "blank": 30,
+                    "code": 84,
+                    "comment": 6,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxPosicion_.java"
+                },
+                {
+                    "blank": 12,
+                    "code": 47,
+                    "comment": 10,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxPosicionCursor.java"
+                },
+                {
+                    "blank": 28,
+                    "code": 78,
+                    "comment": 6,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxTiempo_.java"
+                },
+                {
+                    "blank": 12,
+                    "code": 47,
+                    "comment": 10,
+                    "filename": "bd-benchmark\\target\\generated-sources\\annotations\\mil\\ea\\cideso\\satac\\ObjectBoxTiempoCursor.java"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\target\\maven-archiver\\pom.properties"
+                },
+                {
+                    "blank": 0,
+                    "code": 55,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\target\\maven-status\\maven-compiler-plugin\\compile\\default-compile\\createdFiles.lst"
+                },
+                {
+                    "blank": 0,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\target\\maven-status\\maven-compiler-plugin\\compile\\default-compile\\inputFiles.lst"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\target\\maven-status\\maven-compiler-plugin\\testCompile\\default-testCompile\\createdFiles.lst"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\target\\maven-status\\maven-compiler-plugin\\testCompile\\default-testCompile\\inputFiles.lst"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\target\\surefire-reports\\mil.ea.cideso.satac.SQLiteTest.txt"
+                },
+                {
+                    "blank": 0,
+                    "code": 29,
+                    "comment": 0,
+                    "filename": "bd-benchmark\\target\\surefire-reports\\TEST-mil.ea.cideso.satac.SQLiteTest.xml"
+                },
+                {
+                    "filename": "bd-benchmark\\target\\test-classes\\mil\\ea\\cideso\\satac\\SQLiteTest.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 4,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "README.md"
+                }
+            ]
+        }
+    ]
+}
