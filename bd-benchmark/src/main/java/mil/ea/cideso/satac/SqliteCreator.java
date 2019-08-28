@@ -50,8 +50,8 @@ public class SqliteCreator extends MotorBD {
             getTimer().start();
             getConnection(getUrl());
             getTimer().stop();
-            if (getConn() != null) {
-                DatabaseMetaData meta = getConn().getMetaData();
+            if (conn != null) {
+                DatabaseMetaData meta = conn.getMetaData();
                 System.out.println("Driver: " + meta.getDriverName());
                 System.out.println("La BD se ha generado correctamente.\n");
                 setStatsCreateOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
@@ -306,7 +306,7 @@ public class SqliteCreator extends MotorBD {
     }
 
     // Función para generar la conexión a la BD
-    public Connection getConnection(String url) {
+    public void getConnection(String url) {
         try {
             if (conn == null) {
                 conn = DriverManager.getConnection(url);
@@ -314,11 +314,6 @@ public class SqliteCreator extends MotorBD {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        return conn;
-    }
-
-    public Connection getConn() {
-        return conn;
     }
 
     public int getCantidadAInsertar() {
