@@ -41,10 +41,10 @@ public class H2Creator extends MotorBD {
 
         try {
             getTimer().start();
-            getConnection(getUrl());
+            setConnection(getUrl());
             getTimer().stop();
-            if (getConn() != null) {
-                DatabaseMetaData meta = getConn().getMetaData();
+            if (conn != null) {
+                DatabaseMetaData meta = conn.getMetaData();
                 System.out.println("Driver: " + meta.getDriverName());
                 System.out.println("La BD se ha generado correctamente.\n");
                 setStatsCreateOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
@@ -297,17 +297,12 @@ public class H2Creator extends MotorBD {
         // }
     }
 
-    public Connection getConn() {
-        return conn;
-    }
-
-    public Connection getConnection(String url) {
+    public void setConnection(String url) {
         try {
             conn = DriverManager.getConnection(url);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        return conn;
     }
 
     // public ResultSet getRs() {
