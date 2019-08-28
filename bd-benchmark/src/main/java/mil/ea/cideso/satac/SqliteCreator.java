@@ -63,7 +63,6 @@ public class SqliteCreator extends MotorBD {
             System.out.println("Detalle del error: \n" + e.getMessage());
             System.out.println("\nStacktrace:\n\n");
             e.printStackTrace();
-            System.exit(1);
         }
 
         finally {
@@ -75,7 +74,6 @@ public class SqliteCreator extends MotorBD {
                 System.out.println("Detalle del error: \n" + e.getMessage());
                 System.out.println("\nStacktrace:\n\n");
                 e.printStackTrace();
-                System.exit(1);
             }
         }
     }
@@ -133,7 +131,6 @@ public class SqliteCreator extends MotorBD {
                 System.out.println("Detalle del error: \n" + e.getMessage());
                 System.out.println("\nStacktrace:\n\n");
                 e.printStackTrace();
-                System.exit(1);
             }
         } finally {
             em.close();
@@ -173,7 +170,6 @@ public class SqliteCreator extends MotorBD {
             System.out.println("Detalle del error: \n" + e.getMessage());
             System.out.println("\nStacktrace:\n\n");
             e.printStackTrace();
-            System.exit(1);
         } finally {
             em.close();
             getTimer().stop();
@@ -216,7 +212,6 @@ public class SqliteCreator extends MotorBD {
             System.out.println("Detalle del error: \n" + e.getMessage());
             System.out.println("\nStacktrace:\n\n");
             e.printStackTrace();
-            System.exit(1);
         } finally {
             em.close();
             getTimer().stop();
@@ -261,7 +256,6 @@ public class SqliteCreator extends MotorBD {
             System.out.println("Detalle del error: \n" + e.getMessage());
             System.out.println("\nStacktrace:\n\n");
             e.printStackTrace();
-            System.exit(1);
         } finally {
             em.close();
             if (getEmf() != null)

@@ -56,7 +56,6 @@ public class H2Creator extends MotorBD {
             System.out.println("Detalle del error: \n" + e.getMessage());
             System.out.println("\nStacktrace:\n\n");
             e.printStackTrace();
-            System.exit(1);
         }
 
         finally {
@@ -68,7 +67,6 @@ public class H2Creator extends MotorBD {
                 System.out.println("Detalle del error: \n" + e.getMessage());
                 System.out.println("\nStacktrace:\n\n");
                 e.printStackTrace();
-                System.exit(1);
             }
         }
     }
@@ -126,7 +124,6 @@ public class H2Creator extends MotorBD {
                 System.out.println("Detalle del error: \n" + e.getMessage());
                 System.out.println("\nStacktrace:\n\n");
                 e.printStackTrace();
-                System.exit(1);
             }
         } finally {
             em.close();
@@ -166,7 +163,6 @@ public class H2Creator extends MotorBD {
             System.out.println("Detalle del error: \n" + e.getMessage());
             System.out.println("\nStacktrace:\n\n");
             e.printStackTrace();
-            System.exit(1);
         } finally {
             em.close();
             getTimer().stop();
@@ -209,7 +205,6 @@ public class H2Creator extends MotorBD {
             System.out.println("Detalle del error: \n" + e.getMessage());
             System.out.println("\nStacktrace:\n\n");
             e.printStackTrace();
-            System.exit(1);
         } finally {
             em.close();
             getTimer().stop();
@@ -254,7 +249,6 @@ public class H2Creator extends MotorBD {
             System.out.println("Detalle del error: \n" + e.getMessage());
             System.out.println("\nStacktrace:\n\n");
             e.printStackTrace();
-            System.exit(1);
         } finally {
             em.close();
             if (getEmf() != null)
