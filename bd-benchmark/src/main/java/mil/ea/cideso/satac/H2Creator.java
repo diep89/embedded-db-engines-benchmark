@@ -37,7 +37,7 @@ public class H2Creator extends MotorBD {
     @Override
     public void createNewDatabase(String dbName) {
         setDbName(dbName);
-        setUrl("jdbc:h2:./" + getDbName());
+        setUrl("jdbc:h2:~/" + getDbName());
 
         try {
             getTimer().start();
