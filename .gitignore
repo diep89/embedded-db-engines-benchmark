@@ -41,6 +41,7 @@ $RECYCLE.BIN/
 ### BD Generadas ###
 # ObjectBox #
 testDb-ObjectBox/
+objectbox-jni-windows-x64.dll
 
 # SQLite #
 testDb-SQLite.db
