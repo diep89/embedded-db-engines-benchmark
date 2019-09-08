@@ -35,3 +35,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+### EXTRA ###
+# Linecount ext #
+out/
+
