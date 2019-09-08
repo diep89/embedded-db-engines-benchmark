@@ -114,4 +114,18 @@ buildNumber.properties
 
 ### BD Generadas ###
 # ObjectBox #
+testDb-ObjectBox/
 objectbox-models/
+objectbox-jni-windows-x64.dll
+
+# SQLite #
+testDb-SQLite.db
+
+# RocksDB #
+testDb-RocksDB/
+
+# H2 #
+testDb-H2.mv.db
+
+# db4o #
+testDb-db4o
