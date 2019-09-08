@@ -178,7 +178,7 @@
 							<annotationProcessor>io.objectbox.processor.ObjectBoxProcessorShim</annotationProcessor>
 						</annotationProcessors>
 						<compilerArgs>
-							<arg>-Aobjectbox.modelPath=${project.basedir}/objectbox-models/default.json</arg>
+							<arg>-Aobjectbox.modelPath=${project.basedir}/objectBoxDefault.json</arg>
 						</compilerArgs>
 					</configuration>
 				</plugin>

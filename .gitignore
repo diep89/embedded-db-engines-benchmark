@@ -41,6 +41,7 @@ $RECYCLE.BIN/
 # ObjectBox #
 testDb-ObjectBox/
 objectbox-jni-windows-x64.dll
+objectBoxDefault.json
 
 # SQLite #
 testDb-SQLite.db
