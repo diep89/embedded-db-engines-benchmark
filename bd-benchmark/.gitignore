@@ -111,3 +111,21 @@ buildNumber.properties
 # End of https://www.gitignore.io/api/java,maven,windows,eclipse,visualstudiocode
 
 ### Extra ###
+
+### BD Generadas ###
+# ObjectBox #
+testDb-ObjectBox/
+objectbox-jni-windows-x64.dll
+objectbox-models/
+
+# SQLite #
+testDb-SQLite.db
+
+# RocksDB #
+testDb-RocksDB/
+
+# H2 #
+testDb-H2.mv.db
+
+# db4o #
+testDb-db4o
