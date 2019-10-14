@@ -90,7 +90,6 @@ public class Db4oCreator extends MotorBD {
             db = getDb(getDbName());
 
             Query query = db.query();
-            query.constrain(AmenazaWrapper.class);
             ObjectSet<AmenazaWrapper> result = query.execute();
 
             getTimer().stop();
@@ -98,23 +97,6 @@ public class Db4oCreator extends MotorBD {
             if (result != null) {
                 System.out.println("Registros leídos correctamente.\n");
             }
-
-            // Comprobacion
-            // Query query2 = db.query();
-            // query2.constrain(AmenazaWrapper.class);
-            // ObjectSet<AmenazaWrapper> result2 = query2.execute();
-            // Iterator<AmenazaWrapper> itr2 = result2.iterator();
-
-            // while (itr2.hasNext()) {
-            // AmenazaWrapper amenazaWrapper = itr2.next();
-            // System.out.println("");
-            // System.out.printf("AmenazaWrapper Id: %d\n", amenazaWrapper.getId());
-            // System.out.printf("AmenazaWrapper Leido: %b\n", amenazaWrapper.isLeido());
-            // System.out.printf(" Amenaza Id: %d\n", amenazaWrapper.getAmenaza().getId());
-            // System.out.printf(" codigoSimbolo: %d\n",
-            // amenazaWrapper.getAmenaza().getCodigoSimbolo());
-            // System.out.println("");
-            // }
 
             getTimer().start();
             db.close();

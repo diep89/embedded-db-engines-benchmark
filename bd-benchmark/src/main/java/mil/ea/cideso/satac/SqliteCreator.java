@@ -1,10 +1,3 @@
-// Comando SQL para ver la estructura de una BD SQLite:
-// SELECT name FROM sqlite_master WHERE type ='table' AND name NOT LIKE 'sqlite_%';
-// Comando SQL Para ver la estructura de una tabla en la BD SQLite:
-// SELECT sql FROM sqlite_master WHERE name = 'AmenazaWrapper';
-// SELECT * FROM AmenazaWrapper;
-// SELECT * FROM Amenaza;
-
 package mil.ea.cideso.satac;
 
 import java.sql.Connection;
@@ -161,17 +154,16 @@ public class SqliteCreator extends MotorBD {
         try {
             TypedQuery<AmenazaWrapper> query = em.createQuery("SELECT p FROM AmenazaWrapper p", AmenazaWrapper.class);
             List<AmenazaWrapper> results = query.getResultList();
-
-            // Comprobación
-            // Iterator<AmenazaWrapper> itr = results.iterator();
-            // System.out.println("");
-            // while (itr.hasNext()) {
-            // AmenazaWrapper el = itr.next();
-            // System.out.printf("AmenazaWrapper\nId: %d\nLeido: %b\nVisible: %b\n\n",
-            // el.getId(), el.isLeido(),
-            // el.isVisible());
-            // }
-            // System.out.println("");
+            TypedQuery<Amenaza> query2 = em.createQuery("SELECT p FROM Amenaza p", Amenaza.class);
+            List<Amenaza> results2 = query2.getResultList();
+            TypedQuery<Equipamiento> query3 = em.createQuery("SELECT p FROM Equipamiento p", Equipamiento.class);
+            List<Equipamiento> results3 = query3.getResultList();
+            TypedQuery<Informante> query4 = em.createQuery("SELECT p FROM Informante p", Informante.class);
+            List<Informante> results4 = query4.getResultList();
+            TypedQuery<Posicion> query5 = em.createQuery("SELECT p FROM Posicion p", Posicion.class);
+            List<Posicion> results5 = query5.getResultList();
+            TypedQuery<Tiempo> query6 = em.createQuery("SELECT p FROM Tiempo p", Tiempo.class);
+            List<Tiempo> results6 = query6.getResultList();
 
         } catch (PersistenceException e) {
             System.out.println("Error.");

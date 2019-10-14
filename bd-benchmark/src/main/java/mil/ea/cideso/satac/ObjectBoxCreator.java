@@ -88,17 +88,11 @@ public class ObjectBoxCreator extends MotorBD {
 		getTimer().start();
 
 		List<ObjectBoxAmenazaWrapper> amenazaWrapperList = getStore().boxFor(ObjectBoxAmenazaWrapper.class).getAll();
-
-		// Ejemplo de query:
-		// List<ObjectBoxAmenazaWrapper> amenazaWrapperList =
-		// getAmenazaWrapperBox().query()
-		// .equal(ObjectBoxAmenazaWrapper_.leido, false).build().find();
-
-		// No se utiliza la función runInReadTx() dado que el costo de las lecturas a la
-		// bd no impacta de la manera que lo hacen las escrituras
-		// https://docs.objectbox.io/transactions
-		// getStore().runInReadTx(() -> {
-		// });
+		List<ObjectBoxAmenaza> amenazaList = getStore().boxFor(ObjectBoxAmenaza.class).getAll();
+		List<ObjectBoxTiempo> tiempoList = getStore().boxFor(ObjectBoxTiempo.class).getAll();
+		List<ObjectBoxPosicion> posicionList = getStore().boxFor(ObjectBoxPosicion.class).getAll();
+		List<ObjectBoxEquipamiento> equipamientoList = getStore().boxFor(ObjectBoxEquipamiento.class).getAll();
+		List<ObjectBoxInformante> informanteList = getStore().boxFor(ObjectBoxInformante.class).getAll();
 
 		getTimer().stop();
 		int cantidadDeAmenazas = amenazaWrapperList.size();
