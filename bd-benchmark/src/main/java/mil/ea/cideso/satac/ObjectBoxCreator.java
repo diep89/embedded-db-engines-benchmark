@@ -53,11 +53,12 @@ public class ObjectBoxCreator extends MotorBD {
 	public void insertData(int cantidadAInsertar) {
 		setCantidadAInsertar(cantidadAInsertar);
 
-		getTimer().start();
-
+		// El tiempo de generación de los objetos de prueba se excluye de las mediciones
 		for (int i = 0; i < getCantidadAInsertar(); i++) {
 			generarAmenazaWrapperOB();
 		}
+
+		getTimer().start();
 
 		getStore().runInTx(() -> {
 			getStore().boxFor(ObjectBoxAmenazaWrapper.class).put(getAmenazaWrapperList());

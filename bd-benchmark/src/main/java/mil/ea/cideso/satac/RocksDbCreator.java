@@ -246,11 +246,14 @@ public class RocksDbCreator extends MotorBD {
             // sus atributos en la BD.
             for (int i = 0; i < getCantidadAInsertar(); i++) {
 
+                // El tiempo de generación de los objetos de prueba se excluye de las mediciones
+                getTimer().stop();
                 generarAmenazaWrapperRocksDB(i);
 
                 Iterator<String> itrClaves = getListaClaves().iterator();
                 Iterator<String> itrValores = getListaValores().iterator();
 
+                getTimer().start();
                 WriteBatch batch = new WriteBatch();
                 WriteOptions writeOpts = new WriteOptions();
 

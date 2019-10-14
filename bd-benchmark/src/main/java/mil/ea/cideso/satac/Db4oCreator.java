@@ -52,8 +52,11 @@ public class Db4oCreator extends MotorBD {
             db = getDb(getDbName());
 
             for (int i = 0; i < cantidadAInsertar; i++) {
+                // El tiempo de generación de los objetos de prueba se excluye de las mediciones
+                getTimer().stop();
                 List<Object> newAmenazaList = generarAmenazaWrapper(i);
                 Iterator<Object> newAmenazaListItr = newAmenazaList.iterator();
+                getTimer().start();
 
                 while (newAmenazaListItr.hasNext()) {
                     Object element = newAmenazaListItr.next();

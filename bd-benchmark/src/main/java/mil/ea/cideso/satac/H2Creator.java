@@ -96,8 +96,11 @@ public class H2Creator extends MotorBD {
                 // generarAmenazaWrapperInsert() genera todos los objetos que componen una
                 // amenaza, con todos sus atributos inicializados y todas sus relaciones
                 // declaradas, y los devuelve en una lista.
+                // El tiempo de generación de los objetos de prueba se excluye de las mediciones
+                getTimer().stop();
                 List<Object> newAmenazaList = generarAmenazaWrapper(i);
                 Iterator<Object> newAmenazaListItr = newAmenazaList.iterator();
+                getTimer().start();
 
                 while (newAmenazaListItr.hasNext()) {
                     if (j % getBatchSize() == 0 && j > 0) {
