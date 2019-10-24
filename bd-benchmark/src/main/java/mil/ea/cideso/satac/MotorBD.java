@@ -75,6 +75,7 @@ public abstract class MotorBD {
         return testObjectsList;
     }
 
+    // El método 'persistTestObjects()' realiza persistencia mediante JPA
     public void persistTestObjects(List<AmenazaWrapper> list) {
         Iterator<AmenazaWrapper> listItr = list.iterator();
         EntityManager em = getEmf().createEntityManager();
@@ -152,6 +153,8 @@ public abstract class MotorBD {
 
     public abstract void readData();
 
+    // El método 'readTestobjects()' tiene implementados queries SQL para utilizarse
+    // mediante JPA
     public void readTestObjects() {
         EntityManager em = getEmf().createEntityManager();
 
@@ -180,6 +183,7 @@ public abstract class MotorBD {
 
     public abstract void updateData();
 
+    // El método 'updateTestobjects()' realiza actualizaciones mediante JPA
     public void updateTestObjects() {
         EntityManager em = getEmf().createEntityManager();
         EntityTransaction txn = em.getTransaction();
@@ -231,6 +235,7 @@ public abstract class MotorBD {
 
     public abstract void deleteData();
 
+    // El método 'updateTestobjects()' realiza eliminaciones mediante JPA
     public void deleteTestObjects() {
         EntityManager em = getEmf().createEntityManager();
         EntityTransaction txn = em.getTransaction();
