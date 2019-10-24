@@ -1,7 +1,5 @@
 package mil.ea.cideso.satac;
 
-import mil.ea.cideso.satac.AmenazaWrapper;
-
 import java.util.Iterator;
 import java.util.List;
 
@@ -9,7 +7,7 @@ import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 import com.db4o.ext.Db4oException;
-import com.db4o.query.*;
+import com.db4o.query.Query;
 
 public class Db4oCreator extends MotorBD {
 
@@ -21,19 +19,17 @@ public class Db4oCreator extends MotorBD {
         setEngineVersion("7.7.67");
     }
 
-    public ObjectContainer getDb(String dbName) {
-        ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), dbName);
-        return db;
-    }
-
     @Override
     public void createNewDatabase(String dbName) {
         setDbName(dbName);
+
         try {
             getTimer().start();
             db = getDb(getDbName());
             getTimer().stop();
-            System.out.println("La BD se ha generado correctamente.\n");
+
+            System.out.println("La BD se ha generado correctamente.\n\n");
+
             setStatsCreateOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
             setTimer(getTimer().reset()); // Reseteo el timer.
         } catch (Db4oException e) {
@@ -46,91 +42,100 @@ public class Db4oCreator extends MotorBD {
     @Override
     public void insertData(int cantidadAInsertar) {
         setCantidadAInsertar(cantidadAInsertar);
+        db = getDb(getDbName());
 
-        try {
-            getTimer().start();
-            db = getDb(getDbName());
+        List<AmenazaWrapper> testObjectsList = generateTestObjects(getCantidadAInsertar());
 
-            for (int i = 0; i < cantidadAInsertar; i++) {
-                List<Object> newAmenazaList = generarAmenazaWrapper(i);
-                Iterator<Object> newAmenazaListItr = newAmenazaList.iterator();
+        getTimer().start();
+        persistTestObjectsDb4o(testObjectsList, db);
+        getTimer().stop();
 
-                while (newAmenazaListItr.hasNext()) {
-                    Object element = newAmenazaListItr.next();
-                    db.store(element);
-                }
+        db.close();
 
-                getTimer().stop();
-                if (i + 1 < cantidadAInsertar) {
-                    System.out.print((i + 1) + " - ");
-                } else {
-                    System.out.print((i + 1) + ".");
-                }
-                getTimer().start();
-            }
-            db.close();
-            getTimer().stop();
+        System.out.println("Registros persistidos correctamente.\n\n");
 
-            System.out.println("");
-            System.out.println("");
-            setStatsInsertOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
-            setTimer(getTimer().reset()); // Reseteo el timer.
-        } catch (Db4oException e) {
-            e.printStackTrace(System.err);
-        }
+        setStatsInsertOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
+        setTimer(getTimer().reset()); // Reseteo el timer.
     }
 
     @Override
     public void readData() {
+        db = getDb(getDbName());
+
+        getTimer().start();
+        readTestObjectsDb4o(db);
+        getTimer().stop();
+
+        db.close();
+
+        System.out.println("Registros leídos correctamente.\n\n");
+
+        setStatsReadOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
+        setTimer(getTimer().reset());
+    }
+
+    @Override
+    public void updateData() {
+        db = getDb(getDbName());
+
+        getTimer().start();
+        updateTestObjectsDb4o(db);
+        getTimer().stop();
+
+        db.close();
+
+        System.out.println("Registros actualizados correctamente.\n\n");
+
+        setStatsUpdateOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
+        setTimer(getTimer().reset());
+    }
+
+    @Override
+    public void deleteData() {
+        db = getDb(getDbName());
+
+        getTimer().start();
+        deleteTestObjectsDb4o(db);
+        getTimer().stop();
+
+        db.close();
+
+        System.out.println("Registros eliminados correctamente.\n\n");
+
+        setStatsDeleteOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
+        setTimer(getTimer().reset());
+    }
+
+    @Override
+    public void dropDatabase() {
+
+    }
+
+    public void persistTestObjectsDb4o(List<AmenazaWrapper> list, ObjectContainer db) {
+        Iterator<AmenazaWrapper> listItr = list.iterator();
+
         try {
-            getTimer().start();
-            db = getDb(getDbName());
-
-            Query query = db.query();
-            query.constrain(AmenazaWrapper.class);
-            ObjectSet<AmenazaWrapper> result = query.execute();
-
-            getTimer().stop();
-
-            if (result != null) {
-                System.out.println("Registros leídos correctamente.\n");
+            while (listItr.hasNext()) {
+                AmenazaWrapper testObject = listItr.next();
+                db.store(testObject);
             }
-
-            // Comprobacion
-            // Query query2 = db.query();
-            // query2.constrain(AmenazaWrapper.class);
-            // ObjectSet<AmenazaWrapper> result2 = query2.execute();
-            // Iterator<AmenazaWrapper> itr2 = result2.iterator();
-
-            // while (itr2.hasNext()) {
-            // AmenazaWrapper amenazaWrapper = itr2.next();
-            // System.out.println("");
-            // System.out.printf("AmenazaWrapper Id: %d\n", amenazaWrapper.getId());
-            // System.out.printf("AmenazaWrapper Leido: %b\n", amenazaWrapper.isLeido());
-            // System.out.printf(" Amenaza Id: %d\n", amenazaWrapper.getAmenaza().getId());
-            // System.out.printf(" codigoSimbolo: %d\n",
-            // amenazaWrapper.getAmenaza().getCodigoSimbolo());
-            // System.out.println("");
-            // }
-
-            getTimer().start();
-            db.close();
-            getTimer().stop();
-
-            System.out.println("");
-            setStatsReadOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
-            setTimer(getTimer().reset());
         } catch (Db4oException e) {
             e.printStackTrace(System.err);
         }
     }
 
-    @Override
-    public void updateData() {
+    public void readTestObjectsDb4o(ObjectContainer db) {
         try {
-            getTimer().start();
-            db = getDb(getDbName());
+            Query query = db.query();
+            ObjectSet<AmenazaWrapper> result = query.execute();
+        } catch (Db4oException e) {
+            e.printStackTrace(System.err);
+        }
 
+    }
+
+    public void updateTestObjectsDb4o(ObjectContainer db) {
+        try {
             Query query = db.query();
             query.constrain(AmenazaWrapper.class);
             ObjectSet<AmenazaWrapper> result = query.execute();
@@ -138,56 +143,68 @@ public class Db4oCreator extends MotorBD {
 
             while (itr.hasNext()) {
                 AmenazaWrapper amenazaWrapper = itr.next();
-                updateAmenazaWrapper(amenazaWrapper);
+
+                amenazaWrapper.getAmenaza().setCodigoSimbolo(2);
+                amenazaWrapper.getAmenaza().setRadioAccion(2);
+                amenazaWrapper.getAmenaza().setIdentificacion(2);
+                amenazaWrapper.getAmenaza().setTamanios(2);
+
+                amenazaWrapper.getAmenaza().getTiempo().setEpoch(2);
+
+                amenazaWrapper.getAmenaza().getPosicion().setLatitud(2.5);
+                amenazaWrapper.getAmenaza().getPosicion().setLongitud(2.5);
+                amenazaWrapper.getAmenaza().getPosicion().setMilisegundosFechaHora(2);
+
+                List<Equipamiento> equipamientoList = amenazaWrapper.getAmenaza().getEquipamientoList();
+                Iterator<Equipamiento> itrEquipamiento = equipamientoList.iterator();
+                while (itrEquipamiento.hasNext()) {
+                    Equipamiento equip = itrEquipamiento.next();
+                    equip.setCantidad(2);
+                    equip.setEquipo(2);
+                    equip.setTipo(2);
+                }
+
+                amenazaWrapper.setLeido(true);
             }
-
-            db.close();
-            getTimer().stop();
-            System.out.println("Registros actualizados correctamente.\n");
-
-            System.out.println("");
-            setStatsUpdateOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
-            setTimer(getTimer().reset());
         } catch (Db4oException e) {
             e.printStackTrace(System.err);
         }
-
     }
 
-    @Override
-    public void deleteData() {
+    public void deleteTestObjectsDb4o(ObjectContainer db) {
         try {
-            getTimer().start();
-            db = getDb(getDbName());
-
             Query query = db.query();
-            query.constrain(AmenazaWrapper.class);
-            ObjectSet<AmenazaWrapper> result = query.execute();
-            Iterator<AmenazaWrapper> itr = result.iterator();
+            ObjectSet<Object> result = query.execute();
+            Iterator<Object> itr = result.iterator();
 
             while (itr.hasNext()) {
-                db.delete(itr.next());
+                Object testObject = itr.next();
+                db.delete(testObject);
             }
 
-            getTimer().stop();
-            System.out.println("Registros eliminados correctamente.\n");
-            System.out.println("");
-
-            getTimer().start();
-            db.close();
-            getTimer().stop();
-
-            setStatsDeleteOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
-            setTimer(getTimer().reset());
         } catch (Db4oException e) {
             e.printStackTrace(System.err);
         }
-
     }
 
-    @Override
-    public void dropDatabase() {
+    // El método 'comprobación' lee todos los registros de la BD y los imprime en
+    // pantalla
+    public void comprobacion(ObjectContainer db) {
+        System.out.println("\n\nCOMPROBACION\n\n");
+        Query query = db.query();
+        ObjectSet<Object> result = query.execute();
+        Iterator<Object> itr = result.iterator();
 
+        while (itr.hasNext()) {
+            Object obj = itr.next();
+            System.out.println(obj);
+        }
+        System.out.println("\n\nEND COMPROBACION\n\n");
+    }
+
+    public ObjectContainer getDb(String dbName) {
+        ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), dbName);
+        return db;
     }
 
     public ObjectContainer getDb() {
