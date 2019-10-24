@@ -4,7 +4,8 @@
 http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd" version="2.1">
     <persistence-unit name="SQLitePersistence">
         <!-- <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider> -->
-        <!-- <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider> -->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
         <class>mil.ea.cideso.satac.AmenazaWrapper</class>
         <class>mil.ea.cideso.satac.Amenaza</class>
         <class>mil.ea.cideso.satac.Tiempo</class>
@@ -27,7 +28,7 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd" version="2.1">
             <!-- <property name="hibernate.connection.autocommit" value="true" /> -->
             <property name="hibernate.hbm2ddl.auto" value="create" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.SQLiteDialect" />
-            <property name="hibernate.jdbc.batch_size" value="20" />
+            <!-- <property name="hibernate.jdbc.batch_size" value="20" /> -->
             <property name="hibernate.order_inserts" value="true" />
             <property name="hibernate.order_updates" value="true" />
             <property name="hibernate.batch_versioned_data" value="true" />
@@ -35,6 +36,8 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd" version="2.1">
     </persistence-unit>
 
     <persistence-unit name="H2Persistence">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
         <class>mil.ea.cideso.satac.AmenazaWrapper</class>
         <class>mil.ea.cideso.satac.Amenaza</class>
         <class>mil.ea.cideso.satac.Tiempo</class>
@@ -50,7 +53,7 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd" version="2.1">
             <property name="hibernate.show_sql" value="false" />
             <property name="hibernate.hbm2ddl.auto" value="create" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
-            <property name="hibernate.jdbc.batch_size" value="20" />
+            <!-- <property name="hibernate.jdbc.batch_size" value="20" /> -->
             <property name="hibernate.order_inserts" value="true" />
             <property name="hibernate.order_updates" value="true" />
             <property name="hibernate.batch_versioned_data" value="true" />
