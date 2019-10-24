@@ -1,9 +1,11 @@
 package mil.ea.cideso.satac;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,6 +17,8 @@ public class Equipamiento {
     private int cantidad;
     private int equipo;
     private int tipo;
+    @ManyToOne(cascade = { CascadeType.ALL })
+    private Amenaza amenaza;
 
     public Equipamiento() {
 
@@ -56,6 +60,14 @@ public class Equipamiento {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Amenaza getAmenaza() {
+        return amenaza;
+    }
+
+    public void setAmenaza(Amenaza amenaza) {
+        this.amenaza = amenaza;
     }
 
 }

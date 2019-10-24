@@ -1,7 +1,9 @@
 package mil.ea.cideso.satac;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,17 +19,17 @@ public class Amenaza {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Tiempo tiempo;
     private int codigoSimbolo;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Posicion posicion;
     private int radioAccion;
     private int identificacion;
     private int tamanios;
-    @OneToMany(targetEntity = Equipamiento.class)
-    private List<Equipamiento> equipamientoList;
-    @OneToOne
+    @OneToMany(targetEntity = Equipamiento.class, mappedBy = "amenaza", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Equipamiento> equipamientoList = new ArrayList<>();
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Informante informante;
 
     public Amenaza() {
@@ -44,6 +46,11 @@ public class Amenaza {
         this.tamanios = tamanios;
         this.equipamientoList = equipamientoList;
         this.informante = informante;
+    }
+
+    public void addEquipamientoItem(Equipamiento equip) {
+        equip.setAmenaza(this);
+        this.equipamientoList.add(equip);
     }
 
     public int getId() {
