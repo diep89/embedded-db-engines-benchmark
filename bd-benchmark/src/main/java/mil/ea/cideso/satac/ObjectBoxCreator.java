@@ -1,5 +1,5 @@
 /*  
-En la línea 270 se encuentra el método 'comprobacion', para evaluar 
+En la línea 288 se encuentra el método 'comprobacion()', para evaluar 
 el correcto funcionamiento de las operaciones. Dentro del método existe una 
 segunda alternativa de búsqueda deshabilitada que es igualmente válida.
 */

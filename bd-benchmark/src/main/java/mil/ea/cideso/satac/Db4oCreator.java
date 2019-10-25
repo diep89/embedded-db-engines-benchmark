@@ -1,3 +1,8 @@
+/*  
+En la línea 187 se encuentra el método 'comprobacion()', para evaluar 
+el correcto funcionamiento de las operaciones.
+*/
+
 package mil.ea.cideso.satac;
 
 import java.util.Iterator;
