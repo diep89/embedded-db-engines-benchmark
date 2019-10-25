@@ -53,7 +53,7 @@ public class RocksDbCreator extends MotorBD {
         persistTestObjectsRocksDB();
         getTimer().stop();
 
-        comprobacion();
+        // comprobacion();
 
         System.out.println("Registros persistidos correctamente.\n\n");
 
@@ -77,13 +77,14 @@ public class RocksDbCreator extends MotorBD {
     public void updateData() {
         List<AmenazaWrapper> testObjectsList = generateTestObjects(getCantidadAInsertar());
         List<AmenazaWrapper> updatedObjects = updateNewObjects(testObjectsList);
+        clearLists();
         loadLists(updatedObjects);
 
         getTimer().start();
         updateTestObjectsRocksDB();
         getTimer().stop();
 
-        comprobacion();
+        // comprobacion();
 
         System.out.println("Registros actualizados correctamente.\n\n");
 
@@ -169,6 +170,11 @@ public class RocksDbCreator extends MotorBD {
 
             id++;
         }
+    }
+
+    public void clearLists() {
+        getKeysList().clear();
+        getValuesList().clear();
     }
 
     // 'persistTestObjectsRocksDB()' recibe una lista con todos los objetos
