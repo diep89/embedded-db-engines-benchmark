@@ -1,3 +1,9 @@
+/* En la línea 270 se encuentra el método 'comprobacion', para facilitar 
+el correcto funcionamiento de las operaciones. Dentro del método existe una 
+segunda alternativa de búsqueda deshabilitada que es igualmente válida.
+Dentro de los métodos de prueba se encuentra deshabilitada.
+*/
+
 package mil.ea.cideso.satac;
 
 import java.io.IOException;
@@ -36,9 +42,9 @@ public class ObjectBoxCreator extends MotorBD {
 	}
 
 	@Override
-	// Mensaje:
+	// Sobre el mensaje en pantalla:
 	// [WARN ] Skipped low-level close of cursor (write, TX #xxx alive)
-	// Issue en progreso:
+	// Es una issue actualmente en progreso:
 	// https://github.com/objectbox/objectbox-java/issues/196
 	public void insertData(int cantidadAInsertar) {
 		setCantidadAInsertar(cantidadAInsertar);
@@ -46,7 +52,7 @@ public class ObjectBoxCreator extends MotorBD {
 		List<ObjectBoxAmenazaWrapper> testObjectsList = generateTestObjectsOB();
 
 		getTimer().start();
-		persistTestObjectsOB(testObjectsList);
+		persist(testObjectsList);
 		getTimer().stop();
 
 		clearLists();
@@ -65,7 +71,7 @@ public class ObjectBoxCreator extends MotorBD {
 		readTestObjectsOB();
 		getTimer().stop();
 
-		comprobacion();
+		// comprobacion();
 
 		System.out.println("\nRegistros leídos correctamente.\n\n");
 
@@ -80,9 +86,9 @@ public class ObjectBoxCreator extends MotorBD {
 		updateTestObjectsOB();
 		getTimer().stop();
 
+		// comprobacion();
+		
 		System.out.println("\nRegistros actualizados correctamente.\n\n");
-
-		comprobacion();
 
 		setStatsUpdateOperation(getTimer().toString()); // Guardo el timer para operación READ.
 		setTimer(getTimer().reset()); // Reseteo el timer.
@@ -176,7 +182,7 @@ public class ObjectBoxCreator extends MotorBD {
 		return testObjectsList;
 	}
 
-	public void persistTestObjectsOB(List<ObjectBoxAmenazaWrapper> list) {
+	public void persist(List<ObjectBoxAmenazaWrapper> list) {
 		Iterator<ObjectBoxAmenazaWrapper> listItr = list.iterator();
 
 		while (listItr.hasNext()) {
