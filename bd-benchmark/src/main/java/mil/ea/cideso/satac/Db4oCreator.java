@@ -212,11 +212,4 @@ public class Db4oCreator extends MotorBD {
         this.db = db;
     }
 
-    public int getCantidadAInsertar() {
-        return cantidadAInsertar;
-    }
-
-    public void setCantidadAInsertar(int cantidadAInsertar) {
-        this.cantidadAInsertar = cantidadAInsertar;
-    }
 }

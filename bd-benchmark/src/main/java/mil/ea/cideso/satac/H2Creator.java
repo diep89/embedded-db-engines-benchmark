@@ -139,14 +139,6 @@ public class H2Creator extends MotorBD {
         // }
     }
 
-    public int getCantidadAInsertar() {
-        return cantidadAInsertar;
-    }
-
-    public void setCantidadAInsertar(int cantidadAInsertar) {
-        this.cantidadAInsertar = cantidadAInsertar;
-    }
-
     public String getJdbcDriver() {
         return jdbcDriver;
     }

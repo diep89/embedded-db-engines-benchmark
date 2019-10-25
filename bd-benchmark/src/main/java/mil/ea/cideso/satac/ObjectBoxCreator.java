@@ -378,12 +378,4 @@ public class ObjectBoxCreator extends MotorBD {
 		this.store = store;
 	}
 
-	public int getCantidadAInsertar() {
-		return cantidadAInsertar;
-	}
-
-	public void setCantidadAInsertar(int cantidadAInsertar) {
-		this.cantidadAInsertar = cantidadAInsertar;
-	}
-
 }
