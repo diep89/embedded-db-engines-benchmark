@@ -12,12 +12,7 @@ public class ObjectBoxCreator extends MotorBD {
 	private BoxStore store = null;
 
 	private List<ObjectBoxAmenazaWrapper> amenazaWrapperList = new ArrayList<>();
-	private List<ObjectBoxAmenaza> amenazaList = new ArrayList<>();
-	private List<ObjectBoxTiempo> tiempoList = new ArrayList<>();
-	private List<ObjectBoxPosicion> posicionList = new ArrayList<>();
-	private List<ObjectBoxInformante> informanteList = new ArrayList<>();
-	private List<ObjectBoxEquipamiento> equipamientoList = new ArrayList<>();
-
+	
 	private int cantidadAInsertar;
 
 	public ObjectBoxCreator() {
