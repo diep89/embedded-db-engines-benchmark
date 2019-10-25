@@ -19,9 +19,6 @@ public class RocksDbCreator extends MotorBD {
     private List<String> keysList = new ArrayList<>();
     private List<String> valuesList = new ArrayList<>();
 
-    private List<String> newKeysList = new ArrayList<>();
-    private List<String> newValuesList = new ArrayList<>();
-
     private int cantidadAInsertar;
 
     public RocksDbCreator() {
@@ -53,10 +50,10 @@ public class RocksDbCreator extends MotorBD {
         loadLists(testObjectsList);
 
         getTimer().start();
-        persistTestObjectsRocksDB(testObjectsList);
+        persistTestObjectsRocksDB();
         getTimer().stop();
 
-        // comprobacion();
+        comprobacion();
 
         System.out.println("Registros persistidos correctamente.\n\n");
 
@@ -79,13 +76,14 @@ public class RocksDbCreator extends MotorBD {
     @Override
     public void updateData() {
         List<AmenazaWrapper> testObjectsList = generateTestObjects(getCantidadAInsertar());
-        loadNewLists(testObjectsList);
+        List<AmenazaWrapper> updatedObjects = updateNewObjects(testObjectsList);
+        loadLists(updatedObjects);
 
         getTimer().start();
         updateTestObjectsRocksDB();
         getTimer().stop();
 
-        // comprobacion();
+        comprobacion();
 
         System.out.println("Registros actualizados correctamente.\n\n");
 
@@ -175,7 +173,7 @@ public class RocksDbCreator extends MotorBD {
 
     // 'persistTestObjectsRocksDB()' recibe una lista con todos los objetos
     // AmenazaWrapper que se deben persistir.
-    public void persistTestObjectsRocksDB(List<AmenazaWrapper> list) {
+    public void persistTestObjectsRocksDB() {
         Iterator<String> keysItr = getKeysList().iterator();
         Iterator<String> valuesItr = getValuesList().iterator();
 
@@ -208,14 +206,14 @@ public class RocksDbCreator extends MotorBD {
     }
 
     public void updateTestObjectsRocksDB() {
-        Iterator<String> newKeysItr = getNewKeysList().iterator();
-        Iterator<String> newValuesItr = getNewValuesList().iterator();
+        Iterator<String> keysItr = getKeysList().iterator();
+        Iterator<String> valuesItr = getValuesList().iterator();
 
         try {
-            while (newKeysItr.hasNext() && newValuesItr.hasNext()) {
-                byte[] keyToFind = newKeysItr.next().getBytes();
+            while (keysItr.hasNext() && valuesItr.hasNext()) {
+                byte[] keyToFind = keysItr.next().getBytes();
                 byte[] currentValue = db.get(keyToFind);
-                byte[] newValue = newValuesItr.next().getBytes();
+                byte[] newValue = valuesItr.next().getBytes();
 
                 if (currentValue != null && currentValue != newValue) {
                     db.delete(keyToFind);
@@ -225,58 +223,6 @@ public class RocksDbCreator extends MotorBD {
         } catch (RocksDBException rdbe) {
             rdbe.printStackTrace(System.err);
         }
-    }
-
-    public void loadNewLists(List<AmenazaWrapper> list) {
-        int id = 0;
-        int equipId = 0;
-
-        List<AmenazaWrapper> updatedObjects = updateNewObjects(list);
-        Iterator<AmenazaWrapper> updatedObjectsItr = updatedObjects.iterator();
-
-        while (updatedObjectsItr.hasNext()) {
-            AmenazaWrapper amenazaWrapper = updatedObjectsItr.next();
-
-            getNewKeysList().add("leido" + "_" + id);
-            getNewValuesList().add(String.valueOf(amenazaWrapper.isLeido()));
-            getNewKeysList().add("visible" + "_" + id);
-            getNewValuesList().add(String.valueOf(amenazaWrapper.isVisible()));
-
-            getNewKeysList().add("codigoSimbolo" + "_" + id);
-            getNewValuesList().add(String.valueOf(amenazaWrapper.getAmenaza().getCodigoSimbolo()));
-            getNewKeysList().add("radioAccion" + "_" + id);
-            getNewValuesList().add(String.valueOf(amenazaWrapper.getAmenaza().getRadioAccion()));
-            getNewKeysList().add("identificacion" + "_" + id);
-            getNewValuesList().add(String.valueOf(amenazaWrapper.getAmenaza().getIdentificacion()));
-            getNewKeysList().add("tamanios" + "_" + id);
-            getNewValuesList().add(String.valueOf(amenazaWrapper.getAmenaza().getTamanios()));
-
-            Iterator<Equipamiento> equipItr = amenazaWrapper.getAmenaza().getEquipamientoList().iterator();
-            while (equipItr.hasNext()) {
-                Equipamiento equip = equipItr.next();
-                getNewKeysList().add("cantidad" + "_" + equipId);
-                getNewValuesList().add(String.valueOf(equip.getCantidad()));
-                getNewKeysList().add("equipo" + "_" + equipId);
-                getNewValuesList().add(String.valueOf(equip.getEquipo()));
-                getNewKeysList().add("tipo" + "_" + equipId);
-                getNewValuesList().add(String.valueOf(equip.getTipo()));
-                equipId++;
-            }
-
-            getNewKeysList().add("epoch" + "_" + id);
-            getNewValuesList().add(String.valueOf(amenazaWrapper.getAmenaza().getTiempo().getEpoch()));
-
-            getNewKeysList().add("latitud" + "_" + id);
-            getNewValuesList().add(String.valueOf(amenazaWrapper.getAmenaza().getPosicion().getLatitud()));
-            getNewKeysList().add("longitud" + "_" + id);
-            getNewValuesList().add(String.valueOf(amenazaWrapper.getAmenaza().getPosicion().getLongitud()));
-            getNewKeysList().add("milisegundosFechaHora" + "_" + id);
-            getNewValuesList()
-                    .add(String.valueOf(amenazaWrapper.getAmenaza().getPosicion().getMilisegundosFechaHora()));
-
-            id++;
-        }
-
     }
 
     public List<AmenazaWrapper> updateNewObjects(List<AmenazaWrapper> list) {
@@ -387,22 +333,6 @@ public class RocksDbCreator extends MotorBD {
 
     public void setValuesList(List<String> valuesList) {
         this.valuesList = valuesList;
-    }
-
-    public List<String> getNewKeysList() {
-        return newKeysList;
-    }
-
-    public void setNewKeysList(List<String> newKeysList) {
-        this.newKeysList = newKeysList;
-    }
-
-    public List<String> getNewValuesList() {
-        return newValuesList;
-    }
-
-    public void setNewValuesList(List<String> newValuesList) {
-        this.newValuesList = newValuesList;
     }
 
 }
