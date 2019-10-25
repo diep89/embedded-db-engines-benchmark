@@ -139,6 +139,8 @@ public class Main {
 			waitTime(waitMillis);
 			System.out.println("");
 
+			// pressEnter();
+
 			// OPERACIÓN READ
 			System.out.println("3. Operación READ:\n");
 			waitTime(waitMillis);
@@ -167,7 +169,7 @@ public class Main {
 			waitTime(waitMillis);
 			System.out.println("");
 
-			pressEnter();
+			// pressEnter();
 
 			// OPERACIÓN DELETE
 			System.out.println("5. Operación DELETE:\n");
@@ -180,6 +182,8 @@ public class Main {
 			System.out.println("Motor: " + element.getEngineName() + "\nOperación 'DELETE' finalizada.\n");
 			waitTime(waitMillis);
 			System.out.println("");
+
+			// pressEnter();
 
 			// EXTRA
 			// do {
