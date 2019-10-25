@@ -11,7 +11,7 @@ import com.db4o.query.Query;
 
 public class Db4oCreator extends MotorBD {
 
-    ObjectContainer db = null;
+    private ObjectContainer db;
     private int cantidadAInsertar;
 
     public Db4oCreator() {
@@ -23,34 +23,25 @@ public class Db4oCreator extends MotorBD {
     public void createNewDatabase(String dbName) {
         setDbName(dbName);
 
-        try {
-            getTimer().start();
-            db = getDb(getDbName());
-            getTimer().stop();
+        getTimer().start();
+        createDatabase(getDbName());
+        getTimer().stop();
 
-            System.out.println("La BD se ha generado correctamente.\n\n");
+        System.out.println("La BD se ha generado correctamente.\n\n");
 
-            setStatsCreateOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
-            setTimer(getTimer().reset()); // Reseteo el timer.
-        } catch (Db4oException e) {
-            e.printStackTrace(System.err);
-        } finally {
-            db.close();
-        }
+        setStatsCreateOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
+        setTimer(getTimer().reset()); // Reseteo el timer.
     }
 
     @Override
     public void insertData(int cantidadAInsertar) {
         setCantidadAInsertar(cantidadAInsertar);
-        db = getDb(getDbName());
 
         List<AmenazaWrapper> testObjectsList = generateTestObjects(getCantidadAInsertar());
 
         getTimer().start();
-        persistTestObjectsDb4o(testObjectsList, db);
+        persistTestObjectsDb4o(testObjectsList);
         getTimer().stop();
-
-        db.close();
 
         System.out.println("Registros persistidos correctamente.\n\n");
 
@@ -60,13 +51,9 @@ public class Db4oCreator extends MotorBD {
 
     @Override
     public void readData() {
-        db = getDb(getDbName());
-
         getTimer().start();
-        readTestObjectsDb4o(db);
+        readTestObjectsDb4o();
         getTimer().stop();
-
-        db.close();
 
         System.out.println("Registros leídos correctamente.\n\n");
 
@@ -76,13 +63,9 @@ public class Db4oCreator extends MotorBD {
 
     @Override
     public void updateData() {
-        db = getDb(getDbName());
-
         getTimer().start();
-        updateTestObjectsDb4o(db);
+        updateTestObjectsDb4o();
         getTimer().stop();
-
-        db.close();
 
         System.out.println("Registros actualizados correctamente.\n\n");
 
@@ -92,13 +75,11 @@ public class Db4oCreator extends MotorBD {
 
     @Override
     public void deleteData() {
-        db = getDb(getDbName());
-
         getTimer().start();
-        deleteTestObjectsDb4o(db);
+        deleteTestObjectsDb4o();
         getTimer().stop();
 
-        db.close();
+        getDb().close();
 
         System.out.println("Registros eliminados correctamente.\n\n");
 
@@ -111,22 +92,31 @@ public class Db4oCreator extends MotorBD {
 
     }
 
-    public void persistTestObjectsDb4o(List<AmenazaWrapper> list, ObjectContainer db) {
+    public void createDatabase(String dbName) {
+        try {
+            ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), dbName);
+            setDb(db);
+        } catch (Db4oException e) {
+            e.printStackTrace(System.err);
+        }
+    }
+
+    public void persistTestObjectsDb4o(List<AmenazaWrapper> list) {
         Iterator<AmenazaWrapper> listItr = list.iterator();
 
         try {
             while (listItr.hasNext()) {
                 AmenazaWrapper testObject = listItr.next();
-                db.store(testObject);
+                getDb().store(testObject);
             }
         } catch (Db4oException e) {
             e.printStackTrace(System.err);
         }
     }
 
-    public void readTestObjectsDb4o(ObjectContainer db) {
+    public void readTestObjectsDb4o() {
         try {
-            Query query = db.query();
+            Query query = getDb().query();
             ObjectSet<AmenazaWrapper> result = query.execute();
         } catch (Db4oException e) {
             e.printStackTrace(System.err);
@@ -134,9 +124,9 @@ public class Db4oCreator extends MotorBD {
 
     }
 
-    public void updateTestObjectsDb4o(ObjectContainer db) {
+    public void updateTestObjectsDb4o() {
         try {
-            Query query = db.query();
+            Query query = getDb().query();
             query.constrain(AmenazaWrapper.class);
             ObjectSet<AmenazaWrapper> result = query.execute();
             Iterator<AmenazaWrapper> itr = result.iterator();
@@ -171,15 +161,15 @@ public class Db4oCreator extends MotorBD {
         }
     }
 
-    public void deleteTestObjectsDb4o(ObjectContainer db) {
+    public void deleteTestObjectsDb4o() {
         try {
-            Query query = db.query();
+            Query query = getDb().query();
             ObjectSet<Object> result = query.execute();
             Iterator<Object> itr = result.iterator();
 
             while (itr.hasNext()) {
                 Object testObject = itr.next();
-                db.delete(testObject);
+                getDb().delete(testObject);
             }
 
         } catch (Db4oException e) {
@@ -197,14 +187,9 @@ public class Db4oCreator extends MotorBD {
 
         while (itr.hasNext()) {
             Object obj = itr.next();
-            System.out.println(obj);
+            System.out.println(obj + "\n");
         }
         System.out.println("\n\nEND COMPROBACION\n\n");
-    }
-
-    public ObjectContainer getDb(String dbName) {
-        ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), dbName);
-        return db;
     }
 
     public ObjectContainer getDb() {
