@@ -1,5 +1,5 @@
 /*  
-En la línea 288 se encuentra el método 'comprobacion()', para evaluar 
+En la línea 290 se encuentra el método 'comprobacion()', para evaluar 
 el correcto funcionamiento de las operaciones. Dentro del método existe una 
 segunda alternativa de búsqueda deshabilitada que es igualmente válida.
 */
@@ -79,7 +79,7 @@ public class ObjectBoxCreator extends MotorBD {
 		updateTestObjectsOB();
 		getTimer().stop();
 
-		comprobacion();
+		// comprobacion();
 
 		System.out.println("\nRegistros actualizados correctamente.\n\n");
 
@@ -92,6 +92,8 @@ public class ObjectBoxCreator extends MotorBD {
 		getTimer().start();
 		deleteTestObjectsOB();
 		getTimer().stop();
+
+		// comprobacion();
 
 		System.out.println("\nRegistros eliminados correctamente.\n\n");
 

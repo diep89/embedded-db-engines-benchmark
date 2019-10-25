@@ -1,5 +1,5 @@
 /*  
-En la línea 187 se encuentra el método 'comprobacion()', para evaluar 
+En la línea 195 se encuentra el método 'comprobacion()', para evaluar 
 el correcto funcionamiento de las operaciones.
 */
 
@@ -48,6 +48,8 @@ public class Db4oCreator extends MotorBD {
         persistTestObjectsDb4o(testObjectsList);
         getTimer().stop();
 
+        // comprobacion();
+
         System.out.println("Registros persistidos correctamente.\n\n");
 
         setStatsInsertOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
@@ -59,6 +61,8 @@ public class Db4oCreator extends MotorBD {
         getTimer().start();
         readTestObjectsDb4o();
         getTimer().stop();
+
+        // comprobacion();
 
         System.out.println("Registros leídos correctamente.\n\n");
 
@@ -72,6 +76,8 @@ public class Db4oCreator extends MotorBD {
         updateTestObjectsDb4o();
         getTimer().stop();
 
+        // comprobacion();
+
         System.out.println("Registros actualizados correctamente.\n\n");
 
         setStatsUpdateOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
@@ -83,6 +89,8 @@ public class Db4oCreator extends MotorBD {
         getTimer().start();
         deleteTestObjectsDb4o();
         getTimer().stop();
+
+        // comprobacion();
 
         getDb().close();
 
@@ -184,9 +192,9 @@ public class Db4oCreator extends MotorBD {
 
     // El método 'comprobación' lee todos los registros de la BD y los imprime en
     // pantalla
-    public void comprobacion(ObjectContainer db) {
+    public void comprobacion() {
         System.out.println("\n\nCOMPROBACION\n\n");
-        Query query = db.query();
+        Query query = getDb().query();
         ObjectSet<Object> result = query.execute();
         Iterator<Object> itr = result.iterator();
 
