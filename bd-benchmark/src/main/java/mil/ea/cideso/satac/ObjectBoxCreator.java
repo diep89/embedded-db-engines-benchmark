@@ -17,8 +17,6 @@ import io.objectbox.BoxStore;
 public class ObjectBoxCreator extends MotorBD {
 	private BoxStore store = null;
 
-	private List<ObjectBoxAmenazaWrapper> amenazaWrapperList = new ArrayList<>();
-	
 	private int cantidadAInsertar;
 
 	public ObjectBoxCreator() {
@@ -49,15 +47,13 @@ public class ObjectBoxCreator extends MotorBD {
 	public void insertData(int cantidadAInsertar) {
 		setCantidadAInsertar(cantidadAInsertar);
 
-		List<ObjectBoxAmenazaWrapper> testObjectsList = generateTestObjectsOB();
+		List<ObjectBoxAmenazaWrapper> testObjectsList = generateTestObjectsOB(getCantidadAInsertar());
 
 		getTimer().start();
 		persist(testObjectsList);
 		getTimer().stop();
 
-		clearLists();
-
-		comprobacion();
+		// comprobacion();
 
 		System.out.println("\nRegistros insertados correctamente.\n\n");
 
@@ -86,8 +82,8 @@ public class ObjectBoxCreator extends MotorBD {
 		updateTestObjectsOB();
 		getTimer().stop();
 
-		// comprobacion();
-		
+		comprobacion();
+
 		System.out.println("\nRegistros actualizados correctamente.\n\n");
 
 		setStatsUpdateOperation(getTimer().toString()); // Guardo el timer para operación READ.
@@ -117,69 +113,73 @@ public class ObjectBoxCreator extends MotorBD {
 		}
 	}
 
-	public List<ObjectBoxAmenazaWrapper> generateTestObjectsOB() {
-		List<ObjectBoxAmenazaWrapper> testObjectsList = new ArrayList<>(getCantidadAInsertar());
-
-		for (int i = 0; i < getCantidadAInsertar(); i++) {
-			ObjectBoxAmenazaWrapper amenazaWrapper = new ObjectBoxAmenazaWrapper();
-			amenazaWrapper.setId(0);
-			amenazaWrapper.setVisible(true);
-			amenazaWrapper.setLeido(false);
-
-			ObjectBoxAmenaza amenaza = new ObjectBoxAmenaza();
-			amenaza.setId(0);
-			amenaza.setCodigoSimbolo(1);
-			amenaza.setIdentificacion(1);
-			amenaza.setRadioAccion(1);
-			amenaza.setTamanios(1);
-
-			ObjectBoxTiempo tiempo = new ObjectBoxTiempo();
-			tiempo.setId(0);
-			tiempo.setEpoch(1);
-
-			ObjectBoxPosicion posicion = new ObjectBoxPosicion();
-			posicion.setId(0);
-			posicion.setLatitud(1.5);
-			posicion.setLongitud(1.5);
-			posicion.setMilisegundosFechaHora(1);
-
-			ObjectBoxEquipamiento equipamiento1 = new ObjectBoxEquipamiento();
-			equipamiento1.setId(0);
-			equipamiento1.setCantidad(1);
-			equipamiento1.setEquipo(1);
-			equipamiento1.setTipo(1);
-
-			ObjectBoxEquipamiento equipamiento2 = new ObjectBoxEquipamiento();
-			equipamiento2.setId(0);
-			equipamiento2.setCantidad(1);
-			equipamiento2.setEquipo(1);
-			equipamiento2.setTipo(1);
-
-			ObjectBoxEquipamiento equipamiento3 = new ObjectBoxEquipamiento();
-			equipamiento3.setId(0);
-			equipamiento3.setCantidad(1);
-			equipamiento3.setEquipo(1);
-			equipamiento3.setTipo(1);
-
-			ObjectBoxInformante informante = new ObjectBoxInformante();
-			informante.setId(0);
-
-			amenazaWrapper.amenaza.setTarget(amenaza);
-			amenaza.amenazaWrapper.setTarget(amenazaWrapper);
-			amenaza.informante.setTarget(informante);
-			amenaza.posicion.setTarget(posicion);
-			amenaza.tiempo.setTarget(tiempo);
-			amenaza.equipamientoList.add(equipamiento1);
-			amenaza.equipamientoList.add(equipamiento2);
-			amenaza.equipamientoList.add(equipamiento3);
-			tiempo.amenaza.setTarget(amenaza);
-			posicion.amenaza.setTarget(amenaza);
-			informante.amenaza.setTarget(amenaza);
-
-			testObjectsList.add(amenazaWrapper);
+	public List<ObjectBoxAmenazaWrapper> generateTestObjectsOB(int cant) {
+		List<ObjectBoxAmenazaWrapper> objectsList = new ArrayList<>(cant);
+		for (int i = 0; i < cant; i++) {
+			objectsList.add(generateObjectBoxAmenazaWrapper());
 		}
 
-		return testObjectsList;
+		return objectsList;
+	}
+
+	public ObjectBoxAmenazaWrapper generateObjectBoxAmenazaWrapper() {
+		ObjectBoxAmenazaWrapper amenazaWrapper = new ObjectBoxAmenazaWrapper();
+		amenazaWrapper.setId(0);
+		amenazaWrapper.setVisible(true);
+		amenazaWrapper.setLeido(false);
+
+		ObjectBoxAmenaza amenaza = new ObjectBoxAmenaza();
+		amenaza.setId(0);
+		amenaza.setCodigoSimbolo(1);
+		amenaza.setIdentificacion(1);
+		amenaza.setRadioAccion(1);
+		amenaza.setTamanios(1);
+
+		ObjectBoxTiempo tiempo = new ObjectBoxTiempo();
+		tiempo.setId(0);
+		tiempo.setEpoch(1);
+
+		ObjectBoxPosicion posicion = new ObjectBoxPosicion();
+		posicion.setId(0);
+		posicion.setLatitud(1.5);
+		posicion.setLongitud(1.5);
+		posicion.setMilisegundosFechaHora(1);
+
+		ObjectBoxEquipamiento equipamiento1 = new ObjectBoxEquipamiento();
+		equipamiento1.setId(0);
+		equipamiento1.setCantidad(1);
+		equipamiento1.setEquipo(1);
+		equipamiento1.setTipo(1);
+
+		ObjectBoxEquipamiento equipamiento2 = new ObjectBoxEquipamiento();
+		equipamiento2.setId(0);
+		equipamiento2.setCantidad(1);
+		equipamiento2.setEquipo(1);
+		equipamiento2.setTipo(1);
+
+		ObjectBoxEquipamiento equipamiento3 = new ObjectBoxEquipamiento();
+		equipamiento3.setId(0);
+		equipamiento3.setCantidad(1);
+		equipamiento3.setEquipo(1);
+		equipamiento3.setTipo(1);
+
+		ObjectBoxInformante informante = new ObjectBoxInformante();
+		informante.setId(0);
+
+		amenazaWrapper.amenaza.setTarget(amenaza);
+		amenaza.amenazaWrapper.setTarget(amenazaWrapper);
+		amenaza.informante.setTarget(informante);
+		amenaza.posicion.setTarget(posicion);
+		amenaza.tiempo.setTarget(tiempo);
+		amenaza.equipamientoList.add(equipamiento1);
+		amenaza.equipamientoList.add(equipamiento2);
+		amenaza.equipamientoList.add(equipamiento3);
+		tiempo.amenaza.setTarget(amenaza);
+		posicion.amenaza.setTarget(amenaza);
+		informante.amenaza.setTarget(amenaza);
+
+		return amenazaWrapper;
+
 	}
 
 	public void persist(List<ObjectBoxAmenazaWrapper> list) {
@@ -201,7 +201,13 @@ public class ObjectBoxCreator extends MotorBD {
 	}
 
 	public void updateTestObjectsOB() {
-		clearLists();
+		List<ObjectBoxAmenazaWrapper> newAmenazaWrapperList = new ArrayList<>(getCantidadAInsertar());
+		List<ObjectBoxAmenaza> newAmenazaList = new ArrayList<>(getCantidadAInsertar());
+		List<ObjectBoxTiempo> newTiempoList = new ArrayList<>(getCantidadAInsertar());
+		List<ObjectBoxPosicion> newPosicionList = new ArrayList<>(getCantidadAInsertar());
+		// List<ObjectBoxInformante> newInformanteList = new
+		// ArrayList<>(getCantidadAInsertar());
+		List<ObjectBoxEquipamiento> newEquipamientoList = new ArrayList<>();
 
 		List<ObjectBoxAmenazaWrapper> amenazaWrapperList = getStore().boxFor(ObjectBoxAmenazaWrapper.class).getAll();
 		Iterator<ObjectBoxAmenazaWrapper> amenazaWrapperItr = amenazaWrapperList.iterator();
@@ -210,24 +216,24 @@ public class ObjectBoxCreator extends MotorBD {
 			ObjectBoxAmenazaWrapper amenazaWrapper = amenazaWrapperItr.next();
 
 			amenazaWrapper.setLeido(true);
-			getAmenazaWrapperList().add(amenazaWrapper);
+			newAmenazaWrapperList.add(amenazaWrapper);
 
 			ObjectBoxAmenaza amenaza = amenazaWrapper.getAmenaza();
 			amenaza.setCodigoSimbolo(2);
 			amenaza.setIdentificacion(2);
 			amenaza.setRadioAccion(2);
 			amenaza.setTamanios(2);
-			getAmenazaList().add(amenaza);
+			newAmenazaList.add(amenaza);
 
 			ObjectBoxTiempo tiempo = amenaza.getTiempo();
 			tiempo.setEpoch(2);
-			getTiempoList().add(tiempo);
+			newTiempoList.add(tiempo);
 
 			ObjectBoxPosicion posicion = amenaza.getPosicion();
 			posicion.setLatitud(2.5);
 			posicion.setLongitud(2.5);
 			posicion.setMilisegundosFechaHora(2);
-			getPosicionList().add(posicion);
+			newPosicionList.add(posicion);
 
 			List<ObjectBoxEquipamiento> equipList = amenaza.getEquipamientoList();
 			Iterator<ObjectBoxEquipamiento> equipItr = equipList.iterator();
@@ -236,7 +242,7 @@ public class ObjectBoxCreator extends MotorBD {
 				equip.setCantidad(2);
 				equip.setEquipo(2);
 				equip.setTipo(2);
-				getEquipamientoList().add(equip);
+				newEquipamientoList.add(equip);
 			}
 
 			// Dado que el objeto 'Informante' no contiene atributos modificables,
@@ -246,12 +252,12 @@ public class ObjectBoxCreator extends MotorBD {
 		}
 
 		getStore().runInTx(() -> {
-			getStore().boxFor(ObjectBoxAmenazaWrapper.class).put(getAmenazaWrapperList());
-			getStore().boxFor(ObjectBoxAmenaza.class).put(getAmenazaList());
-			getStore().boxFor(ObjectBoxTiempo.class).put(getTiempoList());
-			getStore().boxFor(ObjectBoxPosicion.class).put(getPosicionList());
-			getStore().boxFor(ObjectBoxEquipamiento.class).put(getEquipamientoList());
-			getStore().boxFor(ObjectBoxInformante.class).put(getInformanteList());
+			getStore().boxFor(ObjectBoxAmenazaWrapper.class).put(newAmenazaWrapperList);
+			getStore().boxFor(ObjectBoxAmenaza.class).put(newAmenazaList);
+			getStore().boxFor(ObjectBoxTiempo.class).put(newTiempoList);
+			getStore().boxFor(ObjectBoxPosicion.class).put(newPosicionList);
+			getStore().boxFor(ObjectBoxEquipamiento.class).put(newEquipamientoList);
+			// getStore().boxFor(ObjectBoxInformante.class).put(newInformanteList);
 		});
 	}
 
@@ -359,15 +365,6 @@ public class ObjectBoxCreator extends MotorBD {
 		// });
 	}
 
-	public void clearLists() {
-		getAmenazaWrapperList().clear();
-		getAmenazaList().clear();
-		getEquipamientoList().clear();
-		getInformanteList().clear();
-		getTiempoList().clear();
-		getPosicionList().clear();
-	}
-
 	public BoxStore getStore() {
 		return store;
 	}
@@ -382,54 +379,6 @@ public class ObjectBoxCreator extends MotorBD {
 
 	public void setCantidadAInsertar(int cantidadAInsertar) {
 		this.cantidadAInsertar = cantidadAInsertar;
-	}
-
-	public List<ObjectBoxAmenazaWrapper> getAmenazaWrapperList() {
-		return amenazaWrapperList;
-	}
-
-	public void setAmenazaWrapperList(List<ObjectBoxAmenazaWrapper> amenazaWrapperList) {
-		this.amenazaWrapperList = amenazaWrapperList;
-	}
-
-	public List<ObjectBoxAmenaza> getAmenazaList() {
-		return amenazaList;
-	}
-
-	public void setAmenazaList(List<ObjectBoxAmenaza> amenazaList) {
-		this.amenazaList = amenazaList;
-	}
-
-	public List<ObjectBoxTiempo> getTiempoList() {
-		return tiempoList;
-	}
-
-	public void setTiempoList(List<ObjectBoxTiempo> tiempoList) {
-		this.tiempoList = tiempoList;
-	}
-
-	public List<ObjectBoxPosicion> getPosicionList() {
-		return posicionList;
-	}
-
-	public void setPosicionList(List<ObjectBoxPosicion> posicionList) {
-		this.posicionList = posicionList;
-	}
-
-	public List<ObjectBoxInformante> getInformanteList() {
-		return informanteList;
-	}
-
-	public void setInformanteList(List<ObjectBoxInformante> informanteList) {
-		this.informanteList = informanteList;
-	}
-
-	public List<ObjectBoxEquipamiento> getEquipamientoList() {
-		return equipamientoList;
-	}
-
-	public void setEquipamientoList(List<ObjectBoxEquipamiento> equipamientoList) {
-		this.equipamientoList = equipamientoList;
 	}
 
 }
