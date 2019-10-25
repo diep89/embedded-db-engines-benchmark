@@ -15,8 +15,6 @@ public class SqliteCreator extends MotorBD {
     private final String user = "";
     private final String pass = "";
 
-    private int cantidadAInsertar;
-
     public SqliteCreator() {
         setEngineName("SQLite");
         setEngineVersion("3.28.0");

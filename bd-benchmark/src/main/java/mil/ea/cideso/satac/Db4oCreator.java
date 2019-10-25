@@ -17,7 +17,6 @@ import com.db4o.query.Query;
 public class Db4oCreator extends MotorBD {
 
     private ObjectContainer db;
-    private int cantidadAInsertar;
 
     public Db4oCreator() {
         setEngineName("db4o");

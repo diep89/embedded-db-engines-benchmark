@@ -24,6 +24,7 @@ public abstract class MotorBD {
     private String providerName;
     private String providerVersion;
     private String dbName;
+    private int cantidadAInsertar;
 
     // Atributos JDBC
     private Connection conn = null;
@@ -418,6 +419,14 @@ public abstract class MotorBD {
 
     public void setEmf(EntityManagerFactory emf) {
         this.emf = emf;
+    }
+
+    public int getCantidadAInsertar() {
+        return cantidadAInsertar;
+    }
+
+    public void setCantidadAInsertar(int cantidadAInsertar) {
+        this.cantidadAInsertar = cantidadAInsertar;
     }
 
 }

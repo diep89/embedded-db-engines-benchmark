@@ -17,8 +17,6 @@ import io.objectbox.BoxStore;
 public class ObjectBoxCreator extends MotorBD {
 	private BoxStore store = null;
 
-	private int cantidadAInsertar;
-
 	public ObjectBoxCreator() {
 		setEngineName("ObjectBox");
 		setEngineVersion("2.3.4");

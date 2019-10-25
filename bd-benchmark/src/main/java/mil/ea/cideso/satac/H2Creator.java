@@ -15,8 +15,6 @@ public class H2Creator extends MotorBD {
     static final String user = "sa";
     static final String pass = "";
 
-    private int cantidadAInsertar;
-
     public H2Creator() {
         setEngineName("H2");
         setEngineVersion("1.4.199");
