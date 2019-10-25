@@ -14,386 +14,99 @@ import org.rocksdb.RocksDBException;
 
 public class RocksDbCreator extends MotorBD {
 
+    private RocksDB db;
+
+    private List<String> keysList = new ArrayList<>();
+    private List<String> valuesList = new ArrayList<>();
+
+    private List<String> newKeysList = new ArrayList<>();
+    private List<String> newValuesList = new ArrayList<>();
+
     private int cantidadAInsertar;
-    private List<String> listaClaves = new ArrayList<>();
-    private List<String> listaValores = new ArrayList<>();
-    private int equipamientoId = 0;
-
-    public void generarAmenazaWrapperRocksDB(int i) {
-        int id = i;
-        int equipId = getEquipamientoId();
-
-        // Genero los objetos que componen al objeto AmenazaWrapper
-        Informante informante = new Informante();
-        informante.setId(id);
-
-        double latitud = 1.5;
-        double longitud = 1.5;
-        int milisegundosFechaHora = 1;
-        Posicion posicion = new Posicion(latitud, longitud, milisegundosFechaHora);
-        posicion.setId(id);
-
-        int epoch = 1;
-        Tiempo tiempo = new Tiempo(epoch);
-        tiempo.setId(id);
-
-        int cantidad = 1;
-        int equipo = 1;
-        int tipo = 1;
-        Equipamiento equipamiento = new Equipamiento(cantidad, equipo, tipo);
-        Equipamiento equipamiento2 = new Equipamiento(cantidad, equipo, tipo);
-        Equipamiento equipamiento3 = new Equipamiento(cantidad, equipo, tipo);
-        equipamiento.setId(equipId);
-        equipId += 1;
-        equipamiento2.setId(equipId);
-        equipId += 1;
-        equipamiento3.setId(equipId);
-        equipId += 1;
-        setEquipamientoId(equipId);
-
-        List<Equipamiento> equipamientoList = new ArrayList<>();
-        equipamientoList.add(equipamiento);
-        equipamientoList.add(equipamiento2);
-        equipamientoList.add(equipamiento3);
-
-        int codigoSimbolo = 1;
-        int radioAccion = 1;
-        int identificacion = 1;
-        int tamanios = 1;
-        Amenaza amenaza = new Amenaza(tiempo, codigoSimbolo, posicion, radioAccion, identificacion, tamanios,
-                equipamientoList, informante);
-        amenaza.setId(id);
-
-        boolean visible = true;
-        boolean leido = false;
-        AmenazaWrapper amenazaWrapper = new AmenazaWrapper(id, amenaza, visible, leido);
-
-        // Limpio las listas a cargar.
-        getListaClaves().clear();
-        getListaValores().clear();
-
-        // Lleno las listas 'listaClaves' y 'listaValores' (de tipo byte[]) con los
-        // atributos de todos los objetos.
-        // Tanto las claves como los valores se convierten de su tipo original a String
-        // y son almacenadas en la lista correspondiente.
-
-        getListaClaves().add("leido");
-        getListaValores().add(String.valueOf(amenazaWrapper.isLeido()));
-        getListaClaves().add("visible");
-        getListaValores().add(String.valueOf(amenazaWrapper.isVisible()));
-
-        getListaClaves().add("codigoSimbolo");
-        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getCodigoSimbolo()));
-        getListaClaves().add("radioAccion");
-        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getRadioAccion()));
-        getListaClaves().add("identificacion");
-        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getIdentificacion()));
-        getListaClaves().add("tamanios");
-        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getTamanios()));
-
-        Iterator<Equipamiento> equipItr = amenazaWrapper.getAmenaza().getEquipamientoList().iterator();
-        while (equipItr.hasNext()) {
-            Equipamiento equip = equipItr.next();
-            getListaClaves().add("cantidad" + "_" + equip.getId());
-            getListaValores().add(String.valueOf(equip.getCantidad()));
-            getListaClaves().add("equipo" + "_" + equip.getId());
-            getListaValores().add(String.valueOf(equip.getEquipo()));
-            getListaClaves().add("tipo" + "_" + equip.getId());
-            getListaValores().add(String.valueOf(equip.getTipo()));
-        }
-
-        getListaClaves().add("epoch");
-        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getTiempo().getEpoch()));
-
-        getListaClaves().add("latitud");
-        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getPosicion().getLatitud()));
-        getListaClaves().add("longitud");
-        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getPosicion().getLongitud()));
-        getListaClaves().add("milisegundosFechaHora");
-        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getPosicion().getMilisegundosFechaHora()));
-
-    }
-
-    public void updateAmenazaWrapperRocksDB(int i) {
-        int id = i;
-        int equipId = getEquipamientoId();
-
-        // Genero los objetos que componen al objeto AmenazaWrapper
-        Informante informante = new Informante();
-        informante.setId(id);
-
-        double latitud = 2.5;
-        double longitud = 2.5;
-        int milisegundosFechaHora = 2;
-        Posicion posicion = new Posicion(latitud, longitud, milisegundosFechaHora);
-        posicion.setId(id);
-
-        int epoch = 2;
-        Tiempo tiempo = new Tiempo(epoch);
-        tiempo.setId(id);
-
-        int cantidad = 2;
-        int equipo = 2;
-        int tipo = 2;
-        Equipamiento equipamiento = new Equipamiento(cantidad, equipo, tipo);
-        Equipamiento equipamiento2 = new Equipamiento(cantidad, equipo, tipo);
-        Equipamiento equipamiento3 = new Equipamiento(cantidad, equipo, tipo);
-        equipamiento.setId(equipId);
-        equipId += 1;
-        equipamiento2.setId(equipId);
-        equipId += 1;
-        equipamiento3.setId(equipId);
-        equipId += 1;
-        setEquipamientoId(equipId);
-
-        List<Equipamiento> equipamientoList = new ArrayList<>();
-        equipamientoList.add(equipamiento);
-        equipamientoList.add(equipamiento2);
-        equipamientoList.add(equipamiento3);
-
-        int codigoSimbolo = 2;
-        int radioAccion = 2;
-        int identificacion = 2;
-        int tamanios = 2;
-        Amenaza amenaza = new Amenaza(tiempo, codigoSimbolo, posicion, radioAccion, identificacion, tamanios,
-                equipamientoList, informante);
-
-        boolean visible = true;
-        boolean leido = true;
-        AmenazaWrapper amenazaWrapper = new AmenazaWrapper(id, amenaza, visible, leido);
-
-        // Lleno las listas 'listaClaves' y 'listaValores' (de tipo byte[]) con los
-        // atributos de todos los objetos.
-        getListaClaves().clear();
-        getListaValores().clear();
-
-        // Tanto las claves como los valores se convierten de su tipo original a String
-        // y luego a byte[].
-        getListaClaves().add("leido");
-        getListaValores().add(String.valueOf(amenazaWrapper.isLeido()));
-        getListaClaves().add("visible");
-        getListaValores().add(String.valueOf(amenazaWrapper.isVisible()));
-
-        getListaClaves().add("codigoSimbolo");
-        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getCodigoSimbolo()));
-        getListaClaves().add("radioAccion");
-        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getRadioAccion()));
-        getListaClaves().add("identificacion");
-        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getIdentificacion()));
-        getListaClaves().add("tamanios");
-        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getTamanios()));
-
-        Iterator<Equipamiento> equipItr = amenazaWrapper.getAmenaza().getEquipamientoList().iterator();
-        while (equipItr.hasNext()) {
-            Equipamiento equip = equipItr.next();
-            getListaClaves().add("cantidad" + "_" + equip.getId());
-            getListaValores().add(String.valueOf(equip.getCantidad()));
-            getListaClaves().add("equipo" + "_" + equip.getId());
-            getListaValores().add(String.valueOf(equip.getEquipo()));
-            getListaClaves().add("tipo" + "_" + equip.getId());
-            getListaValores().add(String.valueOf(equip.getTipo()));
-        }
-
-        getListaClaves().add("epoch");
-        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getTiempo().getEpoch()));
-
-        getListaClaves().add("latitud");
-        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getPosicion().getLatitud()));
-        getListaClaves().add("longitud");
-        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getPosicion().getLongitud()));
-        getListaClaves().add("milisegundosFechaHora");
-        getListaValores().add(String.valueOf(amenazaWrapper.getAmenaza().getPosicion().getMilisegundosFechaHora()));
-    }
 
     public RocksDbCreator() {
         setEngineName("RocksDB");
         setEngineVersion("6.0.1");
     }
 
-    public RocksDB getDb(String dbName) throws RocksDBException {
-        RocksDB.loadLibrary();
-        Options rockopts = new Options().setCreateIfMissing(true);
-        RocksDB db = RocksDB.open(rockopts, dbName);
-        return db;
-    }
-
     @Override
     public void createNewDatabase(String dbName) {
         setDbName(dbName);
 
-        try {
-            getTimer().start();
-            RocksDB db = getDb(getDbName());
-            getTimer().stop();
-            System.out.println("La BD se ha generado correctamente.\n");
-            db.close();
-            setStatsCreateOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
-            setTimer(getTimer().reset()); // Reseteo el timer.
-        } catch (RocksDBException e) {
-            e.printStackTrace(System.err);
-        }
+        getTimer().start();
+        createDatabase(getDbName());
+        getTimer().stop();
+
+        // getDb().close();
+
+        System.out.println("La BD se ha generado correctamente.\n");
+
+        setStatsCreateOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
+        setTimer(getTimer().reset()); // Reseteo el timer.
     }
 
     @Override
     public void insertData(int cantidadAInsertar) {
         setCantidadAInsertar(cantidadAInsertar);
 
-        try {
-            getTimer().start();
-            RocksDB db = getDb(getDbName());
+        List<AmenazaWrapper> testObjectsList = generateTestObjects(getCantidadAInsertar());
+        loadLists(testObjectsList);
 
-            // En cada iteración genero un objeto AmenazaWrapper e inserto
-            // sus atributos en la BD.
-            for (int i = 0; i < getCantidadAInsertar(); i++) {
+        getTimer().start();
+        persistTestObjectsRocksDB(testObjectsList);
+        getTimer().stop();
 
-                generarAmenazaWrapperRocksDB(i);
+        // comprobacion();
 
-                Iterator<String> itrClaves = getListaClaves().iterator();
-                Iterator<String> itrValores = getListaValores().iterator();
+        System.out.println("Registros persistidos correctamente.\n\n");
 
-                WriteBatch batch = new WriteBatch();
-                WriteOptions writeOpts = new WriteOptions();
-
-                while (itrClaves.hasNext() && itrValores.hasNext()) {
-                    byte[] key = new String(itrClaves.next() + "_" + i).getBytes();
-                    byte[] value = new String(itrValores.next()).getBytes();
-                    batch.put(key, value);
-                }
-
-                db.write(writeOpts, batch);
-
-                // getTimer().stop();
-                // if (i + 1 < getCantidadAInsertar()) {
-                // System.out.print((i + 1) + " - ");
-                // } else {
-                // System.out.print((i + 1) + ".");
-                // }
-                // getTimer().start();
-            }
-            db.close();
-            getTimer().stop();
-
-            System.out.println("");
-            System.out.println("");
-            setStatsInsertOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
-            setTimer(getTimer().reset()); // Reseteo el timer.
-
-        } catch (RocksDBException e) {
-            e.printStackTrace(System.err);
-        }
+        setStatsInsertOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
+        setTimer(getTimer().reset()); // Reseteo el timer.
     }
 
     @Override
     public void readData() {
-        try {
-            getTimer().start();
-            RocksDB db = getDb(getDbName());
-            RocksIterator rocksIter = db.newIterator();
-            getTimer().stop();
+        getTimer().start();
+        readTestObjectsRocksDB();
+        getTimer().stop();
 
-            // int i = 1;
-            getTimer().start();
-            for (rocksIter.seekToFirst(); rocksIter.isValid(); rocksIter.next()) {
-                String key = new String(rocksIter.key(), StandardCharsets.UTF_8);
-                String val = new String(rocksIter.value(), StandardCharsets.UTF_8);
-                // getTimer().stop();
-                // Habilitar para mostrar en pantalla el resultado de la consulta
-                // System.out.printf("%-5d Clave: %-15s Valor: %-15s\n", i, key, val);
-                // i++;
-                // getTimer().start();
-            }
-            rocksIter.close();
-            db.close();
-            getTimer().stop();
+        System.out.println("Registros leídos correctamente.\n\n");
 
-            System.out.println("");
-            setStatsReadOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
-            setTimer(getTimer().reset());
-        } catch (RocksDBException rdbe) {
-            rdbe.printStackTrace(System.err);
-        }
+        setStatsReadOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
+        setTimer(getTimer().reset());
     }
 
     @Override
     public void updateData() {
-        setEquipamientoId(0);
-        try {
-            getTimer().start();
-            RocksDB db = getDb(getDbName());
+        List<AmenazaWrapper> testObjectsList = generateTestObjects(getCantidadAInsertar());
+        loadNewLists(testObjectsList);
 
-            for (int i = 0; i < getCantidadAInsertar(); i++) {
+        getTimer().start();
+        updateTestObjectsRocksDB();
+        getTimer().stop();
 
-                updateAmenazaWrapperRocksDB(i);
-                Iterator<String> itrClaves = getListaClaves().iterator();
-                Iterator<String> itrValores = getListaValores().iterator();
+        // comprobacion();
 
-                while (itrClaves.hasNext() && itrValores.hasNext()) {
-                    String keyToFindString = new String(itrClaves.next() + "_" + i);
-                    byte[] keyToFind = keyToFindString.getBytes();
-                    byte[] currentValue = db.get(keyToFind);
-                    byte[] newValue = itrValores.next().getBytes();
+        System.out.println("Registros actualizados correctamente.\n\n");
 
-                    if (currentValue != null) {
-                        if (currentValue != newValue) {
-                            db.delete(keyToFind);
-                            db.put(keyToFindString.getBytes(), newValue);
-                        }
-                    }
-                }
-            }
-
-            getTimer().stop();
-
-            System.out.println("Registros actualizados correctamente.");
-            // System.out.println("Lista de registros actualizada: \n");
-            // RocksIterator rocksIter = db.newIterator();
-            // int i = 0;
-            // RocksIterator rocksIter2 = db.newIterator();
-            // for (rocksIter2.seekToFirst(); rocksIter2.isValid(); rocksIter2.next()) {
-            // String key = new String(rocksIter2.key(), StandardCharsets.UTF_8);
-            // String val = new String(rocksIter2.value(), StandardCharsets.UTF_8);
-            // System.out.printf("%-5d Clave: %-15s Valor: %-15s\n", i, key, val);
-            // i++;
-            // }
-            // rocksIter.close();
-
-            getTimer().start();
-            db.close();
-            getTimer().stop();
-
-            System.out.println("");
-            setStatsUpdateOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
-            setTimer(getTimer().reset());
-        } catch (
-
-        RocksDBException rdbe) {
-            rdbe.printStackTrace(System.err);
-        }
+        setStatsUpdateOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
+        setTimer(getTimer().reset());
     }
 
     @Override
     public void deleteData() {
-        try {
-            getTimer().start();
-            RocksDB db = getDb(getDbName());
-            RocksIterator rocksIter = db.newIterator();
+        getTimer().start();
+        deleteTestObjectsRocksDB();
+        getTimer().stop();
 
-            for (rocksIter.seekToFirst(); rocksIter.isValid(); rocksIter.next()) {
-                db.delete(rocksIter.key());
-            }
+        // comprobacion();
 
-            db.close();
-            getTimer().stop();
+        getDb().close();
 
-            System.out.println("Registros eliminados correctamente.");
-            System.out.println("");
-            setStatsDeleteOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
-            setTimer(getTimer().reset());
-        } catch (
+        System.out.println("Registros eliminados correctamente.\n\n");
 
-        RocksDBException rdbe) {
-            rdbe.printStackTrace(System.err);
-        }
+        setStatsDeleteOperation(getTimer().toString()); // Guardo las estadísticas de la operación.
+        setTimer(getTimer().reset());
     }
 
     @Override
@@ -401,20 +114,247 @@ public class RocksDbCreator extends MotorBD {
 
     }
 
+    public void createDatabase(String dbName) {
+        try {
+            RocksDB.loadLibrary();
+            Options rockopts = new Options().setCreateIfMissing(true);
+            RocksDB db = RocksDB.open(rockopts, dbName);
+            setDb(db);
+        } catch (RocksDBException e) {
+            e.printStackTrace(System.err);
+        }
+    }
+
+    public void loadLists(List<AmenazaWrapper> list) {
+        int id = 0;
+        int equipId = 0;
+        Iterator<AmenazaWrapper> listItr = list.iterator();
+
+        while (listItr.hasNext()) {
+            AmenazaWrapper amenazaWrapper = listItr.next();
+
+            getKeysList().add("leido" + "_" + id);
+            getValuesList().add(String.valueOf(amenazaWrapper.isLeido()));
+            getKeysList().add("visible" + "_" + id);
+            getValuesList().add(String.valueOf(amenazaWrapper.isVisible()));
+
+            getKeysList().add("codigoSimbolo" + "_" + id);
+            getValuesList().add(String.valueOf(amenazaWrapper.getAmenaza().getCodigoSimbolo()));
+            getKeysList().add("radioAccion" + "_" + id);
+            getValuesList().add(String.valueOf(amenazaWrapper.getAmenaza().getRadioAccion()));
+            getKeysList().add("identificacion" + "_" + id);
+            getValuesList().add(String.valueOf(amenazaWrapper.getAmenaza().getIdentificacion()));
+            getKeysList().add("tamanios" + "_" + id);
+            getValuesList().add(String.valueOf(amenazaWrapper.getAmenaza().getTamanios()));
+
+            Iterator<Equipamiento> equipItr = amenazaWrapper.getAmenaza().getEquipamientoList().iterator();
+            while (equipItr.hasNext()) {
+                Equipamiento equip = equipItr.next();
+                getKeysList().add("cantidad" + "_" + equipId);
+                getValuesList().add(String.valueOf(equip.getCantidad()));
+                getKeysList().add("equipo" + "_" + equipId);
+                getValuesList().add(String.valueOf(equip.getEquipo()));
+                getKeysList().add("tipo" + "_" + equipId);
+                getValuesList().add(String.valueOf(equip.getTipo()));
+                equipId++;
+            }
+
+            getKeysList().add("epoch" + "_" + id);
+            getValuesList().add(String.valueOf(amenazaWrapper.getAmenaza().getTiempo().getEpoch()));
+
+            getKeysList().add("latitud" + "_" + id);
+            getValuesList().add(String.valueOf(amenazaWrapper.getAmenaza().getPosicion().getLatitud()));
+            getKeysList().add("longitud" + "_" + id);
+            getValuesList().add(String.valueOf(amenazaWrapper.getAmenaza().getPosicion().getLongitud()));
+            getKeysList().add("milisegundosFechaHora" + "_" + id);
+            getValuesList().add(String.valueOf(amenazaWrapper.getAmenaza().getPosicion().getMilisegundosFechaHora()));
+
+            id++;
+        }
+    }
+
+    // 'persistTestObjectsRocksDB()' recibe una lista con todos los objetos
+    // AmenazaWrapper que se deben persistir.
+    public void persistTestObjectsRocksDB(List<AmenazaWrapper> list) {
+        Iterator<String> keysItr = getKeysList().iterator();
+        Iterator<String> valuesItr = getValuesList().iterator();
+
+        WriteBatch batch = new WriteBatch();
+        WriteOptions writeOpts = new WriteOptions();
+
+        try {
+
+            while (keysItr.hasNext() && valuesItr.hasNext()) {
+                byte[] key = keysItr.next().getBytes();
+                byte[] value = valuesItr.next().getBytes();
+                batch.put(key, value);
+            }
+
+            db.write(writeOpts, batch);
+
+        } catch (RocksDBException e) {
+            e.printStackTrace(System.err);
+        }
+    }
+
+    public void readTestObjectsRocksDB() {
+        RocksIterator rocksIter = getDb().newIterator();
+
+        for (rocksIter.seekToFirst(); rocksIter.isValid(); rocksIter.next()) {
+            String key = new String(rocksIter.key(), StandardCharsets.UTF_8);
+            String val = new String(rocksIter.value(), StandardCharsets.UTF_8);
+        }
+        rocksIter.close();
+    }
+
+    public void updateTestObjectsRocksDB() {
+        Iterator<String> newKeysItr = getNewKeysList().iterator();
+        Iterator<String> newValuesItr = getNewValuesList().iterator();
+
+        try {
+            while (newKeysItr.hasNext() && newValuesItr.hasNext()) {
+                byte[] keyToFind = newKeysItr.next().getBytes();
+                byte[] currentValue = db.get(keyToFind);
+                byte[] newValue = newValuesItr.next().getBytes();
+
+                if (currentValue != null && currentValue != newValue) {
+                    db.delete(keyToFind);
+                    db.put(keyToFind, newValue);
+                }
+            }
+        } catch (RocksDBException rdbe) {
+            rdbe.printStackTrace(System.err);
+        }
+    }
+
+    public void loadNewLists(List<AmenazaWrapper> list) {
+        int id = 0;
+        int equipId = 0;
+
+        List<AmenazaWrapper> updatedObjects = updateNewObjects(list);
+        Iterator<AmenazaWrapper> updatedObjectsItr = updatedObjects.iterator();
+
+        while (updatedObjectsItr.hasNext()) {
+            AmenazaWrapper amenazaWrapper = updatedObjectsItr.next();
+
+            getNewKeysList().add("leido" + "_" + id);
+            getNewValuesList().add(String.valueOf(amenazaWrapper.isLeido()));
+            getNewKeysList().add("visible" + "_" + id);
+            getNewValuesList().add(String.valueOf(amenazaWrapper.isVisible()));
+
+            getNewKeysList().add("codigoSimbolo" + "_" + id);
+            getNewValuesList().add(String.valueOf(amenazaWrapper.getAmenaza().getCodigoSimbolo()));
+            getNewKeysList().add("radioAccion" + "_" + id);
+            getNewValuesList().add(String.valueOf(amenazaWrapper.getAmenaza().getRadioAccion()));
+            getNewKeysList().add("identificacion" + "_" + id);
+            getNewValuesList().add(String.valueOf(amenazaWrapper.getAmenaza().getIdentificacion()));
+            getNewKeysList().add("tamanios" + "_" + id);
+            getNewValuesList().add(String.valueOf(amenazaWrapper.getAmenaza().getTamanios()));
+
+            Iterator<Equipamiento> equipItr = amenazaWrapper.getAmenaza().getEquipamientoList().iterator();
+            while (equipItr.hasNext()) {
+                Equipamiento equip = equipItr.next();
+                getNewKeysList().add("cantidad" + "_" + equipId);
+                getNewValuesList().add(String.valueOf(equip.getCantidad()));
+                getNewKeysList().add("equipo" + "_" + equipId);
+                getNewValuesList().add(String.valueOf(equip.getEquipo()));
+                getNewKeysList().add("tipo" + "_" + equipId);
+                getNewValuesList().add(String.valueOf(equip.getTipo()));
+                equipId++;
+            }
+
+            getNewKeysList().add("epoch" + "_" + id);
+            getNewValuesList().add(String.valueOf(amenazaWrapper.getAmenaza().getTiempo().getEpoch()));
+
+            getNewKeysList().add("latitud" + "_" + id);
+            getNewValuesList().add(String.valueOf(amenazaWrapper.getAmenaza().getPosicion().getLatitud()));
+            getNewKeysList().add("longitud" + "_" + id);
+            getNewValuesList().add(String.valueOf(amenazaWrapper.getAmenaza().getPosicion().getLongitud()));
+            getNewKeysList().add("milisegundosFechaHora" + "_" + id);
+            getNewValuesList()
+                    .add(String.valueOf(amenazaWrapper.getAmenaza().getPosicion().getMilisegundosFechaHora()));
+
+            id++;
+        }
+
+    }
+
+    public List<AmenazaWrapper> updateNewObjects(List<AmenazaWrapper> list) {
+        Iterator<AmenazaWrapper> listItr = list.iterator();
+
+        while (listItr.hasNext()) {
+            AmenazaWrapper amenazaWrapper = listItr.next();
+
+            amenazaWrapper.getAmenaza().setCodigoSimbolo(2);
+            amenazaWrapper.getAmenaza().setRadioAccion(2);
+            amenazaWrapper.getAmenaza().setIdentificacion(2);
+            amenazaWrapper.getAmenaza().setTamanios(2);
+
+            amenazaWrapper.getAmenaza().getTiempo().setEpoch(2);
+
+            amenazaWrapper.getAmenaza().getPosicion().setLatitud(2.5);
+            amenazaWrapper.getAmenaza().getPosicion().setLongitud(2.5);
+            amenazaWrapper.getAmenaza().getPosicion().setMilisegundosFechaHora(2);
+
+            List<Equipamiento> equipamientoList = amenazaWrapper.getAmenaza().getEquipamientoList();
+            Iterator<Equipamiento> itrEquipamiento = equipamientoList.iterator();
+            while (itrEquipamiento.hasNext()) {
+                Equipamiento equip = itrEquipamiento.next();
+                equip.setCantidad(2);
+                equip.setEquipo(2);
+                equip.setTipo(2);
+            }
+
+            amenazaWrapper.setLeido(true);
+        }
+
+        return list;
+    }
+
+    public void deleteTestObjectsRocksDB() {
+        try {
+            RocksIterator rocksIter = getDb().newIterator();
+
+            for (rocksIter.seekToFirst(); rocksIter.isValid(); rocksIter.next()) {
+                db.delete(rocksIter.key());
+            }
+
+        } catch (RocksDBException rdbe) {
+            rdbe.printStackTrace(System.err);
+        }
+    }
+
+    public void comprobacion() {
+        int i = 0;
+        RocksIterator rocksIter = getDb().newIterator();
+
+        System.out.println("\n\nCOMPROBACION\n\n");
+        for (rocksIter.seekToFirst(); rocksIter.isValid(); rocksIter.next()) {
+            String key = new String(rocksIter.key(), StandardCharsets.UTF_8);
+            String val = new String(rocksIter.value(), StandardCharsets.UTF_8);
+
+            System.out.printf("%-5d Clave: %-15s Valor: %-15s\n", i, key, val);
+            i++;
+        }
+        System.out.println("\n\nEND COMPROBACION\n\n");
+
+        rocksIter.close();
+    }
+
     public void setListaClaves(List<String> listaClaves) {
-        this.listaClaves = listaClaves;
+        this.keysList = listaClaves;
     }
 
     public void setListaValores(List<String> listaValores) {
-        this.listaValores = listaValores;
+        this.valuesList = listaValores;
     }
 
     public List<String> getListaClaves() {
-        return listaClaves;
+        return keysList;
     }
 
     public List<String> getListaValores() {
-        return listaValores;
+        return valuesList;
     }
 
     public int getCantidadAInsertar() {
@@ -425,22 +365,44 @@ public class RocksDbCreator extends MotorBD {
         this.cantidadAInsertar = cantidadAInsertar;
     }
 
-    public int getEquipamientoId() {
-        return equipamientoId;
+    public RocksDB getDb() {
+        return db;
     }
 
-    public void setEquipamientoId(int equipamientoId) {
-        this.equipamientoId = equipamientoId;
+    public void setDb(RocksDB db) {
+        this.db = db;
     }
 
-    // Métodos auxiliares
-    // private Byte convertByteArrayToInt(byte[] intBytes) {
-    // // ByteBuffer byteBuffer = ByteBuffer.wrap(intBytes);
-    // int capacity = 1;
-    // ByteBuffer bb = ByteBuffer.allocate(capacity);
-    // bb.put(intBytes);
-    // bb.rewind();
-    // return bb.get();
-    // }
+    public List<String> getKeysList() {
+        return keysList;
+    }
+
+    public void setKeysList(List<String> keysList) {
+        this.keysList = keysList;
+    }
+
+    public List<String> getValuesList() {
+        return valuesList;
+    }
+
+    public void setValuesList(List<String> valuesList) {
+        this.valuesList = valuesList;
+    }
+
+    public List<String> getNewKeysList() {
+        return newKeysList;
+    }
+
+    public void setNewKeysList(List<String> newKeysList) {
+        this.newKeysList = newKeysList;
+    }
+
+    public List<String> getNewValuesList() {
+        return newValuesList;
+    }
+
+    public void setNewValuesList(List<String> newValuesList) {
+        this.newValuesList = newValuesList;
+    }
 
 }
