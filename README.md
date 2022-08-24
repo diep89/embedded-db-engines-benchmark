@@ -1,6 +1,6 @@
 # Embedded DB engines benchmark
 
-[![Stats](https://github-readme-stats.vercel.app/api?username=diep89)](https://github.com/anuraghazra/github-readme-stats)
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=diep89)](https://github.com/anuraghazra/github-readme-stats)
 
 Implemented engines:
 - SQLite (JPA/Hibernate)
