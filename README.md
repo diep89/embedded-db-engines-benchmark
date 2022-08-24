@@ -1,5 +1,7 @@
 # Embedded DB engines benchmark
 
+![Stats](https://github-readme-stats.vercel.app/api?username=diep89&show_icons=true)
+
 Implemented engines:
 - SQLite (JPA/Hibernate)
 - ObjectBox
